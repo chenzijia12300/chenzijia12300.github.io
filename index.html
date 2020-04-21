@@ -21,9 +21,9 @@
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="汤姆猫的博客">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="汤姆猫的博客">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,7 @@
   };
 </script>
 
-  <title>Hexo</title>
+  <title>汤姆猫的博客</title>
   
 
 
@@ -92,7 +92,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">汤姆猫的博客</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -150,6 +150,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/20/java%E9%9B%86%E5%90%88-HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/20/java%E9%9B%86%E5%90%88-HashMap/" class="post-title-link" itemprop="url">java集合-HashMap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-20 22:45:06" itemprop="dateCreated datePublished" datetime="2020-04-20T22:45:06+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-21 15:19:26" itemprop="dateModified" datetime="2020-04-21T15:19:26+08:00">2020-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9B%86%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">集合</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="HashMap简介"><a href="#HashMap简介" class="headerlink" title="HashMap简介"></a>HashMap简介</h3><blockquote>
+<p>HashMap用来存放键值对，它基于哈希表的Map非同步接口实现，它继承了AbstractMap，实现了Map,Cloneable,Serializable等接口。</p>
+</blockquote>
+<blockquote>
+<p>JDK1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）.JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树），以减少搜索时间，具体可以参考 treeifyBin方法。</p>
+</blockquote>
+<h3 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</span><br><span class="line">    &#x2F;&#x2F; 序列号</span><br><span class="line">    private static final long serialVersionUID &#x3D; 362498820763181265L;    </span><br><span class="line">    &#x2F;&#x2F; 默认的初始容量是16</span><br><span class="line">    static final int DEFAULT_INITIAL_CAPACITY &#x3D; 1 &lt;&lt; 4;   </span><br><span class="line">    &#x2F;&#x2F; 最大容量</span><br><span class="line">    static final int MAXIMUM_CAPACITY &#x3D; 1 &lt;&lt; 30; </span><br><span class="line">    &#x2F;&#x2F; 默认的填充因子</span><br><span class="line">    static final float DEFAULT_LOAD_FACTOR &#x3D; 0.75f;</span><br><span class="line">    &#x2F;&#x2F; 当桶(bucket)上的结点数大于这个值时会转成红黑树</span><br><span class="line">    static final int TREEIFY_THRESHOLD &#x3D; 8; </span><br><span class="line">    &#x2F;&#x2F; 当桶(bucket)上的结点数小于这个值时树转链表</span><br><span class="line">    static final int UNTREEIFY_THRESHOLD &#x3D; 6;</span><br><span class="line">    &#x2F;&#x2F; 桶中结构转化为红黑树对应的table的最小大小</span><br><span class="line">    static final int MIN_TREEIFY_CAPACITY &#x3D; 64;</span><br><span class="line">    &#x2F;&#x2F; 存储元素的数组，总是2的幂次倍</span><br><span class="line">    transient Node&lt;k,v&gt;[] table; </span><br><span class="line">    &#x2F;&#x2F; 存放具体元素的集</span><br><span class="line">    transient Set&lt;map.entry&lt;k,v&gt;&gt; entrySet;</span><br><span class="line">    &#x2F;&#x2F; 存放元素的个数，注意这个不等于数组的长度。</span><br><span class="line">    transient int size;</span><br><span class="line">    &#x2F;&#x2F; 每次扩容和更改map结构的计数器</span><br><span class="line">    transient int modCount;   </span><br><span class="line">    &#x2F;&#x2F; 临界值 当实际大小(容量*填充因子)超过临界值时，会进行扩容</span><br><span class="line">    int threshold;</span><br><span class="line">    &#x2F;&#x2F; 加载因子</span><br><span class="line">    final float loadFactor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="loadFactor负载因子"><a href="#loadFactor负载因子" class="headerlink" title="loadFactor负载因子"></a>loadFactor负载因子</h5><blockquote>
+<p>  loadFactor是用来控制存放元素数组的疏密程度，当loadFactor越大，数组存放的entry也就越多，也会让链表的长度变长，当loadFactor越小，数组存放的entry也就越少。<br>    loadFactory太大会导致查询效率变慢，太小会浪费内存空间。</p>
+</blockquote>
+<h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;根据指定的初始化容量和负载因子创建对象</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">    if (initialCapacity &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">        initialCapacity &#x3D; MAXIMUM_CAPACITY;</span><br><span class="line">    if (loadFactor &lt;&#x3D; 0 || Float.isNaN(loadFactor))</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +</span><br><span class="line">                                           loadFactor);</span><br><span class="line">    this.loadFactor &#x3D; loadFactor;</span><br><span class="line">    this.threshold &#x3D; tableSizeFor(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;指定初始化容量，负载因子默认为0.75</span><br><span class="line">public HashMap(int initialCapacity) &#123;</span><br><span class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public HashMap() &#123;</span><br><span class="line">    this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR; &#x2F;&#x2F; all other fields defaulted</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;根据指定的map集合创建对象</span><br><span class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;</span><br><span class="line">    this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR;</span><br><span class="line">    putMapEntries(m, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">               boolean evict) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">    &#x2F;&#x2F;判断table是否未初始化或长度为0，如果是就扩容</span><br><span class="line">    if ((tab &#x3D; table) &#x3D;&#x3D; null || (n &#x3D; tab.length) &#x3D;&#x3D; 0)</span><br><span class="line">        n &#x3D; (tab &#x3D; resize()).length;</span><br><span class="line">    &#x2F;&#x2F;确定元素放在那个桶，如果桶为空则直接插入</span><br><span class="line">    if ((p &#x3D; tab[i &#x3D; (n - 1) &amp; hash]) &#x3D;&#x3D; null)</span><br><span class="line">        tab[i] &#x3D; newNode(hash, key, value, null);</span><br><span class="line">    else &#123;</span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        &#x2F;&#x2F;判断哈希，键是否相等</span><br><span class="line">        if (p.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">            ((k &#x3D; p.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">            e &#x3D; p;后面进行覆盖</span><br><span class="line">        &#x2F;&#x2F;判断节点是否为红黑树</span><br><span class="line">        else if (p instanceof TreeNode)</span><br><span class="line">        	  &#x2F;&#x2F;存放进红黑树中</span><br><span class="line">            e &#x3D; ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">        else &#123;</span><br><span class="line">            &#x2F;&#x2F;循环遍历链表</span><br><span class="line">            for (int binCount &#x3D; 0; ; ++binCount) &#123;</span><br><span class="line">                &#x2F;&#x2F;插入链表的尾部</span><br><span class="line">                if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    p.next &#x3D; newNode(hash, key, value, null);</span><br><span class="line">                    &#x2F;&#x2F;判断是否要将链表转换为红黑树</span><br><span class="line">                    if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) </span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;判断节点的hash和key是否相等</span><br><span class="line">                if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                    ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                    break;</span><br><span class="line">                p &#x3D; e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;如果e不为空，则是进行覆盖操作</span><br><span class="line">        if (e !&#x3D; null) &#123; &#x2F;&#x2F; existing mapping for key</span><br><span class="line">            V oldValue &#x3D; e.value;</span><br><span class="line">            if (!onlyIfAbsent || oldValue &#x3D;&#x3D; null)</span><br><span class="line">                e.value &#x3D; value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ++modCount;</span><br><span class="line">    if (++size &gt; threshold)</span><br><span class="line">        resize();&#x2F;&#x2F;扩容</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">     Node&lt;K,V&gt; e;</span><br><span class="line">     return (e &#x3D; getNode(hash(key), key)) &#x3D;&#x3D; null ? null : e.value;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">    &#x2F;&#x2F;判断哈希表是否为空，长度是否大于0，hash值对应的桶是否为空</span><br><span class="line">    if ((tab &#x3D; table) !&#x3D; null &amp;&amp; (n &#x3D; tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">        (first &#x3D; tab[(n - 1) &amp; hash]) !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F;判断hash，key是否相等</span><br><span class="line">        if (first.hash &#x3D;&#x3D; hash &amp;&amp; &#x2F;&#x2F; always check first node</span><br><span class="line">            ((k &#x3D; first.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">            return first;&#x2F;&#x2F;返回节点</span><br><span class="line">        if ((e &#x3D; first.next) !&#x3D; null) &#123;</span><br><span class="line">        	  &#x2F;&#x2F;判断是否为红黑树</span><br><span class="line">            if (first instanceof TreeNode)</span><br><span class="line">                &#x2F;&#x2F;红黑树查找</span><br><span class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">            do &#123;</span><br><span class="line">                &#x2F;&#x2F;链表遍历查找</span><br><span class="line">                if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                    ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                    return e;</span><br><span class="line">            &#125; while ((e &#x3D; e.next) !&#x3D; null);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>resize方法待写。。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/19/java%E9%9B%86%E5%90%88-LinkedList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -159,7 +254,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="汤姆猫的博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -181,7 +276,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-20 11:13:57" itemprop="dateModified" datetime="2020-04-20T11:13:57+08:00">2020-04-20</time>
+                <time title="Modified: 2020-04-20 11:16:18" itemprop="dateModified" datetime="2020-04-20T11:16:18+08:00">2020-04-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,27 +330,27 @@
 <h4 id="addAll方法"><a href="#addAll方法" class="headerlink" title="addAll方法"></a>addAll方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    return addAll(size, c);&#x2F;&#x2F;尾部批量插入</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="指定位置的addAll方法"><a href="#指定位置的addAll方法" class="headerlink" title="指定位置的addAll方法"></a>指定位置的addAll方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">      checkPositionIndex(index);&#x2F;&#x2F;检测下标范围</span><br><span class="line"></span><br><span class="line">      Object[] a &#x3D; c.toArray();&#x2F;&#x2F;集合转换为数组</span><br><span class="line">      int numNew &#x3D; a.length;</span><br><span class="line">      if (numNew &#x3D;&#x3D; 0)</span><br><span class="line">          return false;</span><br><span class="line"></span><br><span class="line">      Node&lt;E&gt; pred, succ;</span><br><span class="line">      if (index &#x3D;&#x3D; size)&#123;&#x2F;&#x2F;判断下标长度是否等于链表长度，即插入尾部</span><br><span class="line">          succ &#x3D; null;</span><br><span class="line">          pred &#x3D; last;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          succ &#x3D; node(index);</span><br><span class="line">          pred &#x3D; succ.prev;</span><br><span class="line">      &#125;</span><br><span class="line">	&#x2F;&#x2F;循环遍历指定数组</span><br><span class="line">      for (Object o : a) &#123;</span><br><span class="line">          @SuppressWarnings(&quot;unchecked&quot;) E e &#x3D; (E) o;</span><br><span class="line">          Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(pred, e, null);</span><br><span class="line">          if (pred &#x3D;&#x3D; null)</span><br><span class="line">              first &#x3D; newNode;</span><br><span class="line">          else</span><br><span class="line">              pred.next &#x3D; newNode;</span><br><span class="line">          pred &#x3D; newNode;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (succ &#x3D;&#x3D; null) &#123;</span><br><span class="line">          last &#x3D; pred;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          pred.next &#x3D; succ;</span><br><span class="line">          succ.prev &#x3D; pred;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      size +&#x3D; numNew;</span><br><span class="line">      modCount++;</span><br><span class="line">      return true;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="remove方法"><a href="#remove方法" class="headerlink" title="remove方法"></a>remove方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;删除指定元素</span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">        if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">            for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">                if (x.item &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    unlink(x);</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">                if (o.equals(x.item)) &#123;</span><br><span class="line">                    unlink(x);</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">E unlink(Node&lt;E&gt; x) &#123;</span><br><span class="line">        &#x2F;&#x2F; assert x !&#x3D; null;</span><br><span class="line">        final E element &#x3D; x.item;&#x2F;&#x2F;获得要删除元素的值</span><br><span class="line">        final Node&lt;E&gt; next &#x3D; x.next;&#x2F;&#x2F;获得要删除元素的后继节点</span><br><span class="line">        final Node&lt;E&gt; prev &#x3D; x.prev;&#x2F;&#x2F;获得要删除元素的前驱节点</span><br><span class="line">        &#x2F;&#x2F;判断前驱节点是否为空</span><br><span class="line">        if (prev &#x3D;&#x3D; null) &#123;</span><br><span class="line">            first &#x3D; next;&#x2F;&#x2F;把头指针指向后继节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            prev.next &#x3D; next;&#x2F;&#x2F;前驱节点的后继节点指向x的后继节点</span><br><span class="line">            x.prev &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line">			&#x2F;&#x2F;判断后继节点是否为空</span><br><span class="line">        if (next &#x3D;&#x3D; null) &#123;</span><br><span class="line">            last &#x3D; prev;&#x2F;&#x2F;把尾指针指向前驱节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            next.prev &#x3D; prev;&#x2F;&#x2F;后继节点的前驱节点指向x的前驱节点</span><br><span class="line">            x.next &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        x.item &#x3D; null;</span><br><span class="line">        size--;长度减一</span><br><span class="line">        modCount++;</span><br><span class="line">        return element;返回x数据</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">#### get方法</span><br></pre></td></tr></table></figure>
-<p>//上面都讲过了。。<br>public E get(int index) {<br>        checkElementIndex(index);<br>        return node(index).item;<br>    }</p>
-<pre><code>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">E unlink(Node&lt;E&gt; x) &#123;</span><br><span class="line">        &#x2F;&#x2F; assert x !&#x3D; null;</span><br><span class="line">        final E element &#x3D; x.item;&#x2F;&#x2F;获得要删除元素的值</span><br><span class="line">        final Node&lt;E&gt; next &#x3D; x.next;&#x2F;&#x2F;获得要删除元素的后继节点</span><br><span class="line">        final Node&lt;E&gt; prev &#x3D; x.prev;&#x2F;&#x2F;获得要删除元素的前驱节点</span><br><span class="line">        &#x2F;&#x2F;判断前驱节点是否为空</span><br><span class="line">        if (prev &#x3D;&#x3D; null) &#123;</span><br><span class="line">            first &#x3D; next;&#x2F;&#x2F;把头指针指向后继节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            prev.next &#x3D; next;&#x2F;&#x2F;前驱节点的后继节点指向x的后继节点</span><br><span class="line">            x.prev &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line">			&#x2F;&#x2F;判断后继节点是否为空</span><br><span class="line">        if (next &#x3D;&#x3D; null) &#123;</span><br><span class="line">            last &#x3D; prev;&#x2F;&#x2F;把尾指针指向前驱节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            next.prev &#x3D; prev;&#x2F;&#x2F;后继节点的前驱节点指向x的前驱节点</span><br><span class="line">            x.next &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        x.item &#x3D; null;</span><br><span class="line">        size--;长度减一</span><br><span class="line">        modCount++;</span><br><span class="line">        return element;返回x数据</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
+<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;上面都讲过了。。</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">        checkElementIndex(index);</span><br><span class="line">        return node(index).item;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
 
 
+<h3 id="ArrayList和LinkedList的区别，使用场景"><a href="#ArrayList和LinkedList的区别，使用场景" class="headerlink" title="ArrayList和LinkedList的区别，使用场景"></a>ArrayList和LinkedList的区别，使用场景</h3><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><blockquote>
+<p>1.ArrayList和LinkedList的区别就来自于他们的底层数据结构，ArrayList是基于数组实现的，因此它随机遍历会很快，LinkedList是基于双端链表，因此它插入删除会很快。</p>
+</blockquote>
+<blockquote>
+<p>2.相对于ArrayList，LinkedList的随机访问集合元素时性能较差，因为需要在双向列表中找到要index的位置，再返回；但在插入，删除操作是更快的。因为LinkedList不像ArrayList一样，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组，这是ArrayList最坏的一种情况，时间复杂度是O(n)，而LinkedList中插入或删除的时间复杂度仅为O(1)。ArrayList在插入数据时还需要更新索引（除了插入数组的尾部）。</p>
+</blockquote>
+<blockquote>
+<p>3.存储同样数据的LinkedList相对于ArrayList会占用更多内存，因为LinkedList还要存储前驱节点和后驱节点的位置。</p>
+</blockquote>
+<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><blockquote>
+<p>1.在需要大量的随机访问，使用ArrayList优于LinkedList</p>
+</blockquote>
+<blockquote>
+<p>2.在需要大量的插入和删除操作时，使用LinkedList优于ArrayList</p>
+</blockquote>
 
-### ArrayList和LinkedList的区别，使用场景
-
-#### 区别
-&gt; 1.ArrayList和LinkedList的区别就来自于他们的底层数据结构，ArrayList是基于数组实现的，因此它随机遍历会很快，LinkedList是基于双端链表，因此它插入删除会很快。
-
-&gt; 2.相对于ArrayList，LinkedList的随机访问集合元素时性能较差，因为需要在双向列表中找到要index的位置，再返回；但在插入，删除操作是更快的。因为LinkedList不像ArrayList一样，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组，这是ArrayList最坏的一种情况，时间复杂度是O(n)，而LinkedList中插入或删除的时间复杂度仅为O(1)。ArrayList在插入数据时还需要更新索引（除了插入数组的尾部）。
-
-&gt; 3.存储同样数据的LinkedList相对于ArrayList会占用更多内存，因为LinkedList还要存储前驱节点和后驱节点的位置。
-
-#### 使用场景
-
-&gt; 1.在需要大量的随机访问，使用ArrayList优于LinkedList
-
-&gt; 2.在需要大量的插入和删除操作时，使用LinkedList优于ArrayList</code></pre>
       
     </div>
 
@@ -283,7 +378,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="汤姆猫的博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -394,7 +489,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="汤姆猫的博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -453,7 +548,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="汤姆猫的博客">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
@@ -576,7 +671,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
