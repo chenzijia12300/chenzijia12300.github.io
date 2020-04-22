@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="线程基本概念 首先我们要先了解进程的基本概念，因为线程是进程中的一个实体。进程是操作系统中进行资源调度和调度的基本单位，线程则是进程的一个执行路径。    一个进程中包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有独立的程序计数器和栈区域。  线程的三种创建方式类继承Thread12345678910111213public class TestNewThread &amp;#123;    p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程基本概念和操作">
+<meta property="og:url" content="http://yoursite.com/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="汤姆猫的博客">
+<meta property="og:description" content="线程基本概念 首先我们要先了解进程的基本概念，因为线程是进程中的一个实体。进程是操作系统中进行资源调度和调度的基本单位，线程则是进程的一个执行路径。    一个进程中包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有独立的程序计数器和栈区域。  线程的三种创建方式类继承Thread12345678910111213public class TestNewThread &amp;#123;    p">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/pasted-3.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-4.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-5.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-6.png">
+<meta property="article:published_time" content="2020-04-21T14:49:06.000Z">
+<meta property="article:modified_time" content="2020-04-22T14:17:24.088Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-3.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>线程基本概念和操作 | 汤姆猫的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">汤姆猫的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线程基本概念和操作
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-21 22:49:06" itemprop="dateCreated datePublished" datetime="2020-04-21T22:49:06+08:00">2020-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-22 22:17:24" itemprop="dateModified" datetime="2020-04-22T22:17:24+08:00">2020-04-22</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="线程基本概念"><a href="#线程基本概念" class="headerlink" title="线程基本概念"></a>线程基本概念</h3><blockquote>
+<p>首先我们要先了解进程的基本概念，因为线程是进程中的一个实体。进程是操作系统中进行资源调度和调度的基本单位，线程则是进程的一个执行路径。</p>
+</blockquote>
+<p><img src="/images/pasted-3.png" alt="upload successful"></p>
+<blockquote>
+<p>一个进程中包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有独立的程序计数器和栈区域。</p>
+</blockquote>
+<h3 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h3><h4 id="类继承Thread"><a href="#类继承Thread" class="headerlink" title="类继承Thread"></a>类继承Thread</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class MyThread extends Thread&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new MyThread().run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类实现Runnable接口"><a href="#类实现Runnable接口" class="headerlink" title="类实现Runnable接口"></a>类实现Runnable接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class RunnableImpl implements Runnable&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(new RunnableImpl()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类实现Callable接口-使用FutureTask方式"><a href="#类实现Callable接口-使用FutureTask方式" class="headerlink" title="类实现Callable接口,使用FutureTask方式"></a>类实现Callable接口,使用FutureTask方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class CallableImpl implements Callable&lt;String&gt;&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String call() throws Exception &#123;</span><br><span class="line">            return &quot;Hello World&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;*new MyThread().run();*&#x2F;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask&#x3D;new FutureTask&lt;&gt;(new CallableImpl());</span><br><span class="line">        new Thread(futureTask).start();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(futureTask.get());</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="三种方式优劣"><a href="#三种方式优劣" class="headerlink" title="三种方式优劣"></a>三种方式优劣</h4><h5 id="1-使用继承方式"><a href="#1-使用继承方式" class="headerlink" title="1.使用继承方式"></a>1.使用继承方式</h5><blockquote>
+<p>优势：<br>编写简单，传参方便，如果需要访问当前线程，则无需使用Thread.currentThread()方法，直接使用this即可获得当前线程。<br>劣势：无法在继承其他父类</p>
+</blockquote>
+<h5 id="2-实现Runnable接口方式和Callable接口"><a href="#2-实现Runnable接口方式和Callable接口" class="headerlink" title="2.实现Runnable接口方式和Callable接口"></a>2.实现Runnable接口方式和Callable接口</h5><blockquote>
+<p>优势：<br>程类只是实现了Runnable接口或Callable接口，还可以继承其他类。<br>在这种方式下，多个线程可以共享同一个target对象，所以非常适合多个相同线程来处理同一份资源的情况。<br>callable还可以拿到线程的返回值<br>劣势：编写稍微稍微复杂点？</p>
+</blockquote>
+<h3 id="线程的休眠和等待"><a href="#线程的休眠和等待" class="headerlink" title="线程的休眠和等待"></a>线程的休眠和等待</h3><h4 id="wait-方法"><a href="#wait-方法" class="headerlink" title="wait()方法"></a>wait()方法</h4><blockquote>
+<p>在java所有类的直接或间接父类Object类中有个wait(),当调用时会让当前线程堵塞挂起。</p>
+</blockquote>
+<blockquote>
+<p>注意：调用对象的wait()时，要确保获得对象的监视器锁。</p>
+</blockquote>
+<h5 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;🔒前&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                lock.wait();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;🔒后&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-4.png" alt="upload successful"></p>
+<blockquote>
+<p>那么怎么获得对象监视器锁呢<br>1.执行synchronized同步代码块时，并且使用该对象做为锁</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">       synchronized(lock) &#123;</span><br><span class="line">&#x2F;&#x2F;doSomething</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.调用对象的synchronizeed方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void method()&#123;</span><br><span class="line">       &#x2F;&#x2F;doSomething </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sleep-方法"><a href="#sleep-方法" class="headerlink" title="sleep()方法"></a>sleep()方法</h4><blockquote>
+<p>sleep()是Thread线程类的一个静态方法，执行时当前线程会暂时让出对cpu的执行权，但是注意休眠的时候不会退出锁（线程所拥有的监视器资源）。当休眠时间到了就会继续正常运行，当还在休眠时间时，调用该休眠线程的interrupt()方法时，该休眠线程就会在调用sleep()方法的地方抛出InterruptedException异常返回。</p>
+</blockquote>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程二休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程二休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-5.png" alt="upload successful"></p>
+<h3 id="线程通知"><a href="#线程通知" class="headerlink" title="线程通知"></a>线程通知</h3><h4 id="notify-方法和notifyAll-方法"><a href="#notify-方法和notifyAll-方法" class="headerlink" title="notify()方法和notifyAll()方法"></a>notify()方法和notifyAll()方法</h4><blockquote>
+<p>执行notify/notifyAll方法会唤醒一个/多个正处于休眠状态的线程。然后继续往下执行，直到执行完synchronized 代码块的代码或是中途遇到wait() ，再次释放锁。<br>类似wait方法，当前线程获取到对象的锁(监视器资源)才可以执行notify/notifyAll方法,否则会抛出异常。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    lock.wait();</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;尝试换线休眠线程&quot;);</span><br><span class="line">                lock.notify();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;唤醒完毕&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h3><p><img src="/images/pasted-6.png" alt="upload successful"></p>
+<h4 id="NEW"><a href="#NEW" class="headerlink" title="NEW"></a>NEW</h4><blockquote>
+<p>这时候线程已被初始化，不过还没有运行。</p>
+</blockquote>
+<h4 id="RUNNABLE"><a href="#RUNNABLE" class="headerlink" title="RUNNABLE"></a>RUNNABLE</h4><blockquote>
+<p>运行状态，Java线程把操作系统中的就绪和运行两种状态统一称为“运行中”。</p>
+</blockquote>
+<h4 id="TERMINATD"><a href="#TERMINATD" class="headerlink" title="TERMINATD"></a>TERMINATD</h4><blockquote>
+<p>线程结束状态。</p>
+</blockquote>
+<h4 id="BLOCKED"><a href="#BLOCKED" class="headerlink" title="BLOCKED"></a>BLOCKED</h4><blockquote>
+<p>线程堵塞状态，等待获取监视器资源进入同步方法或同步代码块。</p>
+</blockquote>
+<h4 id="WAITING"><a href="#WAITING" class="headerlink" title="WAITING"></a>WAITING</h4><blockquote>
+<p>线程等待状态，等待其他线程，调用Object.wait(),Thread.join()等方法会进入等待状态。</p>
+</blockquote>
+<h4 id="TIMED-WAITING"><a href="#TIMED-WAITING" class="headerlink" title="TIMED_WAITING"></a>TIMED_WAITING</h4><blockquote>
+<p>线程等待一段时间状态,调用Thread.sleep(Long millis)等会进入等待一段时间状态。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/20/java%E9%9B%86%E5%90%88-HashMap/" rel="prev" title="java集合-HashMap">
+      <i class="fa fa-chevron-left"></i> java集合-HashMap
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#线程基本概念"><span class="nav-number">1.</span> <span class="nav-text">线程基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的三种创建方式"><span class="nav-number">2.</span> <span class="nav-text">线程的三种创建方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类继承Thread"><span class="nav-number">2.1.</span> <span class="nav-text">类继承Thread</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类实现Runnable接口"><span class="nav-number">2.2.</span> <span class="nav-text">类实现Runnable接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类实现Callable接口-使用FutureTask方式"><span class="nav-number">2.3.</span> <span class="nav-text">类实现Callable接口,使用FutureTask方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三种方式优劣"><span class="nav-number">2.4.</span> <span class="nav-text">三种方式优劣</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-使用继承方式"><span class="nav-number">2.4.1.</span> <span class="nav-text">1.使用继承方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-实现Runnable接口方式和Callable接口"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.实现Runnable接口方式和Callable接口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的休眠和等待"><span class="nav-number">3.</span> <span class="nav-text">线程的休眠和等待</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wait-方法"><span class="nav-number">3.1.</span> <span class="nav-text">wait()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#反例"><span class="nav-number">3.1.1.</span> <span class="nav-text">反例</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep-方法"><span class="nav-number">3.2.</span> <span class="nav-text">sleep()方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-number">3.2.1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#结果"><span class="nav-number">3.2.2.</span> <span class="nav-text">结果</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程通知"><span class="nav-number">4.</span> <span class="nav-text">线程通知</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#notify-方法和notifyAll-方法"><span class="nav-number">4.1.</span> <span class="nav-text">notify()方法和notifyAll()方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程的六种状态"><span class="nav-number">5.</span> <span class="nav-text">线程的六种状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NEW"><span class="nav-number">5.1.</span> <span class="nav-text">NEW</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RUNNABLE"><span class="nav-number">5.2.</span> <span class="nav-text">RUNNABLE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TERMINATD"><span class="nav-number">5.3.</span> <span class="nav-text">TERMINATD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BLOCKED"><span class="nav-number">5.4.</span> <span class="nav-text">BLOCKED</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WAITING"><span class="nav-number">5.5.</span> <span class="nav-text">WAITING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TIMED-WAITING"><span class="nav-number">5.6.</span> <span class="nav-text">TIMED_WAITING</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
