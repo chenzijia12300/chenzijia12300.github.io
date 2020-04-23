@@ -20,19 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/04/18/hello-world/index.html">
+<meta property="og:title" content="synchronized和volatile关键字">
+<meta property="og:url" content="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
 <meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-18T03:33:01.464Z">
-<meta property="article:modified_time" content="2020-04-18T03:33:01.465Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-8.png">
+<meta property="article:published_time" content="2020-04-23T01:59:21.000Z">
+<meta property="article:modified_time" content="2020-04-23T03:09:39.663Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-7.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/18/hello-world/">
+<link rel="canonical" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
 
 
 <script id="page-configurations">
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title>Hello World | 汤姆猫的博客</title>
+  <title>synchronized和volatile关键字 | 汤姆猫的博客</title>
   
 
 
@@ -155,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +171,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          synchronized和volatile关键字
         </h1>
 
         <div class="post-meta">
@@ -177,8 +180,18 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-04-18 11:33:01" itemprop="dateCreated datePublished" datetime="2020-04-18T11:33:01+08:00">2020-04-18</time>
+              <time title="Created: 2020-04-23 09:59:21 / Modified: 11:09:39" itemprop="dateCreated datePublished" datetime="2020-04-23T09:59:21+08:00">2020-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
             </span>
 
           
@@ -192,19 +205,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h3 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h3><blockquote>
+<p>java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。</p>
+</blockquote>
+<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<blockquote>
+<p>下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。</p>
+</blockquote>
+<blockquote>
+<p>其中java内存模型里的线程工作内存对应就是一级缓存、二级缓存、cpu寄存器</p>
+</blockquote>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<h3 id="共享对象可见性"><a href="#共享对象可见性" class="headerlink" title="共享对象可见性"></a>共享对象可见性</h3><blockquote>
+<p>例如上图，假设线程A和线程B同时处理一个共享变量，且线程使用不同cpu运行，缓存都为空。<br> 线程 A 首先获取共享变量 X 的值，由于两级 Cache 都没有命中 ，所以加载主 内存 中 X 的值，假如为 0。然后把 X=O 的值缓存到两级缓存， 线程 A 修改 X 的值为 1, 然后将其写入两级 Cache， 并且刷新到主内存。 线程 A 操作完毕后，线程 A 所在的 CPU 的两级 Cache 内和主内存里面的 X 的值都是 l 。<br> 线程 B 获取 X 的值，首先一级缓存没有命中，然后看二级缓存，二级缓存命中了 ， 所以返回 X= 1 ； 到这里一切都是正常的， 因为这时候主 内存中也是 X=l 。然后线 程 B 修改 X 的值为 2， 并将其存放到线程 2 所在的一级 Cache 和共享二级 Cache 中， 最后更新主内存中 X 的值为 2 ： 到这里一切都是好的。<br> 线程 A 这次又需要修改 X 的值， 获取时一级缓存命中， 并且 X=l ，到这里问题就 出 现了，明明线程 B 已经把 X 的值修改为了 2，为何线程 A 获取的还是 l 呢？ 这 就是共享变量的内存不可见问题， 也就是线程 B 写入的值对线程 A 不可见。（来自于《java并发编程之美》）</p>
+</blockquote>
+<blockquote>
+<p>使用synchronized和volatile关键字可以解决共享对象的不可见性</p>
+</blockquote>
+<h3 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h3><blockquote>
+<p>synchronized关键字是java提供的一个原子性内置锁（排他锁），同一时间最多只能有一个线程持有相同对象的锁。在线程进入synchronizedd代码块会获得对象锁，其他线程运行到synchronized会被堵塞挂起。<br>拿到对象锁的线程会在以下情况释放对象锁：<br>1.正常执行完同步代码块。<br>2.抛出异常。<br>3.调用wait等休眠方法</p>
+</blockquote>
+<h4 id="synchronized的内存语义"><a href="#synchronized的内存语义" class="headerlink" title="synchronized的内存语义"></a>synchronized的内存语义</h4><blockquote>
+<p>进入synchronized代码块会把同步代码块用到的变量从运行线程的工作内存中清除。这样获取变量时就不会从工作内存中获得，而是去主内存中获得。<br>退出synchronized代码块会把对同步代码块修改的变量刷新到主内存里去。</p>
+</blockquote>
+<h3 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h3><blockquote>
+<p>当一个变量被volatile关键字声明时，工作线程获取该变量时会直接从主内存中获得，修改变量值会直接把值刷新到主内存中去。</p>
+</blockquote>
+<h3 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h3><blockquote>
+<p>同：synchronized和volatile都可以实现在多线程中共享对象的可见性。<br>异：volatile只保证共享对象的可见性，不保证操作的原子性。<br>   synchronized是比较重量级的操作，他会引起线程上下文的切换并带来线程调度开销。</p>
+</blockquote>
 
     </div>
 
@@ -219,11 +248,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2020/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2/" rel="next" title="我的第一次博客">
-      我的第一次博客 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/" rel="prev" title="线程基本概念和操作">
+      <i class="fa fa-chevron-left"></i> 线程基本概念和操作
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -282,7 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存模型"><span class="nav-number">1.</span> <span class="nav-text">java内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享对象可见性"><span class="nav-number">2.</span> <span class="nav-text">共享对象可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">3.</span> <span class="nav-text">synchronized关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized的内存语义"><span class="nav-number">3.1.</span> <span class="nav-text">synchronized的内存语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字"><span class="nav-number">4.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者对比"><span class="nav-number">5.</span> <span class="nav-text">两者对比</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
