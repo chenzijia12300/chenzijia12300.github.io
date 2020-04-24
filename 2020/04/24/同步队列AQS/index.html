@@ -20,22 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
+  <meta name="description" content="AQS简介 AbstractQueuedSynchronizer类简称为（AQS）,它是实现同步器的基本组件，内部使用int类型来表示同步状态，并提供CAS方法来操作这个同步状态。如常用的ReentrantLock&#x2F;Semaphore&#x2F;CountDownLatch等等就是基于AQS实现的，用法是通过继承AQS实现其模版方法，然后将子类作为同步组件的内部类。    上图是该类的属性，AQS是一个FI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="synchronized和volatile关键字">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
+<meta property="og:title" content="抽象同步队列AQS">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/index.html">
 <meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
+<meta property="og:description" content="AQS简介 AbstractQueuedSynchronizer类简称为（AQS）,它是实现同步器的基本组件，内部使用int类型来表示同步状态，并提供CAS方法来操作这个同步状态。如常用的ReentrantLock&#x2F;Semaphore&#x2F;CountDownLatch等等就是基于AQS实现的，用法是通过继承AQS实现其模版方法，然后将子类作为同步组件的内部类。    上图是该类的属性，AQS是一个FI">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-8.png">
-<meta property="article:published_time" content="2020-04-23T01:59:21.000Z">
-<meta property="article:modified_time" content="2020-04-23T03:09:39.663Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-12.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-13.png">
+<meta property="article:published_time" content="2020-04-24T04:21:43.000Z">
+<meta property="article:modified_time" content="2020-04-24T15:48:46.663Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-7.png">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-12.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+<link rel="canonical" href="http://yoursite.com/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>synchronized和volatile关键字 | 汤姆猫的博客</title>
+  <title>抽象同步队列AQS | 汤姆猫的博客</title>
   
 
 
@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +171,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          synchronized和volatile关键字
+          抽象同步队列AQS
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-23 09:59:21 / Modified: 11:09:39" itemprop="dateCreated datePublished" datetime="2020-04-23T09:59:21+08:00">2020-04-23</time>
+              <time title="Created: 2020-04-24 12:21:43 / Modified: 23:48:46" itemprop="dateCreated datePublished" datetime="2020-04-24T12:21:43+08:00">2020-04-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -205,34 +205,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h3><blockquote>
-<p>java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。</p>
+        <h3 id="AQS简介"><a href="#AQS简介" class="headerlink" title="AQS简介"></a>AQS简介</h3><blockquote>
+<p>AbstractQueuedSynchronizer类简称为（AQS）,它是实现同步器的基本组件，内部使用int类型来表示同步状态，并提供CAS方法来操作这个同步状态。如常用的ReentrantLock/Semaphore/CountDownLatch等等就是基于AQS实现的，用法是通过继承AQS实现其模版方法，然后将子类作为同步组件的内部类。</p>
 </blockquote>
-<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<p><img src="/images/pasted-12.png" alt="upload successful"></p>
 <blockquote>
-<p>下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。</p>
+<p>上图是该类的属性，AQS是一个FIFO的双向队列，内部通过head和tail记录头部和尾部节点，队列元素为Node。当一个线程试图获得锁时，如果该锁已被占用就会新创一个Node节点把他插入到尾部。头部节点是成功获得锁的节点，当头部节点被释放的时候，会唤醒后面的节点。</p>
+</blockquote>
+<p><img src="/images/pasted-13.png" alt="upload successful"></p>
+<blockquote>
+<p>在AQS中最重要的就是对状态值state的操作，操作state的方式分为两种。</p>
+</blockquote>
+<ol>
+<li><p>独占（Exclusive），例如ReentrantLock就是独占锁的一种。</p>
+</li>
+<li><p>共享（share），例如Semaphore/CountDownLatch。</p>
+<blockquote>
+<p>使用独占方式获取的资源是与具体线程绑定的，就是说如果一个线程获取到了资源， 就会标记是这个线程获取到了，其他线程再尝试操作 state 获取资源时会发现当前该资源 不是自己持有的，就会在获取失败后被阻塞。 比如独占锁 ReentrantLock 的实现， 当一个 线程获取了 Reer rantLock 的锁后，在 AQS 内 部会首先使用 CAS 操作把 state 状态值从 0 变为 1 ，然后设置当前锁的持有者为当前线程，当该线程再次获取锁时发现它就是锁的持 有者，则会把状态值从 l 变为 2，也就是设置可重入次数，而当另外一个线程获取锁时发 现自己并不是该锁的持有者就会被放入 AQS 阻塞队列后挂起。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>对应共享方式的资源与具体线程是不相关的，当多个线程去请求资源时通过 CAS 方 式竞争获取资源，当一个线程获取到了资源后，另外一个线程再次去获取时如果当前资源 还能满足它的需要，则当前线程只需要使用 CAS 方式进行获取即可。 比如 Semaphore 信 号量， 当一个线程通过 acquire（） 方法获取信号量时，会首先看当前信号量个数是否满足需 要， 不满足则把当前线程放入阻塞队列，如果满足则通过 自旋 CAS 获取信号量。</p>
 </blockquote>
 <blockquote>
-<p>其中java内存模型里的线程工作内存对应就是一级缓存、二级缓存、cpu寄存器</p>
+<p>代写。。源码看晕了</p>
 </blockquote>
-<p><img src="/images/pasted-8.png" alt="upload successful"></p>
-<h3 id="共享对象可见性"><a href="#共享对象可见性" class="headerlink" title="共享对象可见性"></a>共享对象可见性</h3><blockquote>
-<p>例如上图，假设线程A和线程B同时处理一个共享变量，且线程使用不同cpu运行，缓存都为空。<br> 线程 A 首先获取共享变量 X 的值，由于两级 Cache 都没有命中 ，所以加载主 内存 中 X 的值，假如为 0。然后把 X=O 的值缓存到两级缓存， 线程 A 修改 X 的值为 1, 然后将其写入两级 Cache， 并且刷新到主内存。 线程 A 操作完毕后，线程 A 所在的 CPU 的两级 Cache 内和主内存里面的 X 的值都是 l 。<br> 线程 B 获取 X 的值，首先一级缓存没有命中，然后看二级缓存，二级缓存命中了 ， 所以返回 X= 1 ； 到这里一切都是正常的， 因为这时候主 内存中也是 X=l 。然后线 程 B 修改 X 的值为 2， 并将其存放到线程 2 所在的一级 Cache 和共享二级 Cache 中， 最后更新主内存中 X 的值为 2 ： 到这里一切都是好的。<br> 线程 A 这次又需要修改 X 的值， 获取时一级缓存命中， 并且 X=l ，到这里问题就 出 现了，明明线程 B 已经把 X 的值修改为了 2，为何线程 A 获取的还是 l 呢？ 这 就是共享变量的内存不可见问题， 也就是线程 B 写入的值对线程 A 不可见。（来自于《java并发编程之美》）</p>
-</blockquote>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="acquire-独占方法"><a href="#acquire-独占方法" class="headerlink" title="acquire()独占方法"></a>acquire()独占方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final void acquire(int arg) &#123;</span><br><span class="line">        if (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">            selfInterrupt();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>使用synchronized和volatile关键字可以解决共享对象的不可见性</p>
+<p>当一个线程尝试获得独占锁时，会先尝试获得锁，如果失败就将当前线程封装成Exclusive类型的Node插入AQS堵塞队列尾部，并将自己堵塞挂起。</p>
 </blockquote>
-<h3 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h3><blockquote>
-<p>synchronized关键字是java提供的一个原子性内置锁（排他锁），同一时间最多只能有一个线程持有相同对象的锁。在线程进入synchronizedd代码块会获得对象锁，其他线程运行到synchronized会被堵塞挂起。<br>拿到对象锁的线程会在以下情况释放对象锁：<br>1.正常执行完同步代码块。<br>2.抛出异常。<br>3.调用wait等休眠方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected boolean tryAcquire(int arg) &#123;</span><br><span class="line">    throw new UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> tryAcquire()需要具体子类去实现的，根据所需场景设置state。</p>
 </blockquote>
-<h4 id="synchronized的内存语义"><a href="#synchronized的内存语义" class="headerlink" title="synchronized的内存语义"></a>synchronized的内存语义</h4><blockquote>
-<p>进入synchronized代码块会把同步代码块用到的变量从运行线程的工作内存中清除。这样获取变量时就不会从工作内存中获得，而是去主内存中获得。<br>退出synchronized代码块会把对同步代码块修改的变量刷新到主内存里去。</p>
-</blockquote>
-<h3 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h3><blockquote>
-<p>当一个变量被volatile关键字声明时，工作线程获取该变量时会直接从主内存中获得，修改变量值会直接把值刷新到主内存中去。</p>
-</blockquote>
-<h3 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h3><blockquote>
-<p>同：synchronized和volatile都可以实现在多线程中共享对象的可见性。<br>异：volatile只保证共享对象的可见性，不保证操作的原子性。<br>   synchronized是比较重量级的操作，他会引起线程上下文的切换并带来线程调度开销。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">private Node addWaiter(Node mode) &#123;</span><br><span class="line">	    &#x2F;&#x2F;以当前节点和给定模式创建一个新节点</span><br><span class="line">        &#x2F;&#x2F;模式有：EXCLUSIVE(独占),SHARE(共享)</span><br><span class="line">        Node node &#x3D; new Node(Thread.currentThread(), mode);</span><br><span class="line">        &#x2F;&#x2F; Try the fast path of enq; backup to full enq on failure</span><br><span class="line">        Node pred &#x3D; tail;&#x2F;&#x2F;获得尾部节点</span><br><span class="line">        &#x2F;&#x2F;判断尾部节点是否为空</span><br><span class="line">        if (pred !&#x3D; null) &#123;</span><br><span class="line">            node.prev &#x3D; pred;</span><br><span class="line">            &#x2F;&#x2F;设置为尾部节点为新建节点</span><br><span class="line">            if (compareAndSetTail(pred, node)) &#123;</span><br><span class="line">                pred.next &#x3D; node;</span><br><span class="line">                return node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        enq(node);</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>睡啦睡啦明天再学啦</p>
 </blockquote>
 
     </div>
@@ -249,12 +258,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/" rel="prev" title="线程基本概念和操作">
-      <i class="fa fa-chevron-left"></i> 线程基本概念和操作
+    <a href="/2020/04/23/%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB/" rel="prev" title="原子变量操作类">
+      <i class="fa fa-chevron-left"></i> 原子变量操作类
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/23/%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB/" rel="next" title="原子变量操作类">
-      原子变量操作类 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/" rel="next" title="java常用锁">
+      java常用锁 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -314,7 +323,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存模型"><span class="nav-number">1.</span> <span class="nav-text">java内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享对象可见性"><span class="nav-number">2.</span> <span class="nav-text">共享对象可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">3.</span> <span class="nav-text">synchronized关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized的内存语义"><span class="nav-number">3.1.</span> <span class="nav-text">synchronized的内存语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字"><span class="nav-number">4.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者对比"><span class="nav-number">5.</span> <span class="nav-text">两者对比</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AQS简介"><span class="nav-number">1.</span> <span class="nav-text">AQS简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-number">2.</span> <span class="nav-text">源码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#acquire-独占方法"><span class="nav-number">2.1.</span> <span class="nav-text">acquire()独占方法</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
