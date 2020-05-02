@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ArrayBlockingQueue简介 ArrayBlockingQueue是一个有界，堵塞&#x2F;非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。    源码详解成员分析1234567891011121314151617181920&#x2F;&#x2F;存放元素的数组  final Object[] it">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ArrayBlockingQueue详解">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/arrayBlockingQueue%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="汤姆猫的博客">
+<meta property="og:description" content="ArrayBlockingQueue简介 ArrayBlockingQueue是一个有界，堵塞&#x2F;非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。    源码详解成员分析1234567891011121314151617181920&#x2F;&#x2F;存放元素的数组  final Object[] it">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-30T06:35:17.000Z">
+<meta property="article:modified_time" content="2020-04-30T07:16:02.474Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2020/04/30/arrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>ArrayBlockingQueue详解 | 汤姆猫的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">汤姆猫的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/arrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ArrayBlockingQueue详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-30 14:35:17 / Modified: 15:16:02" itemprop="dateCreated datePublished" datetime="2020-04-30T14:35:17+08:00">2020-04-30</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="ArrayBlockingQueue简介"><a href="#ArrayBlockingQueue简介" class="headerlink" title="ArrayBlockingQueue简介"></a>ArrayBlockingQueue简介</h3><blockquote>
+<p>ArrayBlockingQueue是一个有界，堵塞/非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。</p>
+</blockquote>
+<image src="/images/ArrayBlockingQueue.png">
+
+<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;存放元素的数组</span><br><span class="line">  final Object[] items;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;出队操作的下标</span><br><span class="line">  int takeIndex;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F;入队操作的下标</span><br><span class="line">  int putIndex;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;元素个数</span><br><span class="line">  int count;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;入队操作和出队操作的独占锁</span><br><span class="line">  final ReentrantLock lock;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">  private final Condition notEmpty;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">  private final Condition notFull;</span><br></pre></td></tr></table></figure>
+<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public ArrayBlockingQueue(int capacity) &#123;</span><br><span class="line">       this(capacity, false);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair) &#123;</span><br><span class="line">       if (capacity &lt;&#x3D; 0)</span><br><span class="line">           throw new IllegalArgumentException();</span><br><span class="line">       this.items &#x3D; new Object[capacity];&#x2F;&#x2F;创建指定大小的数组</span><br><span class="line">       lock &#x3D; new ReentrantLock(fair);&#x2F;&#x2F;创建锁</span><br><span class="line">       notEmpty &#x3D; lock.newCondition();</span><br><span class="line">       notFull &#x3D;  lock.newCondition();</span><br><span class="line">  &#125;</span><br><span class="line">&#x2F;&#x2F;根据指定集合创建数组</span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair,</span><br><span class="line">                             Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">       this(capacity, fair);</span><br><span class="line"></span><br><span class="line">       final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">       lock.lock(); &#x2F;&#x2F; Lock only for visibility, not mutual exclusion&#x2F;&#x2F;上锁</span><br><span class="line">       try &#123;</span><br><span class="line">           int i &#x3D; 0;</span><br><span class="line">           try &#123;</span><br><span class="line">               for (E e : c) &#123;</span><br><span class="line">                   checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">                   items[i++] &#x3D; e;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (ArrayIndexOutOfBoundsException ex) &#123;</span><br><span class="line">               throw new IllegalArgumentException();</span><br><span class="line">           &#125;</span><br><span class="line">           count &#x3D; i;</span><br><span class="line">           putIndex &#x3D; (i &#x3D;&#x3D; capacity) ? 0 : i;</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>三种构造方法都要指定队列大小，另外fair参数控制独占锁是否为公平非公平锁。</p>
+</blockquote>
+<h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满直接返回false</span><br><span class="line">            return false;</span><br><span class="line">        else &#123;</span><br><span class="line">            enqueue(e);&#x2F;&#x2F;把值添加到队列尾部</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="enqueue-E-x"><a href="#enqueue-E-x" class="headerlink" title="enqueue(E x)"></a>enqueue(E x)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private void enqueue(E x) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert lock.getHoldCount() &#x3D;&#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; assert items[putIndex] &#x3D;&#x3D; null;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    items[putIndex] &#x3D; x;&#x2F;&#x2F;赋值</span><br><span class="line">    if (++putIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果入队下标等于队列边界则把入队下标设置为0</span><br><span class="line">        putIndex &#x3D; 0;</span><br><span class="line">    count++;</span><br><span class="line">    notEmpty.signal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id><a href="#" class="headerlink" title></a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满则休眠</span><br><span class="line">            notFull.await();</span><br><span class="line">        enqueue(e);入队</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>offer()和put()都可以用来添加新的元素，但offer()入队时发现队列已满会直接返回false，put()则会堵塞等待队列不为满在添加。</p>
+</blockquote>
+<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        return (count &#x3D;&#x3D; 0) ? null : dequeue();&#x2F;&#x2F;如果队列个数为空则直接返回null否则调用dequeue()</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="dequeue"><a href="#dequeue" class="headerlink" title="dequeue()"></a>dequeue()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private E dequeue() &#123;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    E x &#x3D; (E) items[takeIndex];&#x2F;&#x2F;根据出队下标获得值</span><br><span class="line">    items[takeIndex] &#x3D; null;</span><br><span class="line">    if (++takeIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;计算出队下标的值，如果等于队列长度则设置为0</span><br><span class="line">        takeIndex &#x3D; 0;</span><br><span class="line">    count--;</span><br><span class="line">    if (itrs !&#x3D; null)</span><br><span class="line">        itrs.elementDequeued();</span><br><span class="line">    notFull.signal();</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则休眠</span><br><span class="line">            notEmpty.await();</span><br><span class="line">        return dequeue();&#x2F;&#x2F;进行出队操作</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>poll()和take()都可以进行出队操作，区别是运行poll()时如果队列为空则直接返回null，take()则会堵塞当前线程直到队列不为空。</p>
+</blockquote>
+</image>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/" rel="prev" title="LinkedBlockingQueue详解">
+      <i class="fa fa-chevron-left"></i> LinkedBlockingQueue详解
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ArrayBlockingQueue简介"><span class="nav-number">1.</span> <span class="nav-text">ArrayBlockingQueue简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码详解"><span class="nav-number">2.</span> <span class="nav-text">源码详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#成员分析"><span class="nav-number">2.1.</span> <span class="nav-text">成员分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造方法分析"><span class="nav-number">2.2.</span> <span class="nav-text">构造方法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#入队操作"><span class="nav-number">2.3.</span> <span class="nav-text">入队操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#offer"><span class="nav-number">2.3.1.</span> <span class="nav-text">offer()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enqueue-E-x"><span class="nav-number">2.3.2.</span> <span class="nav-text">enqueue(E x)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">2.3.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#出队操作"><span class="nav-number">2.4.</span> <span class="nav-text">出队操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#poll"><span class="nav-number">2.4.1.</span> <span class="nav-text">poll()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dequeue"><span class="nav-number">2.4.2.</span> <span class="nav-text">dequeue()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#take"><span class="nav-number">2.4.3.</span> <span class="nav-text">take()</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
