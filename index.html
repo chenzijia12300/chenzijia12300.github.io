@@ -150,6 +150,114 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-title-link" itemprop="url">TCP协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-08 20:02:19" itemprop="dateCreated datePublished" datetime="2020-05-08T20:02:19+08:00">2020-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-09 10:04:24" itemprop="dateModified" datetime="2020-05-09T10:04:24+08:00">2020-05-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><blockquote>
+<p>传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。</p>
+</blockquote>
+<blockquote>
+<p>TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，1003…，并把自己的初始序列号ISN告诉B，让B有一个思想准备，什么样编号的数据是合法的，什么编号是非法的，比如编号900就是非法的，同时B还可以对A每一个编号的字节数据进行确认。如果A收到B确认编号为2001，则意味着字节编号为1001-2000，共1000个字节已经安全到达。</p>
+</blockquote>
+<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="/images/pasted-25.png" alt="upload successful"></p>
+<blockquote>
+<p>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</p>
+</blockquote>
+<blockquote>
+<p>（2）第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</p>
+</blockquote>
+<blockquote>
+<p>（3）第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</p>
+</blockquote>
+<h4 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h4><blockquote>
+<p>三次握手的目的是为了建立可靠的数据通信通道，简单来说就是数据的发送与接收，而三次握手最主要的目的就是双方确认自己与对方的发送与接收是正常的。</p>
+</blockquote>
+<blockquote>
+<p>第一次握手：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常。<br>第二次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常。<br>第三次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常。<br>所以三次握手就能确认双发收发功能都正常，缺一不可。</p>
+</blockquote>
+<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="/images/pasted-27.png" alt="upload successful"></p>
+<blockquote>
+<p>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</p>
+</blockquote>
+<blockquote>
+<p>第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</p>
+</blockquote>
+<blockquote>
+<p>第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</p>
+</blockquote>
+<blockquote>
+<p>第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</p>
+</blockquote>
+<h4 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="为什么要四次挥手？"></a>为什么要四次挥手？</h4><blockquote>
+<p>由于TCP连接是全双工的，因此每个方向都需要关闭。</p>
+</blockquote>
+<blockquote>
+<p>这是因为服务端在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。而关闭连接时，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方也未必全部数据都发送给对方了，所以己方可以立即close，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送。</p>
+</blockquote>
+<blockquote>
+<p>第一次挥手： client表示自己没啥要说的了。<br>第二次挥手： server表示我收到了。<br>第三次挥手： server表示自己没啥要说的了。<br>第四次挥手： client表示我收到了。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,101 +1288,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/23/%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB/" class="post-title-link" itemprop="url">原子变量操作类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-23 14:55:15 / Modified: 15:57:54" itemprop="dateCreated datePublished" datetime="2020-04-23T14:55:15+08:00">2020-04-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="JUC简介"><a href="#JUC简介" class="headerlink" title="JUC简介"></a>JUC简介</h3><blockquote>
-<p>在 Java 5.0 提供了 java.util.concurrent （简称JUC ）包，在此包中增加了在并发编程中很常用的实用工具类，用于定义类似于线程的自定义子系统，包括线程池、异步 IO 和轻量级任务框架。提供可调的、灵活的线程池。还提供了设计用于多线程上下文中的 Collection 实现等。</p>
-</blockquote>
-<blockquote>
-<p>在JUC并发包中包含有AtomicInteger，AtomicLong,AtomicBoolean等基于CAS操作的原子操作类。他们原理相似，下面讲解AtomicLong类。它可以原子性递增或递减，内部通过Unsafe来实现。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">public class AtomicLong extends Number implements java.io.Serializable &#123;</span><br><span class="line">    private static final long serialVersionUID &#x3D; 1927816293512124184L;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 获得Unsafe实例</span><br><span class="line">    private static final Unsafe unsafe &#x3D; Unsafe.getUnsafe();</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F;获得long值偏移量</span><br><span class="line">    private static final long valueOffset;</span><br><span class="line"></span><br><span class="line">	  &#x2F;&#x2F;判断JVM是否支持Long类型的无锁CAS操作</span><br><span class="line">    static final boolean VM_SUPPORTS_LONG_CAS &#x3D; VMSupportsCS8();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;本地方法。。</span><br><span class="line">    private static native boolean VMSupportsCS8();</span><br><span class="line"></span><br><span class="line">	 &#x2F;&#x2F;静态代码块</span><br><span class="line">    static &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            获得偏移量</span><br><span class="line">            valueOffset &#x3D; unsafe.objectFieldOffset</span><br><span class="line">                (AtomicLong.class.getDeclaredField(&quot;value&quot;));</span><br><span class="line">        &#125; catch (Exception ex) &#123; throw new Error(ex); &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">	 &#x2F;&#x2F;实际值</span><br><span class="line">    private volatile long value;</span><br><span class="line"></span><br><span class="line">    public AtomicLong(long initialValue) &#123;</span><br><span class="line">        value &#x3D; initialValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public AtomicLong() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Unsafe类"><a href="#Unsafe类" class="headerlink" title="Unsafe类"></a>Unsafe类</h3><blockquote>
-<p>在jdk中提供了Unsafe类来实现CAS操作，该类中的所有方法都是本地方法（Native），下面是Unsafe几个重要方法</p>
-</blockquote>
-<blockquote>
-<p>long object FieldOffset(Field field)方法, 负责获得指定变量在所属类中的内存偏移量，该偏移量只能在Unsafe方法中访问指定函数才能使用</p>
-</blockquote>
-<blockquote>
-<p>long native getLongVolatile(Object obj,long offset)方法，负责获得对象obj中指定偏移量offset的变量所对应的值</p>
-</blockquote>
-<h3 id="AtomicLong"><a href="#AtomicLong" class="headerlink" title="AtomicLong"></a>AtomicLong</h3><h4 id="递增递减操作"><a href="#递增递减操作" class="headerlink" title="递增递减操作"></a>递增递减操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;获得递增后的值</span><br><span class="line">  public final long incrementAndGet() &#123;</span><br><span class="line">      return unsafe.getAndAddLong(this, valueOffset, 1L) + 1L;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;获得递减后的值</span><br><span class="line">  public final long decrementAndGet() &#123;</span><br><span class="line">      return unsafe.getAndAddLong(this, valueOffset, -1L) - 1L;</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F;获得递增前的值</span><br><span class="line">  public final long getAndIncrement() &#123;</span><br><span class="line">      return unsafe.getAndAddLong(this, valueOffset, 1L);</span><br><span class="line">  &#125;</span><br><span class="line">  获得递减前的值</span><br><span class="line">  public final long getAndDecrement() &#123;</span><br><span class="line">      return unsafe.getAndAddLong(this, valueOffset, -1L);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上面的递增递减操作都是调用了Unsafe的getAndAddLong()方法来实现的,该函数时原子性操作。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;参数一代表AtomicLong实例的引用，</span><br><span class="line">&#x2F;&#x2F;参数二代表AtomicLong的value变量的偏移量</span><br><span class="line">&#x2F;&#x2F;参数三代表要改变的值</span><br><span class="line">public final long getAndAddLong(Object var1, long var2, long var4) &#123;</span><br><span class="line">    long var6;</span><br><span class="line">    do &#123;</span><br><span class="line">        var6 &#x3D; this.getLongVolatile(var1, var2);&#x2F;&#x2F;获得初始值</span><br><span class="line">        &#x2F;&#x2F;如果获得的初始值不相等则继续循环直到相等</span><br><span class="line">    &#125; while(!this.compareAndSwapLong(var1, var2, var6, var6 + var4));</span><br><span class="line"></span><br><span class="line">    return var6;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TestAtomic &#123;</span><br><span class="line">    public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        for (int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">            Thread thread&#x3D;new Thread(new CountThread(),&quot;线程&quot;+i);</span><br><span class="line">            thread.start();</span><br><span class="line">            thread.join();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(CountThread.value);</span><br><span class="line">    &#125;</span><br><span class="line">    public static class CountThread implements Runnable&#123;</span><br><span class="line"></span><br><span class="line">        public static AtomicLong value&#x3D;new AtomicLong();</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            for (int i&#x3D;0;i&lt;1000;i++)&#123;</span><br><span class="line">                value.incrementAndGet();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><blockquote>
-<p>在没有原子类的情况下，要实现多线程计数器需要同步措施，例如使用synchronized关键字，但这会大大影响性能，而这些Atomic原子类实现了CAS非堵塞算法，提升了性能。不过在高并发的情况下还是会影响性能，在JDK8中提供了在高并发性能更好的LongAdder类，下次再来写了。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1344,7 +1357,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
