@@ -20,22 +20,22 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
+  <meta name="description" content="redis简介 redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。   string(字符串类型) hash(散列&#x2F;哈希类型) list(列表类型) set(集合">
 <meta property="og:type" content="article">
-<meta property="og:title" content="synchronized和volatile关键字">
-<meta property="og:url" content="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/index.html">
+<meta property="og:title" content="redis学习笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/index.html">
 <meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="java内存模型 java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。    下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。   其中java内存模型里的线程工作内存对应就是一">
+<meta property="og:description" content="redis简介 redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。   string(字符串类型) hash(散列&#x2F;哈希类型) list(列表类型) set(集合">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/pasted-7.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-8.png">
-<meta property="article:published_time" content="2020-04-23T01:59:21.000Z">
-<meta property="article:modified_time" content="2020-04-23T03:09:39.663Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-28.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-29.png">
+<meta property="article:published_time" content="2020-05-10T15:14:00.000Z">
+<meta property="article:modified_time" content="2020-05-10T15:39:42.512Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-7.png">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-28.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+<link rel="canonical" href="http://yoursite.com/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
 
 
 <script id="page-configurations">
@@ -48,7 +48,7 @@
   };
 </script>
 
-  <title>synchronized和volatile关键字 | 汤姆猫的博客</title>
+  <title>redis学习笔记(一) | 汤姆猫的博客</title>
   
 
 
@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +171,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          synchronized和volatile关键字
+          redis学习笔记(一)
         </h1>
 
         <div class="post-meta">
@@ -182,16 +182,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-04-23 09:59:21 / Modified: 11:09:39" itemprop="dateCreated datePublished" datetime="2020-04-23T09:59:21+08:00">2020-04-23</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
+              <time title="Created: 2020-05-10 23:14:00 / Modified: 23:39:42" itemprop="dateCreated datePublished" datetime="2020-05-10T23:14:00+08:00">2020-05-10</time>
             </span>
 
           
@@ -205,34 +196,43 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h3><blockquote>
-<p>java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。</p>
+        <h3 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h3><blockquote>
+<p>redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。<br>redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。</p>
 </blockquote>
-<p><img src="/images/pasted-7.png" alt="upload successful"></p>
-<blockquote>
-<p>下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。</p>
+<ol>
+<li>string(字符串类型)</li>
+<li>hash(散列/哈希类型)</li>
+<li>list(列表类型)</li>
+<li>set(集合类型)</li>
+<li>zset(有序集合类型)</li>
+</ol>
+<h3 id="redis优点"><a href="#redis优点" class="headerlink" title="redis优点"></a>redis优点</h3><blockquote>
+<p>为啥要用reids呢？mysql不行嘛？</p>
 </blockquote>
-<blockquote>
-<p>其中java内存模型里的线程工作内存对应就是一级缓存、二级缓存、cpu寄存器</p>
+<ol>
+<li>快！  redis 非常快，每秒可执行大约 110000 次的设置(SET)操作，每秒大约可执行 81000 次的读取/获取(GET)操作。(下图是我本机测试的，当然每台电脑不一样看性能的，使用redis-benchmark -n 100000 -q 测试)</li>
+</ol>
+<p><img src="/images/pasted-28.png" alt="upload successful"></p>
+<ol start="2">
+<li><p>原子性! 所有 Redis 操作都是原子操作，这确保如果两个客户端并发访问，Redis 服务器能接收更新的值,因为redis是单线程的。</p>
+</li>
+<li><p>丰富的数据类型!  redis 支持开发人员常用的大多数数据类型，例如列表，集合，排序集和散列等等。这使得 Redis 很容易被用来解决各种问题，因为我们知道哪些问题可以更好使用地哪些数据类型来处理解决。</p>
+</li>
+<li><p>实用工具! Redis 是一个多实用工具，可用于多种用例，如：缓存，消息队列(Redis 本地支持发布/订阅)，应用程序中的任何短期数据，例如，web应用程序中的会话，网页命中计数等。    </p>
+</li>
+</ol>
+<h3 id="reids命令"><a href="#reids命令" class="headerlink" title="reids命令"></a>reids命令</h3><h4 id="redis常用命令"><a href="#redis常用命令" class="headerlink" title="redis常用命令"></a>redis常用命令</h4><h5 id="KEYS-pattern-符合规则的键名列表"><a href="#KEYS-pattern-符合规则的键名列表" class="headerlink" title="KEYS pattern(符合规则的键名列表)"></a>KEYS pattern(符合规则的键名列表)</h5><blockquote>
+<p>KEYS pattern<br>其中pattern支持glob风格通配符的格式,另外由于KEYS命令需要遍历redis中所有的key，而且redis又是单线程的，当key较多时会影响性能，生产环境建议别用喔。</p>
 </blockquote>
-<p><img src="/images/pasted-8.png" alt="upload successful"></p>
-<h3 id="共享对象可见性"><a href="#共享对象可见性" class="headerlink" title="共享对象可见性"></a>共享对象可见性</h3><blockquote>
-<p>例如上图，假设线程A和线程B同时处理一个共享变量，且线程使用不同cpu运行，缓存都为空。<br> 线程 A 首先获取共享变量 X 的值，由于两级 Cache 都没有命中 ，所以加载主 内存 中 X 的值，假如为 0。然后把 X=O 的值缓存到两级缓存， 线程 A 修改 X 的值为 1, 然后将其写入两级 Cache， 并且刷新到主内存。 线程 A 操作完毕后，线程 A 所在的 CPU 的两级 Cache 内和主内存里面的 X 的值都是 l 。<br> 线程 B 获取 X 的值，首先一级缓存没有命中，然后看二级缓存，二级缓存命中了 ， 所以返回 X= 1 ； 到这里一切都是正常的， 因为这时候主 内存中也是 X=l 。然后线 程 B 修改 X 的值为 2， 并将其存放到线程 2 所在的一级 Cache 和共享二级 Cache 中， 最后更新主内存中 X 的值为 2 ： 到这里一切都是好的。<br> 线程 A 这次又需要修改 X 的值， 获取时一级缓存命中， 并且 X=l ，到这里问题就 出 现了，明明线程 B 已经把 X 的值修改为了 2，为何线程 A 获取的还是 l 呢？ 这 就是共享变量的内存不可见问题， 也就是线程 B 写入的值对线程 A 不可见。（来自于《java并发编程之美》）</p>
+<p><img src="/images/pasted-29.png" alt="upload successful"></p>
+<h5 id="EXISTS-key-判断key是否存在"><a href="#EXISTS-key-判断key是否存在" class="headerlink" title="EXISTS key(判断key是否存在)"></a>EXISTS key(判断key是否存在)</h5><blockquote>
+<p>EXISTS key<br>如果key存在则返回整数类型1，否则返回0</p>
 </blockquote>
-<blockquote>
-<p>使用synchronized和volatile关键字可以解决共享对象的不可见性</p>
+<h5 id="DEL-key…-删除键"><a href="#DEL-key…-删除键" class="headerlink" title="DEL key…(删除键)"></a>DEL key…(删除键)</h5><blockquote>
+<p>DEL key…<br>可以删除一个或多个key，返回值是删除键的个数。</p>
 </blockquote>
-<h3 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h3><blockquote>
-<p>synchronized关键字是java提供的一个原子性内置锁（排他锁），同一时间最多只能有一个线程持有相同对象的锁。在线程进入synchronizedd代码块会获得对象锁，其他线程运行到synchronized会被堵塞挂起。<br>拿到对象锁的线程会在以下情况释放对象锁：<br>1.正常执行完同步代码块。<br>2.抛出异常。<br>3.调用wait等休眠方法</p>
-</blockquote>
-<h4 id="synchronized的内存语义"><a href="#synchronized的内存语义" class="headerlink" title="synchronized的内存语义"></a>synchronized的内存语义</h4><blockquote>
-<p>进入synchronized代码块会把同步代码块用到的变量从运行线程的工作内存中清除。这样获取变量时就不会从工作内存中获得，而是去主内存中获得。<br>退出synchronized代码块会把对同步代码块修改的变量刷新到主内存里去。</p>
-</blockquote>
-<h3 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h3><blockquote>
-<p>当一个变量被volatile关键字声明时，工作线程获取该变量时会直接从主内存中获得，修改变量值会直接把值刷新到主内存中去。</p>
-</blockquote>
-<h3 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h3><blockquote>
-<p>同：synchronized和volatile都可以实现在多线程中共享对象的可见性。<br>异：volatile只保证共享对象的可见性，不保证操作的原子性。<br>   synchronized是比较重量级的操作，他会引起线程上下文的切换并带来线程调度开销。</p>
+<h5 id="TYPE-key-获得key的类型"><a href="#TYPE-key-获得key的类型" class="headerlink" title="TYPE key(获得key的类型)"></a>TYPE key(获得key的类型)</h5><blockquote>
+<p>TYPE key<br>如果key不存在返回none，否则返回五种数据类型其中一个。</p>
 </blockquote>
 
     </div>
@@ -249,13 +249,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/" rel="prev" title="线程基本概念和操作">
-      <i class="fa fa-chevron-left"></i> 线程基本概念和操作
+    <a href="/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" rel="prev" title="TCP协议">
+      <i class="fa fa-chevron-left"></i> TCP协议
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/04/23/%E5%8E%9F%E5%AD%90%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB/" rel="next" title="原子变量操作类">
-      原子变量操作类 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -314,7 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java内存模型"><span class="nav-number">1.</span> <span class="nav-text">java内存模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享对象可见性"><span class="nav-number">2.</span> <span class="nav-text">共享对象可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#synchronized关键字"><span class="nav-number">3.</span> <span class="nav-text">synchronized关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronized的内存语义"><span class="nav-number">3.1.</span> <span class="nav-text">synchronized的内存语义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#volatile关键字"><span class="nav-number">4.</span> <span class="nav-text">volatile关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两者对比"><span class="nav-number">5.</span> <span class="nav-text">两者对比</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis简介"><span class="nav-number">1.</span> <span class="nav-text">redis简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis优点"><span class="nav-number">2.</span> <span class="nav-text">redis优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reids命令"><span class="nav-number">3.</span> <span class="nav-text">reids命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#redis常用命令"><span class="nav-number">3.1.</span> <span class="nav-text">redis常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#KEYS-pattern-符合规则的键名列表"><span class="nav-number">3.1.1.</span> <span class="nav-text">KEYS pattern(符合规则的键名列表)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EXISTS-key-判断key是否存在"><span class="nav-number">3.1.2.</span> <span class="nav-text">EXISTS key(判断key是否存在)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DEL-key…-删除键"><span class="nav-number">3.1.3.</span> <span class="nav-text">DEL key…(删除键)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TYPE-key-获得key的类型"><span class="nav-number">3.1.4.</span> <span class="nav-text">TYPE key(获得key的类型)</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
