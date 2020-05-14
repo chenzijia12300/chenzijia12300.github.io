@@ -150,6 +150,135 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/" class="post-title-link" itemprop="url">java常用锁</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-24 21:47:33" itemprop="dateCreated datePublished" datetime="2020-04-24T21:47:33+08:00">2020-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-26 22:08:04" itemprop="dateModified" datetime="2020-04-26T22:08:04+08:00">2020-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="java常用锁类型"><a href="#java常用锁类型" class="headerlink" title="java常用锁类型"></a>java常用锁类型</h3><blockquote>
+<p>常见的锁大致可以分为：乐观锁，悲观锁，排他锁，共享锁，分段锁，自选锁，公平锁，非公平锁等。。今天来学基于CAS非加锁实现的乐观锁</p>
+</blockquote>
+<h3 id="ReentrantLock锁"><a href="#ReentrantLock锁" class="headerlink" title="ReentrantLock锁"></a>ReentrantLock锁</h3><blockquote>
+<p>ReentrantLock类是一种可重入，公平/非公平，独占锁，它于synchronized具有相同的功能和语义，但是它更强大，它支持中断，超时等操作。Sync是ReentrantLock的内部类，他的两个子类分别代表公平锁和非公平锁，ReentrantLock可以在构造方法选择是否公平。</p>
+</blockquote>
+<image src="/images/ReentrantLock.png">
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void lock() &#123;</span><br><span class="line">    sync.lock();</span><br><span class="line">&#125;</span><br><span class="line"> public void unlock() &#123;</span><br><span class="line">    sync.release(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>lock和unlock都是基于内部类Sync实现的，因此我们了解的重点是Sync</p>
+</blockquote>
+<h4 id="内部类Sync"><a href="#内部类Sync" class="headerlink" title="内部类Sync"></a>内部类Sync</h4><blockquote>
+<p>Sync是ReentrantLock定义的一个静态内部类，他继承了<a href="/2020/04/24/同步队列AQS">AbstractQueuedSynchronizer类</a>。它有两个实现类分别为NonfairSync(非公平锁)，FairSync(公平锁)，</p>
+</blockquote>
+<h5 id="非公平锁lock方法"><a href="#非公平锁lock方法" class="headerlink" title="非公平锁lock方法"></a>非公平锁lock方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">final void lock() &#123;</span><br><span class="line">    if (compareAndSetState(0, 1))&#x2F;&#x2F;尝试获得锁</span><br><span class="line">        setExclusiveOwnerThread(Thread.currentThread());</span><br><span class="line">    else</span><br><span class="line">    	  调用AQS的acquire(int arg)方法</span><br><span class="line">        acquire(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="公平锁lock方法"><a href="#公平锁lock方法" class="headerlink" title="公平锁lock方法"></a>公平锁lock方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">final void lock() &#123;</span><br><span class="line">    acquire(1);&#x2F;&#x2F;直接调用AQS的acquire(int arg)方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其实无论是公平或者非公平锁的lock方法最重要的就是tryAcquire(int acquires)方法</p>
+</blockquote>
+<h5 id="非公平锁tryAcquire-int-acquires-方法"><a href="#非公平锁tryAcquire-int-acquires-方法" class="headerlink" title="非公平锁tryAcquire(int acquires)方法"></a>非公平锁tryAcquire(int acquires)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryAcquire(int acquires) &#123;</span><br><span class="line">    return nonfairTryAcquire(acquires);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">final boolean nonfairTryAcquire(int acquires) &#123;</span><br><span class="line">    final Thread current &#x3D; Thread.currentThread();&#x2F;&#x2F;获得当前线程引用</span><br><span class="line">    int c &#x3D; getState();获得状态</span><br><span class="line">    if (c &#x3D;&#x3D; 0) &#123;</span><br><span class="line">    	  &#x2F;&#x2F;尝试设置状态</span><br><span class="line">        if (compareAndSetState(0, acquires)) &#123;</span><br><span class="line">            setExclusiveOwnerThread(current);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;如果当前线程为持锁线程则重入累加</span><br><span class="line">    else if (current &#x3D;&#x3D; getExclusiveOwnerThread()) &#123;</span><br><span class="line">        int nextc &#x3D; c + acquires;</span><br><span class="line">        if (nextc &lt; 0) &#x2F;&#x2F; overflow</span><br><span class="line">            throw new Error(&quot;Maximum lock count exceeded&quot;);</span><br><span class="line">        setState(nextc);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="公平锁tryAcquire-int-acquires-方法"><a href="#公平锁tryAcquire-int-acquires-方法" class="headerlink" title="公平锁tryAcquire(int acquires)方法"></a>公平锁tryAcquire(int acquires)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryAcquire(int acquires) &#123;</span><br><span class="line">		  &#x2F;&#x2F;公平锁相对于非公平锁就是多了hasQueuedPredecessors()来实现公平策略</span><br><span class="line">           final Thread current &#x3D; Thread.currentThread();</span><br><span class="line">           int c &#x3D; getState();</span><br><span class="line">           if (c &#x3D;&#x3D; 0) &#123;</span><br><span class="line">               if (!hasQueuedPredecessors() &amp;&amp;</span><br><span class="line">                   compareAndSetState(0, acquires)) &#123;</span><br><span class="line">                   setExclusiveOwnerThread(current);</span><br><span class="line">                   return true;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           else if (current &#x3D;&#x3D; getExclusiveOwnerThread()) &#123;</span><br><span class="line">               int nextc &#x3D; c + acquires;</span><br><span class="line">               if (nextc &lt; 0)</span><br><span class="line">                   throw new Error(&quot;Maximum lock count exceeded&quot;);</span><br><span class="line">               setState(nextc);</span><br><span class="line">               return true;</span><br><span class="line">           &#125;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h6 id="hasQueuedPredecessors"><a href="#hasQueuedPredecessors" class="headerlink" title="hasQueuedPredecessors()"></a>hasQueuedPredecessors()</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final boolean hasQueuedPredecessors() &#123;</span><br><span class="line"></span><br><span class="line">    Node t &#x3D; tail;&#x2F;&#x2F;获得尾部节点</span><br><span class="line">    Node h &#x3D; head;&#x2F;&#x2F;获得前继节点</span><br><span class="line">    Node s;</span><br><span class="line">    return h !&#x3D; t &amp;&amp;</span><br><span class="line">        ((s &#x3D; h.next) &#x3D;&#x3D; null || s.thread !&#x3D; Thread.currentThread());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>首先头部节点不等于尾部节点则代表队列不为空———&gt;true<br>s为空则代表有头节点———–&gt;true<br>s不为空且s的线程不等于当前线程———&gt;true</p>
+</blockquote>
+<h5 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class TestReentrantLock &#123;</span><br><span class="line">    private static volatile ReentrantLock lock&#x3D;new ReentrantLock();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(&quot;线程一先工作呢&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(2000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;线程一下班啦&quot;);</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(&quot;线程二在工作呢&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;线程二下班啦&quot;);</span><br><span class="line"></span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-16.png" alt="upload successful"></p>
+<h3 id="Semaphore信号量"><a href="#Semaphore信号量" class="headerlink" title="Semaphore信号量"></a>Semaphore信号量</h3><blockquote>
+<p>Semaphore是一种公平/非公平锁，共享锁。它可以做为一个计数器，用来保护一个或多个锁。跟上面讲解的ReentrantLock独占锁一样，核心代码都是基于类中定义的静态内部类Sync。</p>
+</blockquote>
+<h5 id="acquire-方法"><a href="#acquire-方法" class="headerlink" title="acquire()方法"></a>acquire()方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void acquire() throws InterruptedException &#123;</span><br><span class="line">    sync.acquireSharedInterruptibly(1);&#x2F;&#x2F;可以被中断的获锁方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>从信号量获取一个许可，如果无可用许可前将一直阻塞等待。</p>
+</blockquote>
+<h5 id="acquireSharedInterruptibly-int-arg-方法"><a href="#acquireSharedInterruptibly-int-arg-方法" class="headerlink" title="acquireSharedInterruptibly(int arg)方法"></a>acquireSharedInterruptibly(int arg)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final void acquireSharedInterruptibly(int arg)</span><br><span class="line">        throws InterruptedException &#123;</span><br><span class="line">    if (Thread.interrupted())&#x2F;&#x2F;如果当前线程被中断就抛出异常</span><br><span class="line">        throw new InterruptedException();</span><br><span class="line">    if (tryAcquireShared(arg) &lt; 0)&#x2F;&#x2F;尝试获得异常</span><br><span class="line">        doAcquireSharedInterruptibly(arg);&#x2F;&#x2F;获锁失败放进等待队列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="tryAcquireShared-int-arg-方法"><a href="#tryAcquireShared-int-arg-方法" class="headerlink" title="tryAcquireShared(int arg)方法"></a>tryAcquireShared(int arg)方法</h5><h6 id="非公平锁实现"><a href="#非公平锁实现" class="headerlink" title="非公平锁实现"></a>非公平锁实现</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">    return nonfairTryAcquireShared(acquires);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">final int nonfairTryAcquireShared(int acquires) &#123;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int available &#x3D; getState();&#x2F;&#x2F;获得可用锁数量</span><br><span class="line">        int remaining &#x3D; available - acquires;</span><br><span class="line">        &#x2F;&#x2F;如果没有锁了就直接返回否则尝试获得锁资源</span><br><span class="line">        if (remaining &lt; 0 ||</span><br><span class="line">            compareAndSetState(available, remaining))</span><br><span class="line">            return remaining;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="公平锁实现"><a href="#公平锁实现" class="headerlink" title="公平锁实现"></a>公平锁实现</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">            for (;;) &#123;</span><br><span class="line">                if (hasQueuedPredecessors())&#x2F;&#x2F;公平策略就是判断当前节点是否有前驱节点（跟上面的ReentrantLock的公平策略一样的）</span><br><span class="line">                    return -1;</span><br><span class="line">                int available &#x3D; getState();</span><br><span class="line">                int remaining &#x3D; available - acquires;</span><br><span class="line">                if (remaining &lt; 0 ||</span><br><span class="line">                    compareAndSetState(available, remaining))</span><br><span class="line">                    return remaining;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="doAcquireSharedInterruptibly-int-arg"><a href="#doAcquireSharedInterruptibly-int-arg" class="headerlink" title="doAcquireSharedInterruptibly(int arg)"></a>doAcquireSharedInterruptibly(int arg)</h5><blockquote>
+<p><a href="http://localhost:4000/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS" target="_blank" rel="noopener">分析请见</a></p>
+</blockquote>
+<h4 id="release-int-arg-方法"><a href="#release-int-arg-方法" class="headerlink" title="release(int arg)方法"></a>release(int arg)方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void release() &#123;</span><br><span class="line">    sync.releaseShared(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>释放信号量中的一个许可，如果多次调用会扩大信号量的可用数量。</p>
+</blockquote>
+<h5 id="releaseShared-int-arg-方法"><a href="#releaseShared-int-arg-方法" class="headerlink" title="releaseShared(int arg)方法"></a>releaseShared(int arg)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final boolean releaseShared(int arg) &#123;</span><br><span class="line">    if (tryReleaseShared(arg))&#x2F;&#x2F;尝试释放锁 &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="tryReleaseShared-int-releases-方法"><a href="#tryReleaseShared-int-releases-方法" class="headerlink" title="tryReleaseShared(int releases)方法"></a>tryReleaseShared(int releases)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int current &#x3D; getState();&#x2F;&#x2F;获得队列中可用锁数量</span><br><span class="line">        int next &#x3D; current + releases;</span><br><span class="line">        if (next &lt; current) &#x2F;&#x2F; overflow</span><br><span class="line">            throw new Error(&quot;Maximum permit count exceeded&quot;);</span><br><span class="line">        if (compareAndSetState(current, next))&#x2F;&#x2F;尝试设置数量</span><br><span class="line">            return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="doReleaseShared-方法"><a href="#doReleaseShared-方法" class="headerlink" title="doReleaseShared()方法"></a>doReleaseShared()方法</h5><blockquote>
+<p><a href="http://localhost:4000/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS" target="_blank" rel="noopener">分析请见</a></p>
+</blockquote>
+</image>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1162,14 +1291,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
