@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="redis集群简介 首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。   redis有三种集群模式   主从模式 哨兵模式 cluster模式  主从模式 主从模式简介 主从">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis学习笔记(二)---集群">
+<meta property="og:url" content="http://yoursite.com/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/index.html">
+<meta property="og:site_name" content="汤姆猫的博客">
+<meta property="og:description" content="redis集群简介 首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。   redis有三种集群模式   主从模式 哨兵模式 cluster模式  主从模式 主从模式简介 主从">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/pasted-38.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-39.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-40.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-43.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-44.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-45.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-46.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-41.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-42.png">
+<meta property="article:published_time" content="2020-05-14T07:25:00.000Z">
+<meta property="article:modified_time" content="2020-05-14T14:25:00.046Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-38.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>redis学习笔记(二)---集群 | 汤姆猫的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">汤姆猫的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          redis学习笔记(二)---集群
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-14 15:25:00 / Modified: 22:25:00" itemprop="dateCreated datePublished" datetime="2020-05-14T15:25:00+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="redis集群简介"><a href="#redis集群简介" class="headerlink" title="redis集群简介"></a>redis集群简介</h3><blockquote>
+<p>首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。<br>我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。</p>
+</blockquote>
+<blockquote>
+<p>redis有三种集群模式</p>
+</blockquote>
+<ol>
+<li>主从模式</li>
+<li>哨兵模式</li>
+<li>cluster模式</li>
+</ol>
+<h3 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h3><p><img src="/images/pasted-38.png" alt="upload successful"></p>
+<h4 id="主从模式简介"><a href="#主从模式简介" class="headerlink" title="主从模式简介"></a>主从模式简介</h4><blockquote>
+<p>主从模式是三种里面最简单的，它将一台redis服务器里的数据复制到其他redis服务器中，前者称为 主节点(master)，后者称为 从节点(slave)。且数据的复制是 单向 的，只能由主节点到从节点。Redis 主从复制支持 主从同步 和 从从同步 两种，后者是 Redis 后续版本新增的功能，以减轻主节点的同步负担。</p>
+</blockquote>
+<h4 id="主从模式好处"><a href="#主从模式好处" class="headerlink" title="主从模式好处"></a>主从模式好处</h4><ol>
+<li>数据冗余： 主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。</li>
+<li>故障恢复： 当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复 (实际上是一种服务的冗余)。</li>
+<li>负载均衡： 在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务 （即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载。尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量。</li>
+<li>高可用基石： 除了上述作用以外，主从复制还是哨兵和集群能够实施的 基础，因此说主从复制是 Redis 高可用的基础。</li>
+</ol>
+<h4 id="主从模式工作机制"><a href="#主从模式工作机制" class="headerlink" title="主从模式工作机制"></a>主从模式工作机制</h4><blockquote>
+<p>当slave启动后，主动向master发送SYNC命令。master接收到SYNC命令后在后台保存快照（RDB持久化）和缓存保存快照这段时间的命令，然后将保存的快照文件和缓存的命令发送给slave。slave接收到快照文件和命令后加载快照文件和缓存的执行命令。<br>复制初始化后，master每次接收到的写命令都会同步发送给slave，保证主从数据一致性。</p>
+</blockquote>
+<h4 id="主从模式测试"><a href="#主从模式测试" class="headerlink" title="主从模式测试"></a>主从模式测试</h4><blockquote>
+<p>配置文件：在从服务器的配置文件中加入：slaveof <masterip> <masterport><br>启动命令：redis-server 启动命令后加入 –slaveof <masterip> <masterport><br>客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点。</masterport></masterip></masterport></masterip></masterport></masterip></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个端口为 6379 的 Redis 实例</span><br><span class="line">redis-server --port 6379</span><br><span class="line"># 创建一个端口为 6380 的 Redis 实例</span><br><span class="line">redis-server --port 6380</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>此时两个redis服务都为主节点,然后我们在6380端口执行slave of 127.0.0.1 6379,使它变成从节点。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在 6380 端口的 Redis 实例中使用控制台</span><br><span class="line">redis-cli -p 6380</span><br><span class="line"># 成为本地 6379 端口实例的从节点</span><br><span class="line">127.0.0.1:6380&gt; SLAVEOF 127.0.0.1ø 6379</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<h4 id="主从模式原理"><a href="#主从模式原理" class="headerlink" title="主从模式原理"></a>主从模式原理</h4><p><img src="/images/pasted-39.png" alt="upload successful"></p>
+<blockquote>
+<p>其中SYNC是非常耗时的操作。</p>
+</blockquote>
+<ol>
+<li>主服务器需要执行 BGSAVE 命令来生成 RDB 文件，这个生成操作会消耗主服务器大量的CPU、内存和磁盘 I/O 的资源。</li>
+<li>主服务器需要将自己生成的RDB文件发送给从服务器，这个发送操作会消耗主服务器 大量的网络资源 (带宽和流量)，并对主服务器响应命令请求的时间产生影响。</li>
+<li>接收到 RDB 文件的从服务器需要载入主服务器发来的 RBD 文件，并且在载入期间，从服务器会因为阻塞而没办法处理命令请求。</li>
+</ol>
+<blockquote>
+<p>另外如果因为断线重连的情况出现，还要进行SYNC是很浪费的，因此redis2.8有了PSYNC命令来替代SYNC命令。</p>
+</blockquote>
+<ol>
+<li>全量复制：用于初次复制或其他无法进行部分复制的情况，将主节点中的所有数据都发送给从节点，是一个非常重型的操作。</li>
+<li>部分复制：用于网络中断等情况后的复制，只将 中断期间主节点执行的写命令 发送给 从节点，与全量复制相比更加高效。需要注意 的是，如果网络中断时间过长，导致主节点没有能够完整地保存中断期间执行的写命令，则无法进行部分复制，仍使用全量复制。</li>
+</ol>
+<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><h4 id="哨兵模式简介"><a href="#哨兵模式简介" class="headerlink" title="哨兵模式简介"></a>哨兵模式简介</h4><blockquote>
+<p>主从模式有个缺点，如果主redis服务器挂了，那就不能提供写的服务了。因此sentinel哨兵模式应运而生。顾名思义，它的作用就是监控redis集群的运行状况。</p>
+</blockquote>
+<p><img src="/images/pasted-40.png" alt="upload successful"></p>
+<blockquote>
+<p>哨兵模式又两个部分组成，分别是哨兵节点和数据节点。<br>哨兵节点：哨兵系统由一个或多个哨兵节点组成，哨兵节点是特殊的 Redis 节点，不存储数据。<br>数据节点：主节点和从节点都是数据节点。</p>
+</blockquote>
+<h4 id="哨兵模式特点"><a href="#哨兵模式特点" class="headerlink" title="哨兵模式特点"></a>哨兵模式特点</h4><blockquote>
+<p>在复制的基础上，哨兵实现了自动化的故障恢复功能。</p>
+</blockquote>
+<ol>
+<li>监控（Monitoring）： 哨兵会不断地检查主节点和从节点是否运作正常。</li>
+<li>自动故障转移（Automatic failover）： 当 主节点 不能正常工作时，哨兵会开始 3. 自动故障转移操作，它会将失效主节点的其中一个 从节点升级为新的主节点，并让其他从节点改为复制新的主节点。</li>
+<li>配置提供者（Configuration provider）： 客户端在初始化时，通过连接哨兵来获得当前 Redis 服务的主节点地址。</li>
+<li>通知（Notification）： 哨兵可以将故障转移的结果发送给客户端。</li>
+</ol>
+<h4 id="哨兵模式测试"><a href="#哨兵模式测试" class="headerlink" title="哨兵模式测试"></a>哨兵模式测试</h4><h6 id="创建主从节点"><a href="#创建主从节点" class="headerlink" title="创建主从节点"></a>创建主从节点</h6><blockquote>
+<p>首先创建主从配置文件，从文件如下</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">----redis-slave1.conf----</span><br><span class="line">port 6380     &#x2F;&#x2F;端口号</span><br><span class="line">dbfilename &quot;dump-6380.rdb&quot; &#x2F;&#x2F;文件名</span><br><span class="line">daemonize yes &#x2F;&#x2F;demonize是否以后台线程运行 在window没用</span><br><span class="line">slaveof 127.0.0.1 6379 &#x2F;&#x2F;设置主节点</span><br><span class="line">----redis-slave2.conf---</span><br><span class="line">port 6381</span><br><span class="line">dbfilename &quot;dump-6381.rdb&quot;</span><br><span class="line">daemonize yes</span><br><span class="line">slaveof 127.0.0.1 6380</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>然后我们可以执行 redis-server <config file path> 来根据配置文件启动不同的Redis 实例，依次启动主从节点。节点启动后执行redis-cli链接到主节点调用redis-cli命令查看主从状态。</config></p>
+</blockquote>
+<p><img src="/images/pasted-43.png" alt="upload successful"></p>
+<h6 id="创建哨兵节点"><a href="#创建哨兵节点" class="headerlink" title="创建哨兵节点"></a>创建哨兵节点</h6><blockquote>
+<p>按照上面同样的方法，我们给哨兵节点也创建三个配置文件。(哨兵节点本质上是特殊的 Redis 节点，所以配置几乎没什么差别，只是在端口上做区分就好)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">----redis-sentinel1.conf---</span><br><span class="line">port 16379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel1.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel2.conf---</span><br><span class="line">port 16380</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel2.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel3.conf---</span><br><span class="line">port 16381</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel3.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>然后我们启动哨兵节点redis-server <config file path> –sentinel。哨兵节点启动后redis-cli链接到哨兵节点，然后调用info Sentinel 命令来查看是否已经在监视主节点了。</config></p>
+</blockquote>
+<p><img src="/images/pasted-44.png" alt="upload successful"> </p>
+<h6 id="故障模拟"><a href="#故障模拟" class="headerlink" title="故障模拟"></a>故障模拟</h6><blockquote>
+<p>使用taskkill /f /pid <pid>杀掉主节点,然后等待一段时间，在去哨兵节点使用INFO   SENTINEL命令查看节点状态</pid></p>
+</blockquote>
+<p><img src="/images/pasted-45.png" alt="upload successful"></p>
+<p><img src="/images/pasted-46.png" alt="upload successful"></p>
+<blockquote>
+<p>从上图可以发现新的主节点已经变成了6380端口的节点，同时还可以发现，哨兵节点认为新的主节点仍然有两个从节点 (上方 slaves=2)，这是因为哨兵在将 6380 切换成主节点的同时，将 6379 节点置为其从节点。虽然 6379 从节点已经挂掉，但是由于 哨兵并不会对从节点进行客观下线，因此认为该从节点一直存在。当 6379 节点重新启动后，会自动变成 6380 节点的从节点。<br>另外，在故障转移的阶段，哨兵和主从节点的配置文件都会被改写：</p>
+</blockquote>
+<ol>
+<li>对于主从节点： 主要是 slaveof 配置的变化，新的主节点没有了 slaveof 配置，其从节点则 slaveof 新的主节点。</li>
+<li>对于哨兵节点： 除了主从节点信息的变化，纪元(epoch) (记录当前集群状态的参数) 也会变化，纪元相关的参数都 +1 了。</li>
+</ol>
+<h6 id="主节点如何被推选出来"><a href="#主节点如何被推选出来" class="headerlink" title="主节点如何被推选出来"></a>主节点如何被推选出来</h6><ol>
+<li>在失效主服务器属下的从服务器当中， 那些被标记为主观下线、已断线、或者最后一次回复 PING 命令的时间大于五秒钟的从服务器都会被 淘汰。</li>
+<li>在失效主服务器属下的从服务器当中， 那些与失效主服务器连接断开的时长超过 down-after 选项指定的时长十倍的从服务器都会被 淘汰。</li>
+<li>在经历了以上两轮淘汰之后 剩下来的从服务器中,我们选出复制偏移量(replication offset)最大 的那个从服务器作为新的主服务器；如果复制偏移量不可用，或者从服务器的复制偏移量相同，那么带有最小运行ID的那个从服务器成为新的主服务器。</li>
+</ol>
+<h3 id="cluster模式"><a href="#cluster模式" class="headerlink" title="cluster模式"></a>cluster模式</h3><h4 id="cluster模式简介"><a href="#cluster模式简介" class="headerlink" title="cluster模式简介"></a>cluster模式简介</h4><blockquote>
+<p>哨兵模式基本可以满足一般的生产需求，具有高可用。但是当数据量过大到一台服务器存放不下的情况时，主从模式或sentinel模式就不能满足需求了，这个时候需要对存储的数据进行分片，将数据存储到多个Redis实例中。cluster模式的出现就是为了解决单机Redis容量有限的问题，将Redis的数据根据一定的规则分配到多台机器。</p>
+</blockquote>
+<p><img src="/images/pasted-41.png" alt="upload successful"></p>
+<blockquote>
+<p>上图 展示了 Redis Cluster 典型的架构图，集群中的每一个 Redis 节点都 互相两两相连，客户端任意 直连 到集群中的 任意一台，就可以对其他 Redis 节点进行 读写 的操作。</p>
+</blockquote>
+<h4 id="cluster模式原理"><a href="#cluster模式原理" class="headerlink" title="cluster模式原理"></a>cluster模式原理</h4><p><img src="/images/pasted-42.png" alt="upload successful"></p>
+<blockquote>
+<p>redis 集群中内置了 16384 个哈希槽。当客户端连接到rRedis 集群之后，会同时得到一份关于这个 集群的配置信息，当客户端具体对某一个 key 值进行操作时，会计算出它的一个 Hash 值，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，redis 会根据节点数量 大致均等 的将哈希槽映射到不同的节点。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/14/%E8%B7%83%E8%A1%A8/" rel="prev" title="跳跃表">
+      <i class="fa fa-chevron-left"></i> 跳跃表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis集群简介"><span class="nav-number">1.</span> <span class="nav-text">redis集群简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从模式"><span class="nav-number">2.</span> <span class="nav-text">主从模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主从模式简介"><span class="nav-number">2.1.</span> <span class="nav-text">主从模式简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主从模式好处"><span class="nav-number">2.2.</span> <span class="nav-text">主从模式好处</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主从模式工作机制"><span class="nav-number">2.3.</span> <span class="nav-text">主从模式工作机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主从模式测试"><span class="nav-number">2.4.</span> <span class="nav-text">主从模式测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主从模式原理"><span class="nav-number">2.5.</span> <span class="nav-text">主从模式原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哨兵模式"><span class="nav-number">3.</span> <span class="nav-text">哨兵模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵模式简介"><span class="nav-number">3.1.</span> <span class="nav-text">哨兵模式简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵模式特点"><span class="nav-number">3.2.</span> <span class="nav-text">哨兵模式特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵模式测试"><span class="nav-number">3.3.</span> <span class="nav-text">哨兵模式测试</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建主从节点"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">创建主从节点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建哨兵节点"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">创建哨兵节点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#故障模拟"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">故障模拟</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#主节点如何被推选出来"><span class="nav-number">3.3.0.4.</span> <span class="nav-text">主节点如何被推选出来</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cluster模式"><span class="nav-number">4.</span> <span class="nav-text">cluster模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cluster模式简介"><span class="nav-number">4.1.</span> <span class="nav-text">cluster模式简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cluster模式原理"><span class="nav-number">4.2.</span> <span class="nav-text">cluster模式原理</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
