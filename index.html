@@ -150,6 +150,103 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/ava%E6%B3%9B%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/27/ava%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java泛型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-27 10:58:13 / Modified: 16:00:12" itemprop="dateCreated datePublished" datetime="2020-05-27T10:58:13+08:00">2020-05-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="啥是泛型"><a href="#啥是泛型" class="headerlink" title="啥是泛型"></a>啥是泛型</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
+<p>泛型即<strong><em>参数化类型</em></strong>,Java泛型（ generics） 是JDK 5中引⼊的⼀个新特性， 允许在定义类和接⼜的时候使⽤类型参数（ type parameter） 。<br>声明的类型参数在使⽤时⽤具体的类型来替换。 泛型最主要的应⽤是在JDK 5中的新集合类框架中。</p>
+</blockquote>
+<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class ExampleGenerics &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;java1.5以后写法</span><br><span class="line">        &#x2F;&#x2F; 使用泛型集合</span><br><span class="line">        List&lt;Integer&gt; integerList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i &#x3D; 0;i &lt; 10;i++)&#123;</span><br><span class="line">            integerList.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (Integer integer:integerList)&#123;</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;java1.5之前写法</span><br><span class="line">        &#x2F;&#x2F;需要强转</span><br><span class="line">        List list &#x3D; new ArrayList();</span><br><span class="line">        for (int i &#x3D; 0;i &lt; 10;i++)&#123;</span><br><span class="line">            list.add(i);b</span><br><span class="line">        &#125;</span><br><span class="line">        for (Object o:list)&#123;</span><br><span class="line">            System.out.println((Integer)o);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h3><h4 id="各语言是如何处理泛型特性的"><a href="#各语言是如何处理泛型特性的" class="headerlink" title="各语言是如何处理泛型特性的"></a>各语言是如何处理泛型特性的</h4><blockquote>
+<p>一般来说，泛型可以分为两种</p>
+</blockquote>
+<ol>
+<li>Code specialization。在实例化一个泛型类或泛型方法时都产生一份新的目标代码（字节码or二进制代码）。例如，针对一个泛型list，可能需要 针对String，Integer，Float产生三份目标代码。代表语言（c++，c#）</li>
+<li>Code sharing。对每个泛型类只生成唯一的一份目标代码；该泛型类的所有实例都映射到这份目标代码上，在需要的时候执行类型检查和类型转换。代表语言（java）</li>
+</ol>
+<blockquote>
+<p>Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。将多种泛型类形实例映射到唯一的字节码表示是通过<strong><em>类型擦除（type erasue）</em></strong>实现的。</p>
+</blockquote>
+<h4 id="啥是类型擦除"><a href="#啥是类型擦除" class="headerlink" title="啥是类型擦除"></a>啥是类型擦除</h4><blockquote>
+<p>java编译器首先找到泛型的具体类也就是上界，这个类一般是Object。然后将泛型替换成具体类，擦除所有类型参数。</p>
+</blockquote>
+<h4 id="编译器处理泛型的过程"><a href="#编译器处理泛型的过程" class="headerlink" title="编译器处理泛型的过程"></a>编译器处理泛型的过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;源代码</span><br><span class="line">interface Comparable&lt;A&gt; &#123;</span><br><span class="line">    public int compareTo(A that);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public final class NumericValue implements Comparable&lt;NumericValue&gt; &#123;</span><br><span class="line">    private byte value;</span><br><span class="line"></span><br><span class="line">    public NumericValue(byte value) &#123;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public byte getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int compareTo(NumericValue that) &#123;</span><br><span class="line">        return this.value - that.value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;反编译后</span><br><span class="line"> interface Comparable &#123;</span><br><span class="line">  public int compareTo( Object that);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">public final class NumericValue</span><br><span class="line">    implements Comparable</span><br><span class="line">&#123;</span><br><span class="line">    public NumericValue(byte value)</span><br><span class="line">    &#123;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line">    public byte getValue()</span><br><span class="line">    &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">    public int compareTo(NumericValue that)</span><br><span class="line">    &#123;</span><br><span class="line">        return value - that.value;</span><br><span class="line">    &#125;</span><br><span class="line">    public volatile int compareTo(Object obj)</span><br><span class="line">    &#123;</span><br><span class="line">        return compareTo((NumericValue)obj);</span><br><span class="line">    &#125;</span><br><span class="line">    private byte value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以发现Comparable<A>被编译器擦除后替换成具体类Object，Comparable<NumericaValue>的类型参数被擦除后，导致NumericValue没有实现接口Comparable的compareTo(Object that)方法 。所以编译器生成了一个桥接方法。</NumericaValue></A></p>
+</blockquote>
+<h3 id="泛型常用字母含义"><a href="#泛型常用字母含义" class="headerlink" title="泛型常用字母含义"></a>泛型常用字母含义</h3><blockquote>
+<p>E - Element (在集合中使用，因为集合中存放的是元素)<br>T - Type（Java 类）<br>K - Key（键）<br>V - Value（值）<br>N - Number（数值类型）<br>？ - 表示不确定的java类型（无限制通配符类型）</p>
+</blockquote>
+<h3 id="通配符和上下界"><a href="#通配符和上下界" class="headerlink" title="通配符和上下界"></a>通配符和上下界</h3><blockquote>
+<p>使用泛型类可以指定具体类型，也可以使用?通配符来表示未知类型。一般我们会使用上下界来限制通配符。</p>
+</blockquote>
+<blockquote>
+<p>&lt;? extends T&gt;和&lt;? super T&gt;是Java泛型中的“通配符（Wildcards）”和“边界（Bounds）”的概念。<br>&lt;? extends T&gt;：是指 “上界通配符（Upper Bounds Wildcards）”，即泛型中的类必须为当前类的子类或当前类。<br>&lt;? super T&gt;：是指 “下界通配符（Lower Bounds Wildcards）”，即泛型中的类必须为当前类或者其父类。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void TestExtends()&#123;</span><br><span class="line">    List&lt;? extends Number&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    list.add(new Integer(1));&#x2F;&#x2F;报错</span><br><span class="line">    Number number &#x3D; list.get(0);&#x2F;&#x2F;返回上界</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void TestSuper()&#123;</span><br><span class="line">    List&lt;? super Number&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    list.add(new Integer(1));</span><br><span class="line">    list.add(new Object());&#x2F;&#x2F;报错</span><br><span class="line">    Object o &#x3D;list.get(0);&#x2F;&#x2F;只能返回Object类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从上面的例子我们可以看出两个通配符的不同特性。<br>在TestExtends中我们不能确定list中的具体类型，可能是Integer或者Float等。因此使用add方法都会出现编译错误。<br>在TestSuper中我们不能确定元素的上界是什么，所以只能返回Object类型。<br>在java中有一个PECS原则Producter Extends，Consumer Super，意思就是如果需要获取元素（生产）使用extends通配符，如果要添加元素（消费）使用super通配符。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1373,99 +1470,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">ArrayBlockingQueue详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-30 14:35:17" itemprop="dateCreated datePublished" datetime="2020-04-30T14:35:17+08:00">2020-04-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-02 16:44:14" itemprop="dateModified" datetime="2020-05-02T16:44:14+08:00">2020-05-02</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ArrayBlockingQueue简介"><a href="#ArrayBlockingQueue简介" class="headerlink" title="ArrayBlockingQueue简介"></a>ArrayBlockingQueue简介</h3><blockquote>
-<p>ArrayBlockingQueue是一个有界，堵塞/非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。</p>
-</blockquote>
-<image src="/images/ArrayBlockingQueue.png">
-
-<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;存放元素的数组</span><br><span class="line">  final Object[] items;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;出队操作的下标</span><br><span class="line">  int takeIndex;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F;入队操作的下标</span><br><span class="line">  int putIndex;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;元素个数</span><br><span class="line">  int count;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;入队操作和出队操作的独占锁</span><br><span class="line">  final ReentrantLock lock;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">  private final Condition notEmpty;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">  private final Condition notFull;</span><br></pre></td></tr></table></figure>
-<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public ArrayBlockingQueue(int capacity) &#123;</span><br><span class="line">       this(capacity, false);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair) &#123;</span><br><span class="line">       if (capacity &lt;&#x3D; 0)</span><br><span class="line">           throw new IllegalArgumentException();</span><br><span class="line">       this.items &#x3D; new Object[capacity];&#x2F;&#x2F;创建指定大小的数组</span><br><span class="line">       lock &#x3D; new ReentrantLock(fair);&#x2F;&#x2F;创建锁</span><br><span class="line">       notEmpty &#x3D; lock.newCondition();</span><br><span class="line">       notFull &#x3D;  lock.newCondition();</span><br><span class="line">  &#125;</span><br><span class="line">&#x2F;&#x2F;根据指定集合创建数组</span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair,</span><br><span class="line">                             Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">       this(capacity, fair);</span><br><span class="line"></span><br><span class="line">       final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">       lock.lock(); &#x2F;&#x2F; Lock only for visibility, not mutual exclusion&#x2F;&#x2F;上锁</span><br><span class="line">       try &#123;</span><br><span class="line">           int i &#x3D; 0;</span><br><span class="line">           try &#123;</span><br><span class="line">               for (E e : c) &#123;</span><br><span class="line">                   checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">                   items[i++] &#x3D; e;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (ArrayIndexOutOfBoundsException ex) &#123;</span><br><span class="line">               throw new IllegalArgumentException();</span><br><span class="line">           &#125;</span><br><span class="line">           count &#x3D; i;</span><br><span class="line">           putIndex &#x3D; (i &#x3D;&#x3D; capacity) ? 0 : i;</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>三种构造方法都要指定队列大小，另外fair参数控制独占锁是否为公平非公平锁。</p>
-</blockquote>
-<h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满直接返回false</span><br><span class="line">            return false;</span><br><span class="line">        else &#123;</span><br><span class="line">            enqueue(e);&#x2F;&#x2F;把值添加到队列尾部</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="enqueue-E-x"><a href="#enqueue-E-x" class="headerlink" title="enqueue(E x)"></a>enqueue(E x)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private void enqueue(E x) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert lock.getHoldCount() &#x3D;&#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; assert items[putIndex] &#x3D;&#x3D; null;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    items[putIndex] &#x3D; x;&#x2F;&#x2F;赋值</span><br><span class="line">    if (++putIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果入队下标等于队列边界则把入队下标设置为0</span><br><span class="line">        putIndex &#x3D; 0;</span><br><span class="line">    count++;</span><br><span class="line">    notEmpty.signal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id><a href="#" class="headerlink" title></a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满则休眠</span><br><span class="line">            notFull.await();</span><br><span class="line">        enqueue(e);入队</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>offer()和put()都可以用来添加新的元素，但offer()入队时发现队列已满会直接返回false，put()则会堵塞等待队列不为满在添加。</p>
-</blockquote>
-<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        return (count &#x3D;&#x3D; 0) ? null : dequeue();&#x2F;&#x2F;如果队列个数为空则直接返回null否则调用dequeue()</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="dequeue"><a href="#dequeue" class="headerlink" title="dequeue()"></a>dequeue()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private E dequeue() &#123;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    E x &#x3D; (E) items[takeIndex];&#x2F;&#x2F;根据出队下标获得值</span><br><span class="line">    items[takeIndex] &#x3D; null;</span><br><span class="line">    if (++takeIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;计算出队下标的值，如果等于队列长度则设置为0</span><br><span class="line">        takeIndex &#x3D; 0;</span><br><span class="line">    count--;</span><br><span class="line">    if (itrs !&#x3D; null)</span><br><span class="line">        itrs.elementDequeued();</span><br><span class="line">    notFull.signal();</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则休眠</span><br><span class="line">            notEmpty.await();</span><br><span class="line">        return dequeue();&#x2F;&#x2F;进行出队操作</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>poll()和take()都可以进行出队操作，区别是运行poll()时如果队列为空则直接返回null，take()则会堵塞当前线程直到队列不为空。</p>
-</blockquote>
-</image>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1535,7 +1539,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
