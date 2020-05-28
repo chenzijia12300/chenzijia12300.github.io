@@ -150,6 +150,98 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/28/ttp%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/28/ttp%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">HTTP协议和HTTPS协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-28 21:36:00 / Modified: 23:13:21" itemprop="dateCreated datePublished" datetime="2020-05-28T21:36:00+08:00">2020-05-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><blockquote>
+<p>HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是基于应用层的协议，由request和response构成，是一个标准的客户端浏览器模型，同时它还是无状态协议。HTTP协议作为TCP/IP模型中应用层的协议也不例外。HTTP协议通常承载于TCP协议之上，有时也承载于TLS或SSL协议层之上，这个时候，就成了我们常说的HTTPS。</p>
+</blockquote>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>基于请求/响应模型的协议，请求和响应必须成对，先有请求后有响应。</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。</li>
+<li>灵活：http协议允许传输任意数据对象，传输类型由Content-type标识数据类型。</li>
+<li>无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。</li>
+</ol>
+<h4 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h4><blockquote>
+<p>HTTP/1.0:发送一次请求，创建一次连接，获得一个Web资源，连接断开。<br>HTTP/1.1:发送一次请求，创建一次连接，获得多个Web资源，连接断开。</p>
+</blockquote>
+<h4 id="协议的组成"><a href="#协议的组成" class="headerlink" title="协议的组成"></a>协议的组成</h4><blockquote>
+<p>HTTP协议由HTTP请求和HTTP响应组成，其中请求和响应分别可以分为请求行、请求头、请求体和响应行，响应头，响应体。</p>
+</blockquote>
+<p><img src="/images/pasted-49.png" alt="upload successful"></p>
+<h4 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h4><blockquote>
+<p>例如：POST /chapter17/user.html HTTP/1.1<br>格式：请求方法 请求路径 请求协议<br>常用的请求方法有POST,GET,PUT,DELETE，在RESTFUL风格中分别对应CRUD。</p>
+</blockquote>
+<h4 id="GET和POST有啥区别"><a href="#GET和POST有啥区别" class="headerlink" title="GET和POST有啥区别"></a>GET和POST有啥区别</h4><blockquote>
+<p>这个问题真的是老是被问到。。。</p>
+</blockquote>
+<blockquote>
+<p>GET请求，请求的数据会附加在URL之后，以?分割URL和传输数据，多个参数用&amp;连接。URL的编码格式采用的是ASCII编码，而不是uniclde，即是说所有的非ASCII字符都要编码之后再传输。<br>POST请求：POST请求会把请求的数据放置在HTTP请求包的包体中。上面的item=bandsaw就是实际的传输数据。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/ava%E6%B3%9B%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1372,104 +1464,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/" class="post-title-link" itemprop="url">数据结构-堆</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-30 21:56:38" itemprop="dateCreated datePublished" datetime="2020-04-30T21:56:38+08:00">2020-04-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-02 16:45:00" itemprop="dateModified" datetime="2020-05-02T16:45:00+08:00">2020-05-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="堆的定义"><a href="#堆的定义" class="headerlink" title="堆的定义"></a>堆的定义</h3><blockquote>
-<p>堆在逻辑上是一种完全二叉树，物理结构上是一维数组，按照根节点大小分为最大堆和最小堆，如下图。<br>最小堆：所有节点的左右孩子节点都小于或者等于父节点<br>最大堆：所有节点的左右孩子节点都大于或者等于父节点</p>
-</blockquote>
-<blockquote>
-<p>补充：完全二叉树的性质<br>如果有一颗有n个节点的完全二叉树的节点按层次序编号，对任一层的节点i（0&lt;=i&lt;=n）有（注意i的取值）<br>1.如果i=0，则节点是二叉树的根，无双亲，如果i&gt;0，则其双亲节点为[i/2]，向下取整<br>2.如果2i+1&gt;n那么节点i没有左孩子，否则其左孩子为2i+1<br>3.如果2i+2&gt;n那么节点没有右孩子，否则右孩子为2i+2<br><image src="/images/堆.png"></image></p>
-</blockquote>
-<h3 id="堆的特性"><a href="#堆的特性" class="headerlink" title="堆的特性"></a>堆的特性</h3><ol>
-<li>堆是弱序的，所以遍历堆是很难的，基本堆都不支持遍历。</li>
-<li>堆一般都是用来实现优先级队列，由它实现的优先级队列的插入和删除的时间复杂度都是O(logn)。</li>
-</ol>
-<h3 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><blockquote>
-<p>把插入的节点放在数组尾部，然后向上筛选。</p>
-</blockquote>
-<p><img src="/images/pasted-17.png" alt="upload successful"></p>
-<h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><blockquote>
-<p>把根节点移除，然后向下筛选。</p>
-</blockquote>
-<ol>
-<li><p>移走根</p>
-</li>
-<li><p>把最后一个节点移动到根的位置</p>
-</li>
-<li><p>一直向下筛选这个节点，直到它在一个大于它的节点之下，小于它的节点之上为止。</p>
-</li>
-</ol>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.example01;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Array;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">import java.util.Random;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;4&#x2F;30 23:17</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Heap&lt;T extends Comparable&lt;? super T&gt;&gt;&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private final Object[] items;</span><br><span class="line"></span><br><span class="line">    private Comparator comparable;</span><br><span class="line"></span><br><span class="line">    private int currentIndex &#x3D; 0;</span><br><span class="line">    private static final int DEFAULT_CAPACITY &#x3D; 10;</span><br><span class="line">    public Heap()&#123;</span><br><span class="line">        this(DEFAULT_CAPACITY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Heap(int capacity)&#123;</span><br><span class="line">        this(capacity,null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Heap(int capacity,Comparator comparable)&#123;</span><br><span class="line">        this.items &#x3D; new Object[capacity];</span><br><span class="line">        this.comparable &#x3D; comparable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 添加元素，成功返回true,否则返回false</span><br><span class="line">     * @author czj</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;30 23:29</span><br><span class="line">     * @param [item]</span><br><span class="line">     * @return boolean</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean add(T item)&#123;</span><br><span class="line">        &#x2F;&#x2F;堆已满返回false</span><br><span class="line">        if (isFull())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        items[currentIndex] &#x3D; item;</span><br><span class="line">        adjustUp();</span><br><span class="line">        currentIndex++;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isFull()&#123;</span><br><span class="line">        return items.length &#x3D;&#x3D; currentIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isEmpty()&#123;</span><br><span class="line">        return items.length&#x3D;&#x3D;0;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 将新增的元素向上调整到合适的位置</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;30 23:33</span><br><span class="line">     * @param []</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void adjustUp()&#123;</span><br><span class="line">        T temp&#x3D;null;</span><br><span class="line">        T item&#x3D;null;</span><br><span class="line">        T parentItem&#x3D;null;</span><br><span class="line">        int parentIdx &#x3D; (currentIndex-1)&#x2F;2;</span><br><span class="line">        int nowIdx&#x3D;currentIndex;</span><br><span class="line">        int num &#x3D; -1;</span><br><span class="line">        while (nowIdx&gt;0)&#123;</span><br><span class="line">            item &#x3D; (T) items[nowIdx];</span><br><span class="line">            parentItem &#x3D; (T) items[parentIdx];</span><br><span class="line">            if (comparable&#x3D;&#x3D;null)&#123;</span><br><span class="line">                num &#x3D; item.compareTo(parentItem);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                num &#x3D; comparable.compare(item,parentItem);</span><br><span class="line">            &#125;</span><br><span class="line">            if (num&lt;0)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            items[nowIdx]&#x3D;parentItem;</span><br><span class="line">            items[parentIdx]&#x3D;item;</span><br><span class="line">            nowIdx&#x3D;parentIdx;</span><br><span class="line">            parentIdx&#x3D;(nowIdx-1)&#x2F;2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 向下调整</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;2 15:31</span><br><span class="line">     * @param []</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void adjustDown()&#123;</span><br><span class="line">        T item &#x3D; (T) items[0];</span><br><span class="line">        int bigIdx&#x3D;0,index&#x3D;0;</span><br><span class="line">        int leftIdx&#x3D;0,rightIdx&#x3D;0;</span><br><span class="line">        T leftItem&#x3D;null,rightItem&#x3D;null;</span><br><span class="line">        int num&#x3D;0;</span><br><span class="line">        while (index&lt;currentIndex&#x2F;2)&#123;</span><br><span class="line">            leftIdx &#x3D; 2*index+1;</span><br><span class="line">            rightIdx &#x3D; leftIdx+1;</span><br><span class="line">            if (rightIdx&lt;currentIndex) &#123;</span><br><span class="line">                leftItem &#x3D; (T) items[leftIdx];</span><br><span class="line">                rightItem &#x3D; (T) items[rightIdx];</span><br><span class="line">                if (comparable &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    bigIdx &#x3D; leftItem.compareTo(rightItem)&gt;&#x3D;0?leftIdx:rightIdx;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    bigIdx &#x3D; comparable.compare(leftItem, rightItem)&gt;&#x3D;0?leftIdx:rightIdx;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                bigIdx &#x3D; leftIdx;</span><br><span class="line">            &#125;</span><br><span class="line">            items[index]&#x3D;items[bigIdx];</span><br><span class="line">            index&#x3D;bigIdx;</span><br><span class="line">        &#125;</span><br><span class="line">        items[index]&#x3D;item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T remove()&#123;</span><br><span class="line">        if (isEmpty())&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        T item &#x3D; (T) items[0];</span><br><span class="line">        items[0]&#x3D;items[--currentIndex];</span><br><span class="line">        adjustDown();</span><br><span class="line">        return item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int size()&#123;</span><br><span class="line">        return items.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1539,14 +1533,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>

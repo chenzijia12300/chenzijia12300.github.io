@@ -150,6 +150,104 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/" class="post-title-link" itemprop="url">数据结构-堆</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-30 21:56:38" itemprop="dateCreated datePublished" datetime="2020-04-30T21:56:38+08:00">2020-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-02 16:45:00" itemprop="dateModified" datetime="2020-05-02T16:45:00+08:00">2020-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="堆的定义"><a href="#堆的定义" class="headerlink" title="堆的定义"></a>堆的定义</h3><blockquote>
+<p>堆在逻辑上是一种完全二叉树，物理结构上是一维数组，按照根节点大小分为最大堆和最小堆，如下图。<br>最小堆：所有节点的左右孩子节点都小于或者等于父节点<br>最大堆：所有节点的左右孩子节点都大于或者等于父节点</p>
+</blockquote>
+<blockquote>
+<p>补充：完全二叉树的性质<br>如果有一颗有n个节点的完全二叉树的节点按层次序编号，对任一层的节点i（0&lt;=i&lt;=n）有（注意i的取值）<br>1.如果i=0，则节点是二叉树的根，无双亲，如果i&gt;0，则其双亲节点为[i/2]，向下取整<br>2.如果2i+1&gt;n那么节点i没有左孩子，否则其左孩子为2i+1<br>3.如果2i+2&gt;n那么节点没有右孩子，否则右孩子为2i+2<br><image src="/images/堆.png"></image></p>
+</blockquote>
+<h3 id="堆的特性"><a href="#堆的特性" class="headerlink" title="堆的特性"></a>堆的特性</h3><ol>
+<li>堆是弱序的，所以遍历堆是很难的，基本堆都不支持遍历。</li>
+<li>堆一般都是用来实现优先级队列，由它实现的优先级队列的插入和删除的时间复杂度都是O(logn)。</li>
+</ol>
+<h3 id="堆的操作"><a href="#堆的操作" class="headerlink" title="堆的操作"></a>堆的操作</h3><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><blockquote>
+<p>把插入的节点放在数组尾部，然后向上筛选。</p>
+</blockquote>
+<p><img src="/images/pasted-17.png" alt="upload successful"></p>
+<h4 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h4><blockquote>
+<p>把根节点移除，然后向下筛选。</p>
+</blockquote>
+<ol>
+<li><p>移走根</p>
+</li>
+<li><p>把最后一个节点移动到根的位置</p>
+</li>
+<li><p>一直向下筛选这个节点，直到它在一个大于它的节点之下，小于它的节点之上为止。</p>
+</li>
+</ol>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.example01;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Array;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">import java.util.Random;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;4&#x2F;30 23:17</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Heap&lt;T extends Comparable&lt;? super T&gt;&gt;&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private final Object[] items;</span><br><span class="line"></span><br><span class="line">    private Comparator comparable;</span><br><span class="line"></span><br><span class="line">    private int currentIndex &#x3D; 0;</span><br><span class="line">    private static final int DEFAULT_CAPACITY &#x3D; 10;</span><br><span class="line">    public Heap()&#123;</span><br><span class="line">        this(DEFAULT_CAPACITY);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Heap(int capacity)&#123;</span><br><span class="line">        this(capacity,null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Heap(int capacity,Comparator comparable)&#123;</span><br><span class="line">        this.items &#x3D; new Object[capacity];</span><br><span class="line">        this.comparable &#x3D; comparable;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 添加元素，成功返回true,否则返回false</span><br><span class="line">     * @author czj</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;30 23:29</span><br><span class="line">     * @param [item]</span><br><span class="line">     * @return boolean</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean add(T item)&#123;</span><br><span class="line">        &#x2F;&#x2F;堆已满返回false</span><br><span class="line">        if (isFull())&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        items[currentIndex] &#x3D; item;</span><br><span class="line">        adjustUp();</span><br><span class="line">        currentIndex++;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isFull()&#123;</span><br><span class="line">        return items.length &#x3D;&#x3D; currentIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isEmpty()&#123;</span><br><span class="line">        return items.length&#x3D;&#x3D;0;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 将新增的元素向上调整到合适的位置</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;30 23:33</span><br><span class="line">     * @param []</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void adjustUp()&#123;</span><br><span class="line">        T temp&#x3D;null;</span><br><span class="line">        T item&#x3D;null;</span><br><span class="line">        T parentItem&#x3D;null;</span><br><span class="line">        int parentIdx &#x3D; (currentIndex-1)&#x2F;2;</span><br><span class="line">        int nowIdx&#x3D;currentIndex;</span><br><span class="line">        int num &#x3D; -1;</span><br><span class="line">        while (nowIdx&gt;0)&#123;</span><br><span class="line">            item &#x3D; (T) items[nowIdx];</span><br><span class="line">            parentItem &#x3D; (T) items[parentIdx];</span><br><span class="line">            if (comparable&#x3D;&#x3D;null)&#123;</span><br><span class="line">                num &#x3D; item.compareTo(parentItem);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                num &#x3D; comparable.compare(item,parentItem);</span><br><span class="line">            &#125;</span><br><span class="line">            if (num&lt;0)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            items[nowIdx]&#x3D;parentItem;</span><br><span class="line">            items[parentIdx]&#x3D;item;</span><br><span class="line">            nowIdx&#x3D;parentIdx;</span><br><span class="line">            parentIdx&#x3D;(nowIdx-1)&#x2F;2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 向下调整</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;2 15:31</span><br><span class="line">     * @param []</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void adjustDown()&#123;</span><br><span class="line">        T item &#x3D; (T) items[0];</span><br><span class="line">        int bigIdx&#x3D;0,index&#x3D;0;</span><br><span class="line">        int leftIdx&#x3D;0,rightIdx&#x3D;0;</span><br><span class="line">        T leftItem&#x3D;null,rightItem&#x3D;null;</span><br><span class="line">        int num&#x3D;0;</span><br><span class="line">        while (index&lt;currentIndex&#x2F;2)&#123;</span><br><span class="line">            leftIdx &#x3D; 2*index+1;</span><br><span class="line">            rightIdx &#x3D; leftIdx+1;</span><br><span class="line">            if (rightIdx&lt;currentIndex) &#123;</span><br><span class="line">                leftItem &#x3D; (T) items[leftIdx];</span><br><span class="line">                rightItem &#x3D; (T) items[rightIdx];</span><br><span class="line">                if (comparable &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    bigIdx &#x3D; leftItem.compareTo(rightItem)&gt;&#x3D;0?leftIdx:rightIdx;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    bigIdx &#x3D; comparable.compare(leftItem, rightItem)&gt;&#x3D;0?leftIdx:rightIdx;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                bigIdx &#x3D; leftIdx;</span><br><span class="line">            &#125;</span><br><span class="line">            items[index]&#x3D;items[bigIdx];</span><br><span class="line">            index&#x3D;bigIdx;</span><br><span class="line">        &#125;</span><br><span class="line">        items[index]&#x3D;item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T remove()&#123;</span><br><span class="line">        if (isEmpty())&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        T item &#x3D; (T) items[0];</span><br><span class="line">        items[0]&#x3D;items[--currentIndex];</span><br><span class="line">        adjustDown();</span><br><span class="line">        return item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int size()&#123;</span><br><span class="line">        return items.length;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1183,130 +1281,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/19/java%E9%9B%86%E5%90%88-LinkedList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/19/java%E9%9B%86%E5%90%88-LinkedList/" class="post-title-link" itemprop="url">java集合-LinkedList</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-19 11:31:19" itemprop="dateCreated datePublished" datetime="2020-04-19T11:31:19+08:00">2020-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-20 11:16:18" itemprop="dateModified" datetime="2020-04-20T11:16:18+08:00">2020-04-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9B%86%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">集合</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="LinkedList简介"><a href="#LinkedList简介" class="headerlink" title="LinkedList简介"></a>LinkedList简介</h3><blockquote>
-<p>LinkedList数据结构是双端链表，所以它支持高效的插入和删除操作，继承于AbstractSequentialList,实现了Serializable,List,Deque,Cloneable等接口</p>
-</blockquote>
-<blockquote>
-<p>LinkedList继承AbstrctSequentialList，实现了List接口，他是一个链表队列，提供了相关的添加，删除，插入，遍历等操作</p>
-</blockquote>
-<blockquote>
-<p>LinkedList实现了Deque接口，拥有部分队列的性质，例如可以在两端插入和删除元素</p>
-</blockquote>
-<blockquote>
-<p>LinkedList实现了Cloneable接口，表示覆盖了clone（）方法，能被克隆。</p>
-</blockquote>
-<blockquote>
-<p>LinkedList实现了Serializable接口,表示该类能够被序列化来传输。</p>
-</blockquote>
-<p><img src="/images/pasted-0.png" alt="upload successful"></p>
-<blockquote>
-<p>LinkedList类中的静态内部类Node便是用来充当链表中的节点功能</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private static class Node&lt;E&gt; &#123;</span><br><span class="line">      E item;&#x2F;&#x2F;元素数据</span><br><span class="line">      Node&lt;E&gt; next;&#x2F;&#x2F;后继节点</span><br><span class="line">      Node&lt;E&gt; prev;&#x2F;&#x2F;前驱节点</span><br><span class="line"></span><br><span class="line">      Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</span><br><span class="line">          this.item &#x3D; element;</span><br><span class="line">          this.next &#x3D; next;</span><br><span class="line">          this.prev &#x3D; prev;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="LinkedList源码分析"><a href="#LinkedList源码分析" class="headerlink" title="LinkedList源码分析"></a>LinkedList源码分析</h3><h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;&#x2F;无参构造方法</span><br><span class="line"> public LinkedList() &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 根据指定集合创建链表</span><br><span class="line"> * @param  c the collection whose elements are to be placed into this list</span><br><span class="line"> * @throws NullPointerException if the specified collection is null</span><br><span class="line"> *&#x2F;</span><br><span class="line">public LinkedList(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    this();</span><br><span class="line">    addAll(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="add方法"><a href="#add方法" class="headerlink" title="add方法"></a>add方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public boolean add(E e) &#123;</span><br><span class="line">    linkLast(e);&#x2F;&#x2F;插入链表尾部</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">void linkLast(E e) &#123;</span><br><span class="line">    final Node&lt;E&gt; l &#x3D; last;</span><br><span class="line">    final Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(l, e, null);&#x2F;&#x2F;新建节点</span><br><span class="line">    last &#x3D; newNode;&#x2F;&#x2F;尾部指向新建节点</span><br><span class="line">    if (l &#x3D;&#x3D; null)&#x2F;&#x2F;如果尾部节点为空，则代表当前链表元素为空</span><br><span class="line">        first &#x3D; newNode;</span><br><span class="line">    else</span><br><span class="line">        l.next &#x3D; newNode;指向新建的节点</span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="在指定位置插入的add方法"><a href="#在指定位置插入的add方法" class="headerlink" title="在指定位置插入的add方法"></a>在指定位置插入的add方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void add(int index, E element) &#123;</span><br><span class="line">    checkPositionIndex(index);&#x2F;&#x2F;检查下标范围</span><br><span class="line">    if (index &#x3D;&#x3D; size)&#x2F;&#x2F;判断下标值</span><br><span class="line">        linkLast(element);&#x2F;&#x2F;插入尾部（上面讲过了）</span><br><span class="line">    else</span><br><span class="line">        linkBefore(element, node(index));&#x2F;&#x2F;插入指定位置</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;E&gt; node(int index) &#123;</span><br><span class="line">       &#x2F;&#x2F; assert isElementIndex(index);</span><br><span class="line">		&#x2F;&#x2F;判断下标是否小于链表大小&#x2F;2</span><br><span class="line">       &#x2F;&#x2F;这里对半查询</span><br><span class="line">       &#x2F;&#x2F;size&gt;&gt;1&#x3D;&#x3D;size&#x2F;2</span><br><span class="line">       if (index &lt; (size &gt;&gt; 1)) &#123;</span><br><span class="line">           Node&lt;E&gt; x &#x3D; first;</span><br><span class="line">           for (int i &#x3D; 0; i &lt; index; i++)</span><br><span class="line">               x &#x3D; x.next;</span><br><span class="line">           return x;</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           Node&lt;E&gt; x &#x3D; last;</span><br><span class="line">           for (int i &#x3D; size - 1; i &gt; index; i--)</span><br><span class="line">               x &#x3D; x.prev;</span><br><span class="line">           return x;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void linkBefore(E e, Node&lt;E&gt; succ) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert succ !&#x3D; null;</span><br><span class="line">    final Node&lt;E&gt; pred &#x3D; succ.prev;获得原位置节点的前驱节点</span><br><span class="line">    final Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(pred, e, succ);&#x2F;&#x2F;创建新节点</span><br><span class="line">    succ.prev &#x3D; newNode;原位置节点的前驱节点指向新节点</span><br><span class="line">    if (pred &#x3D;&#x3D; null)&#x2F;&#x2F;判断是否为头节点</span><br><span class="line">        first &#x3D; newNode;头节点指向新节点</span><br><span class="line">    else</span><br><span class="line">        pred.next &#x3D; newNode;</span><br><span class="line">    size++;</span><br><span class="line">    modCount++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="addAll方法"><a href="#addAll方法" class="headerlink" title="addAll方法"></a>addAll方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public boolean addAll(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">    return addAll(size, c);&#x2F;&#x2F;尾部批量插入</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="指定位置的addAll方法"><a href="#指定位置的addAll方法" class="headerlink" title="指定位置的addAll方法"></a>指定位置的addAll方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public boolean addAll(int index, Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">      checkPositionIndex(index);&#x2F;&#x2F;检测下标范围</span><br><span class="line"></span><br><span class="line">      Object[] a &#x3D; c.toArray();&#x2F;&#x2F;集合转换为数组</span><br><span class="line">      int numNew &#x3D; a.length;</span><br><span class="line">      if (numNew &#x3D;&#x3D; 0)</span><br><span class="line">          return false;</span><br><span class="line"></span><br><span class="line">      Node&lt;E&gt; pred, succ;</span><br><span class="line">      if (index &#x3D;&#x3D; size)&#123;&#x2F;&#x2F;判断下标长度是否等于链表长度，即插入尾部</span><br><span class="line">          succ &#x3D; null;</span><br><span class="line">          pred &#x3D; last;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          succ &#x3D; node(index);</span><br><span class="line">          pred &#x3D; succ.prev;</span><br><span class="line">      &#125;</span><br><span class="line">	&#x2F;&#x2F;循环遍历指定数组</span><br><span class="line">      for (Object o : a) &#123;</span><br><span class="line">          @SuppressWarnings(&quot;unchecked&quot;) E e &#x3D; (E) o;</span><br><span class="line">          Node&lt;E&gt; newNode &#x3D; new Node&lt;&gt;(pred, e, null);</span><br><span class="line">          if (pred &#x3D;&#x3D; null)</span><br><span class="line">              first &#x3D; newNode;</span><br><span class="line">          else</span><br><span class="line">              pred.next &#x3D; newNode;</span><br><span class="line">          pred &#x3D; newNode;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (succ &#x3D;&#x3D; null) &#123;</span><br><span class="line">          last &#x3D; pred;</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">          pred.next &#x3D; succ;</span><br><span class="line">          succ.prev &#x3D; pred;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      size +&#x3D; numNew;</span><br><span class="line">      modCount++;</span><br><span class="line">      return true;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="remove方法"><a href="#remove方法" class="headerlink" title="remove方法"></a>remove方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;删除指定元素</span><br><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">        if (o &#x3D;&#x3D; null) &#123;</span><br><span class="line">            for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">                if (x.item &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    unlink(x);</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            for (Node&lt;E&gt; x &#x3D; first; x !&#x3D; null; x &#x3D; x.next) &#123;</span><br><span class="line">                if (o.equals(x.item)) &#123;</span><br><span class="line">                    unlink(x);</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">E unlink(Node&lt;E&gt; x) &#123;</span><br><span class="line">        &#x2F;&#x2F; assert x !&#x3D; null;</span><br><span class="line">        final E element &#x3D; x.item;&#x2F;&#x2F;获得要删除元素的值</span><br><span class="line">        final Node&lt;E&gt; next &#x3D; x.next;&#x2F;&#x2F;获得要删除元素的后继节点</span><br><span class="line">        final Node&lt;E&gt; prev &#x3D; x.prev;&#x2F;&#x2F;获得要删除元素的前驱节点</span><br><span class="line">        &#x2F;&#x2F;判断前驱节点是否为空</span><br><span class="line">        if (prev &#x3D;&#x3D; null) &#123;</span><br><span class="line">            first &#x3D; next;&#x2F;&#x2F;把头指针指向后继节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            prev.next &#x3D; next;&#x2F;&#x2F;前驱节点的后继节点指向x的后继节点</span><br><span class="line">            x.prev &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line">			&#x2F;&#x2F;判断后继节点是否为空</span><br><span class="line">        if (next &#x3D;&#x3D; null) &#123;</span><br><span class="line">            last &#x3D; prev;&#x2F;&#x2F;把尾指针指向前驱节点</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            next.prev &#x3D; prev;&#x2F;&#x2F;后继节点的前驱节点指向x的前驱节点</span><br><span class="line">            x.next &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        x.item &#x3D; null;</span><br><span class="line">        size--;长度减一</span><br><span class="line">        modCount++;</span><br><span class="line">        return element;返回x数据</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;</span><br></pre></td></tr></table></figure>
-<h4 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;上面都讲过了。。</span><br><span class="line">public E get(int index) &#123;</span><br><span class="line">        checkElementIndex(index);</span><br><span class="line">        return node(index).item;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="ArrayList和LinkedList的区别，使用场景"><a href="#ArrayList和LinkedList的区别，使用场景" class="headerlink" title="ArrayList和LinkedList的区别，使用场景"></a>ArrayList和LinkedList的区别，使用场景</h3><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><blockquote>
-<p>1.ArrayList和LinkedList的区别就来自于他们的底层数据结构，ArrayList是基于数组实现的，因此它随机遍历会很快，LinkedList是基于双端链表，因此它插入删除会很快。</p>
-</blockquote>
-<blockquote>
-<p>2.相对于ArrayList，LinkedList的随机访问集合元素时性能较差，因为需要在双向列表中找到要index的位置，再返回；但在插入，删除操作是更快的。因为LinkedList不像ArrayList一样，不需要改变数组的大小，也不需要在数组装满的时候要将所有的数据重新装入一个新的数组，这是ArrayList最坏的一种情况，时间复杂度是O(n)，而LinkedList中插入或删除的时间复杂度仅为O(1)。ArrayList在插入数据时还需要更新索引（除了插入数组的尾部）。</p>
-</blockquote>
-<blockquote>
-<p>3.存储同样数据的LinkedList相对于ArrayList会占用更多内存，因为LinkedList还要存储前驱节点和后驱节点的位置。</p>
-</blockquote>
-<h4 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h4><blockquote>
-<p>1.在需要大量的随机访问，使用ArrayList优于LinkedList</p>
-</blockquote>
-<blockquote>
-<p>2.在需要大量的插入和删除操作时，使用LinkedList优于ArrayList</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1376,14 +1350,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
