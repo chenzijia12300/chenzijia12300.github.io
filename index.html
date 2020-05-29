@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-28 21:36:00 / Modified: 23:13:21" itemprop="dateCreated datePublished" datetime="2020-05-28T21:36:00+08:00">2020-05-28</time>
+              <time title="Created: 2020-05-28 21:36:00" itemprop="dateCreated datePublished" datetime="2020-05-28T21:36:00+08:00">2020-05-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-29 10:57:23" itemprop="dateModified" datetime="2020-05-29T10:57:23+08:00">2020-05-29</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -217,13 +223,31 @@
 <h4 id="请求头"><a href="#请求头" class="headerlink" title="请求头"></a>请求头</h4><blockquote>
 <p>例如：POST /chapter17/user.html HTTP/1.1<br>格式：请求方法 请求路径 请求协议<br>常用的请求方法有POST,GET,PUT,DELETE，在RESTFUL风格中分别对应CRUD。</p>
 </blockquote>
-<h4 id="GET和POST有啥区别"><a href="#GET和POST有啥区别" class="headerlink" title="GET和POST有啥区别"></a>GET和POST有啥区别</h4><blockquote>
+<h5 id="GET和POST有啥区别"><a href="#GET和POST有啥区别" class="headerlink" title="GET和POST有啥区别"></a>GET和POST有啥区别</h5><blockquote>
 <p>这个问题真的是老是被问到。。。</p>
 </blockquote>
 <blockquote>
-<p>GET请求，请求的数据会附加在URL之后，以?分割URL和传输数据，多个参数用&amp;连接。URL的编码格式采用的是ASCII编码，而不是uniclde，即是说所有的非ASCII字符都要编码之后再传输。<br>POST请求：POST请求会把请求的数据放置在HTTP请求包的包体中。上面的item=bandsaw就是实际的传输数据。</p>
+<p>1.传输数据方式:<br>请求的数据会附加在URL之后，以?分割URL和传输数据，多个参数用&amp;连接。URL的编码格式采用的是ASCII编码，而不是uniclde，即是说所有的非ASCII字符都要编码之后再传输。<br>POST请求：POST请求会把请求的数据放置在HTTP请求包的包体中。上面的item=bandsaw就是实际的传输数据。<br>2. 传输数据的大小:<br>在HTTP规范中，没有对URL的长度和传输的数据大小进行限制。但是在实际开发过程中，对于GET，特定的浏览器和服务器对URL的长度有限制。因此，在使用GET请求时，传输数据会受到URL长度的限制。<br>对于POST，由于不是URL传值，理论上是不会受限制的，但是实际上各个服务器会规定对POST提交数据大小进行限制，Apache、IIS都有各自的配置。</p>
 </blockquote>
-
+<h4 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h4><blockquote>
+<p>例如：Host: 39.108.107.149:8080<br>格式：键：值                      (跟没写是一样的。。)</p>
+</blockquote>
+<h5 id="常见请求头"><a href="#常见请求头" class="headerlink" title="常见请求头"></a>常见请求头</h5><h6 id="Accept-声明可以接受的MIME资源"><a href="#Accept-声明可以接受的MIME资源" class="headerlink" title="Accept(声明可以接受的MIME资源)"></a>Accept(声明可以接受的MIME资源)</h6><blockquote>
+<p>Accept：text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, <em>/</em>; q=0.8<br>作用： 向服务器申明客户端（浏览器）可以接受的媒体类型（MIME）的资源<br>解释： 浏览器可以接受 text/html、application/xhtml+xml、application/xml类型，通配符<em>/</em> 表示任意类型的数据。并且浏览器按照该顺序进行接收。( text/html —&gt; application/xhtml+xml —&gt; application/xml)</p>
+</blockquote>
+<h6 id="Accept-Encoding-声明可以接受的编码格式"><a href="#Accept-Encoding-声明可以接受的编码格式" class="headerlink" title="Accept-Encoding(声明可以接受的编码格式)"></a>Accept-Encoding(声明可以接受的编码格式)</h6><blockquote>
+<p>Accept-encoding: gzip, deflate, br<br>作用：向服务器申明客户端（浏览器）接收的编码方法，通常为压缩方法<br>解释：浏览器支持采用经过 gzip，deflate 或 br 压缩过的资源</p>
+</blockquote>
+<h6 id="Accept-Language-声明可以接受的语言格式"><a href="#Accept-Language-声明可以接受的语言格式" class="headerlink" title="Accept-Language(声明可以接受的语言格式)"></a>Accept-Language(声明可以接受的语言格式)</h6><blockquote>
+<p>作用：向服务器申明客户端（浏览器）接收的语言<br>解释：浏览器能够接受 en-US, en 和 zh-CN 三种语言，其中 en-US 的权重最高 ( q 最高为1，最低为 0)，服务器优先返回 en-US 语言<br>延伸：语言与字符集的区别：zh-CN 为汉语，汉语中有许多的编码：gbk2312 等</p>
+</blockquote>
+<h6 id="Refer-声明该页面从那里来的"><a href="#Refer-声明该页面从那里来的" class="headerlink" title="Refer(声明该页面从那里来的)"></a>Refer(声明该页面从那里来的)</h6><blockquote>
+<p>Refer：<a href="https://www.baidu.com/xxxxxxxxxx" target="_blank" rel="noopener">https://www.baidu.com/xxxxxxxxxx</a><br>作用：告诉服务器该页面从哪个页面链接的<br>解释：该页面从 <a href="https://www.baidu.com" target="_blank" rel="noopener">https://www.baidu.com</a> 中的搜索结果中点击过来的</p>
+</blockquote>
+<h6 id="User-Agent-声明客户端电脑信息"><a href="#User-Agent-声明客户端电脑信息" class="headerlink" title="User-Agent(声明客户端电脑信息)"></a>User-Agent(声明客户端电脑信息)</h6><blockquote>
+<p>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36<br>作用：告诉服务器，客户端的浏览器信息与操作系统相关信息(一般就是通过这个头属性来区分手机和电脑用户的)</p>
+</blockquote>
+<h6 id="Content-Length-请求体的长度"><a href="#Content-Length-请求体的长度" class="headerlink" title="Content-Length(请求体的长度)"></a>Content-Length(请求体的长度)</h6>
       
     </div>
 
