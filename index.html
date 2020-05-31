@@ -150,6 +150,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/ava%E6%9E%9A%E4%B8%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/29/ava%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">java枚举</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-29 18:23:00" itemprop="dateCreated datePublished" datetime="2020-05-29T18:23:00+08:00">2020-05-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-31 12:29:37" itemprop="dateModified" datetime="2020-05-31T12:29:37+08:00">2020-05-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="枚举简介"><a href="#枚举简介" class="headerlink" title="枚举简介"></a>枚举简介</h3><blockquote>
+<p>枚举是java1.5引入的一个新特性，它继承于java.lang.Enum类。我们使用枚举来替换常量。例如下面是一个B站视频状态的枚举类，以这种方式定义的常量使代码更具可读性，允许进行编译时检查，预先记录可接受值的列表，并避免由于传入无效值而引起的意外行为。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package com.example.item.constant;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;5&#x2F;30 21:18</span><br><span class="line"> *&#x2F;</span><br><span class="line">public enum VideoPublishStatus &#123;</span><br><span class="line">    DRAFT,AUDIT,PUBLISH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在这里我定义了三个视频状态，分别是草稿（draft），审核（audit），发布（publish）。如果我们不用枚举会怎么样呢？下面是一个处理视频发布的方法，它不使用枚举做为方法参数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void handlerVideoStatus(int status)&#123;</span><br><span class="line">    &#x2F;&#x2F;假装是代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这个方法如方法名一样就是处理一下视频的状态，这里参数的理想状态是VideoPublishStatus的任意一种，但是由于没有<strong><em>类型参数限制</em></strong>，这里传啥都行。<br>如果使用枚举来传参就会有更明显的意图和安全性了。</p>
+</blockquote>
+<h3 id="枚举基本用法"><a href="#枚举基本用法" class="headerlink" title="枚举基本用法"></a>枚举基本用法</h3><h4 id="values-返回所有枚举常量的数组集合"><a href="#values-返回所有枚举常量的数组集合" class="headerlink" title="values()返回所有枚举常量的数组集合"></a>values()返回所有枚举常量的数组集合</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (VideoPublishStatus status:VideoPublishStatus.values())&#123;</span><br><span class="line">    System.out.println(status);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*   输出</span><br><span class="line">    DRAFT</span><br><span class="line">    AUDIT</span><br><span class="line">    PUBLISH</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ordinal-返回枚举常量定义序数从0开始"><a href="#ordinal-返回枚举常量定义序数从0开始" class="headerlink" title="ordinal()返回枚举常量定义序数从0开始"></a>ordinal()返回枚举常量定义序数从0开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (VideoPublishStatus status:VideoPublishStatus.values())&#123;</span><br><span class="line">    System.out.println(status.ordinal());</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*   输出</span><br><span class="line">    0</span><br><span class="line">    1</span><br><span class="line">    2</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
+
+<h4 id="valueOf-返回指定名称的枚举常量"><a href="#valueOf-返回指定名称的枚举常量" class="headerlink" title="valueOf()返回指定名称的枚举常量"></a>valueOf()返回指定名称的枚举常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VideoPublishStatus.valueOf(&quot;DRAFT&quot;);</span><br><span class="line">VideoPublishStatus.valueOf(&quot;AUDIT&quot;);</span><br><span class="line">VideoPublishStatus.valueOf(&quot;PUBLISH&quot;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="枚举常用使用场景"><a href="#枚举常用使用场景" class="headerlink" title="枚举常用使用场景"></a>枚举常用使用场景</h3><h4 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h4><h4 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h4><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/28/ttp%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -469,9 +560,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-05-27 10:58:13 / Modified: 16:00:12" itemprop="dateCreated datePublished" datetime="2020-05-27T10:58:13+08:00">2020-05-27</time>
+              <time title="Created: 2020-05-27 10:58:00" itemprop="dateCreated datePublished" datetime="2020-05-27T10:58:00+08:00">2020-05-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-29 18:22:47" itemprop="dateModified" datetime="2020-05-29T18:22:47+08:00">2020-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
             </span>
 
           
@@ -1571,103 +1677,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/PiorityBlockingQueue/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/03/PiorityBlockingQueue/" class="post-title-link" itemprop="url">PriorityBlockingQueue</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-03 11:57:20 / Modified: 21:56:30" itemprop="dateCreated datePublished" datetime="2020-05-03T11:57:20+08:00">2020-05-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="PriorityBlockingQueue简介"><a href="#PriorityBlockingQueue简介" class="headerlink" title="PriorityBlockingQueue简介"></a>PriorityBlockingQueue简介</h3><blockquote>
-<p>PriorityBlockingQueue是一种优先级，无界堵塞，线程安全的队列，每次出队返回优先级高或低的元素，内部通过<a href="/2020/04/30/数据结构-堆">堆</a>实现。</p>
-</blockquote>
-<p><img src="/images/PriorityBlockingQueue.png" alt="upload"></p>
-<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="属性分析"><a href="#属性分析" class="headerlink" title="属性分析"></a>属性分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;队列默认大小</span><br><span class="line">   private static final int DEFAULT_INITIAL_CAPACITY &#x3D; 11;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F;数组最大容量</span><br><span class="line">   private static final int MAX_ARRAY_SIZE &#x3D; Integer.MAX_VALUE - 8;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;存放队列元素</span><br><span class="line">   private transient Object[] queue;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;队列元素个数</span><br><span class="line">   private transient int size;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;比较器</span><br><span class="line">   private transient Comparator&lt;? super E&gt; comparator;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;独占锁</span><br><span class="line">   private final ReentrantLock lock;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">   private final Condition notEmpty;</span><br></pre></td></tr></table></figure>
-
-<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;无参构造方法，设置队列大小为默认11，比较器为null</span><br><span class="line">   public PriorityBlockingQueue() &#123;</span><br><span class="line">       this(DEFAULT_INITIAL_CAPACITY, null);</span><br><span class="line">   &#125;</span><br><span class="line">&#x2F;&#x2F;比较器为null</span><br><span class="line">   public PriorityBlockingQueue(int initialCapacity) &#123;</span><br><span class="line">       this(initialCapacity, null);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;主要构造方法，初始化各组件</span><br><span class="line">   public PriorityBlockingQueue(int initialCapacity,</span><br><span class="line">                                Comparator&lt;? super E&gt; comparator) &#123;</span><br><span class="line">       if (initialCapacity &lt; 1)</span><br><span class="line">           throw new IllegalArgumentException();</span><br><span class="line">       this.lock &#x3D; new ReentrantLock();</span><br><span class="line">       this.notEmpty &#x3D; lock.newCondition();</span><br><span class="line">       this.comparator &#x3D; comparator;</span><br><span class="line">       this.queue &#x3D; new Object[initialCapacity];</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    if (e &#x3D;&#x3D; null)</span><br><span class="line">        throw new NullPointerException();&#x2F;&#x2F;抛出NPE异常</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    int n, cap;</span><br><span class="line">    Object[] array;</span><br><span class="line">    &#x2F;&#x2F;如果当前元素个数大于等于队列大小则扩展</span><br><span class="line">    while ((n &#x3D; size) &gt;&#x3D; (cap &#x3D; (array &#x3D; queue).length))</span><br><span class="line">        tryGrow(array, cap);</span><br><span class="line">    try &#123;</span><br><span class="line">        Comparator&lt;? super E&gt; cmp &#x3D; comparator;</span><br><span class="line">        if (cmp &#x3D;&#x3D; null)</span><br><span class="line">            siftUpComparable(n, e, array);&#x2F;&#x2F;调用对象的compareTo方法</span><br><span class="line">        else</span><br><span class="line">            siftUpUsingComparator(n, e, array, cmp);&#x2F;&#x2F;使用比较器</span><br><span class="line">        size &#x3D; n + 1;</span><br><span class="line">        notEmpty.signal();&#x2F;&#x2F;唤醒因出队操作而休眠的线程</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="tryGrow"><a href="#tryGrow" class="headerlink" title="tryGrow()"></a>tryGrow()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">private void tryGrow(Object[] array, int oldCap) &#123;</span><br><span class="line">    lock.unlock(); &#x2F;&#x2F;释放获得的锁</span><br><span class="line">    Object[] newArray &#x3D; null;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F;尝试获得扩容的锁把</span><br><span class="line">    if (allocationSpinLock &#x3D;&#x3D; 0 &amp;&amp;</span><br><span class="line">        UNSAFE.compareAndSwapInt(this, allocationSpinLockOffset,</span><br><span class="line">                                 0, 1)) &#123;</span><br><span class="line">        &#x2F;&#x2F;如果队列大小小于64则扩大oldCap+2，否则扩大成原来的50%，最大值为MAX_ARRAY_SIZE</span><br><span class="line">        try &#123;</span><br><span class="line">            int newCap &#x3D; oldCap + ((oldCap &lt; 64) ?</span><br><span class="line">                                   (oldCap + 2) : &#x2F;&#x2F; grow faster if small</span><br><span class="line">                                   (oldCap &gt;&gt; 1));</span><br><span class="line">            if (newCap - MAX_ARRAY_SIZE &gt; 0) &#123;    &#x2F;&#x2F; possible overflow</span><br><span class="line">                int minCap &#x3D; oldCap + 1;</span><br><span class="line">                if (minCap &lt; 0 || minCap &gt; MAX_ARRAY_SIZE)</span><br><span class="line">                    throw new OutOfMemoryError();</span><br><span class="line">                newCap &#x3D; MAX_ARRAY_SIZE;</span><br><span class="line">            &#125;</span><br><span class="line">            if (newCap &gt; oldCap &amp;&amp; queue &#x3D;&#x3D; array)</span><br><span class="line">                newArray &#x3D; new Object[newCap];</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            allocationSpinLock &#x3D; 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if (newArray &#x3D;&#x3D; null) &#x2F;&#x2F;如果newArray为空则代表尝试获得扩容的锁失败了，需要把自己尝试挂起，让给扩容线程工作。</span><br><span class="line">        Thread.yield();</span><br><span class="line">    lock.lock();&#x2F;&#x2F;获得锁</span><br><span class="line">    if (newArray !&#x3D; null &amp;&amp; queue &#x3D;&#x3D; array) &#123;</span><br><span class="line">        queue &#x3D; newArray;</span><br><span class="line">        System.arraycopy(array, 0, newArray, 0, oldCap);&#x2F;&#x2F;真正扩容</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这里比较难理解的地方主要是为什么要释放锁。。。这里主要是因为扩容队列需要时间，比较耗时，因为锁的原因，扩容时无法进行入队操作和出队操作。所以为了提高并发性能就要释放锁拉,小编我也感到很惊讶。</p>
-</blockquote>
-<h5 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) &#123;</span><br><span class="line">    offer(e); &#x2F;&#x2F; 直接调用offer()。。两个入队方法一样的</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="siftUpComparable"><a href="#siftUpComparable" class="headerlink" title="siftUpComparable()"></a>siftUpComparable()</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private static &lt;T&gt; void siftUpComparable(int k, T x, Object[] array) &#123;</span><br><span class="line">    Comparable&lt;? super T&gt; key &#x3D; (Comparable&lt;? super T&gt;) x;</span><br><span class="line">    while (k &gt; 0) &#123;</span><br><span class="line">        int parent &#x3D; (k - 1) &gt;&gt;&gt; 1;&#x2F;&#x2F;其实就是(k-1)&#x2F;2,获得父类节点</span><br><span class="line">        Object e &#x3D; array[parent];</span><br><span class="line">        if (key.compareTo((T) e) &gt;&#x3D; 0)&#x2F;&#x2F;如果入队元素大于等于父类节点则直接跳出循环</span><br><span class="line">            break;</span><br><span class="line">        array[k] &#x3D; e;</span><br><span class="line">        k &#x3D; parent;</span><br><span class="line">    &#125;</span><br><span class="line">    array[k] &#x3D; key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;这方法没啥就是个壳，作用就上锁。。</span><br><span class="line">  public E poll() &#123;</span><br><span class="line">      final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">      lock.lock();</span><br><span class="line">      try &#123;</span><br><span class="line">          return dequeue();</span><br><span class="line">      &#125; finally &#123;</span><br><span class="line">          lock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="dequeue"><a href="#dequeue" class="headerlink" title="dequeue()"></a>dequeue()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private E dequeue() &#123;</span><br><span class="line">    int n &#x3D; size - 1;</span><br><span class="line">    if (n &lt; 0)&#x2F;&#x2F;队列为空直接返回null</span><br><span class="line">        return null;</span><br><span class="line">    else &#123;</span><br><span class="line">        Object[] array &#x3D; queue;</span><br><span class="line">        E result &#x3D; (E) array[0];&#x2F;&#x2F;获得首部元素（出队元素）</span><br><span class="line">        E x &#x3D; (E) array[n];</span><br><span class="line">        array[n] &#x3D; null;</span><br><span class="line">        Comparator&lt;? super E&gt; cmp &#x3D; comparator;</span><br><span class="line">        &#x2F;&#x2F;开始向下调整</span><br><span class="line">        if (cmp &#x3D;&#x3D; null)</span><br><span class="line">            siftDownComparable(0, x, array, n);</span><br><span class="line">        else</span><br><span class="line">            siftDownUsingComparator(0, x, array, n, cmp);</span><br><span class="line">        size &#x3D; n;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="siftDownComparable"><a href="#siftDownComparable" class="headerlink" title="siftDownComparable()"></a>siftDownComparable()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">private static &lt;T&gt; void siftDownComparable(int k, T x, Object[] array,                                       int n) &#123;</span><br><span class="line">    &#x2F;&#x2F;判断队列长度是否大于0</span><br><span class="line">    if (n &gt; 0) &#123;</span><br><span class="line">        Comparable&lt;? super T&gt; key &#x3D; (Comparable&lt;? super T&gt;)x;</span><br><span class="line">        int half &#x3D; n &gt;&gt;&gt; 1&#x2F;&#x2F;获得队列长度的一半;          </span><br><span class="line">        while (k &lt; half) &#123;</span><br><span class="line">            int child &#x3D; (k &lt;&lt; 1) + 1; &#x2F;&#x2F;获得k*2+1（也就是获得左子节点）</span><br><span class="line">            Object c &#x3D; array[child];&#x2F;&#x2F;获得左子节点的值</span><br><span class="line">            int right &#x3D; child + 1;&#x2F;&#x2F;获得右子节点</span><br><span class="line">            if (right &lt; n &amp;&amp;</span><br><span class="line">                ((Comparable&lt;? super T&gt;) c).compareTo((T) array[right]) &gt; 0)</span><br><span class="line">                c &#x3D; array[child &#x3D; right];&#x2F;&#x2F;右子节点比较小</span><br><span class="line">            if (key.compareTo((T) c) &lt;&#x3D; 0)&#x2F;&#x2F;如果key值比选出来的节点还小就直接跳出循环</span><br><span class="line">                break;</span><br><span class="line">            array[k] &#x3D; c;&#x2F;&#x2F;赋值</span><br><span class="line">            k &#x3D; child;&#x2F;&#x2F;获得当前最小节点</span><br><span class="line">        &#125;</span><br><span class="line">        array[k] &#x3D; key;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();</span><br><span class="line">    E result;</span><br><span class="line">    try &#123;</span><br><span class="line">        while ( (result &#x3D; dequeue()) &#x3D;&#x3D; null)&#x2F;&#x2F;如果当前队列为空则堵塞</span><br><span class="line">            notEmpty.await();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><h5 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public int size() &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁，保证获取队列长度的时候没有入队出队操作。</span><br><span class="line">    try &#123;</span><br><span class="line">        return size;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();</span><br><span class="line">    try &#123;</span><br><span class="line">        int i &#x3D; indexOf(o);&#x2F;&#x2F;获得移除元素的下标</span><br><span class="line">        if (i &#x3D;&#x3D; -1)</span><br><span class="line">            return false;&#x2F;&#x2F;为空直接返回</span><br><span class="line">        removeAt(i);</span><br><span class="line">        return true;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="removeat"><a href="#removeat" class="headerlink" title="removeat()"></a>removeat()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">private void removeAt(int i) &#123;</span><br><span class="line">    Object[] array &#x3D; queue;</span><br><span class="line">    int n &#x3D; size - 1;</span><br><span class="line">    if (n &#x3D;&#x3D; i) &#x2F;&#x2F; 如果移除的是最后的元素则直接设为null</span><br><span class="line">        array[i] &#x3D; null;</span><br><span class="line">    else &#123;</span><br><span class="line">        E moved &#x3D; (E) array[n];&#x2F;&#x2F;队列最后一个元素</span><br><span class="line">        array[n] &#x3D; null;</span><br><span class="line">        Comparator&lt;? super E&gt; cmp &#x3D; comparator;</span><br><span class="line">       	 &#x2F;&#x2F;向下调整</span><br><span class="line">        if (cmp &#x3D;&#x3D; null)</span><br><span class="line">            siftDownComparable(i, moved, array, n);</span><br><span class="line">        else</span><br><span class="line">            siftDownUsingComparator(i, moved, array, n, cmp);</span><br><span class="line">        &#x2F;&#x2F;如果向下调整不了则向上调整</span><br><span class="line">        if (array[i] &#x3D;&#x3D; moved) &#123;</span><br><span class="line">            if (cmp &#x3D;&#x3D; null)</span><br><span class="line">                siftUpComparable(i, moved, array);</span><br><span class="line">            else</span><br><span class="line">                siftUpUsingComparator(i, moved, array, cmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    size &#x3D; n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1737,14 +1746,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
   </nav>
