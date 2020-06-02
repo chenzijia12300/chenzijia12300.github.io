@@ -150,6 +150,102 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/07/%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-07 21:58:33 / Modified: 22:37:04" itemprop="dateCreated datePublished" datetime="2020-05-07T21:58:33+08:00">2020-05-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="布隆过滤器简介"><a href="#布隆过滤器简介" class="headerlink" title="布隆过滤器简介"></a>布隆过滤器简介</h3><blockquote>
+<p>布隆过滤器是一个位数组和哈希函数实现的一种数据结构，它相对于其他我们平常用的List，Set等更节省内存空间，不过它存在误判概率。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。</p>
+</blockquote>
+<p><img src="/images/pasted-18.png" alt="upload successful"></p>
+<blockquote>
+<p>例如申请100万个元素位数组只用10^6/8 = 125000 Byte = 125000/1024 kb ≈ 122kb 的空间，特别节省空间。</p>
+</blockquote>
+<h3 id="布隆过滤器使用场景"><a href="#布隆过滤器使用场景" class="headerlink" title="布隆过滤器使用场景"></a>布隆过滤器使用场景</h3><ol>
+<li>判断一个元素是否在一个大量元素集中</li>
+<li>对元素去重判断</li>
+</ol>
+<h3 id="布隆过滤器原理"><a href="#布隆过滤器原理" class="headerlink" title="布隆过滤器原理"></a>布隆过滤器原理</h3><h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><blockquote>
+<p>对添加的元素进行哈希运算，得到哈希值，并根据哈希值把对应数组下标的bit设为1</p>
+</blockquote>
+<h4 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h4><blockquote>
+<p>对添加的元素进行哈希运算，得到哈希值，并根据哈希值去获得对应数组下标bit的值，如果都为1则添加的元素<strong><em>可能</em></strong>在存在，否则该元素不存在。<br>我的理解：如果在可能是假的，如果不在就是真的不在拉。</p>
+</blockquote>
+<h3 id="基本代码实现"><a href="#基本代码实现" class="headerlink" title="基本代码实现"></a>基本代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.testarray;</span><br><span class="line"></span><br><span class="line">import java.util.BitSet;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;5&#x2F;7 22:14</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MyBloomFilter&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;位数组默认大小</span><br><span class="line">    private static final int DEFAULT_SIZE &#x3D; 2&lt;&lt;24;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;哈希种子,可以根据这个种子数组创建不同的哈希函数</span><br><span class="line">    private static final int[] SEEDS&#x3D; &#123;4,7,520,3,143&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;位数组</span><br><span class="line">    private BitSet bitSet;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;哈希函数</span><br><span class="line">    private MyHash[] hashes;</span><br><span class="line"></span><br><span class="line">    public MyBloomFilter()&#123;</span><br><span class="line">        this(DEFAULT_SIZE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MyBloomFilter(int size)&#123;</span><br><span class="line">        bitSet &#x3D; new BitSet(size);</span><br><span class="line">        hashes &#x3D; new MyHash[SEEDS.length];</span><br><span class="line">        for (int i&#x3D;0;i&lt;SEEDS.length;i++)&#123;</span><br><span class="line">            hashes[i] &#x3D; new MyHash(size,SEEDS[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 添加元素</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;7 22:27</span><br><span class="line">     * @param [value]</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void add(T value)&#123;</span><br><span class="line">        for (MyHash hash:hashes)&#123;</span><br><span class="line">            bitSet.set(hash.hash(value),true);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 判断元素是否存在 可能会误判</span><br><span class="line">     * 存在可能假存在，不存在是真不存在拉</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;7 22:27</span><br><span class="line">     * @param [value]</span><br><span class="line">     * @return boolean</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean contains(T value)&#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        for (MyHash hash:hashes)&#123;</span><br><span class="line">            flag &#x3D; flag &amp;&amp; bitSet.get(hash.hash(value));</span><br><span class="line">            if (!flag)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">    private static class MyHash&#123;</span><br><span class="line">        private int cap,seed;</span><br><span class="line"></span><br><span class="line">        public MyHash(int cap, int seed) &#123;</span><br><span class="line">            this.cap &#x3D; cap;</span><br><span class="line">            this.seed &#x3D; seed;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;这段哈希运算 网上看的。。。</span><br><span class="line">        public int hash(Object value)&#123;</span><br><span class="line">            int h;</span><br><span class="line">            return (value &#x3D;&#x3D; null) ? 0 : Math.abs(seed * (cap - 1) &amp; ((h &#x3D; value.hashCode()) ^ (h &gt;&gt;&gt; 16)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MyBloomFilter&lt;Integer&gt; myBloomFilter &#x3D; new MyBloomFilter&lt;&gt;();</span><br><span class="line">        myBloomFilter.add(4);</span><br><span class="line">        myBloomFilter.add(9);</span><br><span class="line">        System.out.println(myBloomFilter.contains(123));</span><br><span class="line">        myBloomFilter.add(123);</span><br><span class="line">        System.out.println(myBloomFilter.contains(123));</span><br><span class="line">        System.out.println(myBloomFilter.contains(4));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><blockquote>
+<p>false<br>true<br>true</p>
+</blockquote>
+<h4 id="实际场景"><a href="#实际场景" class="headerlink" title="实际场景"></a>实际场景</h4><blockquote>
+<p>上面只是为了搞明白布隆过滤器的原理，平常我们直接利用Google开源的 Guava中自带的布隆过滤器就ok拉。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.google.guava&lt;&#x2F;groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;guava&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;28.0-jre&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/03/PiorityBlockingQueue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1144,145 +1240,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">线程基本概念和操作</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-21 22:49:06" itemprop="dateCreated datePublished" datetime="2020-04-21T22:49:06+08:00">2020-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-22 22:18:33" itemprop="dateModified" datetime="2020-04-22T22:18:33+08:00">2020-04-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="线程基本概念"><a href="#线程基本概念" class="headerlink" title="线程基本概念"></a>线程基本概念</h3><blockquote>
-<p>首先我们要先了解进程的基本概念，因为线程是进程中的一个实体。进程是操作系统中进行资源调度和调度的基本单位，线程则是进程的一个执行路径。</p>
-</blockquote>
-<p><img src="/images/pasted-3.png" alt="upload successful"></p>
-<blockquote>
-<p>一个进程中包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有独立的程序计数器和栈区域。</p>
-</blockquote>
-<h3 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h3><h4 id="类继承Thread"><a href="#类继承Thread" class="headerlink" title="类继承Thread"></a>类继承Thread</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class MyThread extends Thread&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new MyThread().run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="类实现Runnable接口"><a href="#类实现Runnable接口" class="headerlink" title="类实现Runnable接口"></a>类实现Runnable接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class RunnableImpl implements Runnable&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(new RunnableImpl()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="类实现Callable接口-使用FutureTask方式"><a href="#类实现Callable接口-使用FutureTask方式" class="headerlink" title="类实现Callable接口,使用FutureTask方式"></a>类实现Callable接口,使用FutureTask方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class CallableImpl implements Callable&lt;String&gt;&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String call() throws Exception &#123;</span><br><span class="line">            return &quot;Hello World&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;*new MyThread().run();*&#x2F;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask&#x3D;new FutureTask&lt;&gt;(new CallableImpl());</span><br><span class="line">        new Thread(futureTask).start();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(futureTask.get());</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="三种方式优劣"><a href="#三种方式优劣" class="headerlink" title="三种方式优劣"></a>三种方式优劣</h4><h5 id="1-使用继承方式"><a href="#1-使用继承方式" class="headerlink" title="1.使用继承方式"></a>1.使用继承方式</h5><blockquote>
-<p>优势：<br>编写简单，传参方便，如果需要访问当前线程，则无需使用Thread.currentThread()方法，直接使用this即可获得当前线程。<br>劣势：无法在继承其他父类</p>
-</blockquote>
-<h5 id="2-实现Runnable接口方式和Callable接口"><a href="#2-实现Runnable接口方式和Callable接口" class="headerlink" title="2.实现Runnable接口方式和Callable接口"></a>2.实现Runnable接口方式和Callable接口</h5><blockquote>
-<p>优势：<br>程类只是实现了Runnable接口或Callable接口，还可以继承其他类。<br>在这种方式下，多个线程可以共享同一个target对象，所以非常适合多个相同线程来处理同一份资源的情况。<br>callable还可以拿到线程的返回值<br>劣势：编写稍微稍微复杂点？</p>
-</blockquote>
-<h3 id="线程的休眠和等待"><a href="#线程的休眠和等待" class="headerlink" title="线程的休眠和等待"></a>线程的休眠和等待</h3><h4 id="wait-方法"><a href="#wait-方法" class="headerlink" title="wait()方法"></a>wait()方法</h4><blockquote>
-<p>在java所有类的直接或间接父类Object类中有个wait(),当调用时会让当前线程堵塞挂起。</p>
-</blockquote>
-<blockquote>
-<p>注意：调用对象的wait()时，要确保获得对象的监视器锁。</p>
-</blockquote>
-<h5 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;🔒前&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                lock.wait();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;🔒后&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/pasted-4.png" alt="upload successful"></p>
-<blockquote>
-<p>那么怎么获得对象监视器锁呢<br>1.执行synchronized同步代码块时，并且使用该对象做为锁</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">       synchronized(lock) &#123;</span><br><span class="line">&#x2F;&#x2F;doSomething</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>2.调用对象的synchronizeed方法</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void method()&#123;</span><br><span class="line">       &#x2F;&#x2F;doSomething </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="sleep-方法"><a href="#sleep-方法" class="headerlink" title="sleep()方法"></a>sleep()方法</h4><blockquote>
-<p>sleep()是Thread线程类的一个静态方法，执行时当前线程会暂时让出对cpu的执行权，但是注意休眠的时候不会退出锁（线程所拥有的监视器资源）。当休眠时间到了就会继续正常运行，当还在休眠时间时，调用该休眠线程的interrupt()方法时，该休眠线程就会在调用sleep()方法的地方抛出InterruptedException异常返回。</p>
-</blockquote>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程二休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程二休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-5.png" alt="upload successful"></p>
-<h3 id="线程通知"><a href="#线程通知" class="headerlink" title="线程通知"></a>线程通知</h3><h4 id="notify-方法和notifyAll-方法"><a href="#notify-方法和notifyAll-方法" class="headerlink" title="notify()方法和notifyAll()方法"></a>notify()方法和notifyAll()方法</h4><blockquote>
-<p>执行notify/notifyAll方法会唤醒一个/多个正处于休眠状态的线程。然后继续往下执行，直到执行完synchronized 代码块的代码或是中途遇到wait() ，再次释放锁。<br>类似wait方法，当前线程获取到对象的锁(监视器资源)才可以执行notify/notifyAll方法,否则会抛出异常。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    lock.wait();</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;尝试换线休眠线程&quot;);</span><br><span class="line">                lock.notify();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;唤醒完毕&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h3><p><img src="/images/pasted-6.png" alt="upload successful"></p>
-<h4 id="NEW"><a href="#NEW" class="headerlink" title="NEW"></a>NEW</h4><blockquote>
-<p>这时候线程已被初始化，不过还没有运行。</p>
-</blockquote>
-<h4 id="RUNNABLE"><a href="#RUNNABLE" class="headerlink" title="RUNNABLE"></a>RUNNABLE</h4><blockquote>
-<p>运行状态，Java线程把操作系统中的就绪和运行两种状态统一称为“运行中”。</p>
-</blockquote>
-<h4 id="TERMINATD"><a href="#TERMINATD" class="headerlink" title="TERMINATD"></a>TERMINATD</h4><blockquote>
-<p>线程结束状态。</p>
-</blockquote>
-<h4 id="BLOCKED"><a href="#BLOCKED" class="headerlink" title="BLOCKED"></a>BLOCKED</h4><blockquote>
-<p>线程堵塞状态，等待获取监视器资源进入同步方法或同步代码块。</p>
-</blockquote>
-<h4 id="WAITING"><a href="#WAITING" class="headerlink" title="WAITING"></a>WAITING</h4><blockquote>
-<p>线程等待状态，等待其他线程，调用Object.wait(),Thread.join()等方法会进入等待状态。</p>
-</blockquote>
-<h4 id="TIMED-WAITING"><a href="#TIMED-WAITING" class="headerlink" title="TIMED_WAITING"></a>TIMED_WAITING</h4><blockquote>
-<p>线程等待一段时间状态,调用Thread.sleep(Long millis)等会进入等待一段时间状态。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1352,7 +1309,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
