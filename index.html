@@ -173,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-04 14:14:00 / Modified: 15:37:02" itemprop="dateCreated datePublished" datetime="2020-06-04T14:14:00+08:00">2020-06-04</time>
+              <time title="Created: 2020-06-04 14:14:00" itemprop="dateCreated datePublished" datetime="2020-06-04T14:14:00+08:00">2020-06-04</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-05 10:49:52" itemprop="dateModified" datetime="2020-06-05T10:49:52+08:00">2020-06-05</time>
+              </span>
 
           
 
@@ -216,7 +222,28 @@
 <li>threadFactory ： 线程工厂</li>
 <li>handler ： 拒绝策略，当线程已满且到达maxinumPoolSize个数，采取的拒绝策略</li>
 </ul>
-<h4 id="workQueue任务队列"><a href="#workQueue任务队列" class="headerlink" title="workQueue任务队列"></a>workQueue任务队列</h4><blockquote>
+<h4 id="execute-Runnable-command-方法"><a href="#execute-Runnable-command-方法" class="headerlink" title="execute(Runnable command)方法"></a>execute(Runnable command)方法</h4><blockquote>
+<p>execute方法负责将任务command提交到线程池中运行，ThreadPoolExecutor线程池其实是生产消费模型，当用户提交任务到队列中，相当于生产。当workers线程执行队列里的任务，相当于消费。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public void execute(Runnable command) &#123;</span><br><span class="line"></span><br><span class="line">    if (command &#x3D;&#x3D; null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#x2F;&#x2F;获得当前线程池的状态和线程的个数组合值</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    &#x2F;&#x2F;如果当前工作线程数小于核心线程数则创建线程</span><br><span class="line">    if (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">        if (addWorker(command, true))</span><br><span class="line">            return;</span><br><span class="line">        c &#x3D; ctl.get();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;如果线程池是运行状态，则入队</span><br><span class="line">    if (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">        int recheck &#x3D; ctl.get();</span><br><span class="line">        &#x2F;&#x2F;二次检测，如果不是运行状态了就移除该线程，并执行拒绝策略</span><br><span class="line">        if (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">            reject(command);</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池为空，则添加一个线程</span><br><span class="line">        else if (workerCountOf(recheck) &#x3D;&#x3D; 0)</span><br><span class="line">            addWorker(null, false);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 如果队列满，则新增线程，新增线程则执行拒绝策略</span><br><span class="line">    else if (!addWorker(command, false))</span><br><span class="line">        reject(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="addWorker-Runnable-firstTask-boolean-core-方法"><a href="#addWorker-Runnable-firstTask-boolean-core-方法" class="headerlink" title="addWorker(Runnable firstTask, boolean core)方法"></a>addWorker(Runnable firstTask, boolean core)方法</h4><blockquote>
+<p>addWorker()尝试把新增任务添加到任务队列中，这里代码比较长，但是其实主要分为两部分。</p>
+</blockquote>
+<ol>
+<li>双重循环通过CAS操作自增线程数。</li>
+<li>加锁把新增任务加入到workers里。<br>下面我们分段来看这段代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">retry:</span><br><span class="line">for (;;) &#123;</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    int rs &#x3D; runStateOf(c);</span><br><span class="line">			</span><br><span class="line">    &#x2F;&#x2F;这里比较绕下面会分析</span><br><span class="line">    if (rs &gt;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">        ! (rs &#x3D;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">           firstTask &#x3D;&#x3D; null &amp;&amp;</span><br><span class="line">           ! workQueue.isEmpty()))</span><br><span class="line">        return false;</span><br><span class="line">				 </span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int wc &#x3D; workerCountOf(c);</span><br><span class="line">        &#x2F;&#x2F;如果当前运行线程超过了限制就会返回false</span><br><span class="line">        if (wc &gt;&#x3D; CAPACITY ||</span><br><span class="line">            wc &gt;&#x3D; (core ? corePoolSize : maximumPoolSize))</span><br><span class="line">            return false;</span><br><span class="line">        &#x2F;&#x2F;同一时间只会有一个线程操作成功</span><br><span class="line">        if (compareAndIncrementWorkerCount(c))</span><br><span class="line">            break retry;</span><br><span class="line">        c &#x3D; ctl.get();  &#x2F;&#x2F; Re-read ctl</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池状态被改变则回到上层循环重新获得线程池状态</span><br><span class="line">        if (runStateOf(c) !&#x3D; rs)</span><br><span class="line">            continue retry;</span><br><span class="line">        &#x2F;&#x2F; else CAS failed due to workerCount change; retry inner loop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>判断那里在三种情况下会返回false</p>
+</blockquote>
+<ol>
+<li>当前线程池状态为STOP,TIDYING,TERMINATED</li>
+<li>当前线程池状态为SHUTDOWN而且有第一个任务</li>
+<li>当前线程池状态为SHUTDOWN而且任务队列为空</li>
+</ol>
+<h3 id="任务队列和拒绝策略"><a href="#任务队列和拒绝策略" class="headerlink" title="任务队列和拒绝策略"></a>任务队列和拒绝策略</h3><h4 id="workQueue任务队列"><a href="#workQueue任务队列" class="headerlink" title="workQueue任务队列"></a>workQueue任务队列</h4><blockquote>
 <p>任务队列一般分为4种，直接提交队列，有界队列，无界队列，优先队列。</p>
 </blockquote>
 <h4 id="SynchronousQueue-直接提交队列"><a href="#SynchronousQueue-直接提交队列" class="headerlink" title="SynchronousQueue(直接提交队列)"></a>SynchronousQueue(直接提交队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class TestThreadPoolExecutor &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">        for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class HelloTask implements Runnable&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot; Hello World! &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
