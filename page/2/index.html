@@ -152,6 +152,415 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/%E8%B7%83%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/14/%E8%B7%83%E8%A1%A8/" class="post-title-link" itemprop="url">跳跃表</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-05-14 10:13:00 / Modified: 10:59:11" itemprop="dateCreated datePublished" datetime="2020-05-14T10:13:00+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="跳跃表-skiplist-简介"><a href="#跳跃表-skiplist-简介" class="headerlink" title="跳跃表(skiplist)简介"></a>跳跃表(skiplist)简介</h3><blockquote>
+<p>跳跃表(skiplist)是一种随机化的数据结构，其实就是给顺序单链表加了多个多层索引，高层次的索引跳跃节点大于底层的，增加是以随机化的方式进行的，在列表中查找的可以快速的跳过部分列表，提高查询效率。 跳跃表以有序的方式在层次化的链表中保存元素， 效率和平衡树媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。</p>
+</blockquote>
+<p><img src="/images/pasted-36.png" alt="upload successful"></p>
+<blockquote>
+<p>从图中可以分为4个部分构成：<br>head：负责维护跳跃表的节点指针<br>跳跃表节点：保存元素值<br>层：保持着其他元素的指针，高层的指针越过元素数量大于等于低层的指针，为了提高效率，程序总是从高层开始访问，然后随着范围的缩小，降低层次。</p>
+</blockquote>
+<h3 id="跳跃表代码实现"><a href="#跳跃表代码实现" class="headerlink" title="跳跃表代码实现"></a>跳跃表代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">public class MySkipList&lt;K extends Comparable&lt;? super K&gt;,V&gt;&#123;</span><br><span class="line"></span><br><span class="line">    private MySkipListNode&lt;K,V&gt; head,tail;&#x2F;&#x2F;头尾指针</span><br><span class="line">    private int nodeNum,levelNum;</span><br><span class="line">    private Random random;</span><br><span class="line">    private static final double PROBABILITY &#x3D; 0.5;</span><br><span class="line">    private final  K HEAD_KEY,TAIL_KEY;</span><br><span class="line">    public MySkipList(Class&lt;K&gt; kClass) &#123;</span><br><span class="line">        random &#x3D; new Random();</span><br><span class="line">        HEAD_KEY&#x3D; (K) new NullComparable();</span><br><span class="line">        TAIL_KEY&#x3D; (K) new NullComparable();</span><br><span class="line">        head &#x3D; new MySkipListNode&lt;&gt;(HEAD_KEY,null);</span><br><span class="line">        tail &#x3D; new MySkipListNode&lt;&gt;(TAIL_KEY,null);</span><br><span class="line">        horizontalLink(head,tail);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int size()&#123;</span><br><span class="line">        return nodeNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 在最底层找到要插入位置的元素</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private MySkipListNode&lt;K,V&gt; findNode(K key)&#123;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; head;</span><br><span class="line">        while (true)&#123;</span><br><span class="line">            while (node.right.key!&#x3D;TAIL_KEY&amp;&amp;node.right.key.compareTo(key)&lt;&#x3D;0)&#123;</span><br><span class="line">                node &#x3D; node.right;</span><br><span class="line">            &#125;</span><br><span class="line">            if (node.down !&#x3D; null)&#123;</span><br><span class="line"></span><br><span class="line">                node &#x3D; node.down;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MySkipListNode&lt;K,V&gt; get(K key)&#123;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D;findNode(key);</span><br><span class="line">        if (key.compareTo(node.key)&#x3D;&#x3D;0)&#123;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean add(K key, V value)&#123;</span><br><span class="line">        if (Objects.isNull(key))&#123;</span><br><span class="line">            throw  new AssertionError(&quot;THE KEY CANNOT BE EMPTY&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;如果key存在则直接赋值</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; findNode(key);</span><br><span class="line">        if (!(node.key instanceof NullComparable)&amp;&amp;key.compareTo(node.key)&#x3D;&#x3D;0)&#123;</span><br><span class="line">            node.value&#x3D;value;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; newNode &#x3D; new MySkipListNode&lt;&gt;(key,value);</span><br><span class="line">        backLink(node,newNode);</span><br><span class="line">        int currentLevel &#x3D; 0;</span><br><span class="line">        while(random.nextDouble()&lt;PROBABILITY)&#123;</span><br><span class="line">            if (currentLevel&gt;&#x3D;levelNum)&#123;</span><br><span class="line">                levelNum++;</span><br><span class="line">                MySkipListNode&lt;K,V&gt; newHeadNode &#x3D; new MySkipListNode&lt;K,V&gt;(HEAD_KEY,null);</span><br><span class="line">                MySkipListNode&lt;K,V&gt; newTailNode &#x3D; new MySkipListNode&lt;&gt;(TAIL_KEY,null);</span><br><span class="line">                horizontalLink(newHeadNode,newTailNode);</span><br><span class="line">                verticalLink(newHeadNode,head);</span><br><span class="line">                verticalLink(newTailNode,tail);</span><br><span class="line">                head &#x3D; newHeadNode;</span><br><span class="line">                tail &#x3D; newTailNode;</span><br><span class="line">            &#125;</span><br><span class="line">            while (node.up &#x3D;&#x3D; null)&#123;</span><br><span class="line">                node &#x3D; node.left;</span><br><span class="line">            &#125;</span><br><span class="line">            node &#x3D; node.up;</span><br><span class="line">            MySkipListNode&lt;K,V&gt; newUpNode &#x3D; new MySkipListNode&lt;&gt;(key,null);</span><br><span class="line"></span><br><span class="line">            backLink(node,newUpNode);</span><br><span class="line">            verticalLink(newUpNode,newNode);</span><br><span class="line">            newNode &#x3D; newUpNode;</span><br><span class="line">            currentLevel++;</span><br><span class="line">        &#125;</span><br><span class="line">        nodeNum++;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public List&lt;MySkipListNode&gt; traverseKey()&#123;</span><br><span class="line">        List&lt;MySkipListNode&gt; listNodes &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        if (nodeNum &#x3D;&#x3D; 0)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; head;</span><br><span class="line">        StringBuilder builder &#x3D;new StringBuilder();</span><br><span class="line">        while (node.down!&#x3D;null)&#123;</span><br><span class="line">            node &#x3D; node.down;</span><br><span class="line">        &#125;</span><br><span class="line">        while (node.left!&#x3D;null)&#123;</span><br><span class="line">            node &#x3D; node.left;</span><br><span class="line">        &#125;</span><br><span class="line">        while (node.right!&#x3D;null)&#123;</span><br><span class="line">            listNodes.add(node);</span><br><span class="line">            node &#x3D; node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return listNodes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 将back插入到front的后面。</span><br><span class="line">     * @param front</span><br><span class="line">     * @param back</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void backLink(MySkipListNode front,MySkipListNode back)&#123;</span><br><span class="line">        back.left &#x3D; front;</span><br><span class="line">        back.right&#x3D;front.right;</span><br><span class="line">        front.right.left&#x3D;back;</span><br><span class="line">        front.right&#x3D;back;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 垂直链接</span><br><span class="line">     * @param upNode</span><br><span class="line">     * @param downNode</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void verticalLink(MySkipListNode&lt;K,V&gt; upNode,MySkipListNode&lt;K,V&gt; downNode)&#123;</span><br><span class="line">        upNode.down &#x3D; downNode;</span><br><span class="line">        downNode.up &#x3D; upNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 水平链接</span><br><span class="line">     * @param leftNode</span><br><span class="line">     * @param rightNode</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void horizontalLink(MySkipListNode&lt;K,V&gt; leftNode,MySkipListNode&lt;K,V&gt; rightNode)&#123;</span><br><span class="line">        leftNode.right &#x3D; rightNode;</span><br><span class="line">        rightNode.left &#x3D; leftNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class MySkipListNode&lt;K,V&gt;&#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line">        private MySkipListNode&lt;K,V&gt; up,down,left,right;&#x2F;&#x2F;上下左右</span><br><span class="line"></span><br><span class="line">        public MySkipListNode(K key, V value) &#123;</span><br><span class="line">            this.key &#x3D; key;</span><br><span class="line">            this.value &#x3D; value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean equals(Object o) &#123;</span><br><span class="line">            if (this &#x3D;&#x3D; o) return true;</span><br><span class="line">            if (o &#x3D;&#x3D; null || getClass() !&#x3D; o.getClass()) return false;</span><br><span class="line">            return key&#x3D;&#x3D;((MySkipListNode)o).key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int hashCode() &#123;</span><br><span class="line">            return key.hashCode();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String toString() &#123;</span><br><span class="line">            return &quot;MySkipListNode&#123;&quot; +</span><br><span class="line">                    &quot;key&#x3D;&quot; + key +</span><br><span class="line">                    &quot;, value&#x3D;&quot; + value +</span><br><span class="line">                    &#39;&#125;&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private static class NullComparable implements Comparable&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compareTo(Object o) &#123;</span><br><span class="line">            System.out.println(o);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MySkipList&lt;String,String&gt; mySkipList &#x3D; new MySkipList&lt;&gt;(String.class);</span><br><span class="line">        Random random &#x3D; new Random();</span><br><span class="line">        for (int i&#x3D;0;i&lt;20;i++)&#123;</span><br><span class="line">            int num &#x3D; random.nextInt(100);</span><br><span class="line">            System.out.println(&quot;num &#x3D; &quot;+num);</span><br><span class="line">            mySkipList.add(String.valueOf(num),&quot;num&#x3D;&quot;+num);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(mySkipList.traverseKey());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="post-title-link" itemprop="url">redis学习笔记(一)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-05-10 23:14:00" itemprop="dateCreated datePublished" datetime="2020-05-10T23:14:00+08:00">2020-05-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-14 10:12:58" itemprop="dateModified" datetime="2020-05-14T10:12:58+08:00">2020-05-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h3><blockquote>
+<p>redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。<br>redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。</p>
+</blockquote>
+<ol>
+<li>string(字符串类型)</li>
+<li>hash(散列/哈希类型)</li>
+<li>list(列表类型)</li>
+<li>set(集合类型)</li>
+<li>zset(有序集合类型)</li>
+</ol>
+<h3 id="redis优点"><a href="#redis优点" class="headerlink" title="redis优点"></a>redis优点</h3><blockquote>
+<p>为啥要用reids呢？mysql不行嘛？</p>
+</blockquote>
+<ol>
+<li>快！  redis 非常快，每秒可执行大约 110000 次的设置(SET)操作，每秒大约可执行 81000 次的读取/获取(GET)操作。(下图是我本机测试的，当然每台电脑不一样看性能的，使用redis-benchmark -n 100000 -q 测试)</li>
+</ol>
+<p><img src="/images/pasted-28.png" alt="upload successful"></p>
+<ol start="2">
+<li><p>原子性! 所有 Redis 操作都是原子操作，这确保如果两个客户端并发访问，Redis 服务器能接收更新的值,因为redis是单线程的。</p>
+</li>
+<li><p>丰富的数据类型!  redis 支持开发人员常用的大多数数据类型，例如列表，集合，排序集和散列等等。这使得 Redis 很容易被用来解决各种问题，因为我们知道哪些问题可以更好使用地哪些数据类型来处理解决。</p>
+</li>
+<li><p>实用工具! Redis 是一个多实用工具，可用于多种用例，如：缓存，消息队列(Redis 本地支持发布/订阅)，应用程序中的任何短期数据，例如，web应用程序中的会话，网页命中计数等。    </p>
+</li>
+</ol>
+<h3 id="redis基本命令"><a href="#redis基本命令" class="headerlink" title="redis基本命令"></a>redis基本命令</h3><h4 id="KEYS-pattern-符合规则的键名列表"><a href="#KEYS-pattern-符合规则的键名列表" class="headerlink" title="KEYS pattern(符合规则的键名列表)"></a>KEYS pattern(符合规则的键名列表)</h4><blockquote>
+<p>KEYS pattern<br>其中pattern支持glob风格通配符的格式,另外由于KEYS命令需要遍历redis中所有的key，而且redis又是单线程的，当key较多时会影响性能，生产环境建议别用喔。</p>
+</blockquote>
+<p><img src="/images/pasted-29.png" alt="upload successful"></p>
+<h4 id="EXISTS-key-判断key是否存在"><a href="#EXISTS-key-判断key是否存在" class="headerlink" title="EXISTS key(判断key是否存在)"></a>EXISTS key(判断key是否存在)</h4><blockquote>
+<p>EXISTS key<br>如果key存在则返回整数类型1，否则返回0</p>
+</blockquote>
+<h4 id="DEL-key…-删除键"><a href="#DEL-key…-删除键" class="headerlink" title="DEL key…(删除键)"></a>DEL key…(删除键)</h4><blockquote>
+<p>DEL key…<br>可以删除一个或多个key，返回值是删除键的个数。</p>
+</blockquote>
+<h4 id="TYPE-key-获得key的类型"><a href="#TYPE-key-获得key的类型" class="headerlink" title="TYPE key(获得key的类型)"></a>TYPE key(获得key的类型)</h4><blockquote>
+<p>TYPE key<br>如果key不存在返回none，否则返回五种数据类型其中一个。</p>
+</blockquote>
+<h3 id="redis五种基本数据结构"><a href="#redis五种基本数据结构" class="headerlink" title="redis五种基本数据结构"></a>redis五种基本数据结构</h3><blockquote>
+<p>Redis 有 5 种基础数据结构，它们分别是：string(字符串)、list(列表)、hash(字典)、set(集合) 和 zset(有序集合)。</p>
+</blockquote>
+<h4 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string(字符串)"></a>string(字符串)</h4><h5 id="string简介"><a href="#string简介" class="headerlink" title="string简介"></a>string简介</h5><blockquote>
+<p>字符串类型是redis中最基本的数据类型，它能够存储任何形式的字符串，一个字符串类型的最大容量是512MB。从源码的 sds.h/sdshdr 文件 中可以看到 Redis 底层对于字符串的定义 SDS，即 Simple Dynamic String 结构：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* Note: sdshdr5 is never used, we just access the flags byte directly.</span><br><span class="line"> * However is here to document the layout of type 5 SDS strings. *&#x2F;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr5 &#123;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, and 5 msb of string length *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr8 &#123;</span><br><span class="line">    uint8_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint8_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr16 &#123;</span><br><span class="line">    uint16_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint16_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr32 &#123;</span><br><span class="line">    uint32_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint32_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr64 &#123;</span><br><span class="line">    uint64_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint64_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>为了对内存做到极致的优化，不同长度的字符串使用不同的结构体来表示。</p>
+</blockquote>
+<h5 id="SDS-与-C-字符串的区别"><a href="#SDS-与-C-字符串的区别" class="headerlink" title="SDS 与 C 字符串的区别"></a>SDS 与 C 字符串的区别</h5><blockquote>
+<p>为什么不考虑直接使用 C 语言的字符串呢？因为 C 语言这种简单的字符串表示方式 不符合 Redis 对字符串在安全性、效率以及功能方面的要求。我们知道，C 语言使用了一个长度为 N+1 的字符数组来表示长度为 N 的字符串，并且字符数组最后一个元素总是 ‘\0’。(下图就展示了 C 语言中值为 “Redis” 的一个字符数组)。</p>
+</blockquote>
+<blockquote>
+<p>直接使用c字符串会有哪些问题呢？<br>获取字符串长度为 O(N) 级别的操作 → 因为 C 不保存数组的长度，每次都需要遍历一遍整个数组；<br>不能很好的杜绝 缓冲区溢出/内存泄漏 的问题 → 跟上述问题原因一样，如果执行拼接 or 缩短字符串的操作，如果操作不当就很容易造成上述问题；<br>C 字符串 只能保存文本数据 → 因为 C 语言中的字符串必须符合某种编码（比如 ASCII），例如中间出现的 ‘\0’ 可能会被判定为提前结束的字符串而识别不了；</p>
+</blockquote>
+<h5 id="string基本命令"><a href="#string基本命令" class="headerlink" title="string基本命令"></a>string基本命令</h5><h6 id="赋值和取值"><a href="#赋值和取值" class="headerlink" title="赋值和取值"></a>赋值和取值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET key value</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET key</span><br><span class="line">&quot;value&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当键不存在时会放回空结果(nil)</p>
+</blockquote>
+<h6 id="递增整数"><a href="#递增整数" class="headerlink" title="递增整数"></a>递增整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set num 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr num</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; incr num</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当字符串是整数类型的时候，可以通过incr方法递增，并返回递增后的值，如果不是整数类型则会报错。</p>
+</blockquote>
+<h6 id="递减整数"><a href="#递减整数" class="headerlink" title="递减整数"></a>递减整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; decr num</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>decr递减，其他事项如上面一样。</p>
+</blockquote>
+<h6 id="增加指定的整数"><a href="#增加指定的整数" class="headerlink" title="增加指定的整数"></a>增加指定的整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; incrby num 100</span><br><span class="line">(integer) 102</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>incrby跟递增一样，只是可以指定增加的整数。</p>
+</blockquote>
+<h6 id="减少指定的整数"><a href="#减少指定的整数" class="headerlink" title="减少指定的整数"></a>减少指定的整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; decrby num 100</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>decrby跟递减一样，只是可以指定减少的整数。</p>
+</blockquote>
+<h6 id="增加指定浮点数"><a href="#增加指定浮点数" class="headerlink" title="增加指定浮点数"></a>增加指定浮点数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; incrbyfloat num 100.123</span><br><span class="line">&quot;101.123&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>incrbyfloat同上上，只是加的变成浮点数了。。</p>
+</blockquote>
+<h6 id="向尾部追加值"><a href="#向尾部追加值" class="headerlink" title="向尾部追加值"></a>向尾部追加值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set key TOM</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; append key &quot; CAT&quot;</span><br><span class="line">(integer) 7</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>append作用是向尾部追加value，如果key不存在则设置值为value，返回值是追加后字符串的长度。</p>
+</blockquote>
+<h6 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; strlen key</span><br><span class="line">(integer) 7</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>返回键值的长度，如果键不存在则返回0</p>
+</blockquote>
+<h6 id="同时获得-设置多个值"><a href="#同时获得-设置多个值" class="headerlink" title="同时获得/设置多个值"></a>同时获得/设置多个值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MSET key1 value1 key2 value2 key3 value3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; MGET key1 key2 key3</span><br><span class="line">1) &quot;value1&quot;</span><br><span class="line">2) &quot;value2&quot;</span><br><span class="line">3) &quot;value3&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>MSET/MGET 跟SET/GET一样，只是可以同时设置/获取多个键值。</p>
+</blockquote>
+<h6 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h6><blockquote>
+<p>一个字节由8位二进制组成，在reids中提供了4个命令来直接对二进制位进行位操作。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET bit bar</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+<p><img src="/images/pasted-30.png" alt="upload successful"></p>
+<blockquote>
+<p>GETBIT 命令可以获得一个字符串类型指定位置的二进制位的值（0/1），索引从0开始。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GETBIT bit 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bit 6</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>SETBIT命令可以设置字符串类型指定位置的二进制位的值(0/1),返回值是该位置的旧值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETBIT bit 6 0</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bit 7 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GET bit</span><br><span class="line">&quot;aar&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>BITCOUNT命令可以获得字符串类型中二进制位位1的个数。当然也可以只统计指定范围的。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITCOUNT bit</span><br><span class="line">(integer) 10</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; BITCOUNT bit 0 1</span><br><span class="line">(integer) 6</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>BITOP命令可以对多个字符串类型进行位运算，并将结果存储在指定key中，BITOP命令支持AND、OR、XOR、NOT等位运算操作。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITOP OR result bit1 bit2</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; GET result</span><br><span class="line">&quot;car&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>BITPOS命令可以对指定键的第一个位是0或者1的位置,例如bit1为bar，返回值为1，则表示“bar”中第一个值为1的二进制偏移量为1。    </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITPOS bit1 1</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="hash-哈希-散列"><a href="#hash-哈希-散列" class="headerlink" title="hash(哈希/散列)"></a>hash(哈希/散列)</h4><blockquote>
+<p>redis的hash类型相当于java中的HashMap，内部实现也差不多一样的，都是通过数组+链表的链地址法解决哈希冲突的。散列类型适合存储对象。</p>
+</blockquote>
+<p><img src="/images/pasted-31.png" alt="upload successful"></p>
+<h5 id="hsah基本命令"><a href="#hsah基本命令" class="headerlink" title="hsah基本命令"></a>hsah基本命令</h5><h6 id="赋值和取值-1"><a href="#赋值和取值-1" class="headerlink" title="赋值和取值"></a>赋值和取值</h6><blockquote>
+<p>在哈希列表中使用HSET和HGET来设置/获取字段值。<br>HSET key field value 设置值<br>HGET key field 获取值<br>另外HSET命令不区分是INSERT还是UPDATE操作，当执行的是INSERT操作时会放回1，执行时UPDATE操作会返回0，当键本身不存在，HSET命令也会自动创建的拉。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HSET student:1 name xiaoming</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; HGET student:1 name</span><br><span class="line">&quot;xiaoming&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>跟字符串一样，可以通过HMSET和HMGET来同时设置/获取多个字段值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HMSET student:1 age 18 sex male</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; HMGET student:1 age sex</span><br><span class="line">1) &quot;18&quot;</span><br><span class="line">2) &quot;male&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="判断字段是否存在"><a href="#判断字段是否存在" class="headerlink" title="判断字段是否存在"></a>判断字段是否存在</h6><blockquote>
+<p>HEXISITS key field 用来判断一个字段是否存在，如果存在则返回1，否则返回0。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS student:1 name</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+<h6 id="当字段不存在时赋值"><a href="#当字段不存在时赋值" class="headerlink" title="当字段不存在时赋值"></a>当字段不存在时赋值</h6><blockquote>
+<p>HSETNX key field value  HSETNX与HSET类似，区别在于字段如果已经存在了，HSETNX将不执行任何操作。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HSETNX student:1 name xiaohong</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; HGET student:1 name</span><br><span class="line">&quot;xiaoming&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h6><blockquote>
+<p>HDEL key field… HDEL可以删除一个或多个字段，返回值时删除字段的个数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HDEL student:1 name</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+<h6 id="只获得字段名或者字段值"><a href="#只获得字段名或者字段值" class="headerlink" title="只获得字段名或者字段值"></a>只获得字段名或者字段值</h6><blockquote>
+<p>HKEYS key 获得键中所有字段名<br>HVALS key 获得键中所有字段值</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HMSET student:1 name xiaoming  age 18 sex male</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; HKEYS student:1</span><br><span class="line">1) &quot;name&quot;</span><br><span class="line">2) &quot;age&quot;</span><br><span class="line">3) &quot;sex&quot;</span><br><span class="line">127.0.0.1:6379&gt; HVALS student:1</span><br><span class="line">1) &quot;xiaoming&quot;</span><br><span class="line">2) &quot;18&quot;</span><br><span class="line">3) &quot;male&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="list-列表-类型"><a href="#list-列表-类型" class="headerlink" title="list(列表)类型"></a>list(列表)类型</h4><h5 id="list简介"><a href="#list简介" class="headerlink" title="list简介"></a>list简介</h5><blockquote>
+<p>redis的list相当于java中的LinkedList，它内部时基于双向链表实现的。这意味着它插入和删除特别快，但是随机访问比较慢。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">typedef struct listNode &#123;</span><br><span class="line">    struct listNode *prev;</span><br><span class="line">    struct listNode *next;</span><br><span class="line">    void *value;</span><br><span class="line">&#125; listNode;</span><br><span class="line"></span><br><span class="line">typedef struct listIter &#123;</span><br><span class="line">    listNode *next;</span><br><span class="line">    int direction;</span><br><span class="line">&#125; listIter;</span><br><span class="line"></span><br><span class="line">typedef struct list &#123;</span><br><span class="line">    listNode *head;</span><br><span class="line">    listNode *tail;</span><br><span class="line">    void *(*dup)(void *ptr);</span><br><span class="line">    void (*free)(void *ptr);</span><br><span class="line">    int (*match)(void *ptr, void *key);</span><br><span class="line">    unsigned long len;</span><br><span class="line">&#125; list;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="list基本命令"><a href="#list基本命令" class="headerlink" title="list基本命令"></a>list基本命令</h5><h6 id="向两端添加元素"><a href="#向两端添加元素" class="headerlink" title="向两端添加元素"></a>向两端添加元素</h6><blockquote>
+<p>LPUSH key value…    向列表左边添加元素，返回新列表长度<br>RPUSH key value…     向列表右边添加元素，返回新列表长度</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; RPUSH num 2</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
+
+<h6 id="向两端弹出元素"><a href="#向两端弹出元素" class="headerlink" title="向两端弹出元素"></a>向两端弹出元素</h6><blockquote>
+<p>LPOP key 从列表左边弹出一个元素,返回元素值，如果列表为空则返回nil<br>RPOP key  从列表右边弹出一个元素,返回元素值，如果列表为空则返回nil</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1 2 3 4 5</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; LPOP num</span><br><span class="line">&quot;5&quot;</span><br><span class="line">127.0.0.1:6379&gt; RPOP num</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="获得列表中元素个数"><a href="#获得列表中元素个数" class="headerlink" title="获得列表中元素个数"></a>获得列表中元素个数</h6><blockquote>
+<p>LLEN key 获得列表长度，如果列表不存在则返回0</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LLEN num</span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
+
+<h6 id="获得列表片段"><a href="#获得列表片段" class="headerlink" title="获得列表片段"></a>获得列表片段</h6><blockquote>
+<p>LRANGE key start stop 获得列表从start到stop（包括stop）的片段，redis起始索引从0开始。LRANGE命令支持负索引，例如-1表示最右边第一个元素，-2表示最右边第二个元素。<br>注意事项：</p>
+</blockquote>
+<ol>
+<li>如果start索引位置比stop索引位置靠后则会返回空列表。</li>
+<li>如果stop大于实际索引范围则会返回列表最右边的元素</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1 2 3 4 5 6 7 8 9</span><br><span class="line">(integer) 9</span><br><span class="line">127.0.0.1:6379&gt; LRANGE num 0 3</span><br><span class="line">1) &quot;9&quot;</span><br><span class="line">2) &quot;8&quot;</span><br><span class="line">3) &quot;7&quot;</span><br><span class="line">4) &quot;6&quot;</span><br><span class="line">127.0.0.1:6379&gt; LRANGE num 0 -1</span><br><span class="line">1) &quot;9&quot;</span><br><span class="line">2) &quot;8&quot;</span><br><span class="line">3) &quot;7&quot;</span><br><span class="line">4) &quot;6&quot;</span><br><span class="line">5) &quot;5&quot;</span><br><span class="line">6) &quot;4&quot;</span><br><span class="line">7) &quot;3&quot;</span><br><span class="line">8) &quot;2&quot;</span><br><span class="line">9) &quot;1&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除列表中指定值"><a href="#删除列表中指定值" class="headerlink" title="删除列表中指定值"></a>删除列表中指定值</h6><blockquote>
+<p>LREM key count value 删除列表中前count个值为value的元素，返回值是实际删除元素个数，根据count值的不同，执行起来也不一样</p>
+</blockquote>
+<ol>
+<li>当count&gt;0,列表会从左到右开始删除前count个value值元素。</li>
+<li>当count&lt;0,列表会从右到左开始删除前|count|个value值元素。</li>
+<li>当count=0.列表会删除所有值为value的元素。</li>
+</ol>
+<h4 id="set-集合-类型"><a href="#set-集合-类型" class="headerlink" title="set(集合)类型"></a>set(集合)类型</h4><h5 id="set简介"><a href="#set简介" class="headerlink" title="set简介"></a>set简介</h5><blockquote>
+<p>redis集合相当于java中的HashSet，内部键值对是无序，唯一的。在redis内部实现中是使用value为空的散列表实现的，所有这些操作时间复杂度是O(1),而且多个集合类型之间还可以进行并集，交集，差集等操作。</p>
+</blockquote>
+<h5 id="set基本命令"><a href="#set基本命令" class="headerlink" title="set基本命令"></a>set基本命令</h5><h6 id="添加-删除元素"><a href="#添加-删除元素" class="headerlink" title="添加/删除元素"></a>添加/删除元素</h6><blockquote>
+<p>SADD key member.. 添加一个或多个元素，如果元素已经存在则忽略，返回成功加入元素个数<br>SREM key member.. 删除一个或多个元素，返回删除成功的元素个数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SADD set Hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set WORLD!  &quot;I LOVE YOU&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; SREM set Hello</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+
+<h6 id="获得集合中的所有元素"><a href="#获得集合中的所有元素" class="headerlink" title="获得集合中的所有元素"></a>获得集合中的所有元素</h6><blockquote>
+<p>SMEMBERS key 返回集合中所有的元素</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SMEMBERS set</span><br><span class="line">1) &quot;I LOVE YOU&quot;</span><br><span class="line">2) &quot;WORLD!&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="集合间运算"><a href="#集合间运算" class="headerlink" title="集合间运算"></a>集合间运算</h6><blockquote>
+<p>SDIFF key… 对多个集合进行差集运算。集合A与集合B的差集表示为A-B，代表属于A且不属于B的元素集合，例如：</p>
+</blockquote>
+<p><img src="/images/pasted-32.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SADD set1 1 2 3 4 5</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; SADD set2 2 3 4 5 6</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; SDIFF set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>SINTER key… 对多个集合进行交集运算。集合A与集合B的交集表示为A∩B，代表属于A且属于B的元素集合，例如：</p>
+</blockquote>
+<p><img src="/images/pasted-33.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SINTER set1 set2</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) &quot;3&quot;</span><br><span class="line">3) &quot;4&quot;</span><br><span class="line">4) &quot;5&quot;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>SUNION key… 对多个集合进行并集运算。集合A与集合B的并集表示为A∪B，代表属于A或属于B的元素集合，例如：</p>
+</blockquote>
+<p><img src="/images/pasted-34.png" alt="upload successful"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SUNION set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br><span class="line">4) &quot;4&quot;</span><br><span class="line">5) &quot;5&quot;</span><br><span class="line">6) &quot;6&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="zset-有序列表-类型"><a href="#zset-有序列表-类型" class="headerlink" title="zset(有序列表)类型"></a>zset(有序列表)类型</h4><h5 id="zset简介"><a href="#zset简介" class="headerlink" title="zset简介"></a>zset简介</h5><blockquote>
+<p>zset有序列表，它比较特殊算的上是redis中最高级的类型了，内部实现是通过【跳跃表】来实现的。一方面他是集合，保证了唯一性，另一方面它每个value都有score值，用来实现排序权重。</p>
+</blockquote>
+<h5 id="zset基本命令"><a href="#zset基本命令" class="headerlink" title="zset基本命令"></a>zset基本命令</h5><h6 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h6><blockquote>
+<p>ZADD key score member [score member…]<br>ZADD用来向有序集合中加入一个元素和元素分数，如果元素值存在则会用新分数替换已有分数，返回值是新加入到集合中的元素个数。<br>其中score可以是整数，浮点数。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZADD score 87 Tom 67 Peter 100 Xiaoming</span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
+<h6 id="获得元素分数"><a href="#获得元素分数" class="headerlink" title="获得元素分数"></a>获得元素分数</h6><blockquote>
+<p>ZSCORE key member<br>获得元素分数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZSCORE score Xiaoming</span><br><span class="line">&quot;100&quot;</span><br></pre></td></tr></table></figure>
+<h6 id="获得在某个范围的元素列表"><a href="#获得在某个范围的元素列表" class="headerlink" title="获得在某个范围的元素列表"></a>获得在某个范围的元素列表</h6><blockquote>
+<p>ZRANGE key start stop [WITHSOCRES]<br>ZRANGE命令会按照元素分数从小到大顺序返回索引从start到stop之间的所有元素（包含stop）。同时如果想要获得元素的元素分数可以在 ZRANGE命令尾部加上WITHSCORES。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZRANGE score 0 -1</span><br><span class="line">1) &quot;Peter&quot;</span><br><span class="line">2) &quot;Tom&quot;</span><br><span class="line">3) &quot;Xiaoming&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; ZRANGE score 0 -1 WITHSCORES</span><br><span class="line">1) &quot;Peter&quot;</span><br><span class="line">2) &quot;67&quot;</span><br><span class="line">3) &quot;Tom&quot;</span><br><span class="line">4) &quot;87&quot;</span><br><span class="line">5) &quot;Xiaoming&quot;</span><br><span class="line">6) &quot;100&quot;</span><br></pre></td></tr></table></figure>
+
+<h6 id="获得指定分数范围的元素"><a href="#获得指定分数范围的元素" class="headerlink" title="获得指定分数范围的元素"></a>获得指定分数范围的元素</h6><blockquote>
+<p>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]<br>ZRANGEBYSCORE命令按照元素分数从小到大的顺序返回，分数在min和max之间(包含max)的元素。另外如果不想包括端点值可以在前面加(<br>后面那两个可选参数跟数据库一样的就不在写了。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZRANGEBYSCORE score 80 +inf</span><br><span class="line">1) &quot;Tom&quot;</span><br><span class="line">2) &quot;Xiaoming&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZINCRBY score 10 Tom</span><br><span class="line">&quot;97&quot;</span><br></pre></td></tr></table></figure>
+<h6 id="增加某个元素的分数"><a href="#增加某个元素的分数" class="headerlink" title="增加某个元素的分数"></a>增加某个元素的分数</h6><blockquote>
+<p>ZINCRBY key incrment member<br>ZINCRBY 可以增加一个元素的分数，返回值是更改后的分数。</p>
+</blockquote>
+<h3 id="redis命名推荐"><a href="#redis命名推荐" class="headerlink" title="redis命名推荐"></a>redis命名推荐</h3><blockquote>
+<p>在redis中对键的命名没有强制的要求，但比较好的命名是—对象类型:对象ID:对象属性,例如使用user:1:friends来存储ID为1的用户好友列表。另外键的命名一定要有可读性有意义，例如u:1:f虽然可以节省内存空间但是可读性很明显不好，孰重孰轻还是要分的清的。</p>
+</blockquote>
+<h3 id="学习资料引用"><a href="#学习资料引用" class="headerlink" title="学习资料引用"></a>学习资料引用</h3><p><a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/Redis/redis-collection/Redis(1)%E2%80%94%E2%80%945%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md" target="_blank" rel="noopener">5种基本数据结构</a><br><a href="#">《    Redis入门指南第2版》</a></p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1019,297 +1428,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/" class="post-title-link" itemprop="url">java常用锁</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-24 21:47:33" itemprop="dateCreated datePublished" datetime="2020-04-24T21:47:33+08:00">2020-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 22:08:04" itemprop="dateModified" datetime="2020-04-26T22:08:04+08:00">2020-04-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="java常用锁类型"><a href="#java常用锁类型" class="headerlink" title="java常用锁类型"></a>java常用锁类型</h3><blockquote>
-<p>常见的锁大致可以分为：乐观锁，悲观锁，排他锁，共享锁，分段锁，自选锁，公平锁，非公平锁等。。今天来学基于CAS非加锁实现的乐观锁</p>
-</blockquote>
-<h3 id="ReentrantLock锁"><a href="#ReentrantLock锁" class="headerlink" title="ReentrantLock锁"></a>ReentrantLock锁</h3><blockquote>
-<p>ReentrantLock类是一种可重入，公平/非公平，独占锁，它于synchronized具有相同的功能和语义，但是它更强大，它支持中断，超时等操作。Sync是ReentrantLock的内部类，他的两个子类分别代表公平锁和非公平锁，ReentrantLock可以在构造方法选择是否公平。</p>
-</blockquote>
-<image src="/images/ReentrantLock.png">
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void lock() &#123;</span><br><span class="line">    sync.lock();</span><br><span class="line">&#125;</span><br><span class="line"> public void unlock() &#123;</span><br><span class="line">    sync.release(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>lock和unlock都是基于内部类Sync实现的，因此我们了解的重点是Sync</p>
-</blockquote>
-<h4 id="内部类Sync"><a href="#内部类Sync" class="headerlink" title="内部类Sync"></a>内部类Sync</h4><blockquote>
-<p>Sync是ReentrantLock定义的一个静态内部类，他继承了<a href="/2020/04/24/同步队列AQS">AbstractQueuedSynchronizer类</a>。它有两个实现类分别为NonfairSync(非公平锁)，FairSync(公平锁)，</p>
-</blockquote>
-<h5 id="非公平锁lock方法"><a href="#非公平锁lock方法" class="headerlink" title="非公平锁lock方法"></a>非公平锁lock方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">final void lock() &#123;</span><br><span class="line">    if (compareAndSetState(0, 1))&#x2F;&#x2F;尝试获得锁</span><br><span class="line">        setExclusiveOwnerThread(Thread.currentThread());</span><br><span class="line">    else</span><br><span class="line">    	  调用AQS的acquire(int arg)方法</span><br><span class="line">        acquire(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="公平锁lock方法"><a href="#公平锁lock方法" class="headerlink" title="公平锁lock方法"></a>公平锁lock方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">final void lock() &#123;</span><br><span class="line">    acquire(1);&#x2F;&#x2F;直接调用AQS的acquire(int arg)方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>其实无论是公平或者非公平锁的lock方法最重要的就是tryAcquire(int acquires)方法</p>
-</blockquote>
-<h5 id="非公平锁tryAcquire-int-acquires-方法"><a href="#非公平锁tryAcquire-int-acquires-方法" class="headerlink" title="非公平锁tryAcquire(int acquires)方法"></a>非公平锁tryAcquire(int acquires)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryAcquire(int acquires) &#123;</span><br><span class="line">    return nonfairTryAcquire(acquires);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">final boolean nonfairTryAcquire(int acquires) &#123;</span><br><span class="line">    final Thread current &#x3D; Thread.currentThread();&#x2F;&#x2F;获得当前线程引用</span><br><span class="line">    int c &#x3D; getState();获得状态</span><br><span class="line">    if (c &#x3D;&#x3D; 0) &#123;</span><br><span class="line">    	  &#x2F;&#x2F;尝试设置状态</span><br><span class="line">        if (compareAndSetState(0, acquires)) &#123;</span><br><span class="line">            setExclusiveOwnerThread(current);</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;如果当前线程为持锁线程则重入累加</span><br><span class="line">    else if (current &#x3D;&#x3D; getExclusiveOwnerThread()) &#123;</span><br><span class="line">        int nextc &#x3D; c + acquires;</span><br><span class="line">        if (nextc &lt; 0) &#x2F;&#x2F; overflow</span><br><span class="line">            throw new Error(&quot;Maximum lock count exceeded&quot;);</span><br><span class="line">        setState(nextc);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="公平锁tryAcquire-int-acquires-方法"><a href="#公平锁tryAcquire-int-acquires-方法" class="headerlink" title="公平锁tryAcquire(int acquires)方法"></a>公平锁tryAcquire(int acquires)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryAcquire(int acquires) &#123;</span><br><span class="line">		  &#x2F;&#x2F;公平锁相对于非公平锁就是多了hasQueuedPredecessors()来实现公平策略</span><br><span class="line">           final Thread current &#x3D; Thread.currentThread();</span><br><span class="line">           int c &#x3D; getState();</span><br><span class="line">           if (c &#x3D;&#x3D; 0) &#123;</span><br><span class="line">               if (!hasQueuedPredecessors() &amp;&amp;</span><br><span class="line">                   compareAndSetState(0, acquires)) &#123;</span><br><span class="line">                   setExclusiveOwnerThread(current);</span><br><span class="line">                   return true;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           else if (current &#x3D;&#x3D; getExclusiveOwnerThread()) &#123;</span><br><span class="line">               int nextc &#x3D; c + acquires;</span><br><span class="line">               if (nextc &lt; 0)</span><br><span class="line">                   throw new Error(&quot;Maximum lock count exceeded&quot;);</span><br><span class="line">               setState(nextc);</span><br><span class="line">               return true;</span><br><span class="line">           &#125;</span><br><span class="line">           return false;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<h6 id="hasQueuedPredecessors"><a href="#hasQueuedPredecessors" class="headerlink" title="hasQueuedPredecessors()"></a>hasQueuedPredecessors()</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public final boolean hasQueuedPredecessors() &#123;</span><br><span class="line"></span><br><span class="line">    Node t &#x3D; tail;&#x2F;&#x2F;获得尾部节点</span><br><span class="line">    Node h &#x3D; head;&#x2F;&#x2F;获得前继节点</span><br><span class="line">    Node s;</span><br><span class="line">    return h !&#x3D; t &amp;&amp;</span><br><span class="line">        ((s &#x3D; h.next) &#x3D;&#x3D; null || s.thread !&#x3D; Thread.currentThread());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>首先头部节点不等于尾部节点则代表队列不为空———&gt;true<br>s为空则代表有头节点———–&gt;true<br>s不为空且s的线程不等于当前线程———&gt;true</p>
-</blockquote>
-<h5 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class TestReentrantLock &#123;</span><br><span class="line">    private static volatile ReentrantLock lock&#x3D;new ReentrantLock();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(&quot;线程一先工作呢&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(2000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;线程一下班啦&quot;);</span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;).start();</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            lock.lock();</span><br><span class="line">            System.out.println(&quot;线程二在工作呢&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;线程二下班啦&quot;);</span><br><span class="line"></span><br><span class="line">            lock.unlock();</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/images/pasted-16.png" alt="upload successful"></p>
-<h3 id="Semaphore信号量"><a href="#Semaphore信号量" class="headerlink" title="Semaphore信号量"></a>Semaphore信号量</h3><blockquote>
-<p>Semaphore是一种公平/非公平锁，共享锁。它可以做为一个计数器，用来保护一个或多个锁。跟上面讲解的ReentrantLock独占锁一样，核心代码都是基于类中定义的静态内部类Sync。</p>
-</blockquote>
-<h5 id="acquire-方法"><a href="#acquire-方法" class="headerlink" title="acquire()方法"></a>acquire()方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void acquire() throws InterruptedException &#123;</span><br><span class="line">    sync.acquireSharedInterruptibly(1);&#x2F;&#x2F;可以被中断的获锁方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>从信号量获取一个许可，如果无可用许可前将一直阻塞等待。</p>
-</blockquote>
-<h5 id="acquireSharedInterruptibly-int-arg-方法"><a href="#acquireSharedInterruptibly-int-arg-方法" class="headerlink" title="acquireSharedInterruptibly(int arg)方法"></a>acquireSharedInterruptibly(int arg)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final void acquireSharedInterruptibly(int arg)</span><br><span class="line">        throws InterruptedException &#123;</span><br><span class="line">    if (Thread.interrupted())&#x2F;&#x2F;如果当前线程被中断就抛出异常</span><br><span class="line">        throw new InterruptedException();</span><br><span class="line">    if (tryAcquireShared(arg) &lt; 0)&#x2F;&#x2F;尝试获得异常</span><br><span class="line">        doAcquireSharedInterruptibly(arg);&#x2F;&#x2F;获锁失败放进等待队列</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="tryAcquireShared-int-arg-方法"><a href="#tryAcquireShared-int-arg-方法" class="headerlink" title="tryAcquireShared(int arg)方法"></a>tryAcquireShared(int arg)方法</h5><h6 id="非公平锁实现"><a href="#非公平锁实现" class="headerlink" title="非公平锁实现"></a>非公平锁实现</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">    return nonfairTryAcquireShared(acquires);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">final int nonfairTryAcquireShared(int acquires) &#123;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int available &#x3D; getState();&#x2F;&#x2F;获得可用锁数量</span><br><span class="line">        int remaining &#x3D; available - acquires;</span><br><span class="line">        &#x2F;&#x2F;如果没有锁了就直接返回否则尝试获得锁资源</span><br><span class="line">        if (remaining &lt; 0 ||</span><br><span class="line">            compareAndSetState(available, remaining))</span><br><span class="line">            return remaining;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="公平锁实现"><a href="#公平锁实现" class="headerlink" title="公平锁实现"></a>公平锁实现</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">protected int tryAcquireShared(int acquires) &#123;</span><br><span class="line">            for (;;) &#123;</span><br><span class="line">                if (hasQueuedPredecessors())&#x2F;&#x2F;公平策略就是判断当前节点是否有前驱节点（跟上面的ReentrantLock的公平策略一样的）</span><br><span class="line">                    return -1;</span><br><span class="line">                int available &#x3D; getState();</span><br><span class="line">                int remaining &#x3D; available - acquires;</span><br><span class="line">                if (remaining &lt; 0 ||</span><br><span class="line">                    compareAndSetState(available, remaining))</span><br><span class="line">                    return remaining;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="doAcquireSharedInterruptibly-int-arg"><a href="#doAcquireSharedInterruptibly-int-arg" class="headerlink" title="doAcquireSharedInterruptibly(int arg)"></a>doAcquireSharedInterruptibly(int arg)</h5><blockquote>
-<p><a href="http://localhost:4000/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS" target="_blank" rel="noopener">分析请见</a></p>
-</blockquote>
-<h4 id="release-int-arg-方法"><a href="#release-int-arg-方法" class="headerlink" title="release(int arg)方法"></a>release(int arg)方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void release() &#123;</span><br><span class="line">    sync.releaseShared(1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>释放信号量中的一个许可，如果多次调用会扩大信号量的可用数量。</p>
-</blockquote>
-<h5 id="releaseShared-int-arg-方法"><a href="#releaseShared-int-arg-方法" class="headerlink" title="releaseShared(int arg)方法"></a>releaseShared(int arg)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final boolean releaseShared(int arg) &#123;</span><br><span class="line">    if (tryReleaseShared(arg))&#x2F;&#x2F;尝试释放锁 &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="tryReleaseShared-int-releases-方法"><a href="#tryReleaseShared-int-releases-方法" class="headerlink" title="tryReleaseShared(int releases)方法"></a>tryReleaseShared(int releases)方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryReleaseShared(int releases) &#123;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int current &#x3D; getState();&#x2F;&#x2F;获得队列中可用锁数量</span><br><span class="line">        int next &#x3D; current + releases;</span><br><span class="line">        if (next &lt; current) &#x2F;&#x2F; overflow</span><br><span class="line">            throw new Error(&quot;Maximum permit count exceeded&quot;);</span><br><span class="line">        if (compareAndSetState(current, next))&#x2F;&#x2F;尝试设置数量</span><br><span class="line">            return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="doReleaseShared-方法"><a href="#doReleaseShared-方法" class="headerlink" title="doReleaseShared()方法"></a>doReleaseShared()方法</h5><blockquote>
-<p><a href="http://localhost:4000/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS" target="_blank" rel="noopener">分析请见</a></p>
-</blockquote>
-</image>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/24/%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/" class="post-title-link" itemprop="url">抽象同步队列AQS</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-24 12:21:43" itemprop="dateCreated datePublished" datetime="2020-04-24T12:21:43+08:00">2020-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-04-26 12:00:54" itemprop="dateModified" datetime="2020-04-26T12:00:54+08:00">2020-04-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="AQS简介"><a href="#AQS简介" class="headerlink" title="AQS简介"></a>AQS简介</h3><blockquote>
-<p>AbstractQueuedSynchronizer类简称为（AQS）,它是实现同步器的基本组件，内部使用int类型来表示同步状态，并提供CAS方法来操作这个同步状态。如常用的ReentrantLock/Semaphore/CountDownLatch等等就是基于AQS实现的，用法是通过继承AQS实现其模版方法，然后将子类作为同步组件的内部类。</p>
-</blockquote>
-<p><img src="/images/pasted-12.png" alt="upload successful"></p>
-<blockquote>
-<p>上图是该类的属性，AQS是一个FIFO的双向队列，内部通过head和tail记录头部和尾部节点，队列元素为Node。当一个线程试图获得锁时，如果该锁已被占用就会新创一个Node节点把他插入到尾部。头部节点是成功获得锁的节点，当头部节点被释放的时候，会唤醒后面的节点。</p>
-</blockquote>
-<p><img src="/images/pasted-13.png" alt="upload successful"></p>
-<blockquote>
-<p>在AQS中最重要的就是对状态值state的操作，操作state的方式分为两种。</p>
-</blockquote>
-<ol>
-<li><p>独占（Exclusive），例如ReentrantLock就是独占锁的一种。</p>
-</li>
-<li><p>共享（share），例如Semaphore/CountDownLatch。</p>
-<blockquote>
-<p>使用独占方式获取的资源是与具体线程绑定的，就是说如果一个线程获取到了资源， 就会标记是这个线程获取到了，其他线程再尝试操作 state 获取资源时会发现当前该资源 不是自己持有的，就会在获取失败后被阻塞。 比如独占锁 ReentrantLock 的实现， 当一个 线程获取了 Reer rantLock 的锁后，在 AQS 内 部会首先使用 CAS 操作把 state 状态值从 0 变为 1 ，然后设置当前锁的持有者为当前线程，当该线程再次获取锁时发现它就是锁的持 有者，则会把状态值从 l 变为 2，也就是设置可重入次数，而当另外一个线程获取锁时发 现自己并不是该锁的持有者就会被放入 AQS 阻塞队列后挂起。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>对应共享方式的资源与具体线程是不相关的，当多个线程去请求资源时通过 CAS 方 式竞争获取资源，当一个线程获取到了资源后，另外一个线程再次去获取时如果当前资源 还能满足它的需要，则当前线程只需要使用 CAS 方式进行获取即可。 比如 Semaphore 信 号量， 当一个线程通过 acquire（） 方法获取信号量时，会首先看当前信号量个数是否满足需 要， 不满足则把当前线程放入阻塞队列，如果满足则通过 自旋 CAS 获取信号量。</p>
-</blockquote>
-<blockquote>
-<p>代写。。源码看晕了</p>
-</blockquote>
-<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><h4 id="acquire-int-arg-独占锁方法"><a href="#acquire-int-arg-独占锁方法" class="headerlink" title="acquire(int arg)独占锁方法"></a>acquire(int arg)独占锁方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final void acquire(int arg) &#123;</span><br><span class="line">        if (!tryAcquire(arg) &amp;&amp;</span><br><span class="line">            acquireQueued(addWaiter(Node.EXCLUSIVE), arg))</span><br><span class="line">            selfInterrupt();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>当一个线程尝试获得独占锁时，会先尝试获得锁，如果失败就将当前线程封装成Exclusive类型的Node插入AQS堵塞队列尾部，并将自己堵塞挂起。</p>
-</blockquote>
-<h5 id="tryAcquire-int-arg"><a href="#tryAcquire-int-arg" class="headerlink" title="tryAcquire(int arg)"></a>tryAcquire(int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected boolean tryAcquire(int arg) &#123;</span><br><span class="line">    throw new UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p> tryAcquire()需要具体子类去实现的，根据所需场景设置state。</p>
-</blockquote>
-<h5 id="addWaiter-Node-mode"><a href="#addWaiter-Node-mode" class="headerlink" title="addWaiter(Node mode)"></a>addWaiter(Node mode)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private Node addWaiter(Node mode) &#123;</span><br><span class="line">	    &#x2F;&#x2F;以当前节点和给定模式创建一个新节点</span><br><span class="line">        &#x2F;&#x2F;模式有：EXCLUSIVE(独占),SHARE(共享)</span><br><span class="line">        Node node &#x3D; new Node(Thread.currentThread(), mode);</span><br><span class="line">        &#x2F;&#x2F; Try the fast path of enq; backup to full enq on failure</span><br><span class="line">        Node pred &#x3D; tail;&#x2F;&#x2F;获得尾部节点</span><br><span class="line">        &#x2F;&#x2F;判断尾部节点是否为空</span><br><span class="line">        if (pred !&#x3D; null) &#123;</span><br><span class="line">            node.prev &#x3D; pred;</span><br><span class="line">            &#x2F;&#x2F;设置为尾部节点为新建节点</span><br><span class="line">            if (compareAndSetTail(pred, node)) &#123;</span><br><span class="line">                pred.next &#x3D; node;</span><br><span class="line">                return node;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;如果上面失败了就进行究极自旋保证一定插入队列尾部</span><br><span class="line">        enq(node);</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>addWaiter()方法将当前线程封装成新节点插入队列尾部，并放回。</p>
-</blockquote>
-<h5 id="enq-final-Node-node"><a href="#enq-final-Node-node" class="headerlink" title="enq(final Node node)"></a>enq(final Node node)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">private Node enq(final Node node) &#123;</span><br><span class="line">&#x2F;&#x2F;通过CAS自旋直到node成功插入队列尾部</span><br><span class="line">       for (;;) &#123;</span><br><span class="line">           Node t &#x3D; tail;&#x2F;&#x2F;获得尾部节点</span><br><span class="line">           &#x2F;&#x2F;队列为空，设置首部尾部指向新建节点</span><br><span class="line">           if (t &#x3D;&#x3D; null) &#123; &#x2F;&#x2F; Must initialize</span><br><span class="line">               if (compareAndSetHead(new Node()))</span><br><span class="line">                   tail &#x3D; head;</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">           &#x2F;&#x2F;正常的流程</span><br><span class="line">               node.prev &#x3D; t;</span><br><span class="line">               if (compareAndSetTail(t, node)) &#123;</span><br><span class="line">                   t.next &#x3D; node;</span><br><span class="line">                   return t;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>enq()方法确保一定能将node插入队列尾部</p>
-</blockquote>
-<h5 id="acquireQueued-final-Node-node-int-arg"><a href="#acquireQueued-final-Node-node-int-arg" class="headerlink" title="acquireQueued(final Node node, int arg)"></a>acquireQueued(final Node node, int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">final boolean acquireQueued(final Node node, int arg) &#123;</span><br><span class="line">    boolean failed &#x3D; true;&#x2F;&#x2F;标志是否拿到资源</span><br><span class="line">    try &#123;</span><br><span class="line">        boolean interrupted &#x3D; false;&#x2F;&#x2F;标志等待时是否被中断过</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            final Node p &#x3D; node.predecessor();获得前驱节点</span><br><span class="line">            &#x2F;&#x2F;如果前驱节点为头部节点，则可以尝试获得一下锁啦</span><br><span class="line">            if (p &#x3D;&#x3D; head &amp;&amp; tryAcquire(arg)) &#123;</span><br><span class="line">                setHead(node);&#x2F;&#x2F;设置当前节点为头节点</span><br><span class="line">                p.next &#x3D; null; &#x2F;&#x2F; help GC</span><br><span class="line">                failed &#x3D; false;</span><br><span class="line">                return interrupted;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;shouldParkAfterFailedAcquire判断自己是否可以休息</span><br><span class="line">            &#x2F;&#x2F;parkAndCheckInterrupt让自己休眠</span><br><span class="line">            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                interrupted &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (failed)</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在看shouldParkAfterFailedAcquire()方法前，先要了解withStatus变量。withStatus用来记录线程的等待状态可以为。</p>
-</blockquote>
-<ol>
-<li>CANCELLED=1：表示线程因为中断或者等待超时，需要从等待队列中取消等待；</li>
-<li>SIGNAL=-1：当前线程thread1占有锁，队列中的head(仅仅代表头结点，里面没有存放线程引用)的后继结点node1处于等待状态，如果已占有锁的线程thread1释放锁或被CANCEL之后就会通知这个结点node1去获取锁执行。</li>
-<li>表示结点在等待队列中(这里指的是等待在某个lock的condition上，关于Condition的原理下面会写到)，当持有锁的线程调用了Condition的signal()方法之后，结点会从该condition的等待队列转移到该lock的同步队列上，去竞争lock。(注意：这里的同步队列就是我们说的AQS维护的FIFO队列，等待队列则是每个condition关联的队列)</li>
-<li>表示下一次共享状态获取将会传递给后继结点获取这个共享同步状态。<br>引用：[<a href="https://www.cnblogs.com/fsmly/p/11274572.html]" target="_blank" rel="noopener">https://www.cnblogs.com/fsmly/p/11274572.html]</a><h5 id="shouldParkAfterFailedAcquire-Node-pred-Node-node"><a href="#shouldParkAfterFailedAcquire-Node-pred-Node-node" class="headerlink" title="shouldParkAfterFailedAcquire(Node pred, Node node)"></a>shouldParkAfterFailedAcquire(Node pred, Node node)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) &#123;</span><br><span class="line">    int ws &#x3D; pred.waitStatus;&#x2F;&#x2F;获得前驱节点的状态</span><br><span class="line">    if (ws &#x3D;&#x3D; Node.SIGNAL)&#x2F;&#x2F;判断状态是否为SIGNAL如果是就可以休眠了</span><br><span class="line">        &#x2F;*</span><br><span class="line">         * This node has already set status asking a release</span><br><span class="line">         * to signal it, so it can safely park.</span><br><span class="line">         *&#x2F;</span><br><span class="line">        return true;</span><br><span class="line">    if (ws &gt; 0) &#123;</span><br><span class="line">    &#x2F;&#x2F;如果前端节点状态为CANCELLED,即代表放弃等待了，这时候node需要找一个在等待状态的节点，并把它做为自己的前驱节点</span><br><span class="line">        &#x2F;*</span><br><span class="line">         * Predecessor was cancelled. Skip over predecessors and</span><br><span class="line">         * indicate retry.</span><br><span class="line">         *&#x2F;</span><br><span class="line">        do &#123;</span><br><span class="line">            node.prev &#x3D; pred &#x3D; pred.prev;</span><br><span class="line">        &#125; while (pred.waitStatus &gt; 0);</span><br><span class="line">        pred.next &#x3D; node;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        &#x2F;&#x2F;尝试设置前驱节点值为SIGNAL</span><br><span class="line">        compareAndSetWaitStatus(pred, ws, Node.SIGNAL);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>shouldParkAfterFailedAcquire()方法就是设置自己的前驱节点为SIGNAL状态，这样自己才能去堵塞休眠。。</p>
-</blockquote>
-</li>
-</ol>
-<h5 id="parkAndCheckInterrupt"><a href="#parkAndCheckInterrupt" class="headerlink" title="parkAndCheckInterrupt()"></a>parkAndCheckInterrupt()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private final boolean parkAndCheckInterrupt() &#123;</span><br><span class="line">    LockSupport.park(this);&#x2F;&#x2F;将自己挂起</span><br><span class="line">    return Thread.interrupted();检测自己是否被中断过</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>整体流程图如下<br>流程图片来源[<a href="https://www.cnblogs.com/zyrblog/p/9866140.html]" target="_blank" rel="noopener">https://www.cnblogs.com/zyrblog/p/9866140.html]</a><br><img src="/images/pasted-14.png" alt="upload successful"></p>
-</blockquote>
-<h4 id="release-int-arg-独占锁释放方法"><a href="#release-int-arg-独占锁释放方法" class="headerlink" title="release(int arg)独占锁释放方法"></a>release(int arg)独占锁释放方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public final boolean release(int arg) &#123;</span><br><span class="line">	  &#x2F;&#x2F;尝试释放锁，这里一般都会成功因为独占，一般都是拿到锁的才去释放。。</span><br><span class="line">    if (tryRelease(arg)) &#123;</span><br><span class="line">        Node h &#x3D; head;</span><br><span class="line">        if (h !&#x3D; null &amp;&amp; h.waitStatus !&#x3D; 0)</span><br><span class="line">            unparkSuccessor(h);&#x2F;&#x2F;唤醒等待队列的下一个节点</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="tryRelease-int-arg"><a href="#tryRelease-int-arg" class="headerlink" title="tryRelease(int arg)"></a>tryRelease(int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected boolean tryRelease(int arg) &#123;</span><br><span class="line">    throw new UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这里一样需要具体子类去实现</p>
-</blockquote>
-<h5 id="unparkSuccessor-Node-node"><a href="#unparkSuccessor-Node-node" class="headerlink" title="unparkSuccessor(Node node)"></a>unparkSuccessor(Node node)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private void unparkSuccessor(Node node) &#123;</span><br><span class="line">    int ws &#x3D; node.waitStatus;</span><br><span class="line">    if (ws &lt; 0)</span><br><span class="line">        compareAndSetWaitStatus(node, ws, 0);&#x2F;&#x2F;尝试将当前节点设为0</span><br><span class="line"></span><br><span class="line">    Node s &#x3D; node.next;获得要唤醒的下一个节点</span><br><span class="line">    if (s &#x3D;&#x3D; null || s.waitStatus &gt; 0) &#123;&#x2F;&#x2F;如果为空或取消</span><br><span class="line">        s &#x3D; null;</span><br><span class="line">        &#x2F;&#x2F;遍历找出有效节点</span><br><span class="line">        for (Node t &#x3D; tail; t !&#x3D; null &amp;&amp; t !&#x3D; node; t &#x3D; t.prev)</span><br><span class="line">            if (t.waitStatus &lt;&#x3D; 0)</span><br><span class="line">                s &#x3D; t;</span><br><span class="line">    &#125;</span><br><span class="line">    if (s !&#x3D; null)</span><br><span class="line">        &#x2F;&#x2F;唤醒</span><br><span class="line">        LockSupport.unpark(s.thread);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="/images/pasted-15.png" alt="upload successful"></p>
-<h4 id="acquireShared-int-arg-共享锁方法"><a href="#acquireShared-int-arg-共享锁方法" class="headerlink" title="acquireShared(int arg)共享锁方法"></a>acquireShared(int arg)共享锁方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public final void acquireShared(int arg) &#123;</span><br><span class="line">    &#x2F;&#x2F;尝试获得锁</span><br><span class="line">    if (tryAcquireShared(arg) &lt; 0)</span><br><span class="line">        doAcquireShared(arg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="tryAcquireShared-int-arg"><a href="#tryAcquireShared-int-arg" class="headerlink" title="tryAcquireShared(int arg)"></a>tryAcquireShared(int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected int tryAcquireShared(int arg) &#123;</span><br><span class="line">    throw new UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这里的tryAcquireShared(int arg)方法一样需要具体子类去实现，根据所需场景自定义状态设置，和结果返回。</p>
-</blockquote>
-<h5 id="doAcquireShared-int-arg"><a href="#doAcquireShared-int-arg" class="headerlink" title="doAcquireShared(int arg)"></a>doAcquireShared(int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private void doAcquireShared(int arg) &#123;</span><br><span class="line">    final Node node &#x3D; addWaiter(Node.SHARED);&#x2F;&#x2F;这里一样通过究极自旋操作保证把新建节点插入队列尾部</span><br><span class="line">    boolean failed &#x3D; true;</span><br><span class="line">    try &#123;</span><br><span class="line">        boolean interrupted &#x3D; false;&#x2F;&#x2F;中断标志</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            final Node p &#x3D; node.predecessor();&#x2F;&#x2F;获得前驱节点</span><br><span class="line">            &#x2F;&#x2F;如果head为node的前驱节点，那很有可能就是被head释放锁唤醒的</span><br><span class="line">            if (p &#x3D;&#x3D; head) &#123;</span><br><span class="line">                int r &#x3D; tryAcquireShared(arg);&#x2F;&#x2F;尝试获得锁</span><br><span class="line">                if (r &gt;&#x3D; 0) &#123;</span><br><span class="line">                    setHeadAndPropagate(node, r);&#x2F;&#x2F;设置头部和尝试唤醒其他线程</span><br><span class="line">                    p.next &#x3D; null; &#x2F;&#x2F; help GC</span><br><span class="line">                    if (interrupted)&#x2F;&#x2F;如果被中断过现在中断自己</span><br><span class="line">                        selfInterrupt();</span><br><span class="line">                    failed &#x3D; false;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;跟独占一样，寻找安全点休眠并尝试获得锁</span><br><span class="line">            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                interrupted &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (failed)</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="setHeadAndPropagate-Node-node-int-propagate"><a href="#setHeadAndPropagate-Node-node-int-propagate" class="headerlink" title="setHeadAndPropagate(Node node, int propagate)"></a>setHeadAndPropagate(Node node, int propagate)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private void setHeadAndPropagate(Node node, int propagate) &#123;</span><br><span class="line">    Node h &#x3D; head; &#x2F;&#x2F;获得头部</span><br><span class="line">    setHead(node);&#x2F;&#x2F;设置头部</span><br><span class="line">    &#x2F;&#x2F;</span><br><span class="line">    &#x2F;&#x2F;唤醒后续堵塞节点</span><br><span class="line">    if (propagate &gt; 0 || h &#x3D;&#x3D; null || h.waitStatus &lt; 0 ||</span><br><span class="line">        (h &#x3D; head) &#x3D;&#x3D; null || h.waitStatus &lt; 0) &#123;</span><br><span class="line">        Node s &#x3D; node.next;</span><br><span class="line">        if (s &#x3D;&#x3D; null || s.isShared())</span><br><span class="line">            doReleaseShared();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="releaseShared-int-arg-共享锁释放"><a href="#releaseShared-int-arg-共享锁释放" class="headerlink" title="releaseShared(int arg)共享锁释放"></a>releaseShared(int arg)共享锁释放</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public final boolean releaseShared(int arg) &#123;</span><br><span class="line">    if (tryReleaseShared(arg)) &#123;</span><br><span class="line">        doReleaseShared();</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="tryReleaseShared-int-arg"><a href="#tryReleaseShared-int-arg" class="headerlink" title="tryReleaseShared(int arg)"></a>tryReleaseShared(int arg)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">protected boolean tryReleaseShared(int arg) &#123;</span><br><span class="line">    throw new UnsupportedOperationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>一样由具体子类重写</p>
-</blockquote>
-<h5 id="doReleaseShared"><a href="#doReleaseShared" class="headerlink" title="doReleaseShared()"></a>doReleaseShared()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private void doReleaseShared() &#123;</span><br><span class="line"></span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        Node h &#x3D; head;</span><br><span class="line">        if (h !&#x3D; null &amp;&amp; h !&#x3D; tail) &#123;</span><br><span class="line">            int ws &#x3D; h.waitStatus;</span><br><span class="line">            if (ws &#x3D;&#x3D; Node.SIGNAL) &#123;</span><br><span class="line">                if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))</span><br><span class="line">                    continue;            &#x2F;&#x2F; loop to recheck cases</span><br><span class="line">                unparkSuccessor(h);</span><br><span class="line">            &#125;</span><br><span class="line">            else if (ws &#x3D;&#x3D; 0 &amp;&amp;</span><br><span class="line">                     !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))</span><br><span class="line">                continue;                &#x2F;&#x2F; loop on failed CAS</span><br><span class="line">        &#125;</span><br><span class="line">        if (h &#x3D;&#x3D; head)                   &#x2F;&#x2F; loop if head changed</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1378,7 +1496,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1388,7 +1506,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
