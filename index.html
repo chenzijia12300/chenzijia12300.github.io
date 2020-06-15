@@ -152,6 +152,112 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/14/%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-14 23:42:00" itemprop="dateCreated datePublished" datetime="2020-06-14T23:42:00+08:00">2020-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 15:13:53" itemprop="dateModified" datetime="2020-06-15T15:13:53+08:00">2020-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>单例模式是java23中设计模式之一，也是最常见的一种模式。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li>整个程序运行中只允许有一个类的实例</li>
+<li>需要频繁创建然后销毁的对象</li>
+<li>创建对象时耗时过多或者耗资源过多，但又经常用到的对象</li>
+<li>方便资源相互通信的环境</li>
+</ul>
+<h3 id="单例的几种模式"><a href="#单例的几种模式" class="headerlink" title="单例的几种模式"></a>单例的几种模式</h3><h4 id="线程不安全的懒汉式"><a href="#线程不安全的懒汉式" class="headerlink" title="线程不安全的懒汉式"></a>线程不安全的懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程不安全懒汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:41</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            singleton &#x3D; new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在需要的时候才创建实例，节省内存空间，但是多线程同时访问会导致返回多个实例。</p>
+</blockquote>
+<h4 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton &#x3D; new Singleton();</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 饿汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:54</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Singleton getInstance()&#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过JVM的类加载机制实现了初始化，保证了线程安全。</p>
+</blockquote>
+<h4 id="线程安全懒汉式"><a href="#线程安全懒汉式" class="headerlink" title="线程安全懒汉式"></a>线程安全懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程安全懒汉式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:55</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            synchronized (Singleton.class)&#123;</span><br><span class="line">                if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    singleton &#x3D; new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过双重加锁判断实现了线程安全，但是效率就慢了。</p>
+</blockquote>
+<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder&#123;</span><br><span class="line">        public static Singleton singleton &#x3D; new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 静态内部类</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 14:59</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return Holder.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过JVM类加载机制保证线程安全。</p>
+</blockquote>
+<h4 id="枚举方式"><a href="#枚举方式" class="headerlink" title="枚举方式"></a>枚举方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 15:07</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">public enum SingletonEnum &#123;</span><br><span class="line">    INSTANCE(new Object());</span><br><span class="line"></span><br><span class="line">    private Object object;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 枚举单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 15:08</span><br><span class="line">     * @param [object]</span><br><span class="line">     * @return </span><br><span class="line">     *&#x2F;</span><br><span class="line">    SingletonEnum(Object object) &#123;</span><br><span class="line">        this.object &#x3D; object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过枚举方式创建的单例模式，能保证线程安全而且能防止序列化重新创建对象。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ava7-try-with-resource/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -330,6 +436,177 @@
 <h4 id="集合中的fail-safe"><a href="#集合中的fail-safe" class="headerlink" title="集合中的fail-safe"></a>集合中的fail-safe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new CopyOnWriteArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">    for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(integer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>上面使用CopyOnWriteArrayList这个类来演示fail-safe，这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-09 15:22:00" itemprop="dateCreated datePublished" datetime="2020-06-09T15:22:00+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 15:16:21" itemprop="dateModified" datetime="2020-06-15T15:16:21+08:00">2020-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">spring面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="/images/pasted-55.png" alt="upload successful"></p>
+<blockquote>
+<p>如上图我们大致可以将spring生命周期分为12个步骤</p>
+</blockquote>
+<ol>
+<li>通过反射实例化对象。</li>
+<li>设置对象的属性。</li>
+<li>如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法</li>
+<li>如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。</li>
+<li>如果对象实现了ApplicationContextAware接口，spring将bean所在应用上下文传给setApplicationContext()方法。</li>
+<li>如果对象实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessBeforeInitialization()方法。</li>
+<li>如果对象实现了InitializingBean接口，spring将调用afterPropertiesSet()方法。</li>
+<li>如果对象声明了init-method方法，spring将调用该方法。</li>
+<li>如果Bean 实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessAfterInitialization()方法。</li>
+<li>对象使用中。</li>
+<li>如果对象实现了DisposableBean()接口，spring将调用destroy()方法。</li>
+<li>如果对象声明了destroy-method方法，spring将调用该方法。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">集合面试题（一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-09 14:54:00" itemprop="dateCreated datePublished" datetime="2020-06-09T14:54:00+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 15:16:42" itemprop="dateModified" datetime="2020-06-15T15:16:42+08:00">2020-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">集合面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h3><blockquote>
+<p>首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。</p>
 </blockquote>
 
       
@@ -1070,420 +1347,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/27/ava%E6%B3%9B%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/27/ava%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java泛型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-27 10:58:00" itemprop="dateCreated datePublished" datetime="2020-05-27T10:58:00+08:00">2020-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-29 18:22:47" itemprop="dateModified" datetime="2020-05-29T18:22:47+08:00">2020-05-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="啥是泛型"><a href="#啥是泛型" class="headerlink" title="啥是泛型"></a>啥是泛型</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><blockquote>
-<p>泛型即<strong><em>参数化类型</em></strong>,Java泛型（ generics） 是JDK 5中引⼊的⼀个新特性， 允许在定义类和接⼜的时候使⽤类型参数（ type parameter） 。<br>声明的类型参数在使⽤时⽤具体的类型来替换。 泛型最主要的应⽤是在JDK 5中的新集合类框架中。</p>
-</blockquote>
-<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class ExampleGenerics &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;java1.5以后写法</span><br><span class="line">        &#x2F;&#x2F; 使用泛型集合</span><br><span class="line">        List&lt;Integer&gt; integerList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i &#x3D; 0;i &lt; 10;i++)&#123;</span><br><span class="line">            integerList.add(i);</span><br><span class="line">        &#125;</span><br><span class="line">        for (Integer integer:integerList)&#123;</span><br><span class="line">            System.out.println(integer);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;java1.5之前写法</span><br><span class="line">        &#x2F;&#x2F;需要强转</span><br><span class="line">        List list &#x3D; new ArrayList();</span><br><span class="line">        for (int i &#x3D; 0;i &lt; 10;i++)&#123;</span><br><span class="line">            list.add(i);b</span><br><span class="line">        &#125;</span><br><span class="line">        for (Object o:list)&#123;</span><br><span class="line">            System.out.println((Integer)o);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="类型擦除"><a href="#类型擦除" class="headerlink" title="类型擦除"></a>类型擦除</h3><h4 id="各语言是如何处理泛型特性的"><a href="#各语言是如何处理泛型特性的" class="headerlink" title="各语言是如何处理泛型特性的"></a>各语言是如何处理泛型特性的</h4><blockquote>
-<p>一般来说，泛型可以分为两种</p>
-</blockquote>
-<ol>
-<li>Code specialization。在实例化一个泛型类或泛型方法时都产生一份新的目标代码（字节码or二进制代码）。例如，针对一个泛型list，可能需要 针对String，Integer，Float产生三份目标代码。代表语言（c++，c#）</li>
-<li>Code sharing。对每个泛型类只生成唯一的一份目标代码；该泛型类的所有实例都映射到这份目标代码上，在需要的时候执行类型检查和类型转换。代表语言（java）</li>
-</ol>
-<blockquote>
-<p>Java编译器通过Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。将多种泛型类形实例映射到唯一的字节码表示是通过<strong><em>类型擦除（type erasue）</em></strong>实现的。</p>
-</blockquote>
-<h4 id="啥是类型擦除"><a href="#啥是类型擦除" class="headerlink" title="啥是类型擦除"></a>啥是类型擦除</h4><blockquote>
-<p>java编译器首先找到泛型的具体类也就是上界，这个类一般是Object。然后将泛型替换成具体类，擦除所有类型参数。</p>
-</blockquote>
-<h4 id="编译器处理泛型的过程"><a href="#编译器处理泛型的过程" class="headerlink" title="编译器处理泛型的过程"></a>编译器处理泛型的过程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;源代码</span><br><span class="line">interface Comparable&lt;A&gt; &#123;</span><br><span class="line">    public int compareTo(A that);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public final class NumericValue implements Comparable&lt;NumericValue&gt; &#123;</span><br><span class="line">    private byte value;</span><br><span class="line"></span><br><span class="line">    public NumericValue(byte value) &#123;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public byte getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int compareTo(NumericValue that) &#123;</span><br><span class="line">        return this.value - that.value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;反编译后</span><br><span class="line"> interface Comparable &#123;</span><br><span class="line">  public int compareTo( Object that);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">public final class NumericValue</span><br><span class="line">    implements Comparable</span><br><span class="line">&#123;</span><br><span class="line">    public NumericValue(byte value)</span><br><span class="line">    &#123;</span><br><span class="line">        this.value &#x3D; value;</span><br><span class="line">    &#125;</span><br><span class="line">    public byte getValue()</span><br><span class="line">    &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">    public int compareTo(NumericValue that)</span><br><span class="line">    &#123;</span><br><span class="line">        return value - that.value;</span><br><span class="line">    &#125;</span><br><span class="line">    public volatile int compareTo(Object obj)</span><br><span class="line">    &#123;</span><br><span class="line">        return compareTo((NumericValue)obj);</span><br><span class="line">    &#125;</span><br><span class="line">    private byte value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可以发现Comparable<A>被编译器擦除后替换成具体类Object，Comparable<NumericaValue>的类型参数被擦除后，导致NumericValue没有实现接口Comparable的compareTo(Object that)方法 。所以编译器生成了一个桥接方法。</NumericaValue></A></p>
-</blockquote>
-<h3 id="泛型常用字母含义"><a href="#泛型常用字母含义" class="headerlink" title="泛型常用字母含义"></a>泛型常用字母含义</h3><blockquote>
-<p>E - Element (在集合中使用，因为集合中存放的是元素)<br>T - Type（Java 类）<br>K - Key（键）<br>V - Value（值）<br>N - Number（数值类型）<br>？ - 表示不确定的java类型（无限制通配符类型）</p>
-</blockquote>
-<h3 id="通配符和上下界"><a href="#通配符和上下界" class="headerlink" title="通配符和上下界"></a>通配符和上下界</h3><blockquote>
-<p>使用泛型类可以指定具体类型，也可以使用?通配符来表示未知类型。一般我们会使用上下界来限制通配符。</p>
-</blockquote>
-<blockquote>
-<p>&lt;? extends T&gt;和&lt;? super T&gt;是Java泛型中的“通配符（Wildcards）”和“边界（Bounds）”的概念。<br>&lt;? extends T&gt;：是指 “上界通配符（Upper Bounds Wildcards）”，即泛型中的类必须为当前类的子类或当前类。<br>&lt;? super T&gt;：是指 “下界通配符（Lower Bounds Wildcards）”，即泛型中的类必须为当前类或者其父类。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void TestExtends()&#123;</span><br><span class="line">    List&lt;? extends Number&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    list.add(new Integer(1));&#x2F;&#x2F;报错</span><br><span class="line">    Number number &#x3D; list.get(0);&#x2F;&#x2F;返回上界</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void TestSuper()&#123;</span><br><span class="line">    List&lt;? super Number&gt; list &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    list.add(new Integer(1));</span><br><span class="line">    list.add(new Object());&#x2F;&#x2F;报错</span><br><span class="line">    Object o &#x3D;list.get(0);&#x2F;&#x2F;只能返回Object类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>从上面的例子我们可以看出两个通配符的不同特性。<br>在TestExtends中我们不能确定list中的具体类型，可能是Integer或者Float等。因此使用add方法都会出现编译错误。<br>在TestSuper中我们不能确定元素的上界是什么，所以只能返回Object类型。<br>在java中有一个PECS原则Producter Extends，Consumer Super，意思就是如果需要获取元素（生产）使用extends通配符，如果要添加元素（消费）使用super通配符。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/15/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/15/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/" class="post-title-link" itemprop="url">redis学习笔记(三)---持久化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-15 21:28:55" itemprop="dateCreated datePublished" datetime="2020-05-15T21:28:55+08:00">2020-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-16 10:55:45" itemprop="dateModified" datetime="2020-05-16T10:55:45+08:00">2020-05-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <p>持久化<br>author: John Doe<br>date: 2020-05-15 21:28:55<br>tags:</p>
-<hr>
-<h3 id="持久化简介"><a href="#持久化简介" class="headerlink" title="持久化简介"></a>持久化简介</h3><blockquote>
-<p>redis是内存数据库，它的数据都存放在内存(RAM)中，这意味着如果断电数据将会全部丢失。因此需要把数据写入硬盘(ROM)中,来保证数据可用性。这种机制就是redis的持久化机制，它会将内存中的数据库状态保存到硬盘中。</p>
-</blockquote>
-<blockquote>
-<p>redis支持两种的持久化方式：</p>
-</blockquote>
-<ol>
-<li>RDB快照，在指定的时间间隔对数据进行快照存储。</li>
-<li>AOF，记录服务器每次的写操作，将操作记录追加到硬盘中存储。</li>
-</ol>
-<h3 id="持久化过程"><a href="#持久化过程" class="headerlink" title="持久化过程"></a>持久化过程</h3><p><img src="/images/pasted-47.png" alt="upload successful"></p>
-<ol>
-<li>客户端向数据库 发送写命令(数据在客户端的内存中)</li>
-<li>数据库接收到客户端的写请求(数据在服务器的内存中)</li>
-<li>数据库调用系统API将数据写入磁盘(数据在内核缓冲区中)</li>
-<li>操作系统将写缓冲区传输到磁盘控控制器(数据在磁盘缓存中)</li>
-<li>操作系统的磁盘控制器将数据写入实际的物理媒介(数据在磁盘中)</li>
-</ol>
-<blockquote>
-<p>对于软件来说执行完第3步就认为数据已经成功持久化了，但是如果发生断电宕机等情况数据一样丢失，所以执行完第5步才是客观上真正持久化了。Linux系统中写操作会被写入缓存区中（为了提高IO速度），默认情况下是30秒在真正写入进硬盘中。如果宕机redis30秒内的数据就全没了，所以一般在生产环境的服务器中，redis通常是每隔1s左右执行一次fsync操作。</p>
-</blockquote>
-<h3 id="持久化方式"><a href="#持久化方式" class="headerlink" title="持久化方式"></a>持久化方式</h3><h4 id="RDB快照方式"><a href="#RDB快照方式" class="headerlink" title="RDB快照方式"></a>RDB快照方式</h4><blockquote>
-<p>RDB快照当满足特定条件后例如当m秒内发生n次，执行bgsave命令生成数据集的时间点快照，或者手动输入bgsave命令生成快照。</p>
-</blockquote>
-<blockquote>
-<p>BGSAVE 命令执行之后立即返回 OK ，然后 Redis fork 出一个新子进程，原来的 Redis 进程(父进程)继续处理客户端请求，而子进程则负责将数据保存到磁盘，然后退出。</p>
-</blockquote>
-<p><img src="/images/pasted-48.png" alt="upload successful"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># redis默认文件配置</span><br><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
-
-<h4 id="AOF方式"><a href="#AOF方式" class="headerlink" title="AOF方式"></a>AOF方式</h4><blockquote>
-<p>AOF(Append Only File - 仅追加文件)它的工作方式非常简单:每次执行修改内存中数据集的写操作时，都会记录该操作。假设AOF日志记录了自 redis实例创建以来所有的修改性指令序列，那么就可以通过对一个空的 redis 实例顺序执行所有的指令，也就是重放,来恢复redis当前实例的内存数据结构的状态。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#AOF测试例子</span><br><span class="line">127.0.0.1:6379&gt; set str Hello</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; append str &quot; World!&quot;</span><br><span class="line">(integer) 12</span><br><span class="line">127.0.0.1:6379&gt; del str</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; del no_existing_str</span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#AOF文件</span><br><span class="line">*2</span><br><span class="line">$6</span><br><span class="line">SELECT</span><br><span class="line">$1</span><br><span class="line">0</span><br><span class="line">*3</span><br><span class="line">$3</span><br><span class="line">set</span><br><span class="line">$3</span><br><span class="line">str</span><br><span class="line">$5</span><br><span class="line">Hello</span><br><span class="line">*3</span><br><span class="line">$6</span><br><span class="line">append</span><br><span class="line">$3</span><br><span class="line">str</span><br><span class="line">$7</span><br><span class="line"> World!</span><br><span class="line">*2</span><br><span class="line">$3</span><br><span class="line">del</span><br><span class="line">$3</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以看到最后一个del指令不见了，因为它没有对redis数据进行修改。</p>
-</blockquote>
-<h4 id="AOF文件重写"><a href="#AOF文件重写" class="headerlink" title="AOF文件重写"></a>AOF文件重写</h4><blockquote>
-<p>redis在长期运行的情况下，AOF文件会越来越大，所以需要进行重写，将内存中的数据重新以命令的方式写入aof文件。在重写的过程中，由于redis还会有新的写入，为了避免数据丢失，会开辟一块内存用于存放重写期间产生的写入操作，等到重写完毕后会将这块内存中的操作再追加到aof文件中。</p>
-</blockquote>
-<h5 id="为啥要重写"><a href="#为啥要重写" class="headerlink" title="为啥要重写"></a>为啥要重写</h5><blockquote>
-<p>例如一个计数器你不断递增几千次，AOF文件里就会存储几千次的递增操作。但是我们其实只需要递增最后的结果值。像哪些被频繁调用的key，可能会产生很多条数据，会使得AOF文件膨胀。</p>
-</blockquote>
-<h5 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h5><blockquote>
-<p>redis提供了bgrewriteaof指令用于对AOF日志进行瘦身。其原理就是开辟一个子进程 对内存进行遍历转换成一系列redis的操作指令，序列化到一个新的AOF日志文件中。序列化完毕后再将操作期间发生的增量AOF日志追加到这个新的AOF日志文件中，追加完毕后就立即替代旧的AOF日志文件了，瘦身工作就完成了。</p>
-</blockquote>
-<h4 id="redis4-0混合持久化"><a href="#redis4-0混合持久化" class="headerlink" title="redis4.0混合持久化"></a>redis4.0混合持久化</h4><blockquote>
-<p>重启redis时，我们很少使用 rdb 来恢复内存状态，因为会丢失大量数据。我们通常使用 AOF 日志重放，但是重放 AOF 日志性能相对 rdb 来说要慢很多，这样在redis实例很大的情况下，启动需要花费很长的时间。<br>redis4.0为了解决这个问题，带来了一个新的持久化选项——混合持久化。将rdb文件的内容和增量的AOF日志文件存在一起。这里的AOF日志不再是全量的日志，而是自持久化开始到持久化结束 的这段时间发生的增量AOF日志，通常这部分AOF日志很小：<br>于是在redis重启的时候，可以先加载rdb的内容，然后再重放增量AOF日志就可以完全替代之前的AOF全量文件重放，重启效率因此大幅得到提升。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">redis学习笔记(二)---集群</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-14 15:25:00 / Modified: 22:25:00" itemprop="dateCreated datePublished" datetime="2020-05-14T15:25:00+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="redis集群简介"><a href="#redis集群简介" class="headerlink" title="redis集群简介"></a>redis集群简介</h3><blockquote>
-<p>首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。<br>我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。</p>
-</blockquote>
-<blockquote>
-<p>redis有三种集群模式</p>
-</blockquote>
-<ol>
-<li>主从模式</li>
-<li>哨兵模式</li>
-<li>cluster模式</li>
-</ol>
-<h3 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h3><p><img src="/images/pasted-38.png" alt="upload successful"></p>
-<h4 id="主从模式简介"><a href="#主从模式简介" class="headerlink" title="主从模式简介"></a>主从模式简介</h4><blockquote>
-<p>主从模式是三种里面最简单的，它将一台redis服务器里的数据复制到其他redis服务器中，前者称为 主节点(master)，后者称为 从节点(slave)。且数据的复制是 单向 的，只能由主节点到从节点。Redis 主从复制支持 主从同步 和 从从同步 两种，后者是 Redis 后续版本新增的功能，以减轻主节点的同步负担。</p>
-</blockquote>
-<h4 id="主从模式好处"><a href="#主从模式好处" class="headerlink" title="主从模式好处"></a>主从模式好处</h4><ol>
-<li>数据冗余： 主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。</li>
-<li>故障恢复： 当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复 (实际上是一种服务的冗余)。</li>
-<li>负载均衡： 在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务 （即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载。尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量。</li>
-<li>高可用基石： 除了上述作用以外，主从复制还是哨兵和集群能够实施的 基础，因此说主从复制是 Redis 高可用的基础。</li>
-</ol>
-<h4 id="主从模式工作机制"><a href="#主从模式工作机制" class="headerlink" title="主从模式工作机制"></a>主从模式工作机制</h4><blockquote>
-<p>当slave启动后，主动向master发送SYNC命令。master接收到SYNC命令后在后台保存快照（RDB持久化）和缓存保存快照这段时间的命令，然后将保存的快照文件和缓存的命令发送给slave。slave接收到快照文件和命令后加载快照文件和缓存的执行命令。<br>复制初始化后，master每次接收到的写命令都会同步发送给slave，保证主从数据一致性。</p>
-</blockquote>
-<h4 id="主从模式测试"><a href="#主从模式测试" class="headerlink" title="主从模式测试"></a>主从模式测试</h4><blockquote>
-<p>配置文件：在从服务器的配置文件中加入：slaveof <masterip> <masterport><br>启动命令：redis-server 启动命令后加入 –slaveof <masterip> <masterport><br>客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点。</masterport></masterip></masterport></masterip></masterport></masterip></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个端口为 6379 的 Redis 实例</span><br><span class="line">redis-server --port 6379</span><br><span class="line"># 创建一个端口为 6380 的 Redis 实例</span><br><span class="line">redis-server --port 6380</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>此时两个redis服务都为主节点,然后我们在6380端口执行slave of 127.0.0.1 6379,使它变成从节点。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在 6380 端口的 Redis 实例中使用控制台</span><br><span class="line">redis-cli -p 6380</span><br><span class="line"># 成为本地 6379 端口实例的从节点</span><br><span class="line">127.0.0.1:6380&gt; SLAVEOF 127.0.0.1ø 6379</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h4 id="主从模式原理"><a href="#主从模式原理" class="headerlink" title="主从模式原理"></a>主从模式原理</h4><p><img src="/images/pasted-39.png" alt="upload successful"></p>
-<blockquote>
-<p>其中SYNC是非常耗时的操作。</p>
-</blockquote>
-<ol>
-<li>主服务器需要执行 BGSAVE 命令来生成 RDB 文件，这个生成操作会消耗主服务器大量的CPU、内存和磁盘 I/O 的资源。</li>
-<li>主服务器需要将自己生成的RDB文件发送给从服务器，这个发送操作会消耗主服务器 大量的网络资源 (带宽和流量)，并对主服务器响应命令请求的时间产生影响。</li>
-<li>接收到 RDB 文件的从服务器需要载入主服务器发来的 RBD 文件，并且在载入期间，从服务器会因为阻塞而没办法处理命令请求。</li>
-</ol>
-<blockquote>
-<p>另外如果因为断线重连的情况出现，还要进行SYNC是很浪费的，因此redis2.8有了PSYNC命令来替代SYNC命令。</p>
-</blockquote>
-<ol>
-<li>全量复制：用于初次复制或其他无法进行部分复制的情况，将主节点中的所有数据都发送给从节点，是一个非常重型的操作。</li>
-<li>部分复制：用于网络中断等情况后的复制，只将 中断期间主节点执行的写命令 发送给 从节点，与全量复制相比更加高效。需要注意 的是，如果网络中断时间过长，导致主节点没有能够完整地保存中断期间执行的写命令，则无法进行部分复制，仍使用全量复制。</li>
-</ol>
-<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><h4 id="哨兵模式简介"><a href="#哨兵模式简介" class="headerlink" title="哨兵模式简介"></a>哨兵模式简介</h4><blockquote>
-<p>主从模式有个缺点，如果主redis服务器挂了，那就不能提供写的服务了。因此sentinel哨兵模式应运而生。顾名思义，它的作用就是监控redis集群的运行状况。</p>
-</blockquote>
-<p><img src="/images/pasted-40.png" alt="upload successful"></p>
-<blockquote>
-<p>哨兵模式又两个部分组成，分别是哨兵节点和数据节点。<br>哨兵节点：哨兵系统由一个或多个哨兵节点组成，哨兵节点是特殊的 Redis 节点，不存储数据。<br>数据节点：主节点和从节点都是数据节点。</p>
-</blockquote>
-<h4 id="哨兵模式特点"><a href="#哨兵模式特点" class="headerlink" title="哨兵模式特点"></a>哨兵模式特点</h4><blockquote>
-<p>在复制的基础上，哨兵实现了自动化的故障恢复功能。</p>
-</blockquote>
-<ol>
-<li>监控（Monitoring）： 哨兵会不断地检查主节点和从节点是否运作正常。</li>
-<li>自动故障转移（Automatic failover）： 当 主节点 不能正常工作时，哨兵会开始 3. 自动故障转移操作，它会将失效主节点的其中一个 从节点升级为新的主节点，并让其他从节点改为复制新的主节点。</li>
-<li>配置提供者（Configuration provider）： 客户端在初始化时，通过连接哨兵来获得当前 Redis 服务的主节点地址。</li>
-<li>通知（Notification）： 哨兵可以将故障转移的结果发送给客户端。</li>
-</ol>
-<h4 id="哨兵模式测试"><a href="#哨兵模式测试" class="headerlink" title="哨兵模式测试"></a>哨兵模式测试</h4><h6 id="创建主从节点"><a href="#创建主从节点" class="headerlink" title="创建主从节点"></a>创建主从节点</h6><blockquote>
-<p>首先创建主从配置文件，从文件如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">----redis-slave1.conf----</span><br><span class="line">port 6380     &#x2F;&#x2F;端口号</span><br><span class="line">dbfilename &quot;dump-6380.rdb&quot; &#x2F;&#x2F;文件名</span><br><span class="line">daemonize yes &#x2F;&#x2F;demonize是否以后台线程运行 在window没用</span><br><span class="line">slaveof 127.0.0.1 6379 &#x2F;&#x2F;设置主节点</span><br><span class="line">----redis-slave2.conf---</span><br><span class="line">port 6381</span><br><span class="line">dbfilename &quot;dump-6381.rdb&quot;</span><br><span class="line">daemonize yes</span><br><span class="line">slaveof 127.0.0.1 6380</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后我们可以执行 redis-server <config file path> 来根据配置文件启动不同的Redis 实例，依次启动主从节点。节点启动后执行redis-cli链接到主节点调用redis-cli命令查看主从状态。</config></p>
-</blockquote>
-<p><img src="/images/pasted-43.png" alt="upload successful"></p>
-<h6 id="创建哨兵节点"><a href="#创建哨兵节点" class="headerlink" title="创建哨兵节点"></a>创建哨兵节点</h6><blockquote>
-<p>按照上面同样的方法，我们给哨兵节点也创建三个配置文件。(哨兵节点本质上是特殊的 Redis 节点，所以配置几乎没什么差别，只是在端口上做区分就好)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">----redis-sentinel1.conf---</span><br><span class="line">port 16379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel1.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel2.conf---</span><br><span class="line">port 16380</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel2.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel3.conf---</span><br><span class="line">port 16381</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel3.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后我们启动哨兵节点redis-server <config file path> –sentinel。哨兵节点启动后redis-cli链接到哨兵节点，然后调用info Sentinel 命令来查看是否已经在监视主节点了。</config></p>
-</blockquote>
-<p><img src="/images/pasted-44.png" alt="upload successful"> </p>
-<h6 id="故障模拟"><a href="#故障模拟" class="headerlink" title="故障模拟"></a>故障模拟</h6><blockquote>
-<p>使用taskkill /f /pid <pid>杀掉主节点,然后等待一段时间，在去哨兵节点使用INFO   SENTINEL命令查看节点状态</pid></p>
-</blockquote>
-<p><img src="/images/pasted-45.png" alt="upload successful"></p>
-<p><img src="/images/pasted-46.png" alt="upload successful"></p>
-<blockquote>
-<p>从上图可以发现新的主节点已经变成了6380端口的节点，同时还可以发现，哨兵节点认为新的主节点仍然有两个从节点 (上方 slaves=2)，这是因为哨兵在将 6380 切换成主节点的同时，将 6379 节点置为其从节点。虽然 6379 从节点已经挂掉，但是由于 哨兵并不会对从节点进行客观下线，因此认为该从节点一直存在。当 6379 节点重新启动后，会自动变成 6380 节点的从节点。<br>另外，在故障转移的阶段，哨兵和主从节点的配置文件都会被改写：</p>
-</blockquote>
-<ol>
-<li>对于主从节点： 主要是 slaveof 配置的变化，新的主节点没有了 slaveof 配置，其从节点则 slaveof 新的主节点。</li>
-<li>对于哨兵节点： 除了主从节点信息的变化，纪元(epoch) (记录当前集群状态的参数) 也会变化，纪元相关的参数都 +1 了。</li>
-</ol>
-<h6 id="主节点如何被推选出来"><a href="#主节点如何被推选出来" class="headerlink" title="主节点如何被推选出来"></a>主节点如何被推选出来</h6><ol>
-<li>在失效主服务器属下的从服务器当中， 那些被标记为主观下线、已断线、或者最后一次回复 PING 命令的时间大于五秒钟的从服务器都会被 淘汰。</li>
-<li>在失效主服务器属下的从服务器当中， 那些与失效主服务器连接断开的时长超过 down-after 选项指定的时长十倍的从服务器都会被 淘汰。</li>
-<li>在经历了以上两轮淘汰之后 剩下来的从服务器中,我们选出复制偏移量(replication offset)最大 的那个从服务器作为新的主服务器；如果复制偏移量不可用，或者从服务器的复制偏移量相同，那么带有最小运行ID的那个从服务器成为新的主服务器。</li>
-</ol>
-<h3 id="cluster模式"><a href="#cluster模式" class="headerlink" title="cluster模式"></a>cluster模式</h3><h4 id="cluster模式简介"><a href="#cluster模式简介" class="headerlink" title="cluster模式简介"></a>cluster模式简介</h4><blockquote>
-<p>哨兵模式基本可以满足一般的生产需求，具有高可用。但是当数据量过大到一台服务器存放不下的情况时，主从模式或sentinel模式就不能满足需求了，这个时候需要对存储的数据进行分片，将数据存储到多个Redis实例中。cluster模式的出现就是为了解决单机Redis容量有限的问题，将Redis的数据根据一定的规则分配到多台机器。</p>
-</blockquote>
-<p><img src="/images/pasted-41.png" alt="upload successful"></p>
-<blockquote>
-<p>上图 展示了 Redis Cluster 典型的架构图，集群中的每一个 Redis 节点都 互相两两相连，客户端任意 直连 到集群中的 任意一台，就可以对其他 Redis 节点进行 读写 的操作。</p>
-</blockquote>
-<h4 id="cluster模式原理"><a href="#cluster模式原理" class="headerlink" title="cluster模式原理"></a>cluster模式原理</h4><p><img src="/images/pasted-42.png" alt="upload successful"></p>
-<blockquote>
-<p>redis 集群中内置了 16384 个哈希槽。当客户端连接到rRedis 集群之后，会同时得到一份关于这个 集群的配置信息，当客户端具体对某一个 key 值进行操作时，会计算出它的一个 Hash 值，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，redis 会根据节点数量 大致均等 的将哈希槽映射到不同的节点。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1548,17 +1415,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
