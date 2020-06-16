@@ -152,6 +152,342 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/23/synchronized%E5%92%8Cvolatile%E5%85%B3%E9%94%AE%E5%AD%97/" class="post-title-link" itemprop="url">synchronized和volatile关键字</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-04-23 09:59:21 / Modified: 11:09:39" itemprop="dateCreated datePublished" datetime="2020-04-23T09:59:21+08:00">2020-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="java内存模型"><a href="#java内存模型" class="headerlink" title="java内存模型"></a>java内存模型</h3><blockquote>
+<p>java内存模型规定，将所有的变量都放在主内存，当线程使用变量时，会把该变量复制到线程的工作内存，因此线程读写变量操作的是自己工作内存中的变量。</p>
+</blockquote>
+<p><img src="/images/pasted-7.png" alt="upload successful"></p>
+<blockquote>
+<p>下图是一个双核cpu的系统架构，每个核都有自己的控制器、运算器、一级缓存，其中控制器包含一组寄存器和操作控制器，运算器负责进行算术逻辑运算。在这个架构中cpu还共享一个二级缓存。</p>
+</blockquote>
+<blockquote>
+<p>其中java内存模型里的线程工作内存对应就是一级缓存、二级缓存、cpu寄存器</p>
+</blockquote>
+<p><img src="/images/pasted-8.png" alt="upload successful"></p>
+<h3 id="共享对象可见性"><a href="#共享对象可见性" class="headerlink" title="共享对象可见性"></a>共享对象可见性</h3><blockquote>
+<p>例如上图，假设线程A和线程B同时处理一个共享变量，且线程使用不同cpu运行，缓存都为空。<br> 线程 A 首先获取共享变量 X 的值，由于两级 Cache 都没有命中 ，所以加载主 内存 中 X 的值，假如为 0。然后把 X=O 的值缓存到两级缓存， 线程 A 修改 X 的值为 1, 然后将其写入两级 Cache， 并且刷新到主内存。 线程 A 操作完毕后，线程 A 所在的 CPU 的两级 Cache 内和主内存里面的 X 的值都是 l 。<br> 线程 B 获取 X 的值，首先一级缓存没有命中，然后看二级缓存，二级缓存命中了 ， 所以返回 X= 1 ； 到这里一切都是正常的， 因为这时候主 内存中也是 X=l 。然后线 程 B 修改 X 的值为 2， 并将其存放到线程 2 所在的一级 Cache 和共享二级 Cache 中， 最后更新主内存中 X 的值为 2 ： 到这里一切都是好的。<br> 线程 A 这次又需要修改 X 的值， 获取时一级缓存命中， 并且 X=l ，到这里问题就 出 现了，明明线程 B 已经把 X 的值修改为了 2，为何线程 A 获取的还是 l 呢？ 这 就是共享变量的内存不可见问题， 也就是线程 B 写入的值对线程 A 不可见。（来自于《java并发编程之美》）</p>
+</blockquote>
+<blockquote>
+<p>使用synchronized和volatile关键字可以解决共享对象的不可见性</p>
+</blockquote>
+<h3 id="synchronized关键字"><a href="#synchronized关键字" class="headerlink" title="synchronized关键字"></a>synchronized关键字</h3><blockquote>
+<p>synchronized关键字是java提供的一个原子性内置锁（排他锁），同一时间最多只能有一个线程持有相同对象的锁。在线程进入synchronizedd代码块会获得对象锁，其他线程运行到synchronized会被堵塞挂起。<br>拿到对象锁的线程会在以下情况释放对象锁：<br>1.正常执行完同步代码块。<br>2.抛出异常。<br>3.调用wait等休眠方法</p>
+</blockquote>
+<h4 id="synchronized的内存语义"><a href="#synchronized的内存语义" class="headerlink" title="synchronized的内存语义"></a>synchronized的内存语义</h4><blockquote>
+<p>进入synchronized代码块会把同步代码块用到的变量从运行线程的工作内存中清除。这样获取变量时就不会从工作内存中获得，而是去主内存中获得。<br>退出synchronized代码块会把对同步代码块修改的变量刷新到主内存里去。</p>
+</blockquote>
+<h3 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h3><blockquote>
+<p>当一个变量被volatile关键字声明时，工作线程获取该变量时会直接从主内存中获得，修改变量值会直接把值刷新到主内存中去。</p>
+</blockquote>
+<h3 id="两者对比"><a href="#两者对比" class="headerlink" title="两者对比"></a>两者对比</h3><blockquote>
+<p>同：synchronized和volatile都可以实现在多线程中共享对象的可见性。<br>异：volatile只保证共享对象的可见性，不保证操作的原子性。<br>   synchronized是比较重量级的操作，他会引起线程上下文的切换并带来线程调度开销。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/21/%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">线程基本概念和操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-21 22:49:06" itemprop="dateCreated datePublished" datetime="2020-04-21T22:49:06+08:00">2020-04-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-22 22:18:33" itemprop="dateModified" datetime="2020-04-22T22:18:33+08:00">2020-04-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="线程基本概念"><a href="#线程基本概念" class="headerlink" title="线程基本概念"></a>线程基本概念</h3><blockquote>
+<p>首先我们要先了解进程的基本概念，因为线程是进程中的一个实体。进程是操作系统中进行资源调度和调度的基本单位，线程则是进程的一个执行路径。</p>
+</blockquote>
+<p><img src="/images/pasted-3.png" alt="upload successful"></p>
+<blockquote>
+<p>一个进程中包含多个线程，多个线程共享进程的堆和方法区资源，每个线程有独立的程序计数器和栈区域。</p>
+</blockquote>
+<h3 id="线程的三种创建方式"><a href="#线程的三种创建方式" class="headerlink" title="线程的三种创建方式"></a>线程的三种创建方式</h3><h4 id="类继承Thread"><a href="#类继承Thread" class="headerlink" title="类继承Thread"></a>类继承Thread</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class MyThread extends Thread&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new MyThread().run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类实现Runnable接口"><a href="#类实现Runnable接口" class="headerlink" title="类实现Runnable接口"></a>类实现Runnable接口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class RunnableImpl implements Runnable&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;Hello World&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(new RunnableImpl()).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="类实现Callable接口-使用FutureTask方式"><a href="#类实现Callable接口-使用FutureTask方式" class="headerlink" title="类实现Callable接口,使用FutureTask方式"></a>类实现Callable接口,使用FutureTask方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class TestNewThread &#123;</span><br><span class="line"></span><br><span class="line">    public static class CallableImpl implements Callable&lt;String&gt;&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String call() throws Exception &#123;</span><br><span class="line">            return &quot;Hello World&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;*new MyThread().run();*&#x2F;</span><br><span class="line">        FutureTask&lt;String&gt; futureTask&#x3D;new FutureTask&lt;&gt;(new CallableImpl());</span><br><span class="line">        new Thread(futureTask).start();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(futureTask.get());</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (ExecutionException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="三种方式优劣"><a href="#三种方式优劣" class="headerlink" title="三种方式优劣"></a>三种方式优劣</h4><h5 id="1-使用继承方式"><a href="#1-使用继承方式" class="headerlink" title="1.使用继承方式"></a>1.使用继承方式</h5><blockquote>
+<p>优势：<br>编写简单，传参方便，如果需要访问当前线程，则无需使用Thread.currentThread()方法，直接使用this即可获得当前线程。<br>劣势：无法在继承其他父类</p>
+</blockquote>
+<h5 id="2-实现Runnable接口方式和Callable接口"><a href="#2-实现Runnable接口方式和Callable接口" class="headerlink" title="2.实现Runnable接口方式和Callable接口"></a>2.实现Runnable接口方式和Callable接口</h5><blockquote>
+<p>优势：<br>程类只是实现了Runnable接口或Callable接口，还可以继承其他类。<br>在这种方式下，多个线程可以共享同一个target对象，所以非常适合多个相同线程来处理同一份资源的情况。<br>callable还可以拿到线程的返回值<br>劣势：编写稍微稍微复杂点？</p>
+</blockquote>
+<h3 id="线程的休眠和等待"><a href="#线程的休眠和等待" class="headerlink" title="线程的休眠和等待"></a>线程的休眠和等待</h3><h4 id="wait-方法"><a href="#wait-方法" class="headerlink" title="wait()方法"></a>wait()方法</h4><blockquote>
+<p>在java所有类的直接或间接父类Object类中有个wait(),当调用时会让当前线程堵塞挂起。</p>
+</blockquote>
+<blockquote>
+<p>注意：调用对象的wait()时，要确保获得对象的监视器锁。</p>
+</blockquote>
+<h5 id="反例"><a href="#反例" class="headerlink" title="反例"></a>反例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            System.out.println(&quot;🔒前&quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                lock.wait();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;🔒后&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-4.png" alt="upload successful"></p>
+<blockquote>
+<p>那么怎么获得对象监视器锁呢<br>1.执行synchronized同步代码块时，并且使用该对象做为锁</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">       synchronized(lock) &#123;</span><br><span class="line">&#x2F;&#x2F;doSomething</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.调用对象的synchronizeed方法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void method()&#123;</span><br><span class="line">       &#x2F;&#x2F;doSomething </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sleep-方法"><a href="#sleep-方法" class="headerlink" title="sleep()方法"></a>sleep()方法</h4><blockquote>
+<p>sleep()是Thread线程类的一个静态方法，执行时当前线程会暂时让出对cpu的执行权，但是注意休眠的时候不会退出锁（线程所拥有的监视器资源）。当休眠时间到了就会继续正常运行，当还在休眠时间时，调用该休眠线程的interrupt()方法时，该休眠线程就会在调用sleep()方法的地方抛出InterruptedException异常返回。</p>
+</blockquote>
+<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程二休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程二休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-5.png" alt="upload successful"></p>
+<h3 id="线程通知"><a href="#线程通知" class="headerlink" title="线程通知"></a>线程通知</h3><h4 id="notify-方法和notifyAll-方法"><a href="#notify-方法和notifyAll-方法" class="headerlink" title="notify()方法和notifyAll()方法"></a>notify()方法和notifyAll()方法</h4><blockquote>
+<p>执行notify/notifyAll方法会唤醒一个/多个正处于休眠状态的线程。然后继续往下执行，直到执行完synchronized 代码块的代码或是中途遇到wait() ，再次释放锁。<br>类似wait方法，当前线程获取到对象的锁(监视器资源)才可以执行notify/notifyAll方法,否则会抛出异常。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadWait &#123;</span><br><span class="line">    private static Object lock&#x3D;new Object();</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;线程一休眠前&quot;);</span><br><span class="line">                try &#123;</span><br><span class="line">                    lock.wait();</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(&quot;线程一休眠后&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line"></span><br><span class="line">        new Thread(()-&gt;&#123;</span><br><span class="line">            synchronized(lock) &#123;</span><br><span class="line">                System.out.println(&quot;尝试换线休眠线程&quot;);</span><br><span class="line">                lock.notify();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;唤醒完毕&quot;);</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程的六种状态"><a href="#线程的六种状态" class="headerlink" title="线程的六种状态"></a>线程的六种状态</h3><p><img src="/images/pasted-6.png" alt="upload successful"></p>
+<h4 id="NEW"><a href="#NEW" class="headerlink" title="NEW"></a>NEW</h4><blockquote>
+<p>这时候线程已被初始化，不过还没有运行。</p>
+</blockquote>
+<h4 id="RUNNABLE"><a href="#RUNNABLE" class="headerlink" title="RUNNABLE"></a>RUNNABLE</h4><blockquote>
+<p>运行状态，Java线程把操作系统中的就绪和运行两种状态统一称为“运行中”。</p>
+</blockquote>
+<h4 id="TERMINATD"><a href="#TERMINATD" class="headerlink" title="TERMINATD"></a>TERMINATD</h4><blockquote>
+<p>线程结束状态。</p>
+</blockquote>
+<h4 id="BLOCKED"><a href="#BLOCKED" class="headerlink" title="BLOCKED"></a>BLOCKED</h4><blockquote>
+<p>线程堵塞状态，等待获取监视器资源进入同步方法或同步代码块。</p>
+</blockquote>
+<h4 id="WAITING"><a href="#WAITING" class="headerlink" title="WAITING"></a>WAITING</h4><blockquote>
+<p>线程等待状态，等待其他线程，调用Object.wait(),Thread.join()等方法会进入等待状态。</p>
+</blockquote>
+<h4 id="TIMED-WAITING"><a href="#TIMED-WAITING" class="headerlink" title="TIMED_WAITING"></a>TIMED_WAITING</h4><blockquote>
+<p>线程等待一段时间状态,调用Thread.sleep(Long millis)等会进入等待一段时间状态。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/20/java%E9%9B%86%E5%90%88-HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/20/java%E9%9B%86%E5%90%88-HashMap/" class="post-title-link" itemprop="url">java集合-HashMap</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-20 22:45:06" itemprop="dateCreated datePublished" datetime="2020-04-20T22:45:06+08:00">2020-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-04-21 15:19:26" itemprop="dateModified" datetime="2020-04-21T15:19:26+08:00">2020-04-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9B%86%E5%90%88/" itemprop="url" rel="index"><span itemprop="name">集合</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="HashMap简介"><a href="#HashMap简介" class="headerlink" title="HashMap简介"></a>HashMap简介</h3><blockquote>
+<p>HashMap用来存放键值对，它基于哈希表的Map非同步接口实现，它继承了AbstractMap，实现了Map,Cloneable,Serializable等接口。</p>
+</blockquote>
+<blockquote>
+<p>JDK1.8 之前 HashMap 由 数组+链表 组成的，数组是 HashMap 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）.JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树），以减少搜索时间，具体可以参考 treeifyBin方法。</p>
+</blockquote>
+<h3 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h3><h4 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt; implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</span><br><span class="line">    &#x2F;&#x2F; 序列号</span><br><span class="line">    private static final long serialVersionUID &#x3D; 362498820763181265L;    </span><br><span class="line">    &#x2F;&#x2F; 默认的初始容量是16</span><br><span class="line">    static final int DEFAULT_INITIAL_CAPACITY &#x3D; 1 &lt;&lt; 4;   </span><br><span class="line">    &#x2F;&#x2F; 最大容量</span><br><span class="line">    static final int MAXIMUM_CAPACITY &#x3D; 1 &lt;&lt; 30; </span><br><span class="line">    &#x2F;&#x2F; 默认的填充因子</span><br><span class="line">    static final float DEFAULT_LOAD_FACTOR &#x3D; 0.75f;</span><br><span class="line">    &#x2F;&#x2F; 当桶(bucket)上的结点数大于这个值时会转成红黑树</span><br><span class="line">    static final int TREEIFY_THRESHOLD &#x3D; 8; </span><br><span class="line">    &#x2F;&#x2F; 当桶(bucket)上的结点数小于这个值时树转链表</span><br><span class="line">    static final int UNTREEIFY_THRESHOLD &#x3D; 6;</span><br><span class="line">    &#x2F;&#x2F; 桶中结构转化为红黑树对应的table的最小大小</span><br><span class="line">    static final int MIN_TREEIFY_CAPACITY &#x3D; 64;</span><br><span class="line">    &#x2F;&#x2F; 存储元素的数组，总是2的幂次倍</span><br><span class="line">    transient Node&lt;k,v&gt;[] table; </span><br><span class="line">    &#x2F;&#x2F; 存放具体元素的集</span><br><span class="line">    transient Set&lt;map.entry&lt;k,v&gt;&gt; entrySet;</span><br><span class="line">    &#x2F;&#x2F; 存放元素的个数，注意这个不等于数组的长度。</span><br><span class="line">    transient int size;</span><br><span class="line">    &#x2F;&#x2F; 每次扩容和更改map结构的计数器</span><br><span class="line">    transient int modCount;   </span><br><span class="line">    &#x2F;&#x2F; 临界值 当实际大小(容量*填充因子)超过临界值时，会进行扩容</span><br><span class="line">    int threshold;</span><br><span class="line">    &#x2F;&#x2F; 加载因子</span><br><span class="line">    final float loadFactor;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="loadFactor负载因子"><a href="#loadFactor负载因子" class="headerlink" title="loadFactor负载因子"></a>loadFactor负载因子</h5><blockquote>
+<p>  loadFactor是用来控制存放元素数组的疏密程度，当loadFactor越大，数组存放的entry也就越多，也会让链表的长度变长，当loadFactor越小，数组存放的entry也就越少。<br>    loadFactory太大会导致查询效率变慢，太小会浪费内存空间。</p>
+</blockquote>
+<h4 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;根据指定的初始化容量和负载因子创建对象</span><br><span class="line">public HashMap(int initialCapacity, float loadFactor) &#123;</span><br><span class="line">    if (initialCapacity &lt; 0)</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +</span><br><span class="line">                                           initialCapacity);</span><br><span class="line">    if (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">        initialCapacity &#x3D; MAXIMUM_CAPACITY;</span><br><span class="line">    if (loadFactor &lt;&#x3D; 0 || Float.isNaN(loadFactor))</span><br><span class="line">        throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +</span><br><span class="line">                                           loadFactor);</span><br><span class="line">    this.loadFactor &#x3D; loadFactor;</span><br><span class="line">    this.threshold &#x3D; tableSizeFor(initialCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;指定初始化容量，负载因子默认为0.75</span><br><span class="line">public HashMap(int initialCapacity) &#123;</span><br><span class="line">    this(initialCapacity, DEFAULT_LOAD_FACTOR);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public HashMap() &#123;</span><br><span class="line">    this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR; &#x2F;&#x2F; all other fields defaulted</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;根据指定的map集合创建对象</span><br><span class="line">public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;</span><br><span class="line">    this.loadFactor &#x3D; DEFAULT_LOAD_FACTOR;</span><br><span class="line">    putMapEntries(m, false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">               boolean evict) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">    &#x2F;&#x2F;判断table是否未初始化或长度为0，如果是就扩容</span><br><span class="line">    if ((tab &#x3D; table) &#x3D;&#x3D; null || (n &#x3D; tab.length) &#x3D;&#x3D; 0)</span><br><span class="line">        n &#x3D; (tab &#x3D; resize()).length;</span><br><span class="line">    &#x2F;&#x2F;确定元素放在那个桶，如果桶为空则直接插入</span><br><span class="line">    if ((p &#x3D; tab[i &#x3D; (n - 1) &amp; hash]) &#x3D;&#x3D; null)</span><br><span class="line">        tab[i] &#x3D; newNode(hash, key, value, null);</span><br><span class="line">    else &#123;</span><br><span class="line">        Node&lt;K,V&gt; e; K k;</span><br><span class="line">        &#x2F;&#x2F;判断哈希，键是否相等</span><br><span class="line">        if (p.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">            ((k &#x3D; p.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">            e &#x3D; p;后面进行覆盖</span><br><span class="line">        &#x2F;&#x2F;判断节点是否为红黑树</span><br><span class="line">        else if (p instanceof TreeNode)</span><br><span class="line">        	  &#x2F;&#x2F;存放进红黑树中</span><br><span class="line">            e &#x3D; ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">        else &#123;</span><br><span class="line">            &#x2F;&#x2F;循环遍历链表</span><br><span class="line">            for (int binCount &#x3D; 0; ; ++binCount) &#123;</span><br><span class="line">                &#x2F;&#x2F;插入链表的尾部</span><br><span class="line">                if ((e &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">                    p.next &#x3D; newNode(hash, key, value, null);</span><br><span class="line">                    &#x2F;&#x2F;判断是否要将链表转换为红黑树</span><br><span class="line">                    if (binCount &gt;&#x3D; TREEIFY_THRESHOLD - 1) </span><br><span class="line">                        treeifyBin(tab, hash);</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;判断节点的hash和key是否相等</span><br><span class="line">                if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                    ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                    break;</span><br><span class="line">                p &#x3D; e;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;如果e不为空，则是进行覆盖操作</span><br><span class="line">        if (e !&#x3D; null) &#123; &#x2F;&#x2F; existing mapping for key</span><br><span class="line">            V oldValue &#x3D; e.value;</span><br><span class="line">            if (!onlyIfAbsent || oldValue &#x3D;&#x3D; null)</span><br><span class="line">                e.value &#x3D; value;</span><br><span class="line">            afterNodeAccess(e);</span><br><span class="line">            return oldValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ++modCount;</span><br><span class="line">    if (++size &gt; threshold)</span><br><span class="line">        resize();&#x2F;&#x2F;扩容</span><br><span class="line">    afterNodeInsertion(evict);</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="get方法"><a href="#get方法" class="headerlink" title="get方法"></a>get方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">     Node&lt;K,V&gt; e;</span><br><span class="line">     return (e &#x3D; getNode(hash(key), key)) &#x3D;&#x3D; null ? null : e.value;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">    &#x2F;&#x2F;判断哈希表是否为空，长度是否大于0，hash值对应的桶是否为空</span><br><span class="line">    if ((tab &#x3D; table) !&#x3D; null &amp;&amp; (n &#x3D; tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">        (first &#x3D; tab[(n - 1) &amp; hash]) !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F;判断hash，key是否相等</span><br><span class="line">        if (first.hash &#x3D;&#x3D; hash &amp;&amp; &#x2F;&#x2F; always check first node</span><br><span class="line">            ((k &#x3D; first.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">            return first;&#x2F;&#x2F;返回节点</span><br><span class="line">        if ((e &#x3D; first.next) !&#x3D; null) &#123;</span><br><span class="line">        	  &#x2F;&#x2F;判断是否为红黑树</span><br><span class="line">            if (first instanceof TreeNode)</span><br><span class="line">                &#x2F;&#x2F;红黑树查找</span><br><span class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">            do &#123;</span><br><span class="line">                &#x2F;&#x2F;链表遍历查找</span><br><span class="line">                if (e.hash &#x3D;&#x3D; hash &amp;&amp;</span><br><span class="line">                    ((k &#x3D; e.key) &#x3D;&#x3D; key || (key !&#x3D; null &amp;&amp; key.equals(k))))</span><br><span class="line">                    return e;</span><br><span class="line">            &#125; while ((e &#x3D; e.next) !&#x3D; null);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>resize方法待写。。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/19/java%E9%9B%86%E5%90%88-LinkedList/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -588,17 +924,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
