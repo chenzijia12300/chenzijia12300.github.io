@@ -20,22 +20,24 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="TCP协议 传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。   TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，100">
+  <meta name="description" content="简介首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。  BigDecimal构造方法 BigDecimal(i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TCP协议">
-<meta property="og:url" content="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/index.html">
+<meta property="og:title" content="java BigDecimal详解">
+<meta property="og:url" content="http://yoursite.com/2020/06/23/ava-BigDecimal%E8%AF%A6%E8%A7%A3/index.html">
 <meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="TCP协议 传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。   TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，100">
+<meta property="og:description" content="简介首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。  BigDecimal构造方法 BigDecimal(i">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/images/pasted-25.png">
-<meta property="og:image" content="http://yoursite.com/images/pasted-27.png">
-<meta property="article:published_time" content="2020-05-08T12:02:19.000Z">
-<meta property="article:modified_time" content="2020-05-09T02:04:24.205Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-62.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-63.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-64.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-65.png">
+<meta property="article:published_time" content="2020-06-23T06:42:54.000Z">
+<meta property="article:modified_time" content="2020-06-23T07:22:42.955Z">
 <meta property="article:author" content="陈梓佳">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-25.png">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-62.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+<link rel="canonical" href="http://yoursite.com/2020/06/23/ava-BigDecimal%E8%AF%A6%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -48,7 +50,7 @@
   };
 </script>
 
-  <title>TCP协议 | 汤姆猫的博客</title>
+  <title>java BigDecimal详解 | 汤姆猫的博客</title>
   
 
 
@@ -158,7 +160,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/ava-BigDecimal%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -171,7 +173,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          TCP协议
+          java BigDecimal详解
         </h1>
 
         <div class="post-meta">
@@ -180,16 +182,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-05-08 20:02:19" itemprop="dateCreated datePublished" datetime="2020-05-08T20:02:19+08:00">2020-05-08</time>
+              <time title="Created: 2020-06-23 14:42:54 / Modified: 15:22:42" itemprop="dateCreated datePublished" datetime="2020-06-23T14:42:54+08:00">2020-06-23</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-09 10:04:24" itemprop="dateModified" datetime="2020-05-09T10:04:24+08:00">2020-05-09</time>
-              </span>
 
           
 
@@ -201,50 +197,48 @@
     
     <div class="post-body" itemprop="articleBody">
       
-        <h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><blockquote>
-<p>传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。</p>
-</blockquote>
-<blockquote>
-<p>TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，1003…，并把自己的初始序列号ISN告诉B，让B有一个思想准备，什么样编号的数据是合法的，什么编号是非法的，比如编号900就是非法的，同时B还可以对A每一个编号的字节数据进行确认。如果A收到B确认编号为2001，则意味着字节编号为1001-2000，共1000个字节已经安全到达。</p>
-</blockquote>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="/images/pasted-25.png" alt="upload successful"></p>
-<blockquote>
-<p>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</p>
-</blockquote>
-<blockquote>
-<p>（2）第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</p>
-</blockquote>
-<blockquote>
-<p>（3）第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</p>
-</blockquote>
-<h4 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h4><blockquote>
-<p>三次握手的目的是为了建立可靠的数据通信通道，简单来说就是数据的发送与接收，而三次握手最主要的目的就是双方确认自己与对方的发送与接收是正常的。</p>
-</blockquote>
-<blockquote>
-<p>第一次握手：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常。<br>第二次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常。<br>第三次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常。<br>所以三次握手就能确认双发收发功能都正常，缺一不可。</p>
-</blockquote>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="/images/pasted-27.png" alt="upload successful"></p>
-<blockquote>
-<p>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</p>
-</blockquote>
-<blockquote>
-<p>第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</p>
-</blockquote>
-<blockquote>
-<p>第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</p>
-</blockquote>
-<blockquote>
-<p>第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</p>
-</blockquote>
-<h4 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="为什么要四次挥手？"></a>为什么要四次挥手？</h4><blockquote>
-<p>由于TCP连接是全双工的，因此每个方向都需要关闭。</p>
-</blockquote>
-<blockquote>
-<p>这是因为服务端在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。而关闭连接时，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方也未必全部数据都发送给对方了，所以己方可以立即close，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送。</p>
-</blockquote>
-<blockquote>
-<p>第一次挥手： client表示自己没啥要说的了。<br>第二次挥手： server表示我收到了。<br>第三次挥手： server表示自己没啥要说的了。<br>第四次挥手： client表示我收到了。</p>
-</blockquote>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。</p>
+<p><img src="/images/pasted-62.png" alt="upload successful"></p>
+<h3 id="BigDecimal构造方法"><a href="#BigDecimal构造方法" class="headerlink" title="BigDecimal构造方法"></a>BigDecimal构造方法</h3><ol>
+<li>BigDecimal(int) </li>
+<li><del>BigDecimal(double)</del></li>
+<li>BigDecimal(long) </li>
+<li><strong><em>BigDecimal(String)</em></strong></li>
+</ol>
+<p>BigDecimal共有四种构造方法，但是其中构造参数为double类型的构造方法不推荐使用，为啥呢？看下面。</p>
+<p><img src="/images/pasted-63.png" alt="upload successful"></p>
+<p>使用double类型的构造方法具有不确定性，使用string类型的构造方法就具有确定性，传的啥，创建啥。</p>
+<h3 id="BigDecimal的四则运算"><a href="#BigDecimal的四则运算" class="headerlink" title="BigDecimal的四则运算"></a>BigDecimal的四则运算</h3><ol>
+<li>public BigDecimal add(BigDecimal value)//加法</li>
+<li>public BigDecimal subtract(BigDecimal value)//减法</li>
+<li>public BigDecimal multiply(BigDecimal value)//乘法</li>
+<li>public BigDecimal divide(BigDecimal value)//除法</li>
+</ol>
+<p><img src="/images/pasted-64.png" alt="upload successful"></p>
+<p><strong><em>加减乘除其实最终都返回的是一个新的BigDecimal对象，因为BigInteger与BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象</em></strong></p>
+<p>当divide除不尽的时候会抛出java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result异常。</p>
+<p><img src="/images/pasted-65.png" alt="upload successful"></p>
+<p>因此divide可以传三个参数</p>
+<ul>
+<li>public BigDecimal divide(BigDecimal divisor, int scale, int roundingMode) </li>
+</ul>
+<ul>
+<li>ROUND_UP ：向远离零的方向舍入。舍弃非零部分，并将非零舍弃部分相邻的一位数字加一。</li>
+<li>ROUND_DOWN ：向接近零的方向舍入。舍弃非零部分，同时不会非零舍弃部分相邻的一位数字加一，采取截取行为。</li>
+<li>ROUND_CEILING ：向正无穷的方向舍入。如果为正数，舍入结果同ROUND_UP一致；如果为负数，舍入结果同ROUND_DOWN一致。注意：此模式不会减少数值大小。</li>
+<li>ROUND_FLOOR ：向负无穷的方向舍入。如果为正数，舍入结果同ROUND_DOWN一致；如果为负数，舍入结果同ROUND_UP一致。注意：此模式不会增加数值大小。</li>
+<li>ROUND_HALF_UP ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向上舍入的舍入模式。如果舍弃部分&gt;= 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“四舍五入”。</li>
+<li>ROUND_HALF_DOWN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向下舍入的舍入模式。如果舍弃部分&gt; 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“五舍六入”。</li>
+<li>ROUND_HALF_EVEN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则相邻的偶数舍入。如果舍弃部分左边的数字奇数，则舍入行为与 ROUND_HALF_UP 相同；如果为偶数，则舍入行为与 ROUND_HALF_DOWN 相同。注意：在重复进行一系列计算时，此舍入模式可以将累加错误减到最小。此舍入模式也称为“银行家舍入法”，主要在美国使用。四舍六入，五分两种情况，如果前一位为奇数，则入位，否则舍去。</li>
+<li>ROUND_UNNECESSARY ：断言请求的操作具有精确的结果，因此不需要舍入。如果对获得精确结果的操作指定此舍入模式，则抛出ArithmeticException。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>商业计算使用BigDecimal。</li>
+<li>尽量使用参数类型为String的构造函数。</li>
+<li>BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象，所以在做加减乘除运算时千万要保存操作后的值。</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.cnblogs.com/Jason-Xiang/p/10220231.html" target="_blank" rel="noopener">Java BigDecimal详解</a></p>
+<p><a href="https://blog.csdn.net/qq_35868412/article/details/89029288" target="_blank" rel="noopener">java 中 BigDecimal 详解</a></p>
 
     </div>
 
@@ -269,13 +263,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/05/07/%E6%A0%91/" rel="prev" title="红黑树">
-      <i class="fa fa-chevron-left"></i> 红黑树
+    <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/" rel="prev" title="活动启动模式">
+      <i class="fa fa-chevron-left"></i> 活动启动模式
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/" rel="next" title="redis学习笔记(一)">
-      redis学习笔记(一) <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -334,7 +325,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP协议"><span class="nav-number">1.</span> <span class="nav-text">TCP协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三次握手"><span class="nav-number">2.</span> <span class="nav-text">三次握手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要三次握手？"><span class="nav-number">2.1.</span> <span class="nav-text">为什么要三次握手？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四次挥手"><span class="nav-number">3.</span> <span class="nav-text">四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么要四次挥手？"><span class="nav-number">3.1.</span> <span class="nav-text">为什么要四次挥手？</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigDecimal构造方法"><span class="nav-number">2.</span> <span class="nav-text">BigDecimal构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BigDecimal的四则运算"><span class="nav-number">3.</span> <span class="nav-text">BigDecimal的四则运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
