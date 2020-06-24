@@ -152,6 +152,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/24/sql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/24/sql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">mysql中select+update并发的更新问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-24 10:44:00 / Modified: 16:25:41" itemprop="dateCreated datePublished" datetime="2020-06-24T10:44:00+08:00">2020-06-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="小知识补充"><a href="#小知识补充" class="headerlink" title="小知识补充"></a>小知识补充</h3><p>首先，我们要知道在mysql中update操作都是线程安全的，mysql引擎会update的行加上<strong><em>排他锁</em></strong>，其他对该行的update操作需要等到第一个update操作提交成功或者回滚，才能获取这个<strong><em>排他锁</em></strong>，从而对该行进行操作。</p>
+<h3 id="例子表结构"><a href="#例子表结构" class="headerlink" title="例子表结构"></a>例子表结构</h3><p><img src="/images/pasted-66.png" alt="upload successful"></p>
+<p><strong><em>小知识点:表必备三字段：id, create_time, update_time。</em></strong><br>说明：其中id 必为主键，类型为bigint unsigned、单表时自增、步长为 1。create_time, update_time 的类型均为 datetime 类型。 (来自《阿里巴巴Java开发手册（华山版）》)</p>
+<h3 id="代码环境"><a href="#代码环境" class="headerlink" title="代码环境"></a>代码环境</h3><ul>
+<li>jdk1.8</li>
+<li>idea</li>
+<li>SpringBoot</li>
+<li>Mybatis Plus</li>
+</ul>
+<h3 id="场景演示"><a href="#场景演示" class="headerlink" title="场景演示"></a>场景演示</h3><p>现在假设我们要写一个买书的代码（这里为了简单就一次卖一本啦），并使用线程池模拟并发开启30个线程去买20本书，那我们可以十分随意的写出这样的代码。</p>
+<h4 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h4><p><img src="/images/pasted-68.png" alt="upload successful"></p>
+<h4 id="无锁更新"><a href="#无锁更新" class="headerlink" title="无锁更新"></a>无锁更新</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public int decrGoodsAmount(long id) &#123;</span><br><span class="line">    QueryWrapper queryWrapper &#x3D; new QueryWrapper();</span><br><span class="line">    queryWrapper.eq(&quot;id&quot;,id);</span><br><span class="line">    queryWrapper.last(&quot;for update&quot;);</span><br><span class="line">    Goods goods &#x3D; baseMapper.selectOne(queryWrapper);</span><br><span class="line">    if (goods.getAmount()&gt;0)&#123;</span><br><span class="line">        UpdateWrapper updateWrapper &#x3D; new UpdateWrapper();</span><br><span class="line">        updateWrapper.setSql(&quot;amount&#x3D;amount-1&quot;);</span><br><span class="line">        updateWrapper.eq(&quot;id&quot;,id);</span><br><span class="line">        return baseMapper.update(null,updateWrapper);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-69.png" alt="upload successful"></p>
+<p>结果很明显超卖啦，虽然我们有使用if去判断库存，但是在并发情况下，你<strong><em>观察到的情况可能已经被改变啦</em></strong>。</p>
+<h4 id="写独占锁更新"><a href="#写独占锁更新" class="headerlink" title="写独占锁更新"></a>写独占锁更新</h4><p>我们首先来了解一下 for update语法：</p>
+<blockquote>
+<p>for update是在数据库中上锁用的，可以为数据库中的行上一个排它锁。当一个事务的操作未完成时候，其他事务可以读取但是不能写入或更新。InnoDB默认是行级别的锁，当有明确指定的主键时候，是行级锁。否则是表级别。</p>
+</blockquote>
+<p><strong><em>小知识：for update 仅适用于InnoDB，并且必须开启事务，在begin与commit之间才生效。</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">@Transactional(isolation &#x3D; Isolation.READ_COMMITTED)</span><br><span class="line">public int decrGoodsAmountByLock(long id) &#123;</span><br><span class="line">    QueryWrapper queryWrapper &#x3D; new QueryWrapper();</span><br><span class="line">    queryWrapper.eq(&quot;id&quot;,id);</span><br><span class="line">    queryWrapper.last(&quot;for update&quot;);</span><br><span class="line">    Goods goods &#x3D; baseMapper.selectOne(queryWrapper);</span><br><span class="line">    if (goods.getAmount()&gt;0)&#123;</span><br><span class="line">        UpdateWrapper updateWrapper &#x3D; new UpdateWrapper();</span><br><span class="line">        updateWrapper.setSql(&quot;amount&#x3D;amount-1&quot;);</span><br><span class="line">        updateWrapper.eq(&quot;id&quot;,id);</span><br><span class="line">        return baseMapper.update(null,updateWrapper);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="结果-1"><a href="#结果-1" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-70.png" alt="upload successful"></p>
+<h4 id="CAS更新"><a href="#CAS更新" class="headerlink" title="CAS更新"></a>CAS更新</h4><p>除了使用独占锁或者说是悲观锁来控制数据并发安全，还有什么方法呢？我们还可以使用乐观锁CAS来实现。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public int decrGoodsAmountByCAS(long id) &#123;</span><br><span class="line">    QueryWrapper queryWrapper &#x3D; new QueryWrapper();</span><br><span class="line">    queryWrapper.eq(&quot;id&quot;,id);</span><br><span class="line">    int flag &#x3D; 0,num &#x3D; 0;</span><br><span class="line">    while (flag&#x3D;&#x3D;0) &#123;</span><br><span class="line">        if (++num&#x3D;&#x3D;3)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        Goods goods &#x3D; baseMapper.selectOne(queryWrapper);</span><br><span class="line">        if (goods.getAmount() &gt; 0) &#123;</span><br><span class="line">            UpdateWrapper updateWrapper &#x3D; new UpdateWrapper();</span><br><span class="line">            updateWrapper.setSql(&quot;amount&#x3D;amount-1,update_time&#x3D;CURRENT_TIMESTAMP()&quot;);</span><br><span class="line">            updateWrapper.eq(&quot;id&quot;, id);</span><br><span class="line">            updateWrapper.eq(&quot;amount&quot;,goods.getAmount());</span><br><span class="line">            flag &#x3D; baseMapper.update(null, updateWrapper);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="结果-2"><a href="#结果-2" class="headerlink" title="结果"></a>结果</h5><p><img src="/images/pasted-71.png" alt="upload successful"></p>
+<p><img src="/images/pasted-72.png" alt="upload successful"></p>
+<p>我们可以看到在尝试3次后，任然有22个线程尝试失败，这是因为并发太过激烈的原因。那么什么时候使用CAS操作呢？</p>
+<blockquote>
+<p>阿里巴巴的开发规范上提到，在并发不高的情况下（尝试失败率不超过20%的情况下），推荐用CAS更新。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>使用独占锁来解决并发问题是不错，但我觉得不太常用。</li>
+<li>使用CAS来解决并发问题也不错，甚至不用加事务，而且不会堵塞读取操作。</li>
+</ul>
+<ol>
+<li>如果对读的响应度要求非常高，比如证券交易系统，那么适合用乐观锁，因为悲观锁会阻塞读</li>
+<li>如果读远多于写，那么也适合用乐观锁，因为用悲观锁会导致大量读被少量的写阻塞</li>
+<li>如果写操作频繁并且冲突比例很高，那么适合用悲观写独占锁</li>
+</ol>
+<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><p><a href="https://www.jianshu.com/p/712b8da4c9d6" target="_blank" rel="noopener">简书</a></p>
+<p><a href="https://segmentfault.com/q/1010000009454877" target="_blank" rel="noopener">思否</a></p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/ava-BigDecimal%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1088,84 +1199,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">集合面试题（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 14:54:00" itemprop="dateCreated datePublished" datetime="2020-06-09T14:54:00+08:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-15 15:16:42" itemprop="dateModified" datetime="2020-06-15T15:16:42+08:00">2020-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">集合面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h3><blockquote>
-<p>首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1234,17 +1267,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
