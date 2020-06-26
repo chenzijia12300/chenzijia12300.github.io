@@ -152,6 +152,124 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/26/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/26/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Docker学习笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-26 22:02:00 / Modified: 23:31:50" itemprop="dateCreated datePublished" datetime="2020-06-26T22:02:00+08:00">2020-06-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">容器</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="什么是Docker"><a href="#什么是Docker" class="headerlink" title="什么是Docker"></a>什么是Docker</h3><blockquote>
+<p>Docker 是一个开源的应用容器引擎，可以轻松的为任何应用创建一个轻量级的、可移植的、自给自足的容器。开发者在本地编译测试通过的容器可以批量地在生产环境中部署，包括VMs（虚拟机）、bare metal、OpenStack 集群和其他的基础应用平台。</p>
+</blockquote>
+<h3 id="使用Docker好处"><a href="#使用Docker好处" class="headerlink" title="使用Docker好处"></a>使用Docker好处</h3><h4 id="简化配置"><a href="#简化配置" class="headerlink" title="简化配置"></a>简化配置</h4><p>虚拟机的最大好处是能在你的硬件设施上运行各种配置不一样的平台(软件, 系统), Docker在降低额外开销的情况下提供了同样的功能. 它能让你将运行环境和配置放在代码汇总然后部署, 同一个Docker的配置可以在不同的环境环境中使用, 这样就降低了硬件要求和应用环境之间耦合度。</p>
+<h4 id="代码流水线管理"><a href="#代码流水线管理" class="headerlink" title="代码流水线管理"></a>代码流水线管理</h4><p>代码从开发者的机器到最终在生产环境上的部署, 需要经过很多的中坚环境. 而每一个中间环境都有自己微小的差别, Docker给应用提供了一个从开发到上线均一致的环境, 让代码的流水线变得简单不少.</p>
+<h4 id="提升开发效率"><a href="#提升开发效率" class="headerlink" title="提升开发效率"></a>提升开发效率</h4><p>开发者可以贴近生产环境，并可以快速搭建开发环境。Docker可以轻易的让几十个服务在Docker中跑起来。</p>
+<h4 id="隔离应用"><a href="#隔离应用" class="headerlink" title="隔离应用"></a>隔离应用</h4><p>将一个整体式的应用拆分成低耦合的单个服务(微服务架构)</p>
+<h3 id="Docker基本概念"><a href="#Docker基本概念" class="headerlink" title="Docker基本概念"></a>Docker基本概念</h3><h4 id="镜像（Image）"><a href="#镜像（Image）" class="headerlink" title="镜像（Image）"></a>镜像（Image）</h4><p>Docker镜像是一个特殊的文件系统，提供容器运行时所需的程序、库、资源、配置等文件，另外还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。<br>镜像是一个静态的概念，不包含任何动态数据，其内容在构建之后也不会被改变。</p>
+<h4 id="容器（Container）"><a href="#容器（Container）" class="headerlink" title="容器（Container）"></a>容器（Container）</h4><p>Docker的镜像是用于生成容器的模板，镜像分层的，镜像与容器的关系，就是面向对象编程中类与对象的关系，我们定好每一个类，然后使用类创建对象，对应到Docker的使用上，则是构建好每一个镜像，然后使用镜像创建我们需要的容器。</p>
+<h4 id="仓库（Repository）"><a href="#仓库（Repository）" class="headerlink" title="仓库（Repository）"></a>仓库（Repository）</h4><p>用来存放和分发镜像的服务，Docker Hub就是Docker提供用于存储和分布镜像的官方Docker Registry，也是默认的Registry，其网址为<a href="https://hub.docker.com。" target="_blank" rel="noopener">https://hub.docker.com。</a></p>
+<h3 id="Docker基本命令"><a href="#Docker基本命令" class="headerlink" title="Docker基本命令"></a>Docker基本命令</h3><h4 id="镜像常用命令"><a href="#镜像常用命令" class="headerlink" title="镜像常用命令"></a>镜像常用命令</h4><h5 id="搜索镜像"><a href="#搜索镜像" class="headerlink" title="搜索镜像"></a>搜索镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search java</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/pasted-73.png" alt="upload successful"></p>
+<p>再上图的结果中共有5列，分别代表以下含义</p>
+<ul>
+<li>NAME:镜像仓库名称</li>
+<li>DESCRIPTION:镜像仓库描述</li>
+<li>STARS:镜像仓库收藏数，跟GitHub的stars一样一样的</li>
+<li>OFFICAL:表示是否为官方仓库，该列标记为【OK】的镜像均由各软件的官方项目组创建和维护。</li>
+<li>AUTOMATED:表示是否自动构建的镜像仓库</li>
+</ul>
+<h5 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull java</span><br></pre></td></tr></table></figure>
+<p>执行该命令后，Docker会从Docker Hub中的java仓库下载最新版本的java镜像</p>
+<h5 id="列出镜像"><a href="#列出镜像" class="headerlink" title="列出镜像"></a>列出镜像</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p>列出已下载的镜像</p>
+<p><img src="/images/pasted-74.png" alt="upload successful"></p>
+<p>上图的结果共有5列，分别代表以下含义</p>
+<ul>
+<li>REPOSITORY:镜像所属仓库名称</li>
+<li>TAG:镜像标签，latest表示最新的</li>
+<li>IMAGE ID: 镜像ID，表示镜像唯一标识</li>
+<li>CREATED:镜像创建时间</li>
+<li>SIZE:镜像大小</li>
+</ul>
+<h5 id="删除本地镜像"><a href="#删除本地镜像" class="headerlink" title="删除本地镜像"></a>删除本地镜像</h5><p>使用docker rmi命令即可删除指定镜像</p>
+<h4 id="容器常用命令"><a href="#容器常用命令" class="headerlink" title="容器常用命令"></a>容器常用命令</h4><h5 id="新建并启动容器"><a href="#新建并启动容器" class="headerlink" title="新建并启动容器"></a>新建并启动容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dokcer run 镜像名</span><br></pre></td></tr></table></figure>
+
+<p>常见命令</p>
+<ul>
+<li>d:表示后台运行</li>
+<li>P:随机端口映射</li>
+<li>p:指定端口映射，有四种格式<ul>
+<li>ip:hostPort:containerPort</li>
+<li>ip::containerPort</li>
+<li>hostPort:containerPort</li>
+<li>containerPort</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/24/sql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,99 +1224,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 15:22:00" itemprop="dateCreated datePublished" datetime="2020-06-09T15:22:00+08:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-21 21:38:56" itemprop="dateModified" datetime="2020-06-21T21:38:56+08:00">2020-06-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">spring面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="/images/pasted-55.png" alt="upload successful"></p>
-<blockquote>
-<p>如上图我们大致可以将spring生命周期分为12个步骤</p>
-</blockquote>
-<ol>
-<li>通过反射实例化对象。</li>
-<li>设置对象的属性。</li>
-<li>如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法</li>
-<li>如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。</li>
-<li>如果对象实现了ApplicationContextAware接口，spring将bean所在应用上下文传给setApplicationContext()方法。</li>
-<li>如果对象实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessBeforeInitialization()方法。</li>
-<li>如果对象实现了InitializingBean接口，spring将调用afterPropertiesSet()方法。</li>
-<li>如果对象声明了init-method方法，spring将调用该方法。</li>
-<li>如果Bean 实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessAfterInitialization()方法。</li>
-<li>对象使用中。</li>
-<li>如果对象实现了DisposableBean()接口，spring将调用destroy()方法。</li>
-<li>如果对象声明了destroy-method方法，spring将调用该方法。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1267,17 +1292,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
