@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://yoursite.com/images/pasted-73.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-74.png">
 <meta property="article:published_time" content="2020-06-26T14:02:00.000Z">
-<meta property="article:modified_time" content="2020-06-26T15:31:50.957Z">
+<meta property="article:modified_time" content="2020-06-27T13:45:43.374Z">
 <meta property="article:author" content="陈梓佳">
 <meta property="article:tag" content="容器">
 <meta name="twitter:card" content="summary">
@@ -181,10 +181,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-26 22:02:00 / Modified: 23:31:50" itemprop="dateCreated datePublished" datetime="2020-06-26T22:02:00+08:00">2020-06-26</time>
+              <time title="Created: 2020-06-26 22:02:00" itemprop="dateCreated datePublished" datetime="2020-06-26T22:02:00+08:00">2020-06-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-27 21:45:43" itemprop="dateModified" datetime="2020-06-27T21:45:43+08:00">2020-06-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,7 +248,7 @@
 <h5 id="删除本地镜像"><a href="#删除本地镜像" class="headerlink" title="删除本地镜像"></a>删除本地镜像</h5><p>使用docker rmi命令即可删除指定镜像</p>
 <h4 id="容器常用命令"><a href="#容器常用命令" class="headerlink" title="容器常用命令"></a>容器常用命令</h4><h5 id="新建并启动容器"><a href="#新建并启动容器" class="headerlink" title="新建并启动容器"></a>新建并启动容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dokcer run 镜像名</span><br></pre></td></tr></table></figure>
 
-<p>常见命令</p>
+<p>常见选项</p>
 <ul>
 <li>d:表示后台运行</li>
 <li>P:随机端口映射</li>
@@ -254,6 +260,25 @@
 </ul>
 </li>
 </ul>
+<h5 id="列出容器"><a href="#列出容器" class="headerlink" title="列出容器"></a>列出容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>上图的结果共有7列，分别代表以下含义</p>
+<ul>
+<li>CONTAINER_ID:表示容器ID</li>
+<li>IMAGE:表示镜像名称</li>
+<li>COMMAND:表示启动容器时运行的命令</li>
+<li>CREATED:表示容器的创建时间</li>
+<li>STATUS:表示容器运行状态，Up为运行中，Exited为停止</li>
+<li>PORTS:表示容器对外的端口号</li>
+<li>NAMES:表示容器名称</li>
+</ul>
+<h5 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop ContainerId</span><br></pre></td></tr></table></figure>
+
+<h5 id="强制停止容器"><a href="#强制停止容器" class="headerlink" title="强制停止容器"></a>强制停止容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill ContainerId</span><br></pre></td></tr></table></figure>
+<h5 id="启动已停止的容器"><a href="#启动已停止的容器" class="headerlink" title="启动已停止的容器"></a>启动已停止的容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start ContainerId</span><br></pre></td></tr></table></figure>
+<h5 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm Container</span><br></pre></td></tr></table></figure>
+<p><strong><em>小知识：该命令只能移除已停止的容器，如果需要移除正在运行的容器，可以使用-f参数</em></strong></p>
 
     </div>
 
@@ -284,7 +309,10 @@
     <a href="/2020/06/24/sql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" rel="prev" title="mysql中select+update并发的更新问题">
       <i class="fa fa-chevron-left"></i> mysql中select+update并发的更新问题
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="Elasticsearch学习笔记">
+      Elasticsearch学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -343,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Docker"><span class="nav-number">1.</span> <span class="nav-text">什么是Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Docker好处"><span class="nav-number">2.</span> <span class="nav-text">使用Docker好处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简化配置"><span class="nav-number">2.1.</span> <span class="nav-text">简化配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码流水线管理"><span class="nav-number">2.2.</span> <span class="nav-text">代码流水线管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提升开发效率"><span class="nav-number">2.3.</span> <span class="nav-text">提升开发效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隔离应用"><span class="nav-number">2.4.</span> <span class="nav-text">隔离应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker基本概念"><span class="nav-number">3.</span> <span class="nav-text">Docker基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#镜像（Image）"><span class="nav-number">3.1.</span> <span class="nav-text">镜像（Image）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器（Container）"><span class="nav-number">3.2.</span> <span class="nav-text">容器（Container）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仓库（Repository）"><span class="nav-number">3.3.</span> <span class="nav-text">仓库（Repository）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker基本命令"><span class="nav-number">4.</span> <span class="nav-text">Docker基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#镜像常用命令"><span class="nav-number">4.1.</span> <span class="nav-text">镜像常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索镜像"><span class="nav-number">4.1.1.</span> <span class="nav-text">搜索镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下载镜像"><span class="nav-number">4.1.2.</span> <span class="nav-text">下载镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出镜像"><span class="nav-number">4.1.3.</span> <span class="nav-text">列出镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除本地镜像"><span class="nav-number">4.1.4.</span> <span class="nav-text">删除本地镜像</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器常用命令"><span class="nav-number">4.2.</span> <span class="nav-text">容器常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#新建并启动容器"><span class="nav-number">4.2.1.</span> <span class="nav-text">新建并启动容器</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Docker"><span class="nav-number">1.</span> <span class="nav-text">什么是Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Docker好处"><span class="nav-number">2.</span> <span class="nav-text">使用Docker好处</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简化配置"><span class="nav-number">2.1.</span> <span class="nav-text">简化配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码流水线管理"><span class="nav-number">2.2.</span> <span class="nav-text">代码流水线管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提升开发效率"><span class="nav-number">2.3.</span> <span class="nav-text">提升开发效率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隔离应用"><span class="nav-number">2.4.</span> <span class="nav-text">隔离应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker基本概念"><span class="nav-number">3.</span> <span class="nav-text">Docker基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#镜像（Image）"><span class="nav-number">3.1.</span> <span class="nav-text">镜像（Image）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器（Container）"><span class="nav-number">3.2.</span> <span class="nav-text">容器（Container）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#仓库（Repository）"><span class="nav-number">3.3.</span> <span class="nav-text">仓库（Repository）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker基本命令"><span class="nav-number">4.</span> <span class="nav-text">Docker基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#镜像常用命令"><span class="nav-number">4.1.</span> <span class="nav-text">镜像常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搜索镜像"><span class="nav-number">4.1.1.</span> <span class="nav-text">搜索镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#下载镜像"><span class="nav-number">4.1.2.</span> <span class="nav-text">下载镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出镜像"><span class="nav-number">4.1.3.</span> <span class="nav-text">列出镜像</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除本地镜像"><span class="nav-number">4.1.4.</span> <span class="nav-text">删除本地镜像</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#容器常用命令"><span class="nav-number">4.2.</span> <span class="nav-text">容器常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#新建并启动容器"><span class="nav-number">4.2.1.</span> <span class="nav-text">新建并启动容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列出容器"><span class="nav-number">4.2.2.</span> <span class="nav-text">列出容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#停止容器"><span class="nav-number">4.2.3.</span> <span class="nav-text">停止容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强制停止容器"><span class="nav-number">4.2.4.</span> <span class="nav-text">强制停止容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动已停止的容器"><span class="nav-number">4.2.5.</span> <span class="nav-text">启动已停止的容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重启容器"><span class="nav-number">4.2.6.</span> <span class="nav-text">重启容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除容器"><span class="nav-number">4.2.7.</span> <span class="nav-text">删除容器</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -356,17 +384,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

@@ -152,6 +152,122 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ail-fast%E5%92%8Cfail-safe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/14/ail-fast%E5%92%8Cfail-safe/" class="post-title-link" itemprop="url">fail-fast和fail-safe</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-14 14:51:00 / Modified: 15:29:47" itemprop="dateCreated datePublished" datetime="2020-06-14T14:51:00+08:00">2020-06-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="fail-fast"><a href="#fail-fast" class="headerlink" title="fail-fast"></a>fail-fast</h3><p>首先啥是fail-fast？下面引用别人的解释:</p>
+<blockquote>
+<p>在系统设计中，快速失效系统一种可以立即报告任何可能表明故障的情况的系统。快速失效系统通常设计用于停止正常操作，而不是试图继续可能存在缺陷的过程。这种设计通常会在操作中的多个点检查系统的状态，因此可以及早检测到任何故障。快速失败模块的职责是检测错误，然后让系统的下一个最高级别处理错误。</p>
+</blockquote>
+<p>他的意思就是写程序<strong><em>先考虑异常情况</em></strong>，如果遇到就直接抛出处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public int divide(int divisor,int dividend)&#123;</span><br><span class="line">    if(dividend &#x3D;&#x3D; 0)&#123;</span><br><span class="line">        throw new RuntimeException(&quot;dividend can&#39;t be null&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return divisor&#x2F;dividend;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>例如上面的方法，对除数进行检测如果是0则直接抛出异常，并标明异常原因。这样做的好处就是可以预先识别出一些错误情况，一方面可以避免执行复杂的其他代码，另外一方面，这种异常情况被识别之后也可以针对性的做一些单独处理。</p>
+</blockquote>
+<h4 id="集合中的fail-fast"><a href="#集合中的fail-fast" class="headerlink" title="集合中的fail-fast"></a>集合中的fail-fast</h4><blockquote>
+<p>我们通常说的Java中的fail-fast机制，默认指的是Java集合的一种错误检测机制。当多个线程对部分集合进行结构上的改变的操作时，有可能会产生fail-fast机制，这个时候就会抛出ConcurrentModificationException。下面来看看例子:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">   for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上面使用foreach来遍历list并删除元素值为5的元素，执行结果：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:909)</span><br><span class="line">	at java.util.ArrayList$Itr.next(ArrayList.java:859)</span><br><span class="line">	at com.czj.example01.TestList.main(TestList.java:17)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以看到抛出了ConcurrentModificationException异常，这是因为list的fast-fail的机制。</p>
+</blockquote>
+<h4 id="list源码分析"><a href="#list源码分析" class="headerlink" title="list源码分析"></a>list源码分析</h4><blockquote>
+<p>下面是ArrayList里的内部类Itr的remove()源码,可以看到在执行移除前会执行checkForComodification()方法。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void remove() &#123;</span><br><span class="line">         if (lastRet &lt; 0)</span><br><span class="line">             throw new IllegalStateException();</span><br><span class="line">         checkForComodification();</span><br><span class="line"></span><br><span class="line">         try &#123;</span><br><span class="line">             ArrayList.this.remove(lastRet);</span><br><span class="line">             cursor &#x3D; lastRet;</span><br><span class="line">             lastRet &#x3D; -1;</span><br><span class="line">             expectedModCount &#x3D; modCount;</span><br><span class="line">         &#125; catch (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">             throw new ConcurrentModificationException();</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">    if (modCount !&#x3D; expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>可以看到这里就是抛出ConcurrentModificationException异常的地方，那么modCount和expectedModCount分别代表什么呢？</p>
+</blockquote>
+<ul>
+<li>modCount:ArrayList的成员变量，代表集合的修改次数，初始值为0</li>
+<li>expected:Itr的成员变量，代表迭代器预期集合的修改次数，初始值等于创建itr时的修改次数，只有通过迭代器对集合进行操作，该值才会改变。</li>
+</ul>
+<blockquote>
+<p>通过foreach来遍历集合，其实就是通过集合的迭代器（Iterator）来遍历的，如果不通过迭代器来修改集合内的元素，只要他发现有某一次修改是未经过自己进行的，那么就会抛出异常。</p>
+</blockquote>
+<h3 id="fail-safe"><a href="#fail-safe" class="headerlink" title="fail-safe"></a>fail-safe</h3><blockquote>
+<p>fail-safe字面理解<strong><em>安全失败</em></strong>，java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下面的所有的类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全失败的迭代器永远不会抛出这样的异常。</p>
+</blockquote>
+<h4 id="集合中的fail-safe"><a href="#集合中的fail-safe" class="headerlink" title="集合中的fail-safe"></a>集合中的fail-safe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new CopyOnWriteArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">    for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(integer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面使用CopyOnWriteArrayList这个类来演示fail-safe，这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1272,188 +1388,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/14/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/" class="post-title-link" itemprop="url">redis学习笔记(二)---集群</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-14 15:25:00 / Modified: 22:25:00" itemprop="dateCreated datePublished" datetime="2020-05-14T15:25:00+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="redis集群简介"><a href="#redis集群简介" class="headerlink" title="redis集群简介"></a>redis集群简介</h3><blockquote>
-<p>首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。<br>我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。</p>
-</blockquote>
-<blockquote>
-<p>redis有三种集群模式</p>
-</blockquote>
-<ol>
-<li>主从模式</li>
-<li>哨兵模式</li>
-<li>cluster模式</li>
-</ol>
-<h3 id="主从模式"><a href="#主从模式" class="headerlink" title="主从模式"></a>主从模式</h3><p><img src="/images/pasted-38.png" alt="upload successful"></p>
-<h4 id="主从模式简介"><a href="#主从模式简介" class="headerlink" title="主从模式简介"></a>主从模式简介</h4><blockquote>
-<p>主从模式是三种里面最简单的，它将一台redis服务器里的数据复制到其他redis服务器中，前者称为 主节点(master)，后者称为 从节点(slave)。且数据的复制是 单向 的，只能由主节点到从节点。Redis 主从复制支持 主从同步 和 从从同步 两种，后者是 Redis 后续版本新增的功能，以减轻主节点的同步负担。</p>
-</blockquote>
-<h4 id="主从模式好处"><a href="#主从模式好处" class="headerlink" title="主从模式好处"></a>主从模式好处</h4><ol>
-<li>数据冗余： 主从复制实现了数据的热备份，是持久化之外的一种数据冗余方式。</li>
-<li>故障恢复： 当主节点出现问题时，可以由从节点提供服务，实现快速的故障恢复 (实际上是一种服务的冗余)。</li>
-<li>负载均衡： 在主从复制的基础上，配合读写分离，可以由主节点提供写服务，由从节点提供读服务 （即写 Redis 数据时应用连接主节点，读 Redis 数据时应用连接从节点），分担服务器负载。尤其是在写少读多的场景下，通过多个从节点分担读负载，可以大大提高 Redis 服务器的并发量。</li>
-<li>高可用基石： 除了上述作用以外，主从复制还是哨兵和集群能够实施的 基础，因此说主从复制是 Redis 高可用的基础。</li>
-</ol>
-<h4 id="主从模式工作机制"><a href="#主从模式工作机制" class="headerlink" title="主从模式工作机制"></a>主从模式工作机制</h4><blockquote>
-<p>当slave启动后，主动向master发送SYNC命令。master接收到SYNC命令后在后台保存快照（RDB持久化）和缓存保存快照这段时间的命令，然后将保存的快照文件和缓存的命令发送给slave。slave接收到快照文件和命令后加载快照文件和缓存的执行命令。<br>复制初始化后，master每次接收到的写命令都会同步发送给slave，保证主从数据一致性。</p>
-</blockquote>
-<h4 id="主从模式测试"><a href="#主从模式测试" class="headerlink" title="主从模式测试"></a>主从模式测试</h4><blockquote>
-<p>配置文件：在从服务器的配置文件中加入：slaveof <masterip> <masterport><br>启动命令：redis-server 启动命令后加入 –slaveof <masterip> <masterport><br>客户端命令：Redis 服务器启动后，直接通过客户端执行命令：slaveof <masterip> <masterport>，让该 Redis 实例成为从节点。</masterport></masterip></masterport></masterip></masterport></masterip></p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 创建一个端口为 6379 的 Redis 实例</span><br><span class="line">redis-server --port 6379</span><br><span class="line"># 创建一个端口为 6380 的 Redis 实例</span><br><span class="line">redis-server --port 6380</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>此时两个redis服务都为主节点,然后我们在6380端口执行slave of 127.0.0.1 6379,使它变成从节点。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 在 6380 端口的 Redis 实例中使用控制台</span><br><span class="line">redis-cli -p 6380</span><br><span class="line"># 成为本地 6379 端口实例的从节点</span><br><span class="line">127.0.0.1:6380&gt; SLAVEOF 127.0.0.1ø 6379</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-<h4 id="主从模式原理"><a href="#主从模式原理" class="headerlink" title="主从模式原理"></a>主从模式原理</h4><p><img src="/images/pasted-39.png" alt="upload successful"></p>
-<blockquote>
-<p>其中SYNC是非常耗时的操作。</p>
-</blockquote>
-<ol>
-<li>主服务器需要执行 BGSAVE 命令来生成 RDB 文件，这个生成操作会消耗主服务器大量的CPU、内存和磁盘 I/O 的资源。</li>
-<li>主服务器需要将自己生成的RDB文件发送给从服务器，这个发送操作会消耗主服务器 大量的网络资源 (带宽和流量)，并对主服务器响应命令请求的时间产生影响。</li>
-<li>接收到 RDB 文件的从服务器需要载入主服务器发来的 RBD 文件，并且在载入期间，从服务器会因为阻塞而没办法处理命令请求。</li>
-</ol>
-<blockquote>
-<p>另外如果因为断线重连的情况出现，还要进行SYNC是很浪费的，因此redis2.8有了PSYNC命令来替代SYNC命令。</p>
-</blockquote>
-<ol>
-<li>全量复制：用于初次复制或其他无法进行部分复制的情况，将主节点中的所有数据都发送给从节点，是一个非常重型的操作。</li>
-<li>部分复制：用于网络中断等情况后的复制，只将 中断期间主节点执行的写命令 发送给 从节点，与全量复制相比更加高效。需要注意 的是，如果网络中断时间过长，导致主节点没有能够完整地保存中断期间执行的写命令，则无法进行部分复制，仍使用全量复制。</li>
-</ol>
-<h3 id="哨兵模式"><a href="#哨兵模式" class="headerlink" title="哨兵模式"></a>哨兵模式</h3><h4 id="哨兵模式简介"><a href="#哨兵模式简介" class="headerlink" title="哨兵模式简介"></a>哨兵模式简介</h4><blockquote>
-<p>主从模式有个缺点，如果主redis服务器挂了，那就不能提供写的服务了。因此sentinel哨兵模式应运而生。顾名思义，它的作用就是监控redis集群的运行状况。</p>
-</blockquote>
-<p><img src="/images/pasted-40.png" alt="upload successful"></p>
-<blockquote>
-<p>哨兵模式又两个部分组成，分别是哨兵节点和数据节点。<br>哨兵节点：哨兵系统由一个或多个哨兵节点组成，哨兵节点是特殊的 Redis 节点，不存储数据。<br>数据节点：主节点和从节点都是数据节点。</p>
-</blockquote>
-<h4 id="哨兵模式特点"><a href="#哨兵模式特点" class="headerlink" title="哨兵模式特点"></a>哨兵模式特点</h4><blockquote>
-<p>在复制的基础上，哨兵实现了自动化的故障恢复功能。</p>
-</blockquote>
-<ol>
-<li>监控（Monitoring）： 哨兵会不断地检查主节点和从节点是否运作正常。</li>
-<li>自动故障转移（Automatic failover）： 当 主节点 不能正常工作时，哨兵会开始 3. 自动故障转移操作，它会将失效主节点的其中一个 从节点升级为新的主节点，并让其他从节点改为复制新的主节点。</li>
-<li>配置提供者（Configuration provider）： 客户端在初始化时，通过连接哨兵来获得当前 Redis 服务的主节点地址。</li>
-<li>通知（Notification）： 哨兵可以将故障转移的结果发送给客户端。</li>
-</ol>
-<h4 id="哨兵模式测试"><a href="#哨兵模式测试" class="headerlink" title="哨兵模式测试"></a>哨兵模式测试</h4><h6 id="创建主从节点"><a href="#创建主从节点" class="headerlink" title="创建主从节点"></a>创建主从节点</h6><blockquote>
-<p>首先创建主从配置文件，从文件如下</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">----redis-slave1.conf----</span><br><span class="line">port 6380     &#x2F;&#x2F;端口号</span><br><span class="line">dbfilename &quot;dump-6380.rdb&quot; &#x2F;&#x2F;文件名</span><br><span class="line">daemonize yes &#x2F;&#x2F;demonize是否以后台线程运行 在window没用</span><br><span class="line">slaveof 127.0.0.1 6379 &#x2F;&#x2F;设置主节点</span><br><span class="line">----redis-slave2.conf---</span><br><span class="line">port 6381</span><br><span class="line">dbfilename &quot;dump-6381.rdb&quot;</span><br><span class="line">daemonize yes</span><br><span class="line">slaveof 127.0.0.1 6380</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后我们可以执行 redis-server <config file path> 来根据配置文件启动不同的Redis 实例，依次启动主从节点。节点启动后执行redis-cli链接到主节点调用redis-cli命令查看主从状态。</config></p>
-</blockquote>
-<p><img src="/images/pasted-43.png" alt="upload successful"></p>
-<h6 id="创建哨兵节点"><a href="#创建哨兵节点" class="headerlink" title="创建哨兵节点"></a>创建哨兵节点</h6><blockquote>
-<p>按照上面同样的方法，我们给哨兵节点也创建三个配置文件。(哨兵节点本质上是特殊的 Redis 节点，所以配置几乎没什么差别，只是在端口上做区分就好)</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">----redis-sentinel1.conf---</span><br><span class="line">port 16379</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel1.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel2.conf---</span><br><span class="line">port 16380</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel2.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br><span class="line">----redis-sentinel3.conf---</span><br><span class="line">port 16381</span><br><span class="line">daemonize yes</span><br><span class="line">logfile &quot;redis-sentinel3.log&quot;</span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>然后我们启动哨兵节点redis-server <config file path> –sentinel。哨兵节点启动后redis-cli链接到哨兵节点，然后调用info Sentinel 命令来查看是否已经在监视主节点了。</config></p>
-</blockquote>
-<p><img src="/images/pasted-44.png" alt="upload successful"> </p>
-<h6 id="故障模拟"><a href="#故障模拟" class="headerlink" title="故障模拟"></a>故障模拟</h6><blockquote>
-<p>使用taskkill /f /pid <pid>杀掉主节点,然后等待一段时间，在去哨兵节点使用INFO   SENTINEL命令查看节点状态</pid></p>
-</blockquote>
-<p><img src="/images/pasted-45.png" alt="upload successful"></p>
-<p><img src="/images/pasted-46.png" alt="upload successful"></p>
-<blockquote>
-<p>从上图可以发现新的主节点已经变成了6380端口的节点，同时还可以发现，哨兵节点认为新的主节点仍然有两个从节点 (上方 slaves=2)，这是因为哨兵在将 6380 切换成主节点的同时，将 6379 节点置为其从节点。虽然 6379 从节点已经挂掉，但是由于 哨兵并不会对从节点进行客观下线，因此认为该从节点一直存在。当 6379 节点重新启动后，会自动变成 6380 节点的从节点。<br>另外，在故障转移的阶段，哨兵和主从节点的配置文件都会被改写：</p>
-</blockquote>
-<ol>
-<li>对于主从节点： 主要是 slaveof 配置的变化，新的主节点没有了 slaveof 配置，其从节点则 slaveof 新的主节点。</li>
-<li>对于哨兵节点： 除了主从节点信息的变化，纪元(epoch) (记录当前集群状态的参数) 也会变化，纪元相关的参数都 +1 了。</li>
-</ol>
-<h6 id="主节点如何被推选出来"><a href="#主节点如何被推选出来" class="headerlink" title="主节点如何被推选出来"></a>主节点如何被推选出来</h6><ol>
-<li>在失效主服务器属下的从服务器当中， 那些被标记为主观下线、已断线、或者最后一次回复 PING 命令的时间大于五秒钟的从服务器都会被 淘汰。</li>
-<li>在失效主服务器属下的从服务器当中， 那些与失效主服务器连接断开的时长超过 down-after 选项指定的时长十倍的从服务器都会被 淘汰。</li>
-<li>在经历了以上两轮淘汰之后 剩下来的从服务器中,我们选出复制偏移量(replication offset)最大 的那个从服务器作为新的主服务器；如果复制偏移量不可用，或者从服务器的复制偏移量相同，那么带有最小运行ID的那个从服务器成为新的主服务器。</li>
-</ol>
-<h3 id="cluster模式"><a href="#cluster模式" class="headerlink" title="cluster模式"></a>cluster模式</h3><h4 id="cluster模式简介"><a href="#cluster模式简介" class="headerlink" title="cluster模式简介"></a>cluster模式简介</h4><blockquote>
-<p>哨兵模式基本可以满足一般的生产需求，具有高可用。但是当数据量过大到一台服务器存放不下的情况时，主从模式或sentinel模式就不能满足需求了，这个时候需要对存储的数据进行分片，将数据存储到多个Redis实例中。cluster模式的出现就是为了解决单机Redis容量有限的问题，将Redis的数据根据一定的规则分配到多台机器。</p>
-</blockquote>
-<p><img src="/images/pasted-41.png" alt="upload successful"></p>
-<blockquote>
-<p>上图 展示了 Redis Cluster 典型的架构图，集群中的每一个 Redis 节点都 互相两两相连，客户端任意 直连 到集群中的 任意一台，就可以对其他 Redis 节点进行 读写 的操作。</p>
-</blockquote>
-<h4 id="cluster模式原理"><a href="#cluster模式原理" class="headerlink" title="cluster模式原理"></a>cluster模式原理</h4><p><img src="/images/pasted-42.png" alt="upload successful"></p>
-<blockquote>
-<p>redis 集群中内置了 16384 个哈希槽。当客户端连接到rRedis 集群之后，会同时得到一份关于这个 集群的配置信息，当客户端具体对某一个 key 值进行操作时，会计算出它的一个 Hash 值，然后把结果对 16384 求余数，这样每个 key 都会对应一个编号在 0-16383 之间的哈希槽，redis 会根据节点数量 大致均等 的将哈希槽映射到不同的节点。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1518,17 +1456,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

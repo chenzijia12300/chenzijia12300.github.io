@@ -152,6 +152,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Elasticsearch学习笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-27 22:02:00" itemprop="dateCreated datePublished" datetime="2020-06-27T22:02:00+08:00">2020-06-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-28 00:08:46" itemprop="dateModified" datetime="2020-06-28T00:08:46+08:00">2020-06-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="啥是Elasticsearch"><a href="#啥是Elasticsearch" class="headerlink" title="啥是Elasticsearch"></a>啥是Elasticsearch</h3><blockquote>
+<p>ElasticSearch是一个高度可扩展的开源搜索引擎并使用REST API，底层是开源库 Lucene。</p>
+</blockquote>
+<h3 id="Elasticsearch优点"><a href="#Elasticsearch优点" class="headerlink" title="Elasticsearch优点"></a>Elasticsearch优点</h3><ul>
+<li>横向可扩展性: 作为大型分布式集群，很容易就能扩展新的服务器到ES集群中；也可运行在单机上作为轻量级搜索引擎使用。</li>
+<li>更丰富的功能: 与传统关系型数据库相比，ES提供了全文检索、同义词处理、相关度排名、复杂数据分析、海量数据的近实时处理等功能。</li>
+<li>高可用: 提供副本(Replica)机制，一个分片可以设置多个副本，即使在某些服务器宕机后，集群仍能正常工作。</li>
+<li>开箱即用: 提供简单易用的 API，服务的搭建、部署和使用都很容易操作。</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="Node与Cluster"><a href="#Node与Cluster" class="headerlink" title="Node与Cluster"></a>Node与Cluster</h4><p>Elasticsearch本质上是一个分布式的数据库，它可以多台服务器协同工作，运行多个多个实例。<br><strong><em>单个实例被称为一个节点（Node），一组节点就被成为Cluster</em></strong></p>
+<h4 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h4><p>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
+<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
+<h4 id><a href="#" class="headerlink" title></a></h4><p><img src="/images/pasted-75.png" alt="upload successful"></p>
+<p><img src="/images/pasted-76.png" alt="upload successful"></p>
+<p><img src="/images/pasted-77.png" alt="upload successful"></p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/26/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -175,10 +265,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-06-26 22:02:00 / Modified: 23:31:50" itemprop="dateCreated datePublished" datetime="2020-06-26T22:02:00+08:00">2020-06-26</time>
+              <time title="Created: 2020-06-26 22:02:00" itemprop="dateCreated datePublished" datetime="2020-06-26T22:02:00+08:00">2020-06-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-27 21:45:43" itemprop="dateModified" datetime="2020-06-27T21:45:43+08:00">2020-06-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -236,7 +332,7 @@
 <h5 id="删除本地镜像"><a href="#删除本地镜像" class="headerlink" title="删除本地镜像"></a>删除本地镜像</h5><p>使用docker rmi命令即可删除指定镜像</p>
 <h4 id="容器常用命令"><a href="#容器常用命令" class="headerlink" title="容器常用命令"></a>容器常用命令</h4><h5 id="新建并启动容器"><a href="#新建并启动容器" class="headerlink" title="新建并启动容器"></a>新建并启动容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dokcer run 镜像名</span><br></pre></td></tr></table></figure>
 
-<p>常见命令</p>
+<p>常见选项</p>
 <ul>
 <li>d:表示后台运行</li>
 <li>P:随机端口映射</li>
@@ -248,6 +344,25 @@
 </ul>
 </li>
 </ul>
+<h5 id="列出容器"><a href="#列出容器" class="headerlink" title="列出容器"></a>列出容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<p>上图的结果共有7列，分别代表以下含义</p>
+<ul>
+<li>CONTAINER_ID:表示容器ID</li>
+<li>IMAGE:表示镜像名称</li>
+<li>COMMAND:表示启动容器时运行的命令</li>
+<li>CREATED:表示容器的创建时间</li>
+<li>STATUS:表示容器运行状态，Up为运行中，Exited为停止</li>
+<li>PORTS:表示容器对外的端口号</li>
+<li>NAMES:表示容器名称</li>
+</ul>
+<h5 id="停止容器"><a href="#停止容器" class="headerlink" title="停止容器"></a>停止容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop ContainerId</span><br></pre></td></tr></table></figure>
+
+<h5 id="强制停止容器"><a href="#强制停止容器" class="headerlink" title="强制停止容器"></a>强制停止容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker kill ContainerId</span><br></pre></td></tr></table></figure>
+<h5 id="启动已停止的容器"><a href="#启动已停止的容器" class="headerlink" title="启动已停止的容器"></a>启动已停止的容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker start ContainerId</span><br></pre></td></tr></table></figure>
+<h5 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart</span><br></pre></td></tr></table></figure>
+
+<h5 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm Container</span><br></pre></td></tr></table></figure>
+<p><strong><em>小知识：该命令只能移除已停止的容器，如果需要移除正在运行的容器，可以使用-f参数</em></strong></p>
 
       
     </div>
@@ -1108,126 +1223,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ail-fast%E5%92%8Cfail-safe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/ail-fast%E5%92%8Cfail-safe/" class="post-title-link" itemprop="url">fail-fast和fail-safe</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-06-14 14:51:00 / Modified: 15:29:47" itemprop="dateCreated datePublished" datetime="2020-06-14T14:51:00+08:00">2020-06-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="fail-fast"><a href="#fail-fast" class="headerlink" title="fail-fast"></a>fail-fast</h3><p>首先啥是fail-fast？下面引用别人的解释:</p>
-<blockquote>
-<p>在系统设计中，快速失效系统一种可以立即报告任何可能表明故障的情况的系统。快速失效系统通常设计用于停止正常操作，而不是试图继续可能存在缺陷的过程。这种设计通常会在操作中的多个点检查系统的状态，因此可以及早检测到任何故障。快速失败模块的职责是检测错误，然后让系统的下一个最高级别处理错误。</p>
-</blockquote>
-<p>他的意思就是写程序<strong><em>先考虑异常情况</em></strong>，如果遇到就直接抛出处理。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public int divide(int divisor,int dividend)&#123;</span><br><span class="line">    if(dividend &#x3D;&#x3D; 0)&#123;</span><br><span class="line">        throw new RuntimeException(&quot;dividend can&#39;t be null&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return divisor&#x2F;dividend;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>例如上面的方法，对除数进行检测如果是0则直接抛出异常，并标明异常原因。这样做的好处就是可以预先识别出一些错误情况，一方面可以避免执行复杂的其他代码，另外一方面，这种异常情况被识别之后也可以针对性的做一些单独处理。</p>
-</blockquote>
-<h4 id="集合中的fail-fast"><a href="#集合中的fail-fast" class="headerlink" title="集合中的fail-fast"></a>集合中的fail-fast</h4><blockquote>
-<p>我们通常说的Java中的fail-fast机制，默认指的是Java集合的一种错误检测机制。当多个线程对部分集合进行结构上的改变的操作时，有可能会产生fail-fast机制，这个时候就会抛出ConcurrentModificationException。下面来看看例子:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">   for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上面使用foreach来遍历list并删除元素值为5的元素，执行结果：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:909)</span><br><span class="line">	at java.util.ArrayList$Itr.next(ArrayList.java:859)</span><br><span class="line">	at com.czj.example01.TestList.main(TestList.java:17)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以看到抛出了ConcurrentModificationException异常，这是因为list的fast-fail的机制。</p>
-</blockquote>
-<h4 id="list源码分析"><a href="#list源码分析" class="headerlink" title="list源码分析"></a>list源码分析</h4><blockquote>
-<p>下面是ArrayList里的内部类Itr的remove()源码,可以看到在执行移除前会执行checkForComodification()方法。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void remove() &#123;</span><br><span class="line">         if (lastRet &lt; 0)</span><br><span class="line">             throw new IllegalStateException();</span><br><span class="line">         checkForComodification();</span><br><span class="line"></span><br><span class="line">         try &#123;</span><br><span class="line">             ArrayList.this.remove(lastRet);</span><br><span class="line">             cursor &#x3D; lastRet;</span><br><span class="line">             lastRet &#x3D; -1;</span><br><span class="line">             expectedModCount &#x3D; modCount;</span><br><span class="line">         &#125; catch (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">             throw new ConcurrentModificationException();</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">    if (modCount !&#x3D; expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以看到这里就是抛出ConcurrentModificationException异常的地方，那么modCount和expectedModCount分别代表什么呢？</p>
-</blockquote>
-<ul>
-<li>modCount:ArrayList的成员变量，代表集合的修改次数，初始值为0</li>
-<li>expected:Itr的成员变量，代表迭代器预期集合的修改次数，初始值等于创建itr时的修改次数，只有通过迭代器对集合进行操作，该值才会改变。</li>
-</ul>
-<blockquote>
-<p>通过foreach来遍历集合，其实就是通过集合的迭代器（Iterator）来遍历的，如果不通过迭代器来修改集合内的元素，只要他发现有某一次修改是未经过自己进行的，那么就会抛出异常。</p>
-</blockquote>
-<h3 id="fail-safe"><a href="#fail-safe" class="headerlink" title="fail-safe"></a>fail-safe</h3><blockquote>
-<p>fail-safe字面理解<strong><em>安全失败</em></strong>，java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下面的所有的类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全失败的迭代器永远不会抛出这样的异常。</p>
-</blockquote>
-<h4 id="集合中的fail-safe"><a href="#集合中的fail-safe" class="headerlink" title="集合中的fail-safe"></a>集合中的fail-safe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new CopyOnWriteArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">    for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(integer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面使用CopyOnWriteArrayList这个类来演示fail-safe，这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1292,17 +1291,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
