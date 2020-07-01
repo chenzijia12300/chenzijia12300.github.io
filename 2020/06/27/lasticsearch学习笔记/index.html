@@ -28,7 +28,7 @@
 <meta property="og:description" content="啥是Elasticsearch ElasticSearch是一个高度可扩展的开源搜索引擎并使用REST API，底层是开源库 Lucene。  Elasticsearch优点 横向可扩展性: 作为大型分布式集群，很容易就能扩展新的服务器到ES集群中；也可运行在单机上作为轻量级搜索引擎使用。 更丰富的功能: 与传统关系型数据库相比，ES提供了全文检索、同义词处理、相关度排名、复杂数据分析、海量数据的">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-27T14:02:00.000Z">
-<meta property="article:modified_time" content="2020-06-28T03:09:19.717Z">
+<meta property="article:modified_time" content="2020-06-29T02:11:35.308Z">
 <meta property="article:author" content="陈梓佳">
 <meta property="article:tag" content="搜索引擎">
 <meta property="article:tag" content="Elasticsearch">
@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 11:09:19" itemprop="dateModified" datetime="2020-06-28T11:09:19+08:00">2020-06-28</time>
+                <time title="Modified: 2020-06-29 10:11:35" itemprop="dateModified" datetime="2020-06-29T10:11:35+08:00">2020-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -269,6 +269,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 3,</span><br><span class="line">    &quot;result&quot;: &quot;deleted&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 3,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>从result字段可以看到该文档已被删除了</p>
+<h3 id="下一个"><a href="#下一个" class="headerlink" title="下一个"></a>下一个</h3><p>Elasticsearch的搜索功能</p>
 
     </div>
 
@@ -300,7 +301,10 @@
     <a href="/2020/06/26/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Docker学习笔记">
       <i class="fa fa-chevron-left"></i> Docker学习笔记
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="next" title="java移位运算符">
+      java移位运算符 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -359,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#啥是Elasticsearch"><span class="nav-number">1.</span> <span class="nav-text">啥是Elasticsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Elasticsearch优点"><span class="nav-number">2.</span> <span class="nav-text">Elasticsearch优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node与Cluster"><span class="nav-number">3.1.</span> <span class="nav-text">Node与Cluster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Index"><span class="nav-number">3.2.</span> <span class="nav-text">Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document"><span class="nav-number">3.3.</span> <span class="nav-text">Document</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建记录"><span class="nav-number">4.1.</span> <span class="nav-text">新建记录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不指定文档的ID"><span class="nav-number">4.1.1.</span> <span class="nav-text">不指定文档的ID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定文档的ID"><span class="nav-number">4.1.2.</span> <span class="nav-text">指定文档的ID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回结果字段解释："><span class="nav-number">4.1.3.</span> <span class="nav-text">返回结果字段解释：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询文档"><span class="nav-number">4.2.</span> <span class="nav-text">查询文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存在查询ID的文档"><span class="nav-number">4.2.1.</span> <span class="nav-text">存在查询ID的文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不存在查询ID的文档"><span class="nav-number">4.2.2.</span> <span class="nav-text">不存在查询ID的文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回结果字段解释"><span class="nav-number">4.2.3.</span> <span class="nav-text">返回结果字段解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改文档"><span class="nav-number">4.3.</span> <span class="nav-text">更改文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文档"><span class="nav-number">4.4.</span> <span class="nav-text">删除文档</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#啥是Elasticsearch"><span class="nav-number">1.</span> <span class="nav-text">啥是Elasticsearch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Elasticsearch优点"><span class="nav-number">2.</span> <span class="nav-text">Elasticsearch优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">3.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node与Cluster"><span class="nav-number">3.1.</span> <span class="nav-text">Node与Cluster</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Index"><span class="nav-number">3.2.</span> <span class="nav-text">Index</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Document"><span class="nav-number">3.3.</span> <span class="nav-text">Document</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建记录"><span class="nav-number">4.1.</span> <span class="nav-text">新建记录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不指定文档的ID"><span class="nav-number">4.1.1.</span> <span class="nav-text">不指定文档的ID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#指定文档的ID"><span class="nav-number">4.1.2.</span> <span class="nav-text">指定文档的ID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回结果字段解释："><span class="nav-number">4.1.3.</span> <span class="nav-text">返回结果字段解释：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询文档"><span class="nav-number">4.2.</span> <span class="nav-text">查询文档</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存在查询ID的文档"><span class="nav-number">4.2.1.</span> <span class="nav-text">存在查询ID的文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不存在查询ID的文档"><span class="nav-number">4.2.2.</span> <span class="nav-text">不存在查询ID的文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#返回结果字段解释"><span class="nav-number">4.2.3.</span> <span class="nav-text">返回结果字段解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更改文档"><span class="nav-number">4.3.</span> <span class="nav-text">更改文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除文档"><span class="nav-number">4.4.</span> <span class="nav-text">删除文档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下一个"><span class="nav-number">5.</span> <span class="nav-text">下一个</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -372,7 +376,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

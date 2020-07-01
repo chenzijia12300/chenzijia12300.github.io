@@ -152,6 +152,116 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">LinkedBlockingQueue详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-29 10:47:27" itemprop="dateCreated datePublished" datetime="2020-04-29T10:47:27+08:00">2020-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-02 16:12:34" itemprop="dateModified" datetime="2020-05-02T16:12:34+08:00">2020-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="LinkedBlockingQueue简介"><a href="#LinkedBlockingQueue简介" class="headerlink" title="LinkedBlockingQueue简介"></a>LinkedBlockingQueue简介</h3><blockquote>
+<p>LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线程安全队列。由下类图可以看到他的基本实现。它也是由单向链表实现，也是分别由两个Node指向head和tail，内部还有初始量为0的AtomicInteger的原子变量来计算队列数量。还有两个ReentrantLock独占锁来控制元素入队和出队的原子性。</p>
+</blockquote>
+<p><img src="/images/LinkedBlockingQueue.png" alt="upload successful"></p>
+<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;队列数量最大值默认为0x7FFFFFFF 对应 Integer.MAX_VALUE 即 2147483647</span><br><span class="line">private final int capacity;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;原子性变量计算队列元素个数</span><br><span class="line">private final AtomicInteger count &#x3D; new AtomicInteger();</span><br><span class="line">		</span><br><span class="line">&#x2F;&#x2F;头部节点</span><br><span class="line">transient Node&lt;E&gt; head;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;尾部节点</span><br><span class="line">private transient Node&lt;E&gt; last;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;出队操作需要获得该锁</span><br><span class="line">private final ReentrantLock takeLock &#x3D; new ReentrantLock();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">private final Condition notEmpty &#x3D; takeLock.newCondition();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;入队操作需要获得该锁</span><br><span class="line">private final ReentrantLock putLock &#x3D; new ReentrantLock();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">private final Condition notFull &#x3D; putLock.newCondition();</span><br></pre></td></tr></table></figure>
+
+<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public LinkedBlockingQueue() &#123;</span><br><span class="line">    this(Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public LinkedBlockingQueue(int capacity) &#123;</span><br><span class="line">    if (capacity &lt;&#x3D; 0) throw new IllegalArgumentException();</span><br><span class="line">    this.capacity &#x3D; capacity;</span><br><span class="line">    &#x2F;&#x2F;初始化首尾节点都指向哨兵节点</span><br><span class="line">    last &#x3D; head &#x3D; new Node&lt;E&gt;(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="入队操作分析"><a href="#入队操作分析" class="headerlink" title="入队操作分析"></a>入队操作分析</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    if (e &#x3D;&#x3D; null) throw new NullPointerException();&#x2F;&#x2F;判空</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得队列个数</span><br><span class="line">    if (count.get() &#x3D;&#x3D; capacity)&#x2F;&#x2F;判断队列个数是否等于边界值</span><br><span class="line">        return false;</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    Node&lt;E&gt; node &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;新建节点</span><br><span class="line">    final ReentrantLock putLock &#x3D; this.putLock;</span><br><span class="line">    putLock.lock();&#x2F;&#x2F;获得入队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count.get() &lt; capacity)&#x2F;&#x2F;判断队列个数是否小于边界值&#123;</span><br><span class="line">            enqueue(node);&#x2F;&#x2F;添加进队列尾部</span><br><span class="line">            c &#x3D; count.getAndIncrement();&#x2F;&#x2F;自增</span><br><span class="line">            if (c + 1 &lt; capacity)</span><br><span class="line">                notFull.signal();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        putLock.unlock();&#x2F;&#x2F;放锁</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; 0)</span><br><span class="line">        signalNotEmpty();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">    return c &gt;&#x3D; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>offer()非堵塞入队方法，负责向队列尾部添加一个元素，如果队列有位置添加成功后返回true，否则返回false，如果元素为null则抛出NPE异常。</p>
+</blockquote>
+<h5 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    if (e &#x3D;&#x3D; null) throw new NullPointerException();&#x2F;&#x2F;判空</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    Node&lt;E&gt; node &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;新建节点</span><br><span class="line">    final ReentrantLock putLock &#x3D; this.putLock;</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;</span><br><span class="line">    putLock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count.get() &#x3D;&#x3D; capacity)&#123;</span><br><span class="line">            notFull.await();&#x2F;&#x2F;因队列个数已满把自己挂起</span><br><span class="line">        &#125;</span><br><span class="line">        enqueue(node);&#x2F;&#x2F;入队</span><br><span class="line">        c &#x3D; count.getAndIncrement();&#x2F;&#x2F;自增</span><br><span class="line">        if (c + 1 &lt; capacity)</span><br><span class="line">            notFull.signal();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        putLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; 0)</span><br><span class="line">        signalNotEmpty();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>put()方法向队列尾部添加一个元素，如果队列不为空且添加成功就返回true，否则堵塞线程，直至队列有位置添加成功在返回。如果在该线程被堵塞时设置了中断标志则会抛出InterruptedException异常，如果元素为null则抛出NPE异常。</p>
+</blockquote>
+<h4 id="出队操作分析"><a href="#出队操作分析" class="headerlink" title="出队操作分析"></a>出队操作分析</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得总数</span><br><span class="line">    if (count.get() &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则提取退出</span><br><span class="line">        return null;</span><br><span class="line">    E x &#x3D; null;</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">    takeLock.lock();&#x2F;&#x2F;获得出队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count.get() &gt; 0)&#123;</span><br><span class="line">            x &#x3D; dequeue();出队</span><br><span class="line">            c &#x3D; count.getAndDecrement();递减</span><br><span class="line">            if (c &gt; 1)</span><br><span class="line">                notEmpty.signal();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        takeLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; capacity)</span><br><span class="line">        signalNotFull();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>poll()方法从首部节点获取并移除一个元素，如果队列为空则返回null，否则返回元素值,另外该方法为非堵塞的。</p>
+</blockquote>
+<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">      E x;</span><br><span class="line">      int c &#x3D; -1;</span><br><span class="line">      final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得元素个数</span><br><span class="line">      final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">      takeLock.lockInterruptibly();&#x2F;&#x2F;获得出队操作的可以被中断的独占锁</span><br><span class="line">      try &#123;</span><br><span class="line">          while (count.get() &#x3D;&#x3D; 0)&#123;</span><br><span class="line">              notEmpty.await();&#x2F;&#x2F;队列为空则休眠</span><br><span class="line">          &#125;</span><br><span class="line">          x &#x3D; dequeue();&#x2F;&#x2F;出队</span><br><span class="line">          c &#x3D; count.getAndDecrement();&#x2F;&#x2F;递减</span><br><span class="line">          if (c &gt; 1)</span><br><span class="line">              notEmpty.signal();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">      &#125; finally &#123;</span><br><span class="line">          takeLock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line">      if (c &#x3D;&#x3D; capacity)</span><br><span class="line">          signalNotFull();&#x2F;&#x2F;唤醒因队列为满而休眠的线程</span><br><span class="line">      return x;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>take()方法从首部节点获得并移除一个元素，如果队列为空则堵塞当前线程直到队列不为空返回元素值。如果当前线程被设置了中断标志则被堵塞线程会抛出InterruptedException异常,队列不为空则直接返回元素值。</p>
+</blockquote>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><h5 id="peek"><a href="#peek" class="headerlink" title="peek()"></a>peek()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public E peek() &#123;</span><br><span class="line">    if (count.get() &#x3D;&#x3D; 0)&#x2F;&#x2F;队列为空提前返回null</span><br><span class="line">        return null;</span><br><span class="line">    final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">    takeLock.lock();&#x2F;&#x2F;获得出队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        Node&lt;E&gt; first &#x3D; head.next;</span><br><span class="line">        if (first &#x3D;&#x3D; null)</span><br><span class="line">            return null;</span><br><span class="line">        else</span><br><span class="line">            return first.item;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        takeLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>peek()方法从首部节点获得元素值，如果队列为空则返回null，否则返回元素值，另外该方法非堵塞。</p>
+</blockquote>
+<h5 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int size() &#123;</span><br><span class="line">    return count.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>size()获取当前队列元素个数</p>
+</blockquote>
+<h5 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    if (o &#x3D;&#x3D; null) return false;&#x2F;&#x2F;如果参数为null则直接返回false</span><br><span class="line">    fullyLock();&#x2F;&#x2F;这波是获得入队操作，出队操作的两把独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">    	  &#x2F;&#x2F;遍历队列查找元素，发现则删除返回true，否则返回false</span><br><span class="line">        for (Node&lt;E&gt; trail &#x3D; head, p &#x3D; trail.next;</span><br><span class="line">             p !&#x3D; null;</span><br><span class="line">             trail &#x3D; p, p &#x3D; p.next) &#123;</span><br><span class="line">            if (o.equals(p.item)) &#123;</span><br><span class="line">                unlink(p, trail);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        fullyUnlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/ConcurrentLinkedQueue%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1237,67 +1347,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">我的第一次博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-18 14:04:00 / Modified: 19:28:13" itemprop="dateCreated datePublished" datetime="2020-04-18T14:04:00+08:00">2020-04-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <p>开始于2020年4月18日</p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1366,7 +1415,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

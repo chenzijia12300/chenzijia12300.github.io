@@ -152,6 +152,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">java移位运算符</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-01 15:12:00 / Modified: 15:25:51" itemprop="dateCreated datePublished" datetime="2020-07-01T15:12:00+08:00">2020-07-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>java中移位运算符包括：左移运算符（&lt;&lt;）,右移运算符（&gt;&gt;），无符号右移运算符（&gt;&gt;&gt;）,移位运算符操作的是对象的二进制位。</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;&lt;</td>
+<td>左移运算符，将运算符左边的对象向左移动运算符右边指定的位数（在低位补0）</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>“有符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。如果是正数则高位补0，如果是负数则高位补1</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>“无符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。无论正负高位都为0</td>
+</tr>
+</tbody></table>
+<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int negativeNun &#x3D; -8,positiveNum &#x3D; 8;</span><br><span class="line">System.out.println(&quot;----- &lt;&lt;左移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&lt;&lt;2);</span><br><span class="line">System.out.println(positiveNum&lt;&lt;2);</span><br><span class="line">System.out.println(&quot;----- &gt;&gt;右移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&gt;&gt;2);</span><br><span class="line">System.out.println(positiveNum&gt;&gt;2);</span><br><span class="line">System.out.println(&quot;----- &gt;&gt;&gt;无符号右移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&gt;&gt;&gt;2);</span><br><span class="line">System.out.println(positiveNum&gt;&gt;&gt;2);</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- &lt;&lt;左移运算符 ------</span><br><span class="line">-32</span><br><span class="line">32</span><br><span class="line">----- &gt;&gt;右移运算符 ------</span><br><span class="line">-2</span><br><span class="line">2</span><br><span class="line">----- &gt;&gt;&gt;无符号右移运算符 ------</span><br><span class="line">1073741822</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -183,7 +276,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-28 11:09:19" itemprop="dateModified" datetime="2020-06-28T11:09:19+08:00">2020-06-28</time>
+                <time title="Modified: 2020-06-29 10:11:35" itemprop="dateModified" datetime="2020-06-29T10:11:35+08:00">2020-06-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,6 +358,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 3,</span><br><span class="line">    &quot;result&quot;: &quot;deleted&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 3,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>从result字段可以看到该文档已被删除了</p>
+<h3 id="下一个"><a href="#下一个" class="headerlink" title="下一个"></a>下一个</h3><p>Elasticsearch的搜索功能</p>
 
       
     </div>
@@ -1183,91 +1277,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ava7-try-with-resource/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/ava7-try-with-resource/" class="post-title-link" itemprop="url">java7 try-with-resource</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-06-14 15:46:00 / Modified: 15:51:40" itemprop="dateCreated datePublished" datetime="2020-06-14T15:46:00+08:00">2020-06-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="java7之前"><a href="#java7之前" class="headerlink" title="java7之前"></a>java7之前</h3><blockquote>
-<p>在java7版本之前我们使用资源后，都需要把资源关闭，在try-catch-finally中的finally关闭资源。</p>
-</blockquote>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">long currentTime &#x3D; System.currentTimeMillis();</span><br><span class="line">BufferedReader bufferedReader &#x3D; null;</span><br><span class="line">try&#123;</span><br><span class="line">    bufferedReader &#x3D; new BufferedReader(new FileReader(&quot;C:&#x2F;Users&#x2F;ZJ&#x2F;Desktop&#x2F;spring.log&quot;));</span><br><span class="line">    String line &#x3D; null;</span><br><span class="line">    while((line &#x3D; bufferedReader.readLine())!&#x3D;null)&#123;</span><br><span class="line">        System.out.println(line);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println((System.currentTimeMillis()-currentTime)&#x2F;1000.0+&quot;秒&quot;);</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;finally &#123;</span><br><span class="line">    if (bufferedReader!&#x3D;null)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            bufferedReader.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这个代码莫得问题，但是太杂乱了，因此java7提供了一个新的语法糖：try-with-resource。</p>
-</blockquote>
-<h3 id="java7以后"><a href="#java7以后" class="headerlink" title="java7以后"></a>java7以后</h3><blockquote>
-<p>try-with-resources 方式来管理资源，在try中声明资源，当程序执行完后，会自动将声明的资源关闭掉</p>
-</blockquote>
-<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">long currentTime &#x3D; System.currentTimeMillis();</span><br><span class="line">try(BufferedReader bufferedReader &#x3D; new BufferedReader(new FileReader(&quot;C:&#x2F;Users&#x2F;ZJ&#x2F;Desktop&#x2F;spring.log&quot;)))&#123;</span><br><span class="line">    String line &#x3D; null;</span><br><span class="line">    while((line &#x3D; bufferedReader.readLine())!&#x3D;null)&#123;</span><br><span class="line">        System.out.println(line);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println((System.currentTimeMillis()-currentTime)&#x2F;1000.0+&quot;秒&quot;);</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>我们可以很明显的看到代码量少了很多，而且再也不会因为忘记close而导致出问题拉。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1336,7 +1345,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
