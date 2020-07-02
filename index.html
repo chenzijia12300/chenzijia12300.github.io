@@ -152,6 +152,198 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/01/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">Docker学习笔记（二）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-01 23:29:00" itemprop="dateCreated datePublished" datetime="2020-07-01T23:29:00+08:00">2020-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-02 11:15:13" itemprop="dateModified" datetime="2020-07-02T11:15:13+08:00">2020-07-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="Docker常用命令"><a href="#Docker常用命令" class="headerlink" title="Docker常用命令"></a>Docker常用命令</h3><p>今天我们继续来学Docker的命令/(ㄒoㄒ)/~~</p>
+<h4 id="docker-inspect"><a href="#docker-inspect" class="headerlink" title="docker inspect"></a>docker inspect</h4><ul>
+<li>语法：docker inspect ContainerId/NAME  </li>
+<li>作用：获取容器/镜像的元数据    </li>
+</ul>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">docker inspect elasticsearch:7.7.1                                                                                    [</span><br><span class="line">   &#123;</span><br><span class="line">       &quot;Id&quot;: &quot;sha256:830a894845e39d20e413d8a824ba1f7562d76a02cf9a85a8b6d1d9d47a4d5dd3&quot;,</span><br><span class="line">       &quot;RepoTags&quot;: [</span><br><span class="line">           &quot;elasticsearch:7.7.1&quot;</span><br><span class="line">       ],</span><br><span class="line">       &quot;RepoDigests&quot;: [</span><br><span class="line">           &quot;elasticsearch@sha256:dff614393a31b93e8bbe9f8d1a77be041da37eac2a7a9567166dd5a2abab7c67&quot;</span><br><span class="line">       ],</span><br><span class="line">       &quot;Parent&quot;: &quot;&quot;,</span><br><span class="line">       &quot;Comment&quot;: &quot;&quot;,</span><br><span class="line">       &quot;Created&quot;: &quot;2020-05-28T16:35:24.240322241Z&quot;,</span><br><span class="line">       &quot;Container&quot;: &quot;a5f5c958558a9b015c3b57d3d625c478fd2c1d37e62dad4cb51a23862b59dfdb&quot;,</span><br><span class="line">       &quot;ContainerConfig&quot;: &#123;</span><br><span class="line">           &quot;Hostname&quot;: &quot;a5f5c958558a&quot;,</span><br><span class="line">           &quot;Domainname&quot;: &quot;&quot;,</span><br><span class="line">           &quot;User&quot;: &quot;&quot;,</span><br><span class="line">           &quot;AttachStdin&quot;: false,</span><br><span class="line">           &quot;AttachStdout&quot;: false,</span><br><span class="line">           &quot;AttachStderr&quot;: false,</span><br><span class="line">           &quot;ExposedPorts&quot;: &#123;</span><br><span class="line">               &quot;9200&#x2F;tcp&quot;: &#123;&#125;,</span><br><span class="line">               &quot;9300&#x2F;tcp&quot;: &#123;&#125;</span><br><span class="line">           &#125;,</span><br><span class="line">           &quot;Tty&quot;: false,</span><br><span class="line">           &quot;OpenStdin&quot;: false,</span><br><span class="line">           &quot;StdinOnce&quot;: false,</span><br><span class="line">           &quot;Env&quot;: [</span><br><span class="line">               &quot;PATH&#x3D;&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbin:&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;bin:&#x2F;sbin:&#x2F;bin&quot;,</span><br><span class="line">               &quot;ELASTIC_CONTAINER&#x3D;true&quot;</span><br><span class="line">           ],</span><br><span class="line">           &quot;Cmd&quot;: [</span><br><span class="line">               &quot;&#x2F;bin&#x2F;sh&quot;,</span><br><span class="line">               &quot;-c&quot;,</span><br><span class="line">               &quot;#(nop) &quot;,</span><br><span class="line">               &quot;CMD [\&quot;eswrapper\&quot;]&quot;</span><br><span class="line">           ],</span><br><span class="line">           &quot;Image&quot;: &quot;sha256:9a105291472c67a41cd4ed711e3db5e87f6073550fd1402f9cb8e70597abe019&quot;,</span><br><span class="line">           &quot;Volumes&quot;: null,</span><br><span class="line">           &quot;WorkingDir&quot;: &quot;&#x2F;usr&#x2F;share&#x2F;elasticsearch&quot;,</span><br><span class="line">           &quot;Entrypoint&quot;: [</span><br><span class="line">               &quot;&#x2F;tini&quot;,</span><br><span class="line">               &quot;--&quot;,</span><br><span class="line">               &quot;&#x2F;usr&#x2F;local&#x2F;bin&#x2F;docker-entrypoint.sh&quot;</span><br><span class="line">           ],</span><br><span class="line">           &quot;OnBuild&quot;: null,</span><br><span class="line">           &quot;Labels&quot;: &#123;</span><br><span class="line">               &quot;org.label-schema.build-date&quot;: &quot;2020-05-28T16:30:01.040088Z&quot;,</span><br><span class="line">               &quot;org.label-schema.license&quot;: &quot;Elastic-License&quot;,</span><br><span class="line">               &quot;org.label-schema.name&quot;: &quot;Elasticsearch&quot;,</span><br><span class="line">               &quot;org.label-schema.schema-version&quot;: &quot;1.0&quot;,</span><br><span class="line">               &quot;org.label-schema.url&quot;: &quot;https:&#x2F;&#x2F;www.elastic.co&#x2F;products&#x2F;elasticsearch&quot;,</span><br><span class="line">               &quot;org.label-schema.usage&quot;: &quot;https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;elasticsearch&#x2F;reference&#x2F;index.html&quot;,</span><br><span class="line">               &quot;org.label-schema.vcs-ref&quot;: &quot;ad56dce891c901a492bb1ee393f12dfff473a423&quot;,</span><br><span class="line">               &quot;org.label-schema.vcs-url&quot;: &quot;https:&#x2F;&#x2F;github.com&#x2F;elastic&#x2F;elasticsearch&quot;,</span><br><span class="line">               &quot;org.label-schema.vendor&quot;: &quot;Elastic&quot;,</span><br><span class="line">               &quot;org.label-schema.version&quot;: &quot;7.7.1&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.created&quot;: &quot;2020-05-28T16:30:01.040088Z&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.documentation&quot;: &quot;https:&#x2F;&#x2F;www.elastic.co&#x2F;guide&#x2F;en&#x2F;elasticsearch&#x2F;reference&#x2F;index.html&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.licenses&quot;: &quot;Elastic-License&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.revision&quot;: &quot;ad56dce891c901a492bb1ee393f12dfff473a423&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.source&quot;: &quot;https:&#x2F;&#x2F;github.com&#x2F;elastic&#x2F;elasticsearch&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.title&quot;: &quot;Elasticsearch&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.url&quot;: &quot;https:&#x2F;&#x2F;www.elastic.co&#x2F;products&#x2F;elasticsearch&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.vendor&quot;: &quot;Elastic&quot;,</span><br><span class="line">               &quot;org.opencontainers.image.version&quot;: &quot;7.7.1&quot;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,.......</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="docker-cp"><a href="#docker-cp" class="headerlink" title="docker cp"></a>docker cp</h3><ul>
+<li><p>语法：docker cp CONTAINER:SRC_PATH  DEST_PATH  </p>
+</li>
+<li><p>作用：将容器中文件拷往主机 </p>
+</li>
+<li><p>语法：docker cp SRC_PATH CONTAINER:DEST_PATH</p>
+</li>
+<li><p>作用：将主机的文件拷往容器</p>
+</li>
+</ul>
+<p><img src="/images/pasted-78.png" alt="upload successful"></p>
+<p>例子：将本地的elasticsearch.yml拷往容器的/usr/share/elasticsearch/co<br>nfig/  文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker cp E:&#x2F;elasticsearch-7.3.2-no-jdk-windows-x86_64&#x2F;elasticsearch-7.3.2&#x2F;config&#x2F;elasticsearch.yml 83bba1b53fff:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;co</span><br><span class="line">nfig&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>例子：将容器的elasticsearch.yml拷往主机的桌面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 83bba1b53fff:&#x2F;usr&#x2F;share&#x2F;elasticsearch&#x2F;config&#x2F;elasticsearch.yml C:&#x2F;Users&#x2F;ZJ&#x2F;Desktop&#x2F;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="docker-logs"><a href="#docker-logs" class="headerlink" title="docker logs"></a>docker logs</h3><ul>
+<li>命令： docker logs [OPTIONS] CONTAINERID    </li>
+<li>作用：获取容器的日志</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>–details</td>
+<td>显示更多的信息</td>
+</tr>
+<tr>
+<td>-f, –follow</td>
+<td>跟踪实时日志</td>
+</tr>
+<tr>
+<td>–since string</td>
+<td>显示自某个timestamp之后的日志，或相对时间，如42m（即42分钟）</td>
+</tr>
+<tr>
+<td>–tail string</td>
+<td>从日志末尾显示多少行日志， 默认是all</td>
+</tr>
+<tr>
+<td>-t, –timestamps</td>
+<td>显示时间戳</td>
+</tr>
+<tr>
+<td>–until string</td>
+<td>显示自某个timestamp之前的日志，或相对时间，如42m（即42分钟）</td>
+</tr>
+</tbody></table>
+<p>例子：跟踪实时日志，只显示最后5行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f -t --tail&#x3D;5 83bba1b53fff</span><br></pre></td></tr></table></figure>
+
+<p>例子：显示最近30分钟的日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs --since&#x3D;30m 83bba1b53fff</span><br></pre></td></tr></table></figure>
+
+<p>例子：显示2020年7月1日以后的日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -t --since&#x3D;&quot;2020-07-01&quot; 83bba1b53fff</span><br></pre></td></tr></table></figure>
+
+<p>例子：显示2020年7月1日至2020年7月2日时间段的日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -t --since&#x3D;&quot;2020-07-01&quot; --until &quot;2020-07-02&quot; 83bba1b53fff</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="docker-exec"><a href="#docker-exec" class="headerlink" title="docker exec"></a>docker exec</h3><ul>
+<li>命令:docker exec [OPTIONS] CONTAINER COMMAND [ARG…]</li>
+<li>作用：在运行的容器中执行命令</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>在后台运行</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>即使没有附加也保持STDIN 打开</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>分配一个伪终端</td>
+</tr>
+</tbody></table>
+<p>例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker exec -it 941a819f5832  echo -e &quot;Hello nginx&quot;</span><br><span class="line">Hello nginx</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="命令小备份："><a href="#命令小备份：" class="headerlink" title="命令小备份："></a>命令小备份：</h3><p>docker exec 83bba1b53fff cat /usr/share/elasticsearch/config/elasticsearch.yml</p>
+<p>$ docker run –name=test_es -d -p 9200:9200 -p 9300:9300 docker.io/elasticsearch:7.7.1</p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -412,7 +604,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-27 21:45:43" itemprop="dateModified" datetime="2020-06-27T21:45:43+08:00">2020-06-27</time>
+                <time title="Modified: 2020-07-02 11:15:03" itemprop="dateModified" datetime="2020-07-02T11:15:03+08:00">2020-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -420,7 +612,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">容器</span></a>
+                  <a href="/categories/docker/" itemprop="url" rel="index"><span itemprop="name">docker</span></a>
                 </span>
             </span>
 
@@ -1171,112 +1363,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-14 23:42:00" itemprop="dateCreated datePublished" datetime="2020-06-14T23:42:00+08:00">2020-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-15 15:13:53" itemprop="dateModified" datetime="2020-06-15T15:13:53+08:00">2020-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>单例模式是java23中设计模式之一，也是最常见的一种模式。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>整个程序运行中只允许有一个类的实例</li>
-<li>需要频繁创建然后销毁的对象</li>
-<li>创建对象时耗时过多或者耗资源过多，但又经常用到的对象</li>
-<li>方便资源相互通信的环境</li>
-</ul>
-<h3 id="单例的几种模式"><a href="#单例的几种模式" class="headerlink" title="单例的几种模式"></a>单例的几种模式</h3><h4 id="线程不安全的懒汉式"><a href="#线程不安全的懒汉式" class="headerlink" title="线程不安全的懒汉式"></a>线程不安全的懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程不安全懒汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:41</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            singleton &#x3D; new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在需要的时候才创建实例，节省内存空间，但是多线程同时访问会导致返回多个实例。</p>
-</blockquote>
-<h4 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton &#x3D; new Singleton();</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 饿汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:54</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Singleton getInstance()&#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM的类加载机制实现了初始化，保证了线程安全。</p>
-</blockquote>
-<h4 id="线程安全懒汉式"><a href="#线程安全懒汉式" class="headerlink" title="线程安全懒汉式"></a>线程安全懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程安全懒汉式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:55</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            synchronized (Singleton.class)&#123;</span><br><span class="line">                if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    singleton &#x3D; new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过双重加锁判断实现了线程安全，但是效率就慢了。</p>
-</blockquote>
-<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder&#123;</span><br><span class="line">        public static Singleton singleton &#x3D; new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 静态内部类</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 14:59</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return Holder.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM类加载机制保证线程安全。</p>
-</blockquote>
-<h4 id="枚举方式"><a href="#枚举方式" class="headerlink" title="枚举方式"></a>枚举方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 15:07</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">public enum SingletonEnum &#123;</span><br><span class="line">    INSTANCE(new Object());</span><br><span class="line"></span><br><span class="line">    private Object object;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 枚举单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 15:08</span><br><span class="line">     * @param [object]</span><br><span class="line">     * @return </span><br><span class="line">     *&#x2F;</span><br><span class="line">    SingletonEnum(Object object) &#123;</span><br><span class="line">        this.object &#x3D; object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过枚举方式创建的单例模式，能保证线程安全而且能防止序列化重新创建对象。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1345,7 +1431,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
