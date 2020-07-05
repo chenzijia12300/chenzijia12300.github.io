@@ -20,20 +20,23 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="简介java中移位运算符包括：左移运算符（&lt;&lt;）,右移运算符（&gt;&gt;），无符号右移运算符（&gt;&gt;&gt;）,移位运算符操作的是对象的二进制位。    运算符 含义    &lt;&lt; 左移运算符，将运算符左边的对象向左移动运算符右边指定的位数（在低位补0）   &gt;&gt; “有符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。如果是正数则">
+  <meta name="description" content="简介在微服务的项目中，服务层被拆分成很多个。那么如何处理这些服务之间的通信和管理呢？在Spring cloud中使用Eureka来提供服务注册中心来管理微服务信息。  Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eure">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java移位运算符">
-<meta property="og:url" content="http://yoursite.com/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
+<meta property="og:title" content="Spring Cloud的Eureka">
+<meta property="og:url" content="http://yoursite.com/2020/07/05/Spring-Cloud%E7%9A%84Eureka/index.html">
 <meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="简介java中移位运算符包括：左移运算符（&lt;&lt;）,右移运算符（&gt;&gt;），无符号右移运算符（&gt;&gt;&gt;）,移位运算符操作的是对象的二进制位。    运算符 含义    &lt;&lt; 左移运算符，将运算符左边的对象向左移动运算符右边指定的位数（在低位补0）   &gt;&gt; “有符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。如果是正数则">
+<meta property="og:description" content="简介在微服务的项目中，服务层被拆分成很多个。那么如何处理这些服务之间的通信和管理呢？在Spring cloud中使用Eureka来提供服务注册中心来管理微服务信息。  Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eure">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-01T07:12:00.000Z">
-<meta property="article:modified_time" content="2020-07-01T07:25:51.485Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-79.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-80.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-81.png">
+<meta property="article:published_time" content="2020-07-05T13:54:13.000Z">
+<meta property="article:modified_time" content="2020-07-05T15:51:04.123Z">
 <meta property="article:author" content="陈梓佳">
-<meta property="article:tag" content="java基础">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-79.png">
 
-<link rel="canonical" href="http://yoursite.com/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">
+<link rel="canonical" href="http://yoursite.com/2020/07/05/Spring-Cloud%E7%9A%84Eureka/">
 
 
 <script id="page-configurations">
@@ -46,7 +49,7 @@
   };
 </script>
 
-  <title>java移位运算符 | 汤姆猫的博客</title>
+  <title>Spring Cloud的Eureka | 汤姆猫的博客</title>
   
 
 
@@ -156,7 +159,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/va%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Spring-Cloud%E7%9A%84Eureka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +172,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          java移位运算符
+          Spring Cloud的Eureka
         </h1>
 
         <div class="post-meta">
@@ -180,16 +183,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-07-01 15:12:00 / Modified: 15:25:51" itemprop="dateCreated datePublished" datetime="2020-07-01T15:12:00+08:00">2020-07-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
+              <time title="Created: 2020-07-05 21:54:13 / Modified: 23:51:04" itemprop="dateCreated datePublished" datetime="2020-07-05T21:54:13+08:00">2020-07-05</time>
             </span>
 
           
@@ -202,31 +196,32 @@
     
     <div class="post-body" itemprop="articleBody">
       
-        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>java中移位运算符包括：左移运算符（&lt;&lt;）,右移运算符（&gt;&gt;），无符号右移运算符（&gt;&gt;&gt;）,移位运算符操作的是对象的二进制位。</p>
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>&lt;&lt;</td>
-<td>左移运算符，将运算符左边的对象向左移动运算符右边指定的位数（在低位补0）</td>
-</tr>
-<tr>
-<td>&gt;&gt;</td>
-<td>“有符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。如果是正数则高位补0，如果是负数则高位补1</td>
-</tr>
-<tr>
-<td>&gt;&gt;&gt;</td>
-<td>“无符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。无论正负高位都为0</td>
-</tr>
-</tbody></table>
-<h3 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int negativeNun &#x3D; -8,positiveNum &#x3D; 8;</span><br><span class="line">System.out.println(&quot;----- &lt;&lt;左移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&lt;&lt;2);</span><br><span class="line">System.out.println(positiveNum&lt;&lt;2);</span><br><span class="line">System.out.println(&quot;----- &gt;&gt;右移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&gt;&gt;2);</span><br><span class="line">System.out.println(positiveNum&gt;&gt;2);</span><br><span class="line">System.out.println(&quot;----- &gt;&gt;&gt;无符号右移运算符 ------&quot;);</span><br><span class="line">System.out.println(negativeNun&gt;&gt;&gt;2);</span><br><span class="line">System.out.println(positiveNum&gt;&gt;&gt;2);</span><br></pre></td></tr></table></figure>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在微服务的项目中，服务层被拆分成很多个。那么如何处理这些服务之间的通信和管理呢？在Spring cloud中使用Eureka来提供服务注册中心来管理微服务信息。</p>
+<blockquote>
+<p>Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提<br>供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。</p>
+</blockquote>
+<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<li>SpringBoot:2.2.5.RELEASE</li>
+<li>Java:1.8</li>
+<li>SpringCloud:Hoxton.SR3</li>
+<li>Maven:3.3.9</li>
+</ul>
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>首先在父工程的pom.xml添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-dependencies&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-cloud.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;&#x2F;type&gt;</span><br><span class="line">    &lt;scope&gt;import&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
 
-<p>结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">----- &lt;&lt;左移运算符 ------</span><br><span class="line">-32</span><br><span class="line">32</span><br><span class="line">----- &gt;&gt;右移运算符 ------</span><br><span class="line">-2</span><br><span class="line">2</span><br><span class="line">----- &gt;&gt;&gt;无符号右移运算符 ------</span><br><span class="line">1073741822</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<p>然后在子工程（eureka）里的pom.xml添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动类"><a href="#启动类" class="headerlink" title="启动类"></a>启动类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaServer&#x2F;&#x2F;声明是Eureka服务</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class EurekaApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(EurekaApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="application-yml文件配置"><a href="#application-yml文件配置" class="headerlink" title="application.yml文件配置"></a>application.yml文件配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8100</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: app-eureka-center</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    #注册中心地址</span><br><span class="line">    hostname: 127.0.0.1</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      #客户端调用地址</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;$&#123;eureka.instance.hostname&#125;:8100&#x2F;eureka&#x2F;</span><br><span class="line">    #是否将自己注册到eureka中，该应用不用因为他自己就是注册中心</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    #是否从注册中心中获得信息，原因同上</span><br><span class="line">    fetch-registry: false</span><br><span class="line">  server:</span><br><span class="line">    enable-self-preservation: false</span><br><span class="line">    eviction-interval-timer-in-ms: 3000</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动看看"><a href="#启动看看" class="headerlink" title="启动看看"></a>启动看看</h4><p><img src="/images/pasted-79.png" alt="upload successful"></p>
+<h3 id="Eureka的高可用"><a href="#Eureka的高可用" class="headerlink" title="Eureka的高可用"></a>Eureka的高可用</h3><p>在实际的生产环境中单机的Eureka Server并不适合线上环境。如果它宕机了，会影响到整个系统的可用性，因此，在生产环境中，通常会部署一个高可用的Eureka Server集群。Eureka Server可以运行多个实例并且相互注册的方式来实现高可用部署。</p>
+<h3 id="构建Eureka集群"><a href="#构建Eureka集群" class="headerlink" title="构建Eureka集群"></a>构建Eureka集群</h3><p><img src="/images/pasted-80.png" alt="upload successful"></p>
+<p><img src="/images/pasted-81.png" alt="upload successful"></p>
+
     </div>
 
     
@@ -243,9 +238,6 @@
 		</div>
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/java%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> java基础</a>
-          </div>
 
         
 
@@ -253,13 +245,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/29/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="Elasticsearch学习笔记（二）">
-      <i class="fa fa-chevron-left"></i> Elasticsearch学习笔记（二）
+    <a href="/2020/07/01/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="prev" title="Docker学习笔记（二）">
+      <i class="fa fa-chevron-left"></i> Docker学习笔记（二）
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/07/01/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="Docker学习笔记（二）">
-      Docker学习笔记（二） <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -318,7 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码示例"><span class="nav-number">2.</span> <span class="nav-text">代码示例</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#尝试"><span class="nav-number">2.</span> <span class="nav-text">尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#环境"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#依赖"><span class="nav-number">2.2.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动类"><span class="nav-number">2.3.</span> <span class="nav-text">启动类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#application-yml文件配置"><span class="nav-number">2.4.</span> <span class="nav-text">application.yml文件配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动看看"><span class="nav-number">2.5.</span> <span class="nav-text">启动看看</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Eureka的高可用"><span class="nav-number">3.</span> <span class="nav-text">Eureka的高可用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建Eureka集群"><span class="nav-number">4.</span> <span class="nav-text">构建Eureka集群</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

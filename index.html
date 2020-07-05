@@ -152,6 +152,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Spring-Cloud%E7%9A%84Eureka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/05/Spring-Cloud%E7%9A%84Eureka/" class="post-title-link" itemprop="url">Spring Cloud的Eureka</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-05 21:54:13 / Modified: 23:51:04" itemprop="dateCreated datePublished" datetime="2020-07-05T21:54:13+08:00">2020-07-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在微服务的项目中，服务层被拆分成很多个。那么如何处理这些服务之间的通信和管理呢？在Spring cloud中使用Eureka来提供服务注册中心来管理微服务信息。</p>
+<blockquote>
+<p>Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提<br>供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。</p>
+</blockquote>
+<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<li>SpringBoot:2.2.5.RELEASE</li>
+<li>Java:1.8</li>
+<li>SpringCloud:Hoxton.SR3</li>
+<li>Maven:3.3.9</li>
+</ul>
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>首先在父工程的pom.xml添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-dependencies&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-cloud.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;&#x2F;type&gt;</span><br><span class="line">    &lt;scope&gt;import&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后在子工程（eureka）里的pom.xml添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动类"><a href="#启动类" class="headerlink" title="启动类"></a>启动类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaServer&#x2F;&#x2F;声明是Eureka服务</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class EurekaApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(EurekaApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="application-yml文件配置"><a href="#application-yml文件配置" class="headerlink" title="application.yml文件配置"></a>application.yml文件配置</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8100</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: app-eureka-center</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    #注册中心地址</span><br><span class="line">    hostname: 127.0.0.1</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      #客户端调用地址</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;$&#123;eureka.instance.hostname&#125;:8100&#x2F;eureka&#x2F;</span><br><span class="line">    #是否将自己注册到eureka中，该应用不用因为他自己就是注册中心</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    #是否从注册中心中获得信息，原因同上</span><br><span class="line">    fetch-registry: false</span><br><span class="line">  server:</span><br><span class="line">    enable-self-preservation: false</span><br><span class="line">    eviction-interval-timer-in-ms: 3000</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动看看"><a href="#启动看看" class="headerlink" title="启动看看"></a>启动看看</h4><p><img src="/images/pasted-79.png" alt="upload successful"></p>
+<h3 id="Eureka的高可用"><a href="#Eureka的高可用" class="headerlink" title="Eureka的高可用"></a>Eureka的高可用</h3><p>在实际的生产环境中单机的Eureka Server并不适合线上环境。如果它宕机了，会影响到整个系统的可用性，因此，在生产环境中，通常会部署一个高可用的Eureka Server集群。Eureka Server可以运行多个实例并且相互注册的方式来实现高可用部署。</p>
+<h3 id="构建Eureka集群"><a href="#构建Eureka集群" class="headerlink" title="构建Eureka集群"></a>构建Eureka集群</h3><p><img src="/images/pasted-80.png" alt="upload successful"></p>
+<p><img src="/images/pasted-81.png" alt="upload successful"></p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/01/ocker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -437,6 +522,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/29/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">Elasticsearch学习笔记（二）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-29 10:22:00" itemprop="dateCreated datePublished" datetime="2020-06-29T10:22:00+08:00">2020-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-05 23:51:30" itemprop="dateModified" datetime="2020-07-05T23:51:30+08:00">2020-07-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h3><h4 id="返回所有记录"><a href="#返回所有记录" class="headerlink" title="返回所有记录"></a>返回所有记录</h4><blockquote>
+<p>请求方法：GET，路径：/index/type/_search</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request GET &#39;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 6,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 1,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 1.0,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 1.0,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;description&quot;: &quot;本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。&quot;,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中字段含义：</p>
+<ul>
+<li>total:返回记录的条数</li>
+<li>hits:返回记录的数组</li>
+<li>max_score:最高匹配的程度</li>
+</ul>
+<h4 id="全文本查询"><a href="#全文本查询" class="headerlink" title="全文本查询"></a>全文本查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;java&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 1,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 3,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 0.40388194,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.40388194,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;Jsrp_XIBKoNLJaiRi4mV&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.35667494,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Java并发编程实战&quot;,</span><br><span class="line">                    &quot;price&quot;: 69,</span><br><span class="line">                    &quot;author&quot;: &quot; Brian Goetz&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;J8rq_XIBKoNLJaiRW4n4&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.33698124,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Effective java 中文版（第2版）&quot;,</span><br><span class="line">                    &quot;price&quot;: 52.00,</span><br><span class="line">                    &quot;author&quot;: &quot; [美] Joshua Bloch&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由返回的结果可以看出，elasticsearch返回了标题为java的文档，但match是模糊匹配，他会把查询的词<strong><em>先进行分词然后再去查询</em></strong>。例如下图的示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;编程思想&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 2,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 2,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 4.296419,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 4.296419,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;Jsrp_XIBKoNLJaiRi4mV&quot;,</span><br><span class="line">                &quot;_score&quot;: 1.3862944,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Java并发编程实战&quot;,</span><br><span class="line">                    &quot;price&quot;: 69,</span><br><span class="line">                    &quot;author&quot;: &quot; Brian Goetz&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由上图结果可以看到的确是进行了分词，那如果我们有时候不想要这样查询呢？我们可以换一个关键字match_phrase</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match_phrase&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;编程思想&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 100,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 1,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 4.296419,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 4.296419,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="多字段查询"><a href="#多字段查询" class="headerlink" title="多字段查询"></a>多字段查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;multi_match&quot;:&#123;</span><br><span class="line">            &quot;query&quot;:&quot;java&quot;,</span><br><span class="line">            &quot;fields&quot;:[</span><br><span class="line">                &quot;title&quot;,</span><br><span class="line">                &quot;description&quot;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="语法查询"><a href="#语法查询" class="headerlink" title="语法查询"></a>语法查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;query_string&quot;:&#123;</span><br><span class="line">            &quot;query&quot;:&quot;编程思想 and c++&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="字段查询"><a href="#字段查询" class="headerlink" title="字段查询"></a>字段查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -604,7 +792,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-02 11:15:03" itemprop="dateModified" datetime="2020-07-02T11:15:03+08:00">2020-07-02</time>
+                <time title="Modified: 2020-07-02 14:38:22" itemprop="dateModified" datetime="2020-07-02T14:38:22+08:00">2020-07-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1103,266 +1291,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/ava%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/ava%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">java类的加载机制(学习笔记)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-16 18:16:00" itemprop="dateCreated datePublished" datetime="2020-06-16T18:16:00+08:00">2020-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-17 16:04:35" itemprop="dateModified" datetime="2020-06-17T16:04:35+08:00">2020-06-17</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/jvm/" itemprop="url" rel="index"><span itemprop="name">jvm</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="啥是类加载"><a href="#啥是类加载" class="headerlink" title="啥是类加载"></a>啥是类加载</h3><blockquote>
-<p>类加载是指将class文件读入内存中，并对数据进行校验、转换解析、初始化，最后再<strong><em>堆区</em></strong>创建一个java.lang.Class对象，用来封装类在方法区的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-</blockquote>
-<blockquote>
-<p>在Java语言里面，类型的加载、连接和初始化过程都是在程序运行期间完成的。</p>
-</blockquote>
-<p><strong><em>加载.class文件的方式</em></strong></p>
-<ul>
-<li>从本地系统中直接加载</li>
-<li>通过网络下载.class文件</li>
-<li>从zip，jar等归档文件中加载.class文件</li>
-<li>从专有数据库中提取.class文件</li>
-<li>将Java源文件动态编译为.class文件</li>
-</ul>
-<h3 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h3><p><img src="/images/pasted-61.png" alt="upload successful"></p>
-<p>类的加载过程包括了加载、验证、准备、解析、初始化这五个阶段。在这五个阶段中，加载、验证、准备和初始化这四个阶段发生的顺序是确定的，而解析阶段则不一定，它在某些情况下可以在初始化阶段之后开始，这是为了支持Java语言的运行时绑定（也成为动态绑定或晚期绑定）。另外注意这里的几个阶段是按顺序开始，而不是按顺序进行或完成，因为这些阶段通常都是互相交叉地混合进行的，通常在一个阶段执行的过程中调用或激活另一个阶段。</p>
-<h4 id="加载（Loading）"><a href="#加载（Loading）" class="headerlink" title="加载（Loading）"></a>加载（Loading）</h4><p>加载阶段负责<strong><em>查找和加载类的二进制数据</em></strong>。</p>
-<ol>
-<li>通过类的<strong><em>全限定名</em></strong>来获取其定义的二进制字节流。</li>
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
-<li>在Java堆中生成一个代表这个类的java.lang.Class对象，作为对方法区中这些数据的访问入口。</li>
-</ol>
-<p><strong><em>小知识：加载阶段是可控性最强的阶段，我们可以自定义类加载器（ClassLoader）来完成类的加载。</em></strong></p>
-<h4 id="验证（Verification）"><a href="#验证（Verification）" class="headerlink" title="验证（Verification）"></a>验证（Verification）</h4><p>验证阶段负责确保<strong><em>Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全</em></strong>。</p>
-<ul>
-<li>文件格式验证：验证字节流是否符合Class文件格式的规范；例如：是否以0xCAFEBABE开头、主次版本号是否在当前虚拟机的处理范围之内、常量池中的常量是否有不被支持的类型。</li>
-<li>元数据验证：对字节码描述的信息进行语义分析（注意：对比javac编译阶段的语义分析），以保证其描述的信息符合Java语言规范的要求；例如：这个类是否有父类，除了java.lang.Object之外。</li>
-<li>字节码验证：通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。</li>
-<li>符号引用验证：确保解析动作能正确执行。</li>
-</ul>
-<p><strong><em>小知识:验证阶段是非常重要的，但不是必须的，它对程序运行期没有影响，如果所引用的类经过反复验证，那么可以考虑采用-Xverifynone参数来关闭大部分的类验证措施，以缩短虚拟机类加载的时间。</em></strong></p>
-<h4 id="准备-Preparation"><a href="#准备-Preparation" class="headerlink" title="准备(Preparation)"></a>准备(Preparation)</h4><p>准备阶段负责为<strong><em>类的静态变量分配内存（方法区），并将其初始化为默认值</em></strong>。<br>注意事项：</p>
-<ol>
-<li>这时候进行内存分配的仅包括类变量（static），而不包括实例变量，实例变量会在对象实例化时随着对象一块分配在Java堆中。</li>
-<li>这里所设置的初始值通常情况下是数据类型默认的零值（如0、0L、null、false等），而不是被在Java代码中被显式地赋予的值。</li>
-<li>如果类字段的字段属性表中存在ConstantValue属性，即同时被final和static修饰，那么在准备阶段变量value就会被初始化为ConstValue属性所指定的值。</li>
-</ol>
-<p><strong><em>小知识：将static变量赋值为Java代码中被显式地赋予的值是在初始化阶段才会开始</em></strong></p>
-<h4 id="解析（Resolution）"><a href="#解析（Resolution）" class="headerlink" title="解析（Resolution）"></a>解析（Resolution）</h4><p>解析阶段负责将<strong><em>类中的符号引用转换为直接引用</em></strong>，解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。</p>
-<ul>
-<li><strong><em>符号引用</em></strong>就是一组符号来描述目标，可以是任何字面量。</li>
-<li><strong><em>直接引用</em></strong>就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。</li>
-</ul>
-<h4 id="初始化（initialization）"><a href="#初始化（initialization）" class="headerlink" title="初始化（initialization）"></a>初始化（initialization）</h4><p>初始化阶段负责为为<strong><em>类的静态变量赋予正确的初始值，JVM负责对类进行初始化，主要对类变量进行初始化</em></strong>，此阶段其实就是执行<strong><em>&lt;clinit&gt;()方法</em></strong>的过程。</p>
-<ul>
-<li><p>&lt;clinit&gt;() 不需要显式调用父类（接口除外，接口不需要调用父接口的初始化方法，只有使用到父接口中的静态变量时才需要调用）的初始化方法 &lt;clinit&gt;()，虚拟机会保证在子类的 &lt;clinit&gt;() 方法执行之前，父类的&lt;clinit&gt;() 方法已经执行完毕，也就意味着父类中定义的静态语句块要优先于子类的变量赋值操作。</p>
-</li>
-<li><p>&lt;clinit&gt;()  方法对于类或接口来说并不是必需的，如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成 &lt;clinit&gt;() 方法。</p>
-</li>
-<li><p>虚拟机会保证一个类的 &lt;clinit&gt;() 方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的&lt;clinit&gt;() 方法，其他线程都需要阻塞等待，直到活动线程执行&lt;clinit&gt;()方法完毕。</p>
-</li>
-</ul>
-<p><strong><em>类的初始化时机</em></strong></p>
-<ul>
-<li>创建类的实例</li>
-<li>访问或者赋值某个类或者接口的静态变量</li>
-<li>调用类的静态方法</li>
-<li>反射</li>
-<li>初始化其子类，则该类也会被初始化</li>
-</ul>
-<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>java语言自带三个类加载器</p>
-<ul>
-<li><p>Bootstrap ClassLoader(启动类加载器):负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载）。启动类加载器是无法被Java程序直接引用的。</p>
-</li>
-<li><p>Extention ClassLoader(扩展类加载器):该加载器sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
-</li>
-<li><p>Application ClassLoader(应用程序类加载器):该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
-</li>
-</ul>
-<blockquote>
-<p>应用程序都是由这三种类加载器互相配合进行加载的，如果有必要，我们还可以加入自定义的类加载器。因为JVM自带的ClassLoader只是懂得从本地文件系统加载标准的java class文件，因此如果编写了自己的ClassLoader，便可以做到如下几点：</p>
-</blockquote>
-<ol>
-<li>在执行非置信代码之前，自动验证数字签名。</li>
-<li>动态地创建符合用户特定需要的定制化构建类。</li>
-<li>从特定的场所取得java class，例如数据库中和网络中。</li>
-</ol>
-<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
-<p><strong><em>为了保证java程序安全稳定运行</em></strong></p>
-<ol>
-<li><p>当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。</p>
-</li>
-<li><p>当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。</p>
-</li>
-<li><p>如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载。</p>
-</li>
-<li><p>若ExtClassLoader也加载失败，则会使用AppClassLoader来加载，如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/15/%E5%8D%95%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/%E5%8D%95%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工程模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-06-15 21:20:00 / Modified: 21:40:53" itemprop="dateCreated datePublished" datetime="2020-06-15T21:20:00+08:00">2020-06-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>简单工厂模式是创建形的设计模式，对实现了同一接口的一些类进行实例的创建。简单工厂模式的实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类（这些产品类继承自一个父类或接口）的实例。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>首先来个手机的接口（基类）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 18:31</span><br><span class="line"> *&#x2F;</span><br><span class="line">public interface Phone &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 描述手机信息</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void info();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后来几个手机具体类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class XiaoMiPhone implements Phone&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是小米手机&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class OppoPhone implements Phone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是oppo手机&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HuaWeiPhone implements Phone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是华为手机拉&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在整个枚举类表示手机类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum PhoneType &#123;</span><br><span class="line">    XIAOMI(1),HUAWEI(2),OPPO(3);</span><br><span class="line"></span><br><span class="line">    private int code;</span><br><span class="line"></span><br><span class="line">    PhoneType(int code) &#123;</span><br><span class="line">        this.code &#x3D; code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所需要的配件都搞定拉，现在工厂启动！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class BasePhoneFactory implements PhoneFactory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Phone produce(PhoneType type) &#123;</span><br><span class="line">        switch (type)&#123;</span><br><span class="line">            case XIAOMI:</span><br><span class="line">                return new XiaoMiPhone();</span><br><span class="line">            case OPPO:</span><br><span class="line">                return new OppoPhone();</span><br><span class="line">            case HUAWEI:</span><br><span class="line">                return new HuaWeiPhone();</span><br><span class="line">            default:</span><br><span class="line">                throw new AssertionError(&quot;没有该类型的手机&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        PhoneFactory phoneFactory &#x3D; new BasePhoneFactory();</span><br><span class="line">        Phone phone &#x3D; phoneFactory.produce(PhoneType.XIAOMI);</span><br><span class="line">        phone.info();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果</p>
-<blockquote>
-<p>我是小米手机</p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>优点</li>
-</ul>
-<ol>
-<li>便于对象的扩展，比如要创建苹果手机，只需要继承Phone接口即可，在工厂中对增加的类进行注册，既可以通过PhoneFactory来获取到增加的对象。</li>
-<li>将同一类型的对象进行分装提取，共性都放在接口中，个性放在具体类中。</li>
-</ol>
-<ul>
-<li>缺点：</li>
-</ul>
-<ol>
-<li>不利于不同类型对象的创建</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1431,7 +1359,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
