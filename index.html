@@ -152,6 +152,95 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/pring-Cloud%E7%9A%84Ribbon%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/06/pring-Cloud%E7%9A%84Ribbon%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Spring Cloud的Ribbon学习笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-07-06 21:19:00 / Modified: 23:00:12" itemprop="dateCreated datePublished" datetime="2020-07-06T21:19:00+08:00">2020-07-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index"><span itemprop="name">Spring Cloud</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><blockquote>
+<p>Ribbon是Neflix发布的负载均衡器，它有助于控制HTTP和TCP客户端的行为。通过Spring Cloud的封装，可以让我们轻松的，面向服务的REST模板请求自动转换成客户端负载均衡的服务调用。</p>
+</blockquote>
+<p><img src="/images/pasted-83.png" alt="upload successful"></p>
+<h3 id="操作看看"><a href="#操作看看" class="headerlink" title="操作看看"></a>操作看看</h3><h4 id="服务消费者（order）"><a href="#服务消费者（order）" class="headerlink" title="服务消费者（order）"></a>服务消费者（order）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class OrderController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private OrderServiceImpl orderService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;order&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Order findOrderById(@PathVariable(&quot;id&quot;) int id)&#123;</span><br><span class="line">        return orderService.findOrderById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class OrderServiceImpl &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ItemServiceImpl itemService;</span><br><span class="line"></span><br><span class="line">    private static final Map&lt;Integer,Order&gt; MAP;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        MAP&#x3D;new HashMap&lt;&gt;();</span><br><span class="line">        List&lt;Item&gt; items&#x3D;new ArrayList&lt;&gt;();</span><br><span class="line">        Item item&#x3D;new Item();</span><br><span class="line">        item.setId(1);</span><br><span class="line">        items.add(item);</span><br><span class="line">        Order order&#x3D;new Order(1,1,new Date(),items);</span><br><span class="line">        MAP.put(1,order);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        List&lt;Item&gt; items1&#x3D;new ArrayList&lt;&gt;();</span><br><span class="line">        Item item1&#x3D;new Item();</span><br><span class="line">        item.setId(2);</span><br><span class="line">        items.add(item);</span><br><span class="line">        Order order1&#x3D;new Order(2,2,new Date(System.currentTimeMillis()+1440000),items1);</span><br><span class="line">        MAP.put(2,order1);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 根据订单主键获得订单详细信息</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;2 11:08</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.order.entity.Order</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public Order findOrderById(int orderId)&#123;</span><br><span class="line">        Order order&#x3D;MAP.get(orderId);</span><br><span class="line">        if (order!&#x3D;null) &#123;</span><br><span class="line">            List&lt;Item&gt; items&#x3D;new ArrayList&lt;&gt;();</span><br><span class="line">            for (Item item:order.getItems()) &#123;</span><br><span class="line">                Item result &#x3D; itemService.findItemById(item.getId());</span><br><span class="line">&#x2F;*                Item result&#x3D;itemFeignClient.findItemById(item.getId());*&#x2F;</span><br><span class="line">                items.add(result);</span><br><span class="line">            &#125;</span><br><span class="line">            order.setItems(items);</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            order&#x3D;new Order(0,0,new Date(),new ArrayList&lt;Item&gt;(0));</span><br><span class="line">        &#125;</span><br><span class="line">        return order;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ItemServiceImpl &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger log &#x3D; LoggerFactory.getLogger(ItemServiceImpl.class);		</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private OrderProperties orderProperties;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private RestTemplate restTemplate;</span><br><span class="line"></span><br><span class="line">    public Item findItemById(int id)&#123;</span><br><span class="line">    ServiceInstance serviceInstance &#x3D; this.loadBalancerClient.choose(&quot;app-item&quot;);</span><br><span class="line">        log.info(&quot;&#123;&#125;:&#123;&#125;:&#123;&#125;&quot;,serviceInstance.getServiceId(),serviceInstance.getHost(),serviceInstance.getPort());</span><br><span class="line">        return restTemplate.getForObject(orderProperties.getItem().getUrl(), Item.class,id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@EnableEurekaClient</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class OrderApplication &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SpringApplication.run(OrderApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 向Spring容器中定义RestTemplate对象</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Bean</span><br><span class="line">    @LoadBalanced</span><br><span class="line">    public RestTemplate restTemplate() &#123;</span><br><span class="line">        return new RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="服务提供者（item）"><a href="#服务提供者（item）" class="headerlink" title="服务提供者（item）"></a>服务提供者（item）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class ItemController &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;简便一下就不来创建接口了</span><br><span class="line">    @Autowired</span><br><span class="line">    private ItemServiceImpl itemService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 对外提供查询商品详细信息服务</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;2 10:52</span><br><span class="line">     * @param [id]</span><br><span class="line">     * @return com.example.item.entity.Item</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @GetMapping(&quot;&#x2F;item&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Item findItemById(@PathVariable(&quot;id&quot;)int id)&#123;</span><br><span class="line">        return itemService.findItemById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ItemServiceImpl &#123;</span><br><span class="line">    private static final Map&lt;Integer,Item&gt; MAP;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        MAP&#x3D;new HashMap&lt;&gt;();</span><br><span class="line">        Random random&#x3D;new Random();</span><br><span class="line">        for (int i&#x3D;1;i&lt;&#x3D;100;i++)&#123;</span><br><span class="line">            MAP.put(i,new Item(i,&quot;商品&quot;+i,random.nextInt(200)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 根据主键返回商品详细信息</span><br><span class="line">     * @date 2020&#x2F;4&#x2F;2 10:41</span><br><span class="line">     * @param [id]</span><br><span class="line">     * @return com.example.item.entity.Item</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public Item findItemById(int id)&#123;</span><br><span class="line">        Item item&#x3D;MAP.get(id);</span><br><span class="line">        if (item&#x3D;&#x3D;null)&#123;</span><br><span class="line">            item&#x3D;new Item(0,&quot;未查到该商品！&quot;,0);</span><br><span class="line">        &#125;</span><br><span class="line">        return item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h4><p>分别启动Eureka Server和order服务消费者，最后启动两个端口为8200，8201的两个item服务提供者</p>
+<p><img src="/images/pasted-84.png" alt="upload successful"></p>
+<p>多次请求<a href="http://localhost:8300/order/1的URL" target="_blank" rel="noopener">http://localhost:8300/order/1的URL</a></p>
+<p>打印日记结果<br><img src="/images/pasted-85.png" alt="upload successful"></p>
+<p>可以看到请求会分布均匀到两个item服务提供者的节点上，说明负载均衡成功拉。</p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Spring-Cloud%E7%9A%84Eureka/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -166,7 +255,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/07/05/Spring-Cloud%E7%9A%84Eureka/" class="post-title-link" itemprop="url">Spring Cloud的Eureka</a>
+            <a href="/2020/07/05/Spring-Cloud%E7%9A%84Eureka/" class="post-title-link" itemprop="url">Spring Cloud的Eureka学习笔记</a>
         </h2>
 
         <div class="post-meta">
@@ -175,9 +264,24 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-07-05 21:54:13 / Modified: 23:51:04" itemprop="dateCreated datePublished" datetime="2020-07-05T21:54:13+08:00">2020-07-05</time>
+              <time title="Created: 2020-07-05 21:54:00" itemprop="dateCreated datePublished" datetime="2020-07-05T21:54:00+08:00">2020-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-06 21:16:22" itemprop="dateModified" datetime="2020-07-06T21:16:22+08:00">2020-07-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-Cloud/" itemprop="url" rel="index"><span itemprop="name">Spring Cloud</span></a>
+                </span>
             </span>
 
           
@@ -194,13 +298,13 @@
 <blockquote>
 <p>Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了服务治理的功能，Spring Cloud Eureka提<br>供服务端与客户端，服务端即是Eureka服务注册中心，客户端完成微服务向Eureka服务的注册与发现。服务端和客户端均采用Java语言编写。</p>
 </blockquote>
-<h3 id="尝试"><a href="#尝试" class="headerlink" title="尝试"></a>尝试</h3><h4 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h4><ul>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><ul>
 <li>SpringBoot:2.2.5.RELEASE</li>
 <li>Java:1.8</li>
 <li>SpringCloud:Hoxton.SR3</li>
 <li>Maven:3.3.9</li>
 </ul>
-<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>首先在父工程的pom.xml添加</p>
+<h3 id="Eureka-Server尝试"><a href="#Eureka-Server尝试" class="headerlink" title="Eureka Server尝试"></a>Eureka Server尝试</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>首先在父工程的pom.xml添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-dependencies&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-cloud.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;type&gt;pom&lt;&#x2F;type&gt;</span><br><span class="line">    &lt;scope&gt;import&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
 
 <p>然后在子工程（eureka）里的pom.xml添加</p>
@@ -213,8 +317,23 @@
 
 <h4 id="启动看看"><a href="#启动看看" class="headerlink" title="启动看看"></a>启动看看</h4><p><img src="/images/pasted-79.png" alt="upload successful"></p>
 <h3 id="Eureka的高可用"><a href="#Eureka的高可用" class="headerlink" title="Eureka的高可用"></a>Eureka的高可用</h3><p>在实际的生产环境中单机的Eureka Server并不适合线上环境。如果它宕机了，会影响到整个系统的可用性，因此，在生产环境中，通常会部署一个高可用的Eureka Server集群。Eureka Server可以运行多个实例并且相互注册的方式来实现高可用部署。</p>
-<h3 id="构建Eureka集群"><a href="#构建Eureka集群" class="headerlink" title="构建Eureka集群"></a>构建Eureka集群</h3><p><img src="/images/pasted-80.png" alt="upload successful"></p>
+<h3 id="构建Eureka集群"><a href="#构建Eureka集群" class="headerlink" title="构建Eureka集群"></a>构建Eureka集群</h3><h4 id="application-yml配置文件"><a href="#application-yml配置文件" class="headerlink" title="application.yml配置文件"></a>application.yml配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    #应用程序名</span><br><span class="line">    name: app-eureka-center</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">spring:</span><br><span class="line">  profiles: eureka-node1</span><br><span class="line">server:</span><br><span class="line">  port: 8100</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    #注册中心地址</span><br><span class="line">    hostname: 127.0.0.1</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      #客户端调用地址</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;$&#123;eureka.instance.hostname&#125;:8101&#x2F;eureka&#x2F;</span><br><span class="line">    #是否将自己注册到eureka中</span><br><span class="line">    register-with-eureka: true</span><br><span class="line">    #是否从注册中心中获得信息</span><br><span class="line">    fetch-registry: true</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">spring:</span><br><span class="line">  profiles: eureka-node2</span><br><span class="line">server:</span><br><span class="line">  port: 8101</span><br><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    #注册中心地址</span><br><span class="line">    hostname: 127.0.0.1</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      #客户端调用地址</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;$&#123;eureka.instance.hostname&#125;:8100&#x2F;eureka&#x2F;</span><br><span class="line">    #是否将自己注册到eureka中</span><br><span class="line">    register-with-eureka: true</span><br><span class="line">    #是否从注册中心中获得信息</span><br><span class="line">    fetch-registry: true</span><br></pre></td></tr></table></figure>
+
+<p>在上面的配置文件中，是使用分隔符（—）来把它分为三部分,在第二部分和第三部分分别定义了所属的spring.profiles。然后分别设置profiles后启动看看。</p>
+<p><img src="/images/pasted-80.png" alt="upload successful"></p>
 <p><img src="/images/pasted-81.png" alt="upload successful"></p>
+<p>由上面两张图可以看到两个Eureka节点互相注册拉。</p>
+<h3 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h3><p>在Eureka Server中默认是允许匿名访问，既不需要账户密码就可以登录查看，这就有点不安全拉。所以我们搞一个需要登录才能访问的Eureka Server。</p>
+<h4 id="application-yml配置文件-1"><a href="#application-yml配置文件-1" class="headerlink" title="application.yml配置文件"></a>application.yml配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    #应用程序名</span><br><span class="line">    name: app-eureka-center</span><br><span class="line">  security:</span><br><span class="line">    user:</span><br><span class="line">      name: root</span><br><span class="line">      password: root</span><br></pre></td></tr></table></figure>
+
+<p>启动Eureka Server看看</p>
+<p><img src="/images/pasted-82.png" alt="upload successful"></p>
+<p>可以看到现在需要登录才能访问Eureka Server端口了。</p>
+<h3 id="Eureka-Client尝试"><a href="#Eureka-Client尝试" class="headerlink" title="Eureka Client尝试"></a>Eureka Client尝试</h3><h4 id="依赖-1"><a href="#依赖-1" class="headerlink" title="依赖"></a>依赖</h4><p>在父工程下创建一个子工程order,并在pom.xml中配置Eureka Client的依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="application-yml"><a href="#application-yml" class="headerlink" title="application.yml"></a>application.yml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 8300</span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: app-order</span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;127.0.0.1:8100&#x2F;eureka&#x2F;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1189,108 +1308,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">活动的生命周期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-06-16 21:03:00 / Modified: 21:16:13" itemprop="dateCreated datePublished" datetime="2020-06-16T21:03:00+08:00">2020-06-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">android基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="活动的生命周期"><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h3><h4 id="返回栈"><a href="#返回栈" class="headerlink" title="返回栈"></a>返回栈</h4><blockquote>
-<p>Android是使用任务（Task）来管理活动的，一个任务就是一组存放在栈里的活动的集合，这个栈也被称作返回栈（Back Stack）。栈是一种后进先出的数据结构，在默认情况下，每当我们启动了一个新的活动，它会在返回栈中入栈，并处于栈顶的位置。而每当我们按下Back键或调用finish() 方法去销毁一个活动时，处于栈顶的活动会出栈，这时前一个入栈的活动就会重新处于栈顶的位置。系统总是会显示处于栈顶的活动给用户。</p>
-</blockquote>
-<p><img src="/images/pasted-56.png" alt="upload successful"></p>
-<h4 id="活动状态"><a href="#活动状态" class="headerlink" title="活动状态"></a>活动状态</h4><p>活动在其生命周期最多会有4中状态</p>
-<h5 id="运行状态"><a href="#运行状态" class="headerlink" title="运行状态"></a>运行状态</h5><p>当一个活动位于返回栈的栈顶时，这时活动就处于运行状态。系统最不愿意回收的就是处于运行状态的活动，因为这会带来非常差的用户体验。</p>
-<h5 id="暂停状态"><a href="#暂停状态" class="headerlink" title="暂停状态"></a>暂停状态</h5><p>当一个活动不再处于栈顶位置，但仍然可见时，这时活动就进入了暂停状态。系统也不愿意去回收这种活动（因为它还是可见的，回收可见的东西都会在用户体验方面有不好的影响），只有在内存极低的情况下，系统才会去考虑回收这种活动。</p>
-<h5 id="停止状态"><a href="#停止状态" class="headerlink" title="停止状态"></a>停止状态</h5><p>当一个活动不再处于栈顶位置，并且完全不可见的时候，就进入了停止状态。系统仍然会为这种活动保存相应的状态和成员变量，但是这并不是完全可靠的，当其他地方需要内存时，处于停止状态的活动有可能会被系统回收。</p>
-<h5 id="销毁状态"><a href="#销毁状态" class="headerlink" title="销毁状态"></a>销毁状态</h5><p>当一个活动从返回栈中移除后就变成了销毁状态。系统会最倾向于回收处于这种状态的活动，从而保证手机的内存充足。</p>
-<h4 id="活动7种回调方法"><a href="#活动7种回调方法" class="headerlink" title="活动7种回调方法"></a>活动7种回调方法</h4><ul>
-<li><p>onCreate()它会在活动第一次被创建的时候调用。你应该在这个方法中完成活动的初始化操作，比如说加载布局、绑定事件等。</p>
-</li>
-<li><p>onStart() 。这个方法在活动由不可见变为可见的时候调用。</p>
-</li>
-<li><p>onResume() 。这个方法在活动准备好和用户进行交互的时候调用。此时的活动一定位于返回栈的栈顶，并且处于运行状态。</p>
-</li>
-<li><p>onPause() 。这个方法在系统准备去启动或者恢复另一个活动的时候调用。我们通常会在这个方法中将一些消耗CPU的资源释放掉，以及保存一些关键数据，但这个方法的执行速度一定要快，不然会影响到新的栈顶活动的使用。</p>
-</li>
-<li><p>onStop() 。这个方法在活动完全不可见的时候调用。它和onPause() 方法的主要区别在于，如果启动的新活动是一个对话框式的活动，那么onPause() 方法会得到执行，而onStop() 方法并不会执行。</p>
-</li>
-<li><p>onDestroy() 。这个方法在活动被销毁之前调用，之后活动的状态将变为销毁状态。</p>
-</li>
-<li><p>onRestart() 。这个方法在活动由停止状态变为运行状态之前调用，也就是活动被重新启动了。</p>
-</li>
-</ul>
-<p><img src="/images/pasted-57.png" alt="upload successful"></p>
-<h4 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h4><blockquote>
-<p>Activity中还提供了一个onSaveInstanceState() 回调方法，这个方法可以保证在活动被回收之前一定会被调用，因此我们可以通过这个方法来解决活动被回收时临时数据得不到保存的问题。</p>
-</blockquote>
-<p>onSaveInstanceState() 方法会携带一个Bundle 类型的参数，Bundle 提供了一系列的方法用于保存数据，比如可以使用putString() 方法保存字符串，使用putInt() 方法保存整型数据，以此类推。每个保存方法需要传入两个参数，第一个参数是键，用于后面从Bundle 中取值，第二个参数是真正要保存的内容。</p>
-<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
-<li>全来自《第一行代码——Android（第2版）》</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1359,17 +1376,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

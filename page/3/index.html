@@ -152,6 +152,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">Unix的五种I/O模型</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-02 10:21:25" itemprop="dateCreated datePublished" datetime="2020-06-02T10:21:25+08:00">2020-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-04 11:02:25" itemprop="dateModified" datetime="2020-06-04T11:02:25+08:00">2020-06-04</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="堵塞形I-O模型"><a href="#堵塞形I-O模型" class="headerlink" title="堵塞形I/O模型"></a>堵塞形I/O模型</h3><p><img src="/images/pasted-50.png" alt></p>
+<blockquote>
+<p>上图为堵塞形I/O模型，进程调用recvfrom命令，进程一直等待直到数据报被复制到进程的缓冲区或者发生错误才返回。进程从调用recvfrom开始到它返回的整段时间内是被阻塞的。</p>
+</blockquote>
+<h3 id="非堵塞形I-O模型"><a href="#非堵塞形I-O模型" class="headerlink" title="非堵塞形I/O模型"></a>非堵塞形I/O模型</h3><p><img src="/images/pasted-51.png" alt></p>
+<h3 id="多路复用I-O模型"><a href="#多路复用I-O模型" class="headerlink" title="多路复用I/O模型"></a>多路复用I/O模型</h3><p><img src="/images/pasted-52.png" alt></p>
+<h3 id="信号驱动I-O模型"><a href="#信号驱动I-O模型" class="headerlink" title="信号驱动I/O模型"></a>信号驱动I/O模型</h3><p><img src="/images/pasted-53.png" alt></p>
+<h3 id="异步I-O模型"><a href="#异步I-O模型" class="headerlink" title="异步I/O模型"></a>异步I/O模型</h3><p><img src="/images/pasted-54.png" alt></p>
+<h3 id="五种模型异同"><a href="#五种模型异同" class="headerlink" title="五种模型异同"></a>五种模型异同</h3><blockquote>
+<p>上面五种I/O模型中，前四种都是同步I/O模型，因为他们在真的的I/O操作时，都堵塞了进程，在将数据从内核空间复制到用户空间时都是堵塞状态。</p>
+</blockquote>
+<blockquote>
+<p>一般I/O操作可以分为两步，第一步：发起IO请求，第二步：实际IO操作<br>堵塞IO和非堵塞IO的区别就在于第一步发起请求是否堵塞，如果堵塞直到完成就是传统的堵塞IO模型，否则就是非堵塞IO模型<br>同步IO和异步IO的区别就在于第二步实际IO操作是否堵塞，如果实际的IO读写阻塞请求进程，那么就是同步IO，因此阻塞IO、非阻塞IO、IO复用、信号驱动IO都是同步IO，如果不阻塞，而是操作系统做完IO两个阶段的操作再将结果返回，那么就是异步IO。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/java%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1601,104 +1681,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/07/%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-07 21:58:33 / Modified: 22:37:04" itemprop="dateCreated datePublished" datetime="2020-05-07T21:58:33+08:00">2020-05-07</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="布隆过滤器简介"><a href="#布隆过滤器简介" class="headerlink" title="布隆过滤器简介"></a>布隆过滤器简介</h3><blockquote>
-<p>布隆过滤器是一个位数组和哈希函数实现的一种数据结构，它相对于其他我们平常用的List，Set等更节省内存空间，不过它存在误判概率。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。</p>
-</blockquote>
-<p><img src="/images/pasted-18.png" alt="upload successful"></p>
-<blockquote>
-<p>例如申请100万个元素位数组只用10^6/8 = 125000 Byte = 125000/1024 kb ≈ 122kb 的空间，特别节省空间。</p>
-</blockquote>
-<h3 id="布隆过滤器使用场景"><a href="#布隆过滤器使用场景" class="headerlink" title="布隆过滤器使用场景"></a>布隆过滤器使用场景</h3><ol>
-<li>判断一个元素是否在一个大量元素集中</li>
-<li>对元素去重判断</li>
-</ol>
-<h3 id="布隆过滤器原理"><a href="#布隆过滤器原理" class="headerlink" title="布隆过滤器原理"></a>布隆过滤器原理</h3><h4 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h4><blockquote>
-<p>对添加的元素进行哈希运算，得到哈希值，并根据哈希值把对应数组下标的bit设为1</p>
-</blockquote>
-<h4 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h4><blockquote>
-<p>对添加的元素进行哈希运算，得到哈希值，并根据哈希值去获得对应数组下标bit的值，如果都为1则添加的元素<strong><em>可能</em></strong>在存在，否则该元素不存在。<br>我的理解：如果在可能是假的，如果不在就是真的不在拉。</p>
-</blockquote>
-<h3 id="基本代码实现"><a href="#基本代码实现" class="headerlink" title="基本代码实现"></a>基本代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.testarray;</span><br><span class="line"></span><br><span class="line">import java.util.BitSet;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;5&#x2F;7 22:14</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class MyBloomFilter&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;位数组默认大小</span><br><span class="line">    private static final int DEFAULT_SIZE &#x3D; 2&lt;&lt;24;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;哈希种子,可以根据这个种子数组创建不同的哈希函数</span><br><span class="line">    private static final int[] SEEDS&#x3D; &#123;4,7,520,3,143&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;位数组</span><br><span class="line">    private BitSet bitSet;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;哈希函数</span><br><span class="line">    private MyHash[] hashes;</span><br><span class="line"></span><br><span class="line">    public MyBloomFilter()&#123;</span><br><span class="line">        this(DEFAULT_SIZE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MyBloomFilter(int size)&#123;</span><br><span class="line">        bitSet &#x3D; new BitSet(size);</span><br><span class="line">        hashes &#x3D; new MyHash[SEEDS.length];</span><br><span class="line">        for (int i&#x3D;0;i&lt;SEEDS.length;i++)&#123;</span><br><span class="line">            hashes[i] &#x3D; new MyHash(size,SEEDS[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 添加元素</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;7 22:27</span><br><span class="line">     * @param [value]</span><br><span class="line">     * @return void</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void add(T value)&#123;</span><br><span class="line">        for (MyHash hash:hashes)&#123;</span><br><span class="line">            bitSet.set(hash.hash(value),true);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 判断元素是否存在 可能会误判</span><br><span class="line">     * 存在可能假存在，不存在是真不存在拉</span><br><span class="line">     * @date 2020&#x2F;5&#x2F;7 22:27</span><br><span class="line">     * @param [value]</span><br><span class="line">     * @return boolean</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean contains(T value)&#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        for (MyHash hash:hashes)&#123;</span><br><span class="line">            flag &#x3D; flag &amp;&amp; bitSet.get(hash.hash(value));</span><br><span class="line">            if (!flag)&#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">    private static class MyHash&#123;</span><br><span class="line">        private int cap,seed;</span><br><span class="line"></span><br><span class="line">        public MyHash(int cap, int seed) &#123;</span><br><span class="line">            this.cap &#x3D; cap;</span><br><span class="line">            this.seed &#x3D; seed;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;这段哈希运算 网上看的。。。</span><br><span class="line">        public int hash(Object value)&#123;</span><br><span class="line">            int h;</span><br><span class="line">            return (value &#x3D;&#x3D; null) ? 0 : Math.abs(seed * (cap - 1) &amp; ((h &#x3D; value.hashCode()) ^ (h &gt;&gt;&gt; 16)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MyBloomFilter&lt;Integer&gt; myBloomFilter &#x3D; new MyBloomFilter&lt;&gt;();</span><br><span class="line">        myBloomFilter.add(4);</span><br><span class="line">        myBloomFilter.add(9);</span><br><span class="line">        System.out.println(myBloomFilter.contains(123));</span><br><span class="line">        myBloomFilter.add(123);</span><br><span class="line">        System.out.println(myBloomFilter.contains(123));</span><br><span class="line">        System.out.println(myBloomFilter.contains(4));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><blockquote>
-<p>false<br>true<br>true</p>
-</blockquote>
-<h4 id="实际场景"><a href="#实际场景" class="headerlink" title="实际场景"></a>实际场景</h4><blockquote>
-<p>上面只是为了搞明白布隆过滤器的原理，平常我们直接利用Google开源的 Guava中自带的布隆过滤器就ok拉。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;com.google.guava&lt;&#x2F;groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;guava&lt;&#x2F;artifactId&gt;</span><br><span class="line">          &lt;version&gt;28.0-jre&lt;&#x2F;version&gt;</span><br><span class="line">      &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1767,17 +1749,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">46</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
