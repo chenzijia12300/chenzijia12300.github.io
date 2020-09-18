@@ -152,6 +152,427 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-09 15:22:00" itemprop="dateCreated datePublished" datetime="2020-06-09T15:22:00+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-21 21:38:56" itemprop="dateModified" datetime="2020-06-21T21:38:56+08:00">2020-06-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">spring面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="/images/pasted-55.png" alt="upload successful"></p>
+<blockquote>
+<p>如上图我们大致可以将spring生命周期分为12个步骤</p>
+</blockquote>
+<ol>
+<li>通过反射实例化对象。</li>
+<li>设置对象的属性。</li>
+<li>如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法</li>
+<li>如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。</li>
+<li>如果对象实现了ApplicationContextAware接口，spring将bean所在应用上下文传给setApplicationContext()方法。</li>
+<li>如果对象实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessBeforeInitialization()方法。</li>
+<li>如果对象实现了InitializingBean接口，spring将调用afterPropertiesSet()方法。</li>
+<li>如果对象声明了init-method方法，spring将调用该方法。</li>
+<li>如果Bean 实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessAfterInitialization()方法。</li>
+<li>对象使用中。</li>
+<li>如果对象实现了DisposableBean()接口，spring将调用destroy()方法。</li>
+<li>如果对象声明了destroy-method方法，spring将调用该方法。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">集合面试题（一）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-09 14:54:00" itemprop="dateCreated datePublished" datetime="2020-06-09T14:54:00+08:00">2020-06-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 15:16:42" itemprop="dateModified" datetime="2020-06-15T15:16:42+08:00">2020-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">集合面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h3><blockquote>
+<p>首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/07/%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">多线程面试题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-07 17:10:00" itemprop="dateCreated datePublished" datetime="2020-06-07T17:10:00+08:00">2020-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-12 23:22:14" itemprop="dateModified" datetime="2020-06-12T23:22:14+08:00">2020-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">多线程面试题</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="三个线程顺序执行依次输出ABCABCABCABC…"><a href="#三个线程顺序执行依次输出ABCABCABCABC…" class="headerlink" title="三个线程顺序执行依次输出ABCABCABCABC…"></a>三个线程顺序执行依次输出ABCABCABCABC…</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
+<p>三个线程顺序执行依次输出ABCABCABCABC…，让我们如何控制线程的同步访问，使得线程依次输出ABCABCABCABC…的结果。</p>
+</blockquote>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><blockquote>
+<p>使用最简便最实用的信号量Semaphore，通过控制信号的获取以及释放，承接获取锁来实现线程得顺序执行以及临界资源的同步访问。这里要明白如果信号量（Semaphore）初始化为0的话，调用acquire()就会堵塞，直到调用relase()。</p>
+</blockquote>
+<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.interview;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;7 17:06</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SemaphoreABC &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Semaphore semaphoreA &#x3D; new Semaphore(1);</span><br><span class="line">        Semaphore semaphoreB &#x3D; new Semaphore(0);</span><br><span class="line">        Semaphore semaphoreC &#x3D; new Semaphore(0);</span><br><span class="line">        new Thread(()-&gt;print(&quot;A&quot;,semaphoreA,semaphoreB)).start();</span><br><span class="line">        new Thread(()-&gt;print(&quot;B&quot;,semaphoreB,semaphoreC)).start();</span><br><span class="line">        new Thread(()-&gt;print(&quot;C&quot;,semaphoreC,semaphoreA)).start();</span><br><span class="line">    &#125;</span><br><span class="line">    public static void print(String word, Semaphore start, Semaphore end)&#123;</span><br><span class="line">        for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                start.acquire();</span><br><span class="line">                System.out.println(word);</span><br><span class="line">                end.release();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h3><ul>
+<li>进程是程序运行和资源分配的基本单位，一个程序至少有一个进程，一个进程至少有一个线程。</li>
+<li>进程在执行过程中拥有独立的内存单元，而多个线程共享内存资源，减少切换次数，从而效率更高。</li>
+<li>线程是进程的一个实体，是cpu调度和分派的基本单位，是比程序更小的能独立运行的基本单位。同一进程中的多个线程之间可以并发执行。</li>
+</ul>
+<h3 id="创建线程有哪几种方式"><a href="#创建线程有哪几种方式" class="headerlink" title="创建线程有哪几种方式"></a>创建线程有哪几种方式</h3><ol>
+<li>实现Runnable接口</li>
+<li>通过Callable和Future创建线程</li>
+<li>继承Thread类</li>
+</ol>
+<h3 id="死锁是什么，怎么防止死锁"><a href="#死锁是什么，怎么防止死锁" class="headerlink" title="死锁是什么，怎么防止死锁"></a>死锁是什么，怎么防止死锁</h3><blockquote>
+<p>死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。</p>
+</blockquote>
+<h4 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h4><ul>
+<li>互斥条件：一个资源每次只能被一个线程使用</li>
+<li>请求和保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不可剥夺条件：线程已获得的资源，在末使用完之前，不能强行剥夺</li>
+<li>环路等待条件：若干线程之间形成一种头尾相接的循环等待资源关系</li>
+</ul>
+<h3 id="为什么阿里开发手册说线程池不允许使用Executors去创建"><a href="#为什么阿里开发手册说线程池不允许使用Executors去创建" class="headerlink" title="为什么阿里开发手册说线程池不允许使用Executors去创建"></a>为什么阿里开发手册说线程池不允许使用Executors去创建</h3><ul>
+<li>FixedThreadPool和SingleThreadPool：允许的请求队列长度为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。 </li>
+<li>CachedThreadPool:允许的创建线程数量为Integer.MAX_VALUE,可能会创建大量的线程，从而导致OOM。 </li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">ThreadPoolExecutor线程池详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-04 14:14:00" itemprop="dateCreated datePublished" datetime="2020-06-04T14:14:00+08:00">2020-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-05 10:49:52" itemprop="dateModified" datetime="2020-06-05T10:49:52+08:00">2020-06-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="ThreadPoolExecutor线程池简介"><a href="#ThreadPoolExecutor线程池简介" class="headerlink" title="ThreadPoolExecutor线程池简介"></a>ThreadPoolExecutor线程池简介</h3><blockquote>
+<p>在阿里的开发手册里，注明了不能在项目中显示创建线程，而是要通过线程池来管理提供。这样做是因为可以减少线程创建和销毁的内存开销，合理控制项目中的线程数。</p>
+</blockquote>
+<p><img src="/images/ThreadPoolExecutor.png" alt="123"></p>
+<h3 id="ThreadPoolExecutor源码初探"><a href="#ThreadPoolExecutor源码初探" class="headerlink" title="ThreadPoolExecutor源码初探"></a>ThreadPoolExecutor源码初探</h3><h4 id="线程池状态成员字段"><a href="#线程池状态成员字段" class="headerlink" title="线程池状态成员字段"></a>线程池状态成员字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 高3位表示线程池状态，低29位表示线程池个数（默认是RUNNING状态线程个数为0）</span><br><span class="line">private final AtomicInteger ctl &#x3D; new AtomicInteger(ctlOf(RUNNING, 0));</span><br><span class="line">   &#x2F;&#x2F; 线程个数掩码位数</span><br><span class="line">   private static final int COUNT_BITS &#x3D; Integer.SIZE - 3;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 线程最大个数29个二进制1</span><br><span class="line">   private static final int CAPACITY   &#x3D; (1 &lt;&lt; COUNT_BITS) - 1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F; ***线程池状态***：</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 运行状态（高三位）111</span><br><span class="line">   private static final int RUNNING    &#x3D; -1 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 暂停状态（高三位）000</span><br><span class="line">   private static final int SHUTDOWN   &#x3D;  0 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 停止状态（高三位）001</span><br><span class="line">   private static final int STOP       &#x3D;  1 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 完成状态（高三位）010</span><br><span class="line">   private static final int TIDYING    &#x3D;  2 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 终止状态（高三位）011</span><br><span class="line">   private static final int TERMINATED &#x3D;  3 &lt;&lt; COUNT_BITS;</span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F; 获得高三位（运行状态）</span><br><span class="line">   private static int runStateOf(int c)     &#123; return c &amp; ~CAPACITY; &#125;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 获得低29位（线程个数）</span><br><span class="line">   private static int workerCountOf(int c)  &#123; return c &amp; CAPACITY; &#125;</span><br><span class="line">   </span><br><span class="line">   计算新值</span><br><span class="line">   private static int ctlOf(int rs, int wc) &#123; return rs | wc; &#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="线程池状态"><a href="#线程池状态" class="headerlink" title="线程池状态"></a>线程池状态</h5><ul>
+<li>RUNNING : 接受新的任务并且处理堵塞队列的任务</li>
+<li>SHUTDOWN : 不接受新的任务但是处理堵塞队列的任务</li>
+<li>STOP ： 不接受新的任务而且抛弃堵塞队列的任务，中断正在运行的任务</li>
+<li>TIDYING ：所有任务都执行完毕，活动线程个数为0，且准备调用terminated方法</li>
+<li>TERMINATED ： 终止状态，调用完terminated后的状态</li>
+</ul>
+<h4 id="线程池构造方法"><a href="#线程池构造方法" class="headerlink" title="线程池构造方法"></a>线程池构造方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          Executors.defaultThreadFactory(), defaultHandler);</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line">  public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           ThreadFactory threadFactory) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          threadFactory, defaultHandler);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           RejectedExecutionHandler handler) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          Executors.defaultThreadFactory(), handler);</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">     public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           ThreadFactory threadFactory,</span><br><span class="line">                           RejectedExecutionHandler handler) &#123;</span><br><span class="line">     if (corePoolSize &lt; 0 ||</span><br><span class="line">         maximumPoolSize &lt;&#x3D; 0 ||</span><br><span class="line">         maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">         keepAliveTime &lt; 0)</span><br><span class="line">         throw new IllegalArgumentException();</span><br><span class="line">     if (workQueue &#x3D;&#x3D; null || threadFactory &#x3D;&#x3D; null || handler &#x3D;&#x3D; null)</span><br><span class="line">         throw new NullPointerException();</span><br><span class="line">     this.acc &#x3D; System.getSecurityManager() &#x3D;&#x3D; null ?</span><br><span class="line">             null :</span><br><span class="line">             AccessController.getContext();</span><br><span class="line">     this.corePoolSize &#x3D; corePoolSize;</span><br><span class="line">     this.maximumPoolSize &#x3D; maximumPoolSize;</span><br><span class="line">     this.workQueue &#x3D; workQueue;</span><br><span class="line">     this.keepAliveTime &#x3D; unit.toNanos(keepAliveTime);</span><br><span class="line">     this.threadFactory &#x3D; threadFactory;</span><br><span class="line">     this.handler &#x3D; handler;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从上面线程池的四个构造方法可以看出其实最后一个7参数才是真正的构造方法。</p>
+</blockquote>
+<h5 id="线程池构造参数"><a href="#线程池构造参数" class="headerlink" title="线程池构造参数"></a>线程池构造参数</h5><ul>
+<li>corePoolSize ： 线程池核心线程数</li>
+<li>maxinumPoolSize ： 线程池最大线程数，如果大于等于就会执行拒绝策略</li>
+<li>keepAliveTime ： 空闲线程存活时间，如果当前线程大于核心线程数且是空闲状态的最长休眠时间。</li>
+<li>unit ： 时间单位</li>
+<li>workQueue ：堵塞队列</li>
+<li>threadFactory ： 线程工厂</li>
+<li>handler ： 拒绝策略，当线程已满且到达maxinumPoolSize个数，采取的拒绝策略</li>
+</ul>
+<h4 id="execute-Runnable-command-方法"><a href="#execute-Runnable-command-方法" class="headerlink" title="execute(Runnable command)方法"></a>execute(Runnable command)方法</h4><blockquote>
+<p>execute方法负责将任务command提交到线程池中运行，ThreadPoolExecutor线程池其实是生产消费模型，当用户提交任务到队列中，相当于生产。当workers线程执行队列里的任务，相当于消费。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public void execute(Runnable command) &#123;</span><br><span class="line"></span><br><span class="line">    if (command &#x3D;&#x3D; null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#x2F;&#x2F;获得当前线程池的状态和线程的个数组合值</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    &#x2F;&#x2F;如果当前工作线程数小于核心线程数则创建线程</span><br><span class="line">    if (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">        if (addWorker(command, true))</span><br><span class="line">            return;</span><br><span class="line">        c &#x3D; ctl.get();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;如果线程池是运行状态，则入队</span><br><span class="line">    if (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">        int recheck &#x3D; ctl.get();</span><br><span class="line">        &#x2F;&#x2F;二次检测，如果不是运行状态了就移除该线程，并执行拒绝策略</span><br><span class="line">        if (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">            reject(command);</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池为空，则添加一个线程</span><br><span class="line">        else if (workerCountOf(recheck) &#x3D;&#x3D; 0)</span><br><span class="line">            addWorker(null, false);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 如果队列满，则新增线程，新增线程则执行拒绝策略</span><br><span class="line">    else if (!addWorker(command, false))</span><br><span class="line">        reject(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="addWorker-Runnable-firstTask-boolean-core-方法"><a href="#addWorker-Runnable-firstTask-boolean-core-方法" class="headerlink" title="addWorker(Runnable firstTask, boolean core)方法"></a>addWorker(Runnable firstTask, boolean core)方法</h4><blockquote>
+<p>addWorker()尝试把新增任务添加到任务队列中，这里代码比较长，但是其实主要分为两部分。</p>
+</blockquote>
+<ol>
+<li>双重循环通过CAS操作自增线程数。</li>
+<li>加锁把新增任务加入到workers里。<br>下面我们分段来看这段代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">retry:</span><br><span class="line">for (;;) &#123;</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    int rs &#x3D; runStateOf(c);</span><br><span class="line">			</span><br><span class="line">    &#x2F;&#x2F;这里比较绕下面会分析</span><br><span class="line">    if (rs &gt;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">        ! (rs &#x3D;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">           firstTask &#x3D;&#x3D; null &amp;&amp;</span><br><span class="line">           ! workQueue.isEmpty()))</span><br><span class="line">        return false;</span><br><span class="line">				 </span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int wc &#x3D; workerCountOf(c);</span><br><span class="line">        &#x2F;&#x2F;如果当前运行线程超过了限制就会返回false</span><br><span class="line">        if (wc &gt;&#x3D; CAPACITY ||</span><br><span class="line">            wc &gt;&#x3D; (core ? corePoolSize : maximumPoolSize))</span><br><span class="line">            return false;</span><br><span class="line">        &#x2F;&#x2F;同一时间只会有一个线程操作成功</span><br><span class="line">        if (compareAndIncrementWorkerCount(c))</span><br><span class="line">            break retry;</span><br><span class="line">        c &#x3D; ctl.get();  &#x2F;&#x2F; Re-read ctl</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池状态被改变则回到上层循环重新获得线程池状态</span><br><span class="line">        if (runStateOf(c) !&#x3D; rs)</span><br><span class="line">            continue retry;</span><br><span class="line">        &#x2F;&#x2F; else CAS failed due to workerCount change; retry inner loop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>判断那里在三种情况下会返回false</p>
+</blockquote>
+<ol>
+<li>当前线程池状态为STOP,TIDYING,TERMINATED</li>
+<li>当前线程池状态为SHUTDOWN而且有第一个任务</li>
+<li>当前线程池状态为SHUTDOWN而且任务队列为空</li>
+</ol>
+<h3 id="任务队列和拒绝策略"><a href="#任务队列和拒绝策略" class="headerlink" title="任务队列和拒绝策略"></a>任务队列和拒绝策略</h3><h4 id="workQueue任务队列"><a href="#workQueue任务队列" class="headerlink" title="workQueue任务队列"></a>workQueue任务队列</h4><blockquote>
+<p>任务队列一般分为4种，直接提交队列，有界队列，无界队列，优先队列。</p>
+</blockquote>
+<h4 id="SynchronousQueue-直接提交队列"><a href="#SynchronousQueue-直接提交队列" class="headerlink" title="SynchronousQueue(直接提交队列)"></a>SynchronousQueue(直接提交队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class TestThreadPoolExecutor &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">        for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class HelloTask implements Runnable&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot; Hello World! &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<blockquote>
+<p>pool-1-thread-1 Hello World!<br>pool-1-thread-2 Hello World!<br>Exception in thread “main” java.util.concurrent.RejectedExecutionException: Task Thread[线程2,5,main] rejected from java.util.concurrent.ThreadPoolExecutor@14ae5a5[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]<br>    at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)<br>    at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)<br>    at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)<br>    at com.czj.example01.TestThreadPoolExceutor.main(TestThreadPoolExceutor.java:12)</p>
+</blockquote>
+<blockquote>
+<p>可以看到当队列为SynchronousQueue时，当创建的线程数超过了maxinumPoolSize时就会直接执行拒绝策略。<br>使用SynchronousQueue队列，提交的任务不会被保存，总是会马上提交执行。如果用于执行任务的线程数量小于maximumPoolSize，则尝试创建新的进程，如果达到maximumPoolSize设置的最大值，则根据你设置的handler执行拒绝策略。因此这种方式你提交的任务不会被缓存起来，而是会被马上执行，在这种情况下，你需要对你程序的并发量有个准确的评估，才能设置合适的maximumPoolSize数量，否则很容易就会执行拒绝策略；</p>
+</blockquote>
+<h4 id="ArrayBlockingQueue-有界任务队列"><a href="#ArrayBlockingQueue-有界任务队列" class="headerlink" title="ArrayBlockingQueue(有界任务队列)"></a>ArrayBlockingQueue(有界任务队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new ArrayBlockingQueue&lt;Runnable&gt;(16));</span><br><span class="line">    for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">        threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用ArrayBlockingQueue有界任务队列，若有新的任务需要执行时，线程池会创建新的线程，直到创建的线程数量达到corePoolSize时，则会将新的任务加入到等待队列中。若等待队列已满，即超过ArrayBlockingQueue初始化的容量，则继续创建线程，直到线程数量达到maximumPoolSize设置的最大线程数量，若大于maximumPoolSize，则执行拒绝策略。在这种情况下，线程数量的上限与有界任务队列的状态有直接关系，如果有界队列初始容量较大或者没有达到超负荷的状态，线程数将一直维持在corePoolSize以下，反之当任务队列已满时，则会以maximumPoolSize为最大线程数上限。</p>
+</blockquote>
+<h4 id="LinkedBlockingQueue-无界任务队列"><a href="#LinkedBlockingQueue-无界任务队列" class="headerlink" title="LinkedBlockingQueue(无界任务队列)"></a>LinkedBlockingQueue(无界任务队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">    for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">        threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>使用无界任务队列，线程池的任务队列可以无限制的添加新的任务，而线程池创建的最大线程数量就是你corePoolSize设置的数量，也就是说在这种情况下maximumPoolSize这个参数是无效的，哪怕你的任务队列中缓存了很多未执行的任务，当线程池的线程数达到corePoolSize后，就不会再增加了；若后续有新的任务加入，则直接进入队列等待，当使用这种任务队列模式时，一定要注意你任务提交与处理之间的协调与控制，不然会出现队列中的任务由于无法及时处理导致一直增长，直到最后资源耗尽的问题。</p>
+</blockquote>
+<h4 id="PriorityBlockingQueue-优先队列"><a href="#PriorityBlockingQueue-优先队列" class="headerlink" title="PriorityBlockingQueue(优先队列)"></a>PriorityBlockingQueue(优先队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadPoolExecutor &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,10,100, TimeUnit.SECONDS,new PriorityBlockingQueue&lt;&gt;());</span><br><span class="line">        for (int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">            threadPoolExecutor.execute(new HelloTask(&quot;线程&quot;+i,i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class HelloTask implements Runnable,Comparable&lt;HelloTask&gt;&#123;</span><br><span class="line"></span><br><span class="line">        private int priority;</span><br><span class="line"></span><br><span class="line">        private String name;</span><br><span class="line">        public HelloTask(String name,int priority) &#123;</span><br><span class="line">            this.name &#x3D; name;</span><br><span class="line">            this.priority &#x3D; priority;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(name+&quot; Start Hello World! &quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(name+&quot; End Goodbye &quot;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compareTo(HelloTask o) &#123;</span><br><span class="line">            if (this&#x3D;&#x3D;o)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            int num &#x3D; this.priority-o.priority;</span><br><span class="line">            if (num&#x3D;&#x3D;0)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;PriorityBlockingQueue底层实现是最小堆，所以比较越小越优先。</span><br><span class="line">            return num&gt;0?-1:1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<blockquote>
+<p>线程0 Start Hello World!<br>线程0 End Goodbye<br>线程9 Start Hello World!<br>线程9 End Goodbye<br>线程8 Start Hello World!<br>线程8 End Goodbye<br>线程7 Start Hello World!<br>线程7 End Goodbye<br>线程6 Start Hello World!<br>线程6 End Goodbye<br>线程5 Start Hello World!<br>线程5 End Goodbye<br>线程4 Start Hello World!<br>线程4 End Goodbye<br>线程3 Start Hello World!<br>线程3 End Goodbye<br>线程2 Start Hello World!<br>线程2 End Goodbye<br>线程1 Start Hello World!<br>线程1 End Goodbye </p>
+</blockquote>
+<blockquote>
+<p>大家可以看到除了第一个任务直接创建线程执行外，其他的任务都被放入了优先任务队列，按优先级进行了重新排列执行，且线程池的线程数一直为corePoolSize，也就是只有一个。<br>通过运行的代码我们可以看出PriorityBlockingQueue它其实是一个特殊的无界队列，它其中无论添加了多少个任务，线程池创建的线程数也不会超过corePoolSize的数量，只不过其他队列一般是按照先进先出的规则处理任务，而PriorityBlockingQueue队列可以自定义规则根据任务的优先级顺序先后执行。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1029,658 +1450,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/14/%E8%B7%83%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/14/%E8%B7%83%E8%A1%A8/" class="post-title-link" itemprop="url">跳跃表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-05-14 10:13:00 / Modified: 10:59:11" itemprop="dateCreated datePublished" datetime="2020-05-14T10:13:00+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="跳跃表-skiplist-简介"><a href="#跳跃表-skiplist-简介" class="headerlink" title="跳跃表(skiplist)简介"></a>跳跃表(skiplist)简介</h3><blockquote>
-<p>跳跃表(skiplist)是一种随机化的数据结构，其实就是给顺序单链表加了多个多层索引，高层次的索引跳跃节点大于底层的，增加是以随机化的方式进行的，在列表中查找的可以快速的跳过部分列表，提高查询效率。 跳跃表以有序的方式在层次化的链表中保存元素， 效率和平衡树媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。</p>
-</blockquote>
-<p><img src="/images/pasted-36.png" alt="upload successful"></p>
-<blockquote>
-<p>从图中可以分为4个部分构成：<br>head：负责维护跳跃表的节点指针<br>跳跃表节点：保存元素值<br>层：保持着其他元素的指针，高层的指针越过元素数量大于等于低层的指针，为了提高效率，程序总是从高层开始访问，然后随着范围的缩小，降低层次。</p>
-</blockquote>
-<h3 id="跳跃表代码实现"><a href="#跳跃表代码实现" class="headerlink" title="跳跃表代码实现"></a>跳跃表代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">public class MySkipList&lt;K extends Comparable&lt;? super K&gt;,V&gt;&#123;</span><br><span class="line"></span><br><span class="line">    private MySkipListNode&lt;K,V&gt; head,tail;&#x2F;&#x2F;头尾指针</span><br><span class="line">    private int nodeNum,levelNum;</span><br><span class="line">    private Random random;</span><br><span class="line">    private static final double PROBABILITY &#x3D; 0.5;</span><br><span class="line">    private final  K HEAD_KEY,TAIL_KEY;</span><br><span class="line">    public MySkipList(Class&lt;K&gt; kClass) &#123;</span><br><span class="line">        random &#x3D; new Random();</span><br><span class="line">        HEAD_KEY&#x3D; (K) new NullComparable();</span><br><span class="line">        TAIL_KEY&#x3D; (K) new NullComparable();</span><br><span class="line">        head &#x3D; new MySkipListNode&lt;&gt;(HEAD_KEY,null);</span><br><span class="line">        tail &#x3D; new MySkipListNode&lt;&gt;(TAIL_KEY,null);</span><br><span class="line">        horizontalLink(head,tail);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int size()&#123;</span><br><span class="line">        return nodeNum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 在最底层找到要插入位置的元素</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private MySkipListNode&lt;K,V&gt; findNode(K key)&#123;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; head;</span><br><span class="line">        while (true)&#123;</span><br><span class="line">            while (node.right.key!&#x3D;TAIL_KEY&amp;&amp;node.right.key.compareTo(key)&lt;&#x3D;0)&#123;</span><br><span class="line">                node &#x3D; node.right;</span><br><span class="line">            &#125;</span><br><span class="line">            if (node.down !&#x3D; null)&#123;</span><br><span class="line"></span><br><span class="line">                node &#x3D; node.down;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public MySkipListNode&lt;K,V&gt; get(K key)&#123;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D;findNode(key);</span><br><span class="line">        if (key.compareTo(node.key)&#x3D;&#x3D;0)&#123;</span><br><span class="line">            return node;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    public boolean add(K key, V value)&#123;</span><br><span class="line">        if (Objects.isNull(key))&#123;</span><br><span class="line">            throw  new AssertionError(&quot;THE KEY CANNOT BE EMPTY&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;如果key存在则直接赋值</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; findNode(key);</span><br><span class="line">        if (!(node.key instanceof NullComparable)&amp;&amp;key.compareTo(node.key)&#x3D;&#x3D;0)&#123;</span><br><span class="line">            node.value&#x3D;value;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; newNode &#x3D; new MySkipListNode&lt;&gt;(key,value);</span><br><span class="line">        backLink(node,newNode);</span><br><span class="line">        int currentLevel &#x3D; 0;</span><br><span class="line">        while(random.nextDouble()&lt;PROBABILITY)&#123;</span><br><span class="line">            if (currentLevel&gt;&#x3D;levelNum)&#123;</span><br><span class="line">                levelNum++;</span><br><span class="line">                MySkipListNode&lt;K,V&gt; newHeadNode &#x3D; new MySkipListNode&lt;K,V&gt;(HEAD_KEY,null);</span><br><span class="line">                MySkipListNode&lt;K,V&gt; newTailNode &#x3D; new MySkipListNode&lt;&gt;(TAIL_KEY,null);</span><br><span class="line">                horizontalLink(newHeadNode,newTailNode);</span><br><span class="line">                verticalLink(newHeadNode,head);</span><br><span class="line">                verticalLink(newTailNode,tail);</span><br><span class="line">                head &#x3D; newHeadNode;</span><br><span class="line">                tail &#x3D; newTailNode;</span><br><span class="line">            &#125;</span><br><span class="line">            while (node.up &#x3D;&#x3D; null)&#123;</span><br><span class="line">                node &#x3D; node.left;</span><br><span class="line">            &#125;</span><br><span class="line">            node &#x3D; node.up;</span><br><span class="line">            MySkipListNode&lt;K,V&gt; newUpNode &#x3D; new MySkipListNode&lt;&gt;(key,null);</span><br><span class="line"></span><br><span class="line">            backLink(node,newUpNode);</span><br><span class="line">            verticalLink(newUpNode,newNode);</span><br><span class="line">            newNode &#x3D; newUpNode;</span><br><span class="line">            currentLevel++;</span><br><span class="line">        &#125;</span><br><span class="line">        nodeNum++;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public List&lt;MySkipListNode&gt; traverseKey()&#123;</span><br><span class="line">        List&lt;MySkipListNode&gt; listNodes &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        if (nodeNum &#x3D;&#x3D; 0)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        MySkipListNode&lt;K,V&gt; node &#x3D; head;</span><br><span class="line">        StringBuilder builder &#x3D;new StringBuilder();</span><br><span class="line">        while (node.down!&#x3D;null)&#123;</span><br><span class="line">            node &#x3D; node.down;</span><br><span class="line">        &#125;</span><br><span class="line">        while (node.left!&#x3D;null)&#123;</span><br><span class="line">            node &#x3D; node.left;</span><br><span class="line">        &#125;</span><br><span class="line">        while (node.right!&#x3D;null)&#123;</span><br><span class="line">            listNodes.add(node);</span><br><span class="line">            node &#x3D; node.right;</span><br><span class="line">        &#125;</span><br><span class="line">        return listNodes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 将back插入到front的后面。</span><br><span class="line">     * @param front</span><br><span class="line">     * @param back</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void backLink(MySkipListNode front,MySkipListNode back)&#123;</span><br><span class="line">        back.left &#x3D; front;</span><br><span class="line">        back.right&#x3D;front.right;</span><br><span class="line">        front.right.left&#x3D;back;</span><br><span class="line">        front.right&#x3D;back;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 垂直链接</span><br><span class="line">     * @param upNode</span><br><span class="line">     * @param downNode</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void verticalLink(MySkipListNode&lt;K,V&gt; upNode,MySkipListNode&lt;K,V&gt; downNode)&#123;</span><br><span class="line">        upNode.down &#x3D; downNode;</span><br><span class="line">        downNode.up &#x3D; upNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 水平链接</span><br><span class="line">     * @param leftNode</span><br><span class="line">     * @param rightNode</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void horizontalLink(MySkipListNode&lt;K,V&gt; leftNode,MySkipListNode&lt;K,V&gt; rightNode)&#123;</span><br><span class="line">        leftNode.right &#x3D; rightNode;</span><br><span class="line">        rightNode.left &#x3D; leftNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class MySkipListNode&lt;K,V&gt;&#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line">        private MySkipListNode&lt;K,V&gt; up,down,left,right;&#x2F;&#x2F;上下左右</span><br><span class="line"></span><br><span class="line">        public MySkipListNode(K key, V value) &#123;</span><br><span class="line">            this.key &#x3D; key;</span><br><span class="line">            this.value &#x3D; value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean equals(Object o) &#123;</span><br><span class="line">            if (this &#x3D;&#x3D; o) return true;</span><br><span class="line">            if (o &#x3D;&#x3D; null || getClass() !&#x3D; o.getClass()) return false;</span><br><span class="line">            return key&#x3D;&#x3D;((MySkipListNode)o).key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int hashCode() &#123;</span><br><span class="line">            return key.hashCode();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String toString() &#123;</span><br><span class="line">            return &quot;MySkipListNode&#123;&quot; +</span><br><span class="line">                    &quot;key&#x3D;&quot; + key +</span><br><span class="line">                    &quot;, value&#x3D;&quot; + value +</span><br><span class="line">                    &#39;&#125;&#39;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    private static class NullComparable implements Comparable&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compareTo(Object o) &#123;</span><br><span class="line">            System.out.println(o);</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MySkipList&lt;String,String&gt; mySkipList &#x3D; new MySkipList&lt;&gt;(String.class);</span><br><span class="line">        Random random &#x3D; new Random();</span><br><span class="line">        for (int i&#x3D;0;i&lt;20;i++)&#123;</span><br><span class="line">            int num &#x3D; random.nextInt(100);</span><br><span class="line">            System.out.println(&quot;num &#x3D; &quot;+num);</span><br><span class="line">            mySkipList.add(String.valueOf(num),&quot;num&#x3D;&quot;+num);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(mySkipList.traverseKey());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/10/edis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/" class="post-title-link" itemprop="url">redis学习笔记(一)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-10 23:14:00" itemprop="dateCreated datePublished" datetime="2020-05-10T23:14:00+08:00">2020-05-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-14 10:12:58" itemprop="dateModified" datetime="2020-05-14T10:12:58+08:00">2020-05-14</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index"><span itemprop="name">redis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h3><blockquote>
-<p>redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。<br>redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。</p>
-</blockquote>
-<ol>
-<li>string(字符串类型)</li>
-<li>hash(散列/哈希类型)</li>
-<li>list(列表类型)</li>
-<li>set(集合类型)</li>
-<li>zset(有序集合类型)</li>
-</ol>
-<h3 id="redis优点"><a href="#redis优点" class="headerlink" title="redis优点"></a>redis优点</h3><blockquote>
-<p>为啥要用reids呢？mysql不行嘛？</p>
-</blockquote>
-<ol>
-<li>快！  redis 非常快，每秒可执行大约 110000 次的设置(SET)操作，每秒大约可执行 81000 次的读取/获取(GET)操作。(下图是我本机测试的，当然每台电脑不一样看性能的，使用redis-benchmark -n 100000 -q 测试)</li>
-</ol>
-<p><img src="/images/pasted-28.png" alt="upload successful"></p>
-<ol start="2">
-<li><p>原子性! 所有 Redis 操作都是原子操作，这确保如果两个客户端并发访问，Redis 服务器能接收更新的值,因为redis是单线程的。</p>
-</li>
-<li><p>丰富的数据类型!  redis 支持开发人员常用的大多数数据类型，例如列表，集合，排序集和散列等等。这使得 Redis 很容易被用来解决各种问题，因为我们知道哪些问题可以更好使用地哪些数据类型来处理解决。</p>
-</li>
-<li><p>实用工具! Redis 是一个多实用工具，可用于多种用例，如：缓存，消息队列(Redis 本地支持发布/订阅)，应用程序中的任何短期数据，例如，web应用程序中的会话，网页命中计数等。    </p>
-</li>
-</ol>
-<h3 id="redis基本命令"><a href="#redis基本命令" class="headerlink" title="redis基本命令"></a>redis基本命令</h3><h4 id="KEYS-pattern-符合规则的键名列表"><a href="#KEYS-pattern-符合规则的键名列表" class="headerlink" title="KEYS pattern(符合规则的键名列表)"></a>KEYS pattern(符合规则的键名列表)</h4><blockquote>
-<p>KEYS pattern<br>其中pattern支持glob风格通配符的格式,另外由于KEYS命令需要遍历redis中所有的key，而且redis又是单线程的，当key较多时会影响性能，生产环境建议别用喔。</p>
-</blockquote>
-<p><img src="/images/pasted-29.png" alt="upload successful"></p>
-<h4 id="EXISTS-key-判断key是否存在"><a href="#EXISTS-key-判断key是否存在" class="headerlink" title="EXISTS key(判断key是否存在)"></a>EXISTS key(判断key是否存在)</h4><blockquote>
-<p>EXISTS key<br>如果key存在则返回整数类型1，否则返回0</p>
-</blockquote>
-<h4 id="DEL-key…-删除键"><a href="#DEL-key…-删除键" class="headerlink" title="DEL key…(删除键)"></a>DEL key…(删除键)</h4><blockquote>
-<p>DEL key…<br>可以删除一个或多个key，返回值是删除键的个数。</p>
-</blockquote>
-<h4 id="TYPE-key-获得key的类型"><a href="#TYPE-key-获得key的类型" class="headerlink" title="TYPE key(获得key的类型)"></a>TYPE key(获得key的类型)</h4><blockquote>
-<p>TYPE key<br>如果key不存在返回none，否则返回五种数据类型其中一个。</p>
-</blockquote>
-<h3 id="redis五种基本数据结构"><a href="#redis五种基本数据结构" class="headerlink" title="redis五种基本数据结构"></a>redis五种基本数据结构</h3><blockquote>
-<p>Redis 有 5 种基础数据结构，它们分别是：string(字符串)、list(列表)、hash(字典)、set(集合) 和 zset(有序集合)。</p>
-</blockquote>
-<h4 id="string-字符串"><a href="#string-字符串" class="headerlink" title="string(字符串)"></a>string(字符串)</h4><h5 id="string简介"><a href="#string简介" class="headerlink" title="string简介"></a>string简介</h5><blockquote>
-<p>字符串类型是redis中最基本的数据类型，它能够存储任何形式的字符串，一个字符串类型的最大容量是512MB。从源码的 sds.h/sdshdr 文件 中可以看到 Redis 底层对于字符串的定义 SDS，即 Simple Dynamic String 结构：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* Note: sdshdr5 is never used, we just access the flags byte directly.</span><br><span class="line"> * However is here to document the layout of type 5 SDS strings. *&#x2F;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr5 &#123;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, and 5 msb of string length *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr8 &#123;</span><br><span class="line">    uint8_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint8_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr16 &#123;</span><br><span class="line">    uint16_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint16_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr32 &#123;</span><br><span class="line">    uint32_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint32_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br><span class="line">struct __attribute__ ((__packed__)) sdshdr64 &#123;</span><br><span class="line">    uint64_t len; &#x2F;* used *&#x2F;</span><br><span class="line">    uint64_t alloc; &#x2F;* excluding the header and null terminator *&#x2F;</span><br><span class="line">    unsigned char flags; &#x2F;* 3 lsb of type, 5 unused bits *&#x2F;</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>为了对内存做到极致的优化，不同长度的字符串使用不同的结构体来表示。</p>
-</blockquote>
-<h5 id="SDS-与-C-字符串的区别"><a href="#SDS-与-C-字符串的区别" class="headerlink" title="SDS 与 C 字符串的区别"></a>SDS 与 C 字符串的区别</h5><blockquote>
-<p>为什么不考虑直接使用 C 语言的字符串呢？因为 C 语言这种简单的字符串表示方式 不符合 Redis 对字符串在安全性、效率以及功能方面的要求。我们知道，C 语言使用了一个长度为 N+1 的字符数组来表示长度为 N 的字符串，并且字符数组最后一个元素总是 ‘\0’。(下图就展示了 C 语言中值为 “Redis” 的一个字符数组)。</p>
-</blockquote>
-<blockquote>
-<p>直接使用c字符串会有哪些问题呢？<br>获取字符串长度为 O(N) 级别的操作 → 因为 C 不保存数组的长度，每次都需要遍历一遍整个数组；<br>不能很好的杜绝 缓冲区溢出/内存泄漏 的问题 → 跟上述问题原因一样，如果执行拼接 or 缩短字符串的操作，如果操作不当就很容易造成上述问题；<br>C 字符串 只能保存文本数据 → 因为 C 语言中的字符串必须符合某种编码（比如 ASCII），例如中间出现的 ‘\0’ 可能会被判定为提前结束的字符串而识别不了；</p>
-</blockquote>
-<h5 id="string基本命令"><a href="#string基本命令" class="headerlink" title="string基本命令"></a>string基本命令</h5><h6 id="赋值和取值"><a href="#赋值和取值" class="headerlink" title="赋值和取值"></a>赋值和取值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET key value</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; GET key</span><br><span class="line">&quot;value&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>当键不存在时会放回空结果(nil)</p>
-</blockquote>
-<h6 id="递增整数"><a href="#递增整数" class="headerlink" title="递增整数"></a>递增整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set num 0</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; incr num</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; incr num</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>当字符串是整数类型的时候，可以通过incr方法递增，并返回递增后的值，如果不是整数类型则会报错。</p>
-</blockquote>
-<h6 id="递减整数"><a href="#递减整数" class="headerlink" title="递减整数"></a>递减整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; decr num</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>decr递减，其他事项如上面一样。</p>
-</blockquote>
-<h6 id="增加指定的整数"><a href="#增加指定的整数" class="headerlink" title="增加指定的整数"></a>增加指定的整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; incrby num 100</span><br><span class="line">(integer) 102</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>incrby跟递增一样，只是可以指定增加的整数。</p>
-</blockquote>
-<h6 id="减少指定的整数"><a href="#减少指定的整数" class="headerlink" title="减少指定的整数"></a>减少指定的整数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; decrby num 100</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>decrby跟递减一样，只是可以指定减少的整数。</p>
-</blockquote>
-<h6 id="增加指定浮点数"><a href="#增加指定浮点数" class="headerlink" title="增加指定浮点数"></a>增加指定浮点数</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; incrbyfloat num 100.123</span><br><span class="line">&quot;101.123&quot;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>incrbyfloat同上上，只是加的变成浮点数了。。</p>
-</blockquote>
-<h6 id="向尾部追加值"><a href="#向尾部追加值" class="headerlink" title="向尾部追加值"></a>向尾部追加值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set key TOM</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; append key &quot; CAT&quot;</span><br><span class="line">(integer) 7</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>append作用是向尾部追加value，如果key不存在则设置值为value，返回值是追加后字符串的长度。</p>
-</blockquote>
-<h6 id="获取字符串长度"><a href="#获取字符串长度" class="headerlink" title="获取字符串长度"></a>获取字符串长度</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; strlen key</span><br><span class="line">(integer) 7</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>返回键值的长度，如果键不存在则返回0</p>
-</blockquote>
-<h6 id="同时获得-设置多个值"><a href="#同时获得-设置多个值" class="headerlink" title="同时获得/设置多个值"></a>同时获得/设置多个值</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; MSET key1 value1 key2 value2 key3 value3</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; MGET key1 key2 key3</span><br><span class="line">1) &quot;value1&quot;</span><br><span class="line">2) &quot;value2&quot;</span><br><span class="line">3) &quot;value3&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>MSET/MGET 跟SET/GET一样，只是可以同时设置/获取多个键值。</p>
-</blockquote>
-<h6 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h6><blockquote>
-<p>一个字节由8位二进制组成，在reids中提供了4个命令来直接对二进制位进行位操作。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SET bit bar</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/images/pasted-30.png" alt="upload successful"></p>
-<blockquote>
-<p>GETBIT 命令可以获得一个字符串类型指定位置的二进制位的值（0/1），索引从0开始。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; GETBIT bit 0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GETBIT bit 6</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>SETBIT命令可以设置字符串类型指定位置的二进制位的值(0/1),返回值是该位置的旧值。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SETBIT bit 6 0</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SETBIT bit 7 1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; GET bit</span><br><span class="line">&quot;aar&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>BITCOUNT命令可以获得字符串类型中二进制位位1的个数。当然也可以只统计指定范围的。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITCOUNT bit</span><br><span class="line">(integer) 10</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; BITCOUNT bit 0 1</span><br><span class="line">(integer) 6</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>BITOP命令可以对多个字符串类型进行位运算，并将结果存储在指定key中，BITOP命令支持AND、OR、XOR、NOT等位运算操作。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITOP OR result bit1 bit2</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; GET result</span><br><span class="line">&quot;car&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>BITPOS命令可以对指定键的第一个位是0或者1的位置,例如bit1为bar，返回值为1，则表示“bar”中第一个值为1的二进制偏移量为1。    </p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; BITPOS bit1 1</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="hash-哈希-散列"><a href="#hash-哈希-散列" class="headerlink" title="hash(哈希/散列)"></a>hash(哈希/散列)</h4><blockquote>
-<p>redis的hash类型相当于java中的HashMap，内部实现也差不多一样的，都是通过数组+链表的链地址法解决哈希冲突的。散列类型适合存储对象。</p>
-</blockquote>
-<p><img src="/images/pasted-31.png" alt="upload successful"></p>
-<h5 id="hsah基本命令"><a href="#hsah基本命令" class="headerlink" title="hsah基本命令"></a>hsah基本命令</h5><h6 id="赋值和取值-1"><a href="#赋值和取值-1" class="headerlink" title="赋值和取值"></a>赋值和取值</h6><blockquote>
-<p>在哈希列表中使用HSET和HGET来设置/获取字段值。<br>HSET key field value 设置值<br>HGET key field 获取值<br>另外HSET命令不区分是INSERT还是UPDATE操作，当执行的是INSERT操作时会放回1，执行时UPDATE操作会返回0，当键本身不存在，HSET命令也会自动创建的拉。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HSET student:1 name xiaoming</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; HGET student:1 name</span><br><span class="line">&quot;xiaoming&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>跟字符串一样，可以通过HMSET和HMGET来同时设置/获取多个字段值。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HMSET student:1 age 18 sex male</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; HMGET student:1 age sex</span><br><span class="line">1) &quot;18&quot;</span><br><span class="line">2) &quot;male&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="判断字段是否存在"><a href="#判断字段是否存在" class="headerlink" title="判断字段是否存在"></a>判断字段是否存在</h6><blockquote>
-<p>HEXISITS key field 用来判断一个字段是否存在，如果存在则返回1，否则返回0。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HEXISTS student:1 name</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-
-<h6 id="当字段不存在时赋值"><a href="#当字段不存在时赋值" class="headerlink" title="当字段不存在时赋值"></a>当字段不存在时赋值</h6><blockquote>
-<p>HSETNX key field value  HSETNX与HSET类似，区别在于字段如果已经存在了，HSETNX将不执行任何操作。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HSETNX student:1 name xiaohong</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; HGET student:1 name</span><br><span class="line">&quot;xiaoming&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="删除字段"><a href="#删除字段" class="headerlink" title="删除字段"></a>删除字段</h6><blockquote>
-<p>HDEL key field… HDEL可以删除一个或多个字段，返回值时删除字段的个数。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HDEL student:1 name</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-
-<h6 id="只获得字段名或者字段值"><a href="#只获得字段名或者字段值" class="headerlink" title="只获得字段名或者字段值"></a>只获得字段名或者字段值</h6><blockquote>
-<p>HKEYS key 获得键中所有字段名<br>HVALS key 获得键中所有字段值</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; HMSET student:1 name xiaoming  age 18 sex male</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; HKEYS student:1</span><br><span class="line">1) &quot;name&quot;</span><br><span class="line">2) &quot;age&quot;</span><br><span class="line">3) &quot;sex&quot;</span><br><span class="line">127.0.0.1:6379&gt; HVALS student:1</span><br><span class="line">1) &quot;xiaoming&quot;</span><br><span class="line">2) &quot;18&quot;</span><br><span class="line">3) &quot;male&quot;</span><br></pre></td></tr></table></figure>
-
-
-<h4 id="list-列表-类型"><a href="#list-列表-类型" class="headerlink" title="list(列表)类型"></a>list(列表)类型</h4><h5 id="list简介"><a href="#list简介" class="headerlink" title="list简介"></a>list简介</h5><blockquote>
-<p>redis的list相当于java中的LinkedList，它内部时基于双向链表实现的。这意味着它插入和删除特别快，但是随机访问比较慢。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">typedef struct listNode &#123;</span><br><span class="line">    struct listNode *prev;</span><br><span class="line">    struct listNode *next;</span><br><span class="line">    void *value;</span><br><span class="line">&#125; listNode;</span><br><span class="line"></span><br><span class="line">typedef struct listIter &#123;</span><br><span class="line">    listNode *next;</span><br><span class="line">    int direction;</span><br><span class="line">&#125; listIter;</span><br><span class="line"></span><br><span class="line">typedef struct list &#123;</span><br><span class="line">    listNode *head;</span><br><span class="line">    listNode *tail;</span><br><span class="line">    void *(*dup)(void *ptr);</span><br><span class="line">    void (*free)(void *ptr);</span><br><span class="line">    int (*match)(void *ptr, void *key);</span><br><span class="line">    unsigned long len;</span><br><span class="line">&#125; list;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="list基本命令"><a href="#list基本命令" class="headerlink" title="list基本命令"></a>list基本命令</h5><h6 id="向两端添加元素"><a href="#向两端添加元素" class="headerlink" title="向两端添加元素"></a>向两端添加元素</h6><blockquote>
-<p>LPUSH key value…    向列表左边添加元素，返回新列表长度<br>RPUSH key value…     向列表右边添加元素，返回新列表长度</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; RPUSH num 2</span><br><span class="line">(integer) 2</span><br></pre></td></tr></table></figure>
-
-<h6 id="向两端弹出元素"><a href="#向两端弹出元素" class="headerlink" title="向两端弹出元素"></a>向两端弹出元素</h6><blockquote>
-<p>LPOP key 从列表左边弹出一个元素,返回元素值，如果列表为空则返回nil<br>RPOP key  从列表右边弹出一个元素,返回元素值，如果列表为空则返回nil</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1 2 3 4 5</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; LPOP num</span><br><span class="line">&quot;5&quot;</span><br><span class="line">127.0.0.1:6379&gt; RPOP num</span><br><span class="line">&quot;1&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="获得列表中元素个数"><a href="#获得列表中元素个数" class="headerlink" title="获得列表中元素个数"></a>获得列表中元素个数</h6><blockquote>
-<p>LLEN key 获得列表长度，如果列表不存在则返回0</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LLEN num</span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
-
-<h6 id="获得列表片段"><a href="#获得列表片段" class="headerlink" title="获得列表片段"></a>获得列表片段</h6><blockquote>
-<p>LRANGE key start stop 获得列表从start到stop（包括stop）的片段，redis起始索引从0开始。LRANGE命令支持负索引，例如-1表示最右边第一个元素，-2表示最右边第二个元素。<br>注意事项：</p>
-</blockquote>
-<ol>
-<li>如果start索引位置比stop索引位置靠后则会返回空列表。</li>
-<li>如果stop大于实际索引范围则会返回列表最右边的元素</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; LPUSH num 1 2 3 4 5 6 7 8 9</span><br><span class="line">(integer) 9</span><br><span class="line">127.0.0.1:6379&gt; LRANGE num 0 3</span><br><span class="line">1) &quot;9&quot;</span><br><span class="line">2) &quot;8&quot;</span><br><span class="line">3) &quot;7&quot;</span><br><span class="line">4) &quot;6&quot;</span><br><span class="line">127.0.0.1:6379&gt; LRANGE num 0 -1</span><br><span class="line">1) &quot;9&quot;</span><br><span class="line">2) &quot;8&quot;</span><br><span class="line">3) &quot;7&quot;</span><br><span class="line">4) &quot;6&quot;</span><br><span class="line">5) &quot;5&quot;</span><br><span class="line">6) &quot;4&quot;</span><br><span class="line">7) &quot;3&quot;</span><br><span class="line">8) &quot;2&quot;</span><br><span class="line">9) &quot;1&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="删除列表中指定值"><a href="#删除列表中指定值" class="headerlink" title="删除列表中指定值"></a>删除列表中指定值</h6><blockquote>
-<p>LREM key count value 删除列表中前count个值为value的元素，返回值是实际删除元素个数，根据count值的不同，执行起来也不一样</p>
-</blockquote>
-<ol>
-<li>当count&gt;0,列表会从左到右开始删除前count个value值元素。</li>
-<li>当count&lt;0,列表会从右到左开始删除前|count|个value值元素。</li>
-<li>当count=0.列表会删除所有值为value的元素。</li>
-</ol>
-<h4 id="set-集合-类型"><a href="#set-集合-类型" class="headerlink" title="set(集合)类型"></a>set(集合)类型</h4><h5 id="set简介"><a href="#set简介" class="headerlink" title="set简介"></a>set简介</h5><blockquote>
-<p>redis集合相当于java中的HashSet，内部键值对是无序，唯一的。在redis内部实现中是使用value为空的散列表实现的，所有这些操作时间复杂度是O(1),而且多个集合类型之间还可以进行并集，交集，差集等操作。</p>
-</blockquote>
-<h5 id="set基本命令"><a href="#set基本命令" class="headerlink" title="set基本命令"></a>set基本命令</h5><h6 id="添加-删除元素"><a href="#添加-删除元素" class="headerlink" title="添加/删除元素"></a>添加/删除元素</h6><blockquote>
-<p>SADD key member.. 添加一个或多个元素，如果元素已经存在则忽略，返回成功加入元素个数<br>SREM key member.. 删除一个或多个元素，返回删除成功的元素个数。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SADD set Hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; SADD set WORLD!  &quot;I LOVE YOU&quot;</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; SREM set Hello</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
-
-<h6 id="获得集合中的所有元素"><a href="#获得集合中的所有元素" class="headerlink" title="获得集合中的所有元素"></a>获得集合中的所有元素</h6><blockquote>
-<p>SMEMBERS key 返回集合中所有的元素</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SMEMBERS set</span><br><span class="line">1) &quot;I LOVE YOU&quot;</span><br><span class="line">2) &quot;WORLD!&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="集合间运算"><a href="#集合间运算" class="headerlink" title="集合间运算"></a>集合间运算</h6><blockquote>
-<p>SDIFF key… 对多个集合进行差集运算。集合A与集合B的差集表示为A-B，代表属于A且不属于B的元素集合，例如：</p>
-</blockquote>
-<p><img src="/images/pasted-32.png" alt="upload successful"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SADD set1 1 2 3 4 5</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; SADD set2 2 3 4 5 6</span><br><span class="line">(integer) 5</span><br><span class="line">127.0.0.1:6379&gt; SDIFF set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>SINTER key… 对多个集合进行交集运算。集合A与集合B的交集表示为A∩B，代表属于A且属于B的元素集合，例如：</p>
-</blockquote>
-<p><img src="/images/pasted-33.png" alt="upload successful"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SINTER set1 set2</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) &quot;3&quot;</span><br><span class="line">3) &quot;4&quot;</span><br><span class="line">4) &quot;5&quot;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>SUNION key… 对多个集合进行并集运算。集合A与集合B的并集表示为A∪B，代表属于A或属于B的元素集合，例如：</p>
-</blockquote>
-<p><img src="/images/pasted-34.png" alt="upload successful"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; SUNION set1 set2</span><br><span class="line">1) &quot;1&quot;</span><br><span class="line">2) &quot;2&quot;</span><br><span class="line">3) &quot;3&quot;</span><br><span class="line">4) &quot;4&quot;</span><br><span class="line">5) &quot;5&quot;</span><br><span class="line">6) &quot;6&quot;</span><br></pre></td></tr></table></figure>
-
-<h4 id="zset-有序列表-类型"><a href="#zset-有序列表-类型" class="headerlink" title="zset(有序列表)类型"></a>zset(有序列表)类型</h4><h5 id="zset简介"><a href="#zset简介" class="headerlink" title="zset简介"></a>zset简介</h5><blockquote>
-<p>zset有序列表，它比较特殊算的上是redis中最高级的类型了，内部实现是通过【跳跃表】来实现的。一方面他是集合，保证了唯一性，另一方面它每个value都有score值，用来实现排序权重。</p>
-</blockquote>
-<h5 id="zset基本命令"><a href="#zset基本命令" class="headerlink" title="zset基本命令"></a>zset基本命令</h5><h6 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h6><blockquote>
-<p>ZADD key score member [score member…]<br>ZADD用来向有序集合中加入一个元素和元素分数，如果元素值存在则会用新分数替换已有分数，返回值是新加入到集合中的元素个数。<br>其中score可以是整数，浮点数。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZADD score 87 Tom 67 Peter 100 Xiaoming</span><br><span class="line">(integer) 3</span><br></pre></td></tr></table></figure>
-<h6 id="获得元素分数"><a href="#获得元素分数" class="headerlink" title="获得元素分数"></a>获得元素分数</h6><blockquote>
-<p>ZSCORE key member<br>获得元素分数</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZSCORE score Xiaoming</span><br><span class="line">&quot;100&quot;</span><br></pre></td></tr></table></figure>
-<h6 id="获得在某个范围的元素列表"><a href="#获得在某个范围的元素列表" class="headerlink" title="获得在某个范围的元素列表"></a>获得在某个范围的元素列表</h6><blockquote>
-<p>ZRANGE key start stop [WITHSOCRES]<br>ZRANGE命令会按照元素分数从小到大顺序返回索引从start到stop之间的所有元素（包含stop）。同时如果想要获得元素的元素分数可以在 ZRANGE命令尾部加上WITHSCORES。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZRANGE score 0 -1</span><br><span class="line">1) &quot;Peter&quot;</span><br><span class="line">2) &quot;Tom&quot;</span><br><span class="line">3) &quot;Xiaoming&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; ZRANGE score 0 -1 WITHSCORES</span><br><span class="line">1) &quot;Peter&quot;</span><br><span class="line">2) &quot;67&quot;</span><br><span class="line">3) &quot;Tom&quot;</span><br><span class="line">4) &quot;87&quot;</span><br><span class="line">5) &quot;Xiaoming&quot;</span><br><span class="line">6) &quot;100&quot;</span><br></pre></td></tr></table></figure>
-
-<h6 id="获得指定分数范围的元素"><a href="#获得指定分数范围的元素" class="headerlink" title="获得指定分数范围的元素"></a>获得指定分数范围的元素</h6><blockquote>
-<p>ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]<br>ZRANGEBYSCORE命令按照元素分数从小到大的顺序返回，分数在min和max之间(包含max)的元素。另外如果不想包括端点值可以在前面加(<br>后面那两个可选参数跟数据库一样的就不在写了。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZRANGEBYSCORE score 80 +inf</span><br><span class="line">1) &quot;Tom&quot;</span><br><span class="line">2) &quot;Xiaoming&quot;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; ZINCRBY score 10 Tom</span><br><span class="line">&quot;97&quot;</span><br></pre></td></tr></table></figure>
-<h6 id="增加某个元素的分数"><a href="#增加某个元素的分数" class="headerlink" title="增加某个元素的分数"></a>增加某个元素的分数</h6><blockquote>
-<p>ZINCRBY key incrment member<br>ZINCRBY 可以增加一个元素的分数，返回值是更改后的分数。</p>
-</blockquote>
-<h3 id="redis命名推荐"><a href="#redis命名推荐" class="headerlink" title="redis命名推荐"></a>redis命名推荐</h3><blockquote>
-<p>在redis中对键的命名没有强制的要求，但比较好的命名是—对象类型:对象ID:对象属性,例如使用user:1:friends来存储ID为1的用户好友列表。另外键的命名一定要有可读性有意义，例如u:1:f虽然可以节省内存空间但是可读性很明显不好，孰重孰轻还是要分的清的。</p>
-</blockquote>
-<h3 id="学习资料引用"><a href="#学习资料引用" class="headerlink" title="学习资料引用"></a>学习资料引用</h3><p><a href="https://github.com/Snailclimb/JavaGuide/blob/master/docs/database/Redis/redis-collection/Redis(1)%E2%80%94%E2%80%945%E7%A7%8D%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.md" target="_blank" rel="noopener">5种基本数据结构</a><br><a href="#">《    Redis入门指南第2版》</a></p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/08/%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" class="post-title-link" itemprop="url">TCP协议</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-08 20:02:19" itemprop="dateCreated datePublished" datetime="2020-05-08T20:02:19+08:00">2020-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-09 10:04:24" itemprop="dateModified" datetime="2020-05-09T10:04:24+08:00">2020-05-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h3><blockquote>
-<p>传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。</p>
-</blockquote>
-<blockquote>
-<p>TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，1003…，并把自己的初始序列号ISN告诉B，让B有一个思想准备，什么样编号的数据是合法的，什么编号是非法的，比如编号900就是非法的，同时B还可以对A每一个编号的字节数据进行确认。如果A收到B确认编号为2001，则意味着字节编号为1001-2000，共1000个字节已经安全到达。</p>
-</blockquote>
-<h3 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h3><p><img src="/images/pasted-25.png" alt="upload successful"></p>
-<blockquote>
-<p>第一次握手：Client将标志位SYN置为1，随机产生一个值seq=J，并将该数据包发送给Server，Client进入SYN_SENT状态，等待Server确认。</p>
-</blockquote>
-<blockquote>
-<p>（2）第二次握手：Server收到数据包后由标志位SYN=1知道Client请求建立连接，Server将标志位SYN和ACK都置为1，ack=J+1，随机产生一个值seq=K，并将该数据包发送给Client以确认连接请求，Server进入SYN_RCVD状态。</p>
-</blockquote>
-<blockquote>
-<p>（3）第三次握手：Client收到确认后，检查ack是否为J+1，ACK是否为1，如果正确则将标志位ACK置为1，ack=K+1，并将该数据包发送给Server，Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功，Client和Server进入ESTABLISHED状态，完成三次握手，随后Client与Server之间可以开始传输数据了。</p>
-</blockquote>
-<h4 id="为什么要三次握手？"><a href="#为什么要三次握手？" class="headerlink" title="为什么要三次握手？"></a>为什么要三次握手？</h4><blockquote>
-<p>三次握手的目的是为了建立可靠的数据通信通道，简单来说就是数据的发送与接收，而三次握手最主要的目的就是双方确认自己与对方的发送与接收是正常的。</p>
-</blockquote>
-<blockquote>
-<p>第一次握手：Client 什么都不能确认；Server 确认了对方发送正常，自己接收正常。<br>第二次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：对方发送正常，自己接收正常。<br>第三次握手：Client 确认了：自己发送、接收正常，对方发送、接收正常；Server 确认了：自己发送、接收正常，对方发送、接收正常。<br>所以三次握手就能确认双发收发功能都正常，缺一不可。</p>
-</blockquote>
-<h3 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h3><p><img src="/images/pasted-27.png" alt="upload successful"></p>
-<blockquote>
-<p>第一次挥手：Client发送一个FIN，用来关闭Client到Server的数据传送，Client进入FIN_WAIT_1状态。</p>
-</blockquote>
-<blockquote>
-<p>第二次挥手：Server收到FIN后，发送一个ACK给Client，确认序号为收到序号+1（与SYN相同，一个FIN占用一个序号），Server进入CLOSE_WAIT状态。</p>
-</blockquote>
-<blockquote>
-<p>第三次挥手：Server发送一个FIN，用来关闭Server到Client的数据传送，Server进入LAST_ACK状态。</p>
-</blockquote>
-<blockquote>
-<p>第四次挥手：Client收到FIN后，Client进入TIME_WAIT状态，接着发送一个ACK给Server，确认序号为收到序号+1，Server进入CLOSED状态，完成四次挥手。</p>
-</blockquote>
-<h4 id="为什么要四次挥手？"><a href="#为什么要四次挥手？" class="headerlink" title="为什么要四次挥手？"></a>为什么要四次挥手？</h4><blockquote>
-<p>由于TCP连接是全双工的，因此每个方向都需要关闭。</p>
-</blockquote>
-<blockquote>
-<p>这是因为服务端在LISTEN状态下，收到建立连接请求的SYN报文后，把ACK和SYN放在一个报文里发送给客户端。而关闭连接时，当收到对方的FIN报文时，仅仅表示对方不再发送数据了但是还能接收数据，己方也未必全部数据都发送给对方了，所以己方可以立即close，也可以发送一些数据给对方后，再发送FIN报文给对方来表示同意现在关闭连接，因此，己方ACK和FIN一般都会分开发送。</p>
-</blockquote>
-<blockquote>
-<p>第一次挥手： client表示自己没啥要说的了。<br>第二次挥手： server表示我收到了。<br>第三次挥手： server表示自己没啥要说的了。<br>第四次挥手： client表示我收到了。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/07/%E6%A0%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/07/%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-07 22:40:00" itemprop="dateCreated datePublished" datetime="2020-05-07T22:40:00+08:00">2020-05-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-08 17:36:47" itemprop="dateModified" datetime="2020-05-08T17:36:47+08:00">2020-05-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="红黑树简介"><a href="#红黑树简介" class="headerlink" title="红黑树简介"></a>红黑树简介</h3><blockquote>
-<p>红黑树一种<strong><em>自平衡</em></strong>的二叉树，先了解一下什么是二叉树把。</p>
-</blockquote>
-<h4 id="二叉树的性质"><a href="#二叉树的性质" class="headerlink" title="二叉树的性质"></a>二叉树的性质</h4><p><img src="/images/pasted-19.png" alt="upload successful"></p>
-<blockquote>
-</blockquote>
-<p>性质1：二叉树第i层上的结点数目最多为2i-1(i&gt;=1)<br>性质2：深度为k的二叉树至多有2k-1个结点（k&gt;=1）<br>性质3：包含n个结点的二叉树的高度至少为(log2n)+1<br>性质4：在任意一棵二叉树中，若终端结点的个数为n0，度为2的结点数为n2，则n0=n2+1</p>
-<blockquote>
-<p>在了解二叉树的性质后，再来了解一下红黑树的性质</p>
-</blockquote>
-<h4 id="红黑树性质"><a href="#红黑树性质" class="headerlink" title="红黑树性质"></a>红黑树性质</h4><blockquote>
-</blockquote>
-<p>性质1：每个节点要么是黑色，要么是红色。<br>性质2：根节点是黑色。<br>性质3：每个叶子节点（NIL）是黑色。<br>性质4：每个红色结点的两个子结点一定都是黑色。<br>性质5：任意一结点到每个叶子结点的路径都包含数量相同的黑结点。</p>
-<p><img src="/images/pasted-22.png" alt="简单的红黑树图"></p>
-<blockquote>
-<p>红黑树是自平衡的二叉树，由上图可以看出来虽然左右子树的层数不一样，但是从任一节点到每个子节点都包含相同数量的黑色节点。</p>
-</blockquote>
-<h3 id="红黑树的自平衡操作"><a href="#红黑树的自平衡操作" class="headerlink" title="红黑树的自平衡操作"></a>红黑树的自平衡操作</h3><blockquote>
-<p>红黑树通过三种操作来实现自平衡分别是<br>左旋:以X做为支点(旋转节点)，其右子结点变为旋转节点的父结点，右子节点的左子节点变为旋转节点的右子节点，左节结点保持不变。<br>右旋:以X做为支点(旋转节点)，其左子节点变为旋转节点的父节点，左子节点的右子节点变为旋转节点的左子节点，右子节点保持不变。<br>变色：红变黑，黑变红</p>
-</blockquote>
-<center>左旋</center>
-![图片描述](/images/pasted-20.png)
-
-<center>右旋</center>
-![upload successful](/images/pasted-21.png)
-
-<blockquote>
-<p>从上图可以发现<br>左旋只影响旋转节点和其右子节点的结构。<br>右旋只影响旋转节点和其左子节点的结构。</p>
-</blockquote>
-<h3 id="红黑树查找"><a href="#红黑树查找" class="headerlink" title="红黑树查找"></a>红黑树查找</h3><blockquote>
-<p>因为红黑树就只是能够自平衡的二叉树，它与二叉树的区别主要在于插入，因此它的查找于二叉树是一样一样的。</p>
-</blockquote>
-<ol>
-<li>把根节点设为当前节点，从根节点开始查找。</li>
-<li>如果当前节点为空，直接返回null</li>
-<li>如果当前节点与查找key相等，直接返回当前节点</li>
-<li>如果当前节点大于查找key，则设置当前节点的左子节点为当前节点，重复步骤2</li>
-<li>如果当前节点小于查找key，则设置当前节点的右子节点为当前节点，重复步骤2</li>
-</ol>
-<p><img src="/images/pasted-23.png" alt="upload successful"></p>
-<h3 id="红黑树插入"><a href="#红黑树插入" class="headerlink" title="红黑树插入"></a>红黑树插入</h3><blockquote>
-<p>红黑树的插入分为两部分，第一部分于一般的二叉树插入一样，第二部分就是自平衡。</p>
-</blockquote>
-<ol>
-<li>从根节点开始查找。</li>
-<li>若根节点为空，那么插入节点作为根节点，结束。</li>
-<li>若根节点不为空，那么把根节点作为当前节点。</li>
-<li>若当前节点为null，返回当前节点的节结点，结束。</li>
-<li>若当前节点key等于查找key，那么该key所在节点就是插入节点，更新节点的值，结束。</li>
-<li>若当前节点key大于查找key，把当前节点的左子节点设置为当前节点，重复步骤4</li>
-<li>若当前节点key小于查找key，把当前结点的右子结点设置为当前节点，重复步骤4</li>
-</ol>
-<p><img src="/images/pasted-24.png" alt="upload successful"></p>
-<blockquote>
-<p>插入的节点默认都是红色的，因为为红色不见得会破坏红黑树平衡，但是如果为黑色，那么黑节点多1，打破平衡，就必须要做自平衡了。</p>
-</blockquote>
-<h3 id="红黑树自平衡"><a href="#红黑树自平衡" class="headerlink" title="红黑树自平衡"></a>红黑树自平衡</h3><p><img src="/images/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%8F%92%E5%85%A58%E4%B8%AA%E6%83%85%E5%86%B5.png" alt></p>
-<h3 id="红黑树代码实现"><a href="#红黑树代码实现" class="headerlink" title="红黑树代码实现"></a>红黑树代码实现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.shiro.redblcaktree;</span><br><span class="line"></span><br><span class="line">import java.util.Random;</span><br><span class="line">import java.util.Stack;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;3&#x2F;30 22:41</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class RBTree&lt;T extends Comparable&gt;&#123;</span><br><span class="line"></span><br><span class="line">    public static final boolean RED&#x3D;false;</span><br><span class="line"></span><br><span class="line">    public static final boolean BLACK&#x3D;true;</span><br><span class="line"></span><br><span class="line">    private RBNode&lt;T&gt; headNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static class RBNode&lt;T extends Comparable&gt;&#123;</span><br><span class="line">        private T key; &#x2F;&#x2F;键</span><br><span class="line"></span><br><span class="line">        private boolean color; &#x2F;&#x2F;颜色</span><br><span class="line"></span><br><span class="line">        private RBNode&lt;T&gt; leftNode; &#x2F;&#x2F;左子节点</span><br><span class="line"></span><br><span class="line">        private RBNode&lt;T&gt; rightNode; &#x2F;&#x2F;右子节点</span><br><span class="line"></span><br><span class="line">        private RBNode&lt;T&gt; parentNode; &#x2F;&#x2F;父亲节点</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void insert(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        int tmp&#x3D;0;</span><br><span class="line">        RBNode&lt;T&gt; x&#x3D;this.headNode;</span><br><span class="line">        RBNode&lt;T&gt; y&#x3D;null;</span><br><span class="line"></span><br><span class="line">        while(x!&#x3D;null)&#123;</span><br><span class="line">            y&#x3D;x;</span><br><span class="line">            tmp&#x3D;x.key.compareTo(node.key);</span><br><span class="line">            if (tmp&#x3D;&#x3D;1)&#123;</span><br><span class="line">                x&#x3D;x.leftNode;</span><br><span class="line">            &#125;else if(tmp&#x3D;&#x3D;-1)&#123;</span><br><span class="line">                x&#x3D;x.rightNode;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        node.parentNode&#x3D;y;</span><br><span class="line">        if (y!&#x3D;null)&#123;</span><br><span class="line">            tmp&#x3D;y.key.compareTo(node.key);</span><br><span class="line">            if (tmp&#x3D;&#x3D;1)&#123;</span><br><span class="line">                y.leftNode&#x3D;node;</span><br><span class="line">            &#125;else if(tmp&#x3D;&#x3D;-1)&#123;</span><br><span class="line">                y.rightNode&#x3D;node;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            this.headNode&#x3D;node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        node.color&#x3D;RED;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private void fix(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        RBNode&lt;T&gt; parent,uncle,gParent;</span><br><span class="line">        &#x2F;&#x2F;1-3情况 不需要修正..</span><br><span class="line">        while ((parent&#x3D;parentOf(node))!&#x3D;null&amp;&amp;isRed(node))&#123;</span><br><span class="line">            gParent&#x3D;parentOf(parent);</span><br><span class="line">            &#x2F;&#x2F;处理当父亲结点为红色和叔叔结点存在且为红色的情况4.1</span><br><span class="line">            if((uncle&#x3D;isUncle(node))!&#x3D;null&amp;&amp;isRed(uncle))&#123;</span><br><span class="line">                parent.color&#x3D;BLACK;</span><br><span class="line">                uncle.color&#x3D;BLACK;</span><br><span class="line">                gParent.color&#x3D;RED;</span><br><span class="line">                node&#x3D;gParent;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;如果父亲结点为祖父结点的左子结点4.2</span><br><span class="line">            if(gParent.leftNode&#x3D;&#x3D;parent)&#123;</span><br><span class="line"></span><br><span class="line">                &#x2F;&#x2F;如果当前结点为父亲结点的右子结点4.2.2</span><br><span class="line">                if (parent.rightNode&#x3D;&#x3D;node)&#123;</span><br><span class="line">                    leftRotate(parent);&#x2F;&#x2F;左旋</span><br><span class="line">                    RBNode&lt;T&gt; tmp&#x3D;node;</span><br><span class="line">                    node&#x3D;parent;       &#x2F;&#x2F;把父类结点设为当前结点</span><br><span class="line">                    parent&#x3D;tmp;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                gParent.color&#x3D;RED;&#x2F;&#x2F;4.2.1情景</span><br><span class="line">                parent.color&#x3D;BLACK;</span><br><span class="line">                rightNode(gParent);</span><br><span class="line">            &#x2F;&#x2F;如果父类结点为祖父结点的右子结点</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                &#x2F;&#x2F;如果当前结点为父类结点的左子结点</span><br><span class="line">                if (parent.leftNode&#x3D;&#x3D;node)&#123;</span><br><span class="line">                    rightNode(parent);</span><br><span class="line">                    RBNode&lt;T&gt; tmp&#x3D;node;</span><br><span class="line">                    node&#x3D;parent;       &#x2F;&#x2F;把父类结点设为当前结点</span><br><span class="line">                    parent&#x3D;tmp;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                gParent.color&#x3D;RED;</span><br><span class="line">                parent.color&#x3D;BLACK;</span><br><span class="line">                leftRotate(gParent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        this.headNode.color&#x3D;BLACK;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public RBNode&lt;T&gt; parentOf(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        return node.parentNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isRed(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        return node.color&#x3D;&#x3D;RED;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 返回叔叔节点 如果父亲结点不存在或叔叔结点不存在 返回null</span><br><span class="line">     * @date 2020&#x2F;3&#x2F;31 10:18</span><br><span class="line">     * @param [node]</span><br><span class="line">     * @return com.czj.shiro.redblcaktree.RBTree.RBNode&lt;T&gt;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public RBNode&lt;T&gt; isUncle(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        RBNode&lt;T&gt; parentNode&#x3D;node.parentNode;</span><br><span class="line">        if (parentNode&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (parentNode.leftNode&#x3D;&#x3D;null||parentNode.rightNode&#x3D;&#x3D;null)&#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        if (parentNode.leftNode&#x3D;&#x3D;node)&#123;</span><br><span class="line">            return parentNode.rightNode;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return parentNode.leftNode;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;左旋</span><br><span class="line">    public void leftRotate(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        RBNode&lt;T&gt; rightNode&#x3D;node.rightNode;&#x2F;&#x2F;获得右子结点</span><br><span class="line">        node.rightNode&#x3D;rightNode.leftNode;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;如果右子结点的左子结点不为空</span><br><span class="line">        if (rightNode.leftNode!&#x3D;null)</span><br><span class="line">            rightNode.leftNode.parentNode&#x3D;node;</span><br><span class="line">        &#x2F;&#x2F;祖父结点设置</span><br><span class="line">        rightNode.parentNode&#x3D;node.parentNode;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;判断是不是为根节点</span><br><span class="line">        if (node.parentNode&#x3D;&#x3D;null)&#123;</span><br><span class="line">            this.headNode&#x3D;rightNode;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            if (node.parentNode.leftNode&#x3D;&#x3D;node)&#123;</span><br><span class="line">                node.parentNode.leftNode&#x3D;rightNode;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                node.parentNode.rightNode&#x3D;rightNode;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        rightNode.leftNode&#x3D;node;</span><br><span class="line">        node.parentNode&#x3D;rightNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;右旋</span><br><span class="line">    public void rightNode(RBNode&lt;T&gt; node)&#123;</span><br><span class="line">        RBNode&lt;T&gt; leftNode&#x3D;node.leftNode;</span><br><span class="line">        node.leftNode&#x3D;leftNode.rightNode;</span><br><span class="line">        if (leftNode.rightNode!&#x3D;null)&#123;</span><br><span class="line">            leftNode.rightNode.parentNode&#x3D;node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        leftNode.parentNode&#x3D;node.parentNode;</span><br><span class="line"></span><br><span class="line">        if (node.parentNode&#x3D;&#x3D;null)&#123;</span><br><span class="line">            this.headNode&#x3D;leftNode;</span><br><span class="line">        &#125;else &#123;</span><br><span class="line">            if (node.parentNode.leftNode&#x3D;&#x3D;node)&#123;</span><br><span class="line">                node.parentNode.leftNode&#x3D;leftNode;</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                node.parentNode.rightNode&#x3D;leftNode;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        leftNode.rightNode&#x3D;node;</span><br><span class="line">        node.parentNode&#x3D;leftNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;中序遍历（非递归）</span><br><span class="line">    public void inOrder()&#123;</span><br><span class="line">        Stack&lt;RBNode&lt;T&gt;&gt; stack&#x3D;new Stack&lt;&gt;();</span><br><span class="line">        RBNode&lt;T&gt; node&#x3D;this.headNode;</span><br><span class="line">        while(node!&#x3D;null||!stack.isEmpty())&#123;</span><br><span class="line">            while(node!&#x3D;null)&#123;</span><br><span class="line">                stack.push(node);</span><br><span class="line">                node&#x3D;node.leftNode;</span><br><span class="line">            &#125;</span><br><span class="line">            if (!stack.isEmpty())&#123;</span><br><span class="line">                RBNode&lt;T&gt; nNode&#x3D;stack.pop();</span><br><span class="line">                System.out.println(&quot;值:&quot;+nNode.key);</span><br><span class="line">                node&#x3D;nNode.rightNode;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        RBTree&lt;Integer&gt; rbTree&#x3D;new RBTree&lt;&gt;();</span><br><span class="line">        Random random&#x3D;new Random();</span><br><span class="line">        RBNode&lt;Integer&gt; rbNode&#x3D;null;</span><br><span class="line">        for (int i&#x3D;0;i&lt;&#x3D;100;i++)&#123;</span><br><span class="line">            rbNode &#x3D; new RBNode&lt;&gt;();</span><br><span class="line">            rbNode.key&#x3D;random.nextInt(1000);</span><br><span class="line">            rbTree.insert(rbNode);</span><br><span class="line">        &#125;</span><br><span class="line">        rbTree.inOrder();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1749,17 +1518,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
