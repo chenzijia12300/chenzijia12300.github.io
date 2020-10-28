@@ -152,6 +152,242 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">LinkedBlockingQueue详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-29 10:47:27" itemprop="dateCreated datePublished" datetime="2020-04-29T10:47:27+08:00">2020-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-02 16:12:34" itemprop="dateModified" datetime="2020-05-02T16:12:34+08:00">2020-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="LinkedBlockingQueue简介"><a href="#LinkedBlockingQueue简介" class="headerlink" title="LinkedBlockingQueue简介"></a>LinkedBlockingQueue简介</h3><blockquote>
+<p>LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线程安全队列。由下类图可以看到他的基本实现。它也是由单向链表实现，也是分别由两个Node指向head和tail，内部还有初始量为0的AtomicInteger的原子变量来计算队列数量。还有两个ReentrantLock独占锁来控制元素入队和出队的原子性。</p>
+</blockquote>
+<p><img src="/images/LinkedBlockingQueue.png" alt="upload successful"></p>
+<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;队列数量最大值默认为0x7FFFFFFF 对应 Integer.MAX_VALUE 即 2147483647</span><br><span class="line">private final int capacity;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;原子性变量计算队列元素个数</span><br><span class="line">private final AtomicInteger count &#x3D; new AtomicInteger();</span><br><span class="line">		</span><br><span class="line">&#x2F;&#x2F;头部节点</span><br><span class="line">transient Node&lt;E&gt; head;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;尾部节点</span><br><span class="line">private transient Node&lt;E&gt; last;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;出队操作需要获得该锁</span><br><span class="line">private final ReentrantLock takeLock &#x3D; new ReentrantLock();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">private final Condition notEmpty &#x3D; takeLock.newCondition();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;入队操作需要获得该锁</span><br><span class="line">private final ReentrantLock putLock &#x3D; new ReentrantLock();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">private final Condition notFull &#x3D; putLock.newCondition();</span><br></pre></td></tr></table></figure>
+
+<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public LinkedBlockingQueue() &#123;</span><br><span class="line">    this(Integer.MAX_VALUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public LinkedBlockingQueue(int capacity) &#123;</span><br><span class="line">    if (capacity &lt;&#x3D; 0) throw new IllegalArgumentException();</span><br><span class="line">    this.capacity &#x3D; capacity;</span><br><span class="line">    &#x2F;&#x2F;初始化首尾节点都指向哨兵节点</span><br><span class="line">    last &#x3D; head &#x3D; new Node&lt;E&gt;(null);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="入队操作分析"><a href="#入队操作分析" class="headerlink" title="入队操作分析"></a>入队操作分析</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    if (e &#x3D;&#x3D; null) throw new NullPointerException();&#x2F;&#x2F;判空</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得队列个数</span><br><span class="line">    if (count.get() &#x3D;&#x3D; capacity)&#x2F;&#x2F;判断队列个数是否等于边界值</span><br><span class="line">        return false;</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    Node&lt;E&gt; node &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;新建节点</span><br><span class="line">    final ReentrantLock putLock &#x3D; this.putLock;</span><br><span class="line">    putLock.lock();&#x2F;&#x2F;获得入队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count.get() &lt; capacity)&#x2F;&#x2F;判断队列个数是否小于边界值&#123;</span><br><span class="line">            enqueue(node);&#x2F;&#x2F;添加进队列尾部</span><br><span class="line">            c &#x3D; count.getAndIncrement();&#x2F;&#x2F;自增</span><br><span class="line">            if (c + 1 &lt; capacity)</span><br><span class="line">                notFull.signal();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        putLock.unlock();&#x2F;&#x2F;放锁</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; 0)</span><br><span class="line">        signalNotEmpty();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">    return c &gt;&#x3D; 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>offer()非堵塞入队方法，负责向队列尾部添加一个元素，如果队列有位置添加成功后返回true，否则返回false，如果元素为null则抛出NPE异常。</p>
+</blockquote>
+<h5 id="put"><a href="#put" class="headerlink" title="put()"></a>put()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    if (e &#x3D;&#x3D; null) throw new NullPointerException();&#x2F;&#x2F;判空</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    Node&lt;E&gt; node &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;新建节点</span><br><span class="line">    final ReentrantLock putLock &#x3D; this.putLock;</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;</span><br><span class="line">    putLock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count.get() &#x3D;&#x3D; capacity)&#123;</span><br><span class="line">            notFull.await();&#x2F;&#x2F;因队列个数已满把自己挂起</span><br><span class="line">        &#125;</span><br><span class="line">        enqueue(node);&#x2F;&#x2F;入队</span><br><span class="line">        c &#x3D; count.getAndIncrement();&#x2F;&#x2F;自增</span><br><span class="line">        if (c + 1 &lt; capacity)</span><br><span class="line">            notFull.signal();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        putLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; 0)</span><br><span class="line">        signalNotEmpty();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>put()方法向队列尾部添加一个元素，如果队列不为空且添加成功就返回true，否则堵塞线程，直至队列有位置添加成功在返回。如果在该线程被堵塞时设置了中断标志则会抛出InterruptedException异常，如果元素为null则抛出NPE异常。</p>
+</blockquote>
+<h4 id="出队操作分析"><a href="#出队操作分析" class="headerlink" title="出队操作分析"></a>出队操作分析</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得总数</span><br><span class="line">    if (count.get() &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则提取退出</span><br><span class="line">        return null;</span><br><span class="line">    E x &#x3D; null;</span><br><span class="line">    int c &#x3D; -1;</span><br><span class="line">    final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">    takeLock.lock();&#x2F;&#x2F;获得出队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count.get() &gt; 0)&#123;</span><br><span class="line">            x &#x3D; dequeue();出队</span><br><span class="line">            c &#x3D; count.getAndDecrement();递减</span><br><span class="line">            if (c &gt; 1)</span><br><span class="line">                notEmpty.signal();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        takeLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">    if (c &#x3D;&#x3D; capacity)</span><br><span class="line">        signalNotFull();&#x2F;&#x2F;唤醒因队列满而休眠的线程</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>poll()方法从首部节点获取并移除一个元素，如果队列为空则返回null，否则返回元素值,另外该方法为非堵塞的。</p>
+</blockquote>
+<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">      E x;</span><br><span class="line">      int c &#x3D; -1;</span><br><span class="line">      final AtomicInteger count &#x3D; this.count;&#x2F;&#x2F;获得元素个数</span><br><span class="line">      final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">      takeLock.lockInterruptibly();&#x2F;&#x2F;获得出队操作的可以被中断的独占锁</span><br><span class="line">      try &#123;</span><br><span class="line">          while (count.get() &#x3D;&#x3D; 0)&#123;</span><br><span class="line">              notEmpty.await();&#x2F;&#x2F;队列为空则休眠</span><br><span class="line">          &#125;</span><br><span class="line">          x &#x3D; dequeue();&#x2F;&#x2F;出队</span><br><span class="line">          c &#x3D; count.getAndDecrement();&#x2F;&#x2F;递减</span><br><span class="line">          if (c &gt; 1)</span><br><span class="line">              notEmpty.signal();&#x2F;&#x2F;唤醒因队列为空而休眠的线程</span><br><span class="line">      &#125; finally &#123;</span><br><span class="line">          takeLock.unlock();</span><br><span class="line">      &#125;</span><br><span class="line">      if (c &#x3D;&#x3D; capacity)</span><br><span class="line">          signalNotFull();&#x2F;&#x2F;唤醒因队列为满而休眠的线程</span><br><span class="line">      return x;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>take()方法从首部节点获得并移除一个元素，如果队列为空则堵塞当前线程直到队列不为空返回元素值。如果当前线程被设置了中断标志则被堵塞线程会抛出InterruptedException异常,队列不为空则直接返回元素值。</p>
+</blockquote>
+<h4 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h4><h5 id="peek"><a href="#peek" class="headerlink" title="peek()"></a>peek()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public E peek() &#123;</span><br><span class="line">    if (count.get() &#x3D;&#x3D; 0)&#x2F;&#x2F;队列为空提前返回null</span><br><span class="line">        return null;</span><br><span class="line">    final ReentrantLock takeLock &#x3D; this.takeLock;</span><br><span class="line">    takeLock.lock();&#x2F;&#x2F;获得出队操作的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        Node&lt;E&gt; first &#x3D; head.next;</span><br><span class="line">        if (first &#x3D;&#x3D; null)</span><br><span class="line">            return null;</span><br><span class="line">        else</span><br><span class="line">            return first.item;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        takeLock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>peek()方法从首部节点获得元素值，如果队列为空则返回null，否则返回元素值，另外该方法非堵塞。</p>
+</blockquote>
+<h5 id="size"><a href="#size" class="headerlink" title="size()"></a>size()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int size() &#123;</span><br><span class="line">    return count.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>size()获取当前队列元素个数</p>
+</blockquote>
+<h5 id="remove"><a href="#remove" class="headerlink" title="remove()"></a>remove()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public boolean remove(Object o) &#123;</span><br><span class="line">    if (o &#x3D;&#x3D; null) return false;&#x2F;&#x2F;如果参数为null则直接返回false</span><br><span class="line">    fullyLock();&#x2F;&#x2F;这波是获得入队操作，出队操作的两把独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">    	  &#x2F;&#x2F;遍历队列查找元素，发现则删除返回true，否则返回false</span><br><span class="line">        for (Node&lt;E&gt; trail &#x3D; head, p &#x3D; trail.next;</span><br><span class="line">             p !&#x3D; null;</span><br><span class="line">             trail &#x3D; p, p &#x3D; p.next) &#123;</span><br><span class="line">            if (o.equals(p.item)) &#123;</span><br><span class="line">                unlink(p, trail);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        fullyUnlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/ConcurrentLinkedQueue%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/27/ConcurrentLinkedQueue%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">ConcurrentLinkedQueue详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-27 09:59:10" itemprop="dateCreated datePublished" datetime="2020-04-27T09:59:10+08:00">2020-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-02 16:12:13" itemprop="dateModified" datetime="2020-05-02T16:12:13+08:00">2020-05-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">多线程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="ConcurrentLinkedQueue简介"><a href="#ConcurrentLinkedQueue简介" class="headerlink" title="ConcurrentLinkedQueue简介"></a>ConcurrentLinkedQueue简介</h3><blockquote>
+<p>ConcurrentLinkedQueue是一种无边界非堵塞线程安全的队列，底层通过单向链表实现，线程安全通过CAS操作实现。下图是它的类图关系，它继承了AbstractQueue类，实现Queue接口，具有Queue的基本特性。</p>
+</blockquote>
+<image src="/images/ConcurrentLinkedQueue.png">
+
+<blockquote>
+<p>该类内部通过两个volatile类型的Node节点来分别指向队列的首，尾节点。</p>
+</blockquote>
+<h3 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;无参构造方法首尾分别指向item为null的哨兵节点</span><br><span class="line">public ConcurrentLinkedQueue() &#123;</span><br><span class="line">        head &#x3D; tail &#x3D; new Node&lt;E&gt;(null);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;根据指定集合创建队列</span><br><span class="line">  public ConcurrentLinkedQueue(Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">      Node&lt;E&gt; h &#x3D; null, t &#x3D; null;</span><br><span class="line">      for (E e : c) &#123;</span><br><span class="line">          checkNotNull(e);&#x2F;&#x2F;判断元素是否为null</span><br><span class="line">          Node&lt;E&gt; newNode &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;根据item创建Node·</span><br><span class="line">          if (h &#x3D;&#x3D; null)</span><br><span class="line">              h &#x3D; t &#x3D; newNode;&#x2F;&#x2F;首次插入设置首尾节点指向</span><br><span class="line">          else &#123;</span><br><span class="line">              t.lazySetNext(newNode);t的next指向新节点</span><br><span class="line">              t &#x3D; newNode;&#x2F;&#x2F;尾部节点指向新节点</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;&#x2F;防止指定集合为空</span><br><span class="line">      if (h &#x3D;&#x3D; null)</span><br><span class="line">          h &#x3D; t &#x3D; new Node&lt;E&gt;(null);</span><br><span class="line">      head &#x3D; h;</span><br><span class="line">      tail &#x3D; t;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="offer-入队操作"><a href="#offer-入队操作" class="headerlink" title="offer()入队操作"></a>offer()入队操作</h3><blockquote>
+<p>offer()方法向队列尾部添加一个新节点，由于ConcurrentLinkedQueue是无界队列因此offer()方法放回一直是true，还有多线程是基于CAS操作因此该方法不会堵塞。方法参数不能为null，否则会抛出NPE异常。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);&#x2F;&#x2F;检测e是否为空</span><br><span class="line">    final Node&lt;E&gt; newNode &#x3D; new Node&lt;E&gt;(e);&#x2F;&#x2F;创建新节点</span><br><span class="line">			</span><br><span class="line">    &#x2F;&#x2F;从尾部开始插入</span><br><span class="line">    for (Node&lt;E&gt; t &#x3D; tail, p &#x3D; t;;) &#123;</span><br><span class="line">        Node&lt;E&gt; q &#x3D; p.next;</span><br><span class="line">        &#x2F;&#x2F;判断q是否为空，如果是则说明p为尾节点</span><br><span class="line">        if (q &#x3D;&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; 尝试把p的next节点指向新节点</span><br><span class="line">            if (p.casNext(null, newNode)) &#123;</span><br><span class="line"></span><br><span class="line">                if (p !&#x3D; t) &#x2F;&#x2F; </span><br><span class="line">                    casTail(t, newNode);  &#x2F;&#x2F; 尝试将尾部节点设置为新节点，失败也没事也就说法其他线程已经设置了。</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F; Lost CAS race to another thread; re-read next</span><br><span class="line">        &#125;</span><br><span class="line">        else if (p &#x3D;&#x3D; q)</span><br><span class="line">        	  &#x2F;&#x2F;为了处理poll()方法导致的。。</span><br><span class="line">            p &#x3D; (t !&#x3D; (t &#x3D; tail)) ? t : head;</span><br><span class="line">        else</span><br><span class="line">        		</span><br><span class="line">            &#x2F;&#x2F; 寻找尾部节点</span><br><span class="line">            p &#x3D; (p !&#x3D; t &amp;&amp; t !&#x3D; (t &#x3D; tail)) ? t : q;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该入队方法可以分为两步:</p>
+</blockquote>
+<ol>
+<li>定位到尾部节点：<blockquote>
+<p>因为为了节省CAS操作更新tail节点的次数，所以tail并不总是尾节点，可能他的netx才是尾节点。因此在循环体中需要判断tail是否有next节点。</p>
+</blockquote>
+</li>
+<li>通过CAS操作尝试将入队节点设置为尾节点的next节点<blockquote>
+<p>p.casNext(null, newNode)方法用于将入队节点设置为当前队列尾节点的next节点，q如果是null表示p是当前队列的尾节点，如果不为null表示有其他线程更新了尾节点，则需要重新获取当前队列的尾节点。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="为啥tail不总是为尾部节点"><a href="#为啥tail不总是为尾部节点" class="headerlink" title="为啥tail不总是为尾部节点"></a>为啥tail不总是为尾部节点</h3><blockquote>
+<p>普通队列中总是把入队节点设置为尾部节点，在offer方法我们可以写成。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final Node&lt;E&gt; newNode &#x3D; new Node&lt;E&gt;(e);</span><br><span class="line">    </span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        Node&lt;E&gt; t &#x3D; tail;</span><br><span class="line">        </span><br><span class="line">        if (t.casNext(null ,newNode) &amp;&amp; casTail(t, newNode)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>入队节点总是尾节点，这样的代码简单易读。但是每次入队的时候都要循环设置tail节点为入队节点，影响效率。<br> · 引用:在JDK 1.7的实现中，doug lea使用hops变量来控制并减少tail节点的更新频率，并不是每次节点入队后都将 tail节点更新成尾节点，而是当tail节点和尾节点的距离大于等于常量HOPS的值（默认等于1）时才更新tail节点，tail和尾节点的距离越长使用CAS更新tail节点的次数就会越少，但是距离越长带来的负面效果就是每次入队时定位尾节点的时间就越长，因为循环体需要多循环一次来定位出尾节点，但是这样仍然能提高入队的效率，因为从本质上来看它通过增加对volatile变量的读操作来减少了对volatile变量的写操作，而对volatile变量的写操作开销要远远大于读操作，所以入队效率会有所提升。<br> 在JDK 1.8的实现中，tail的更新时机是通过p和t是否相等来判断的，其实现结果和JDK 1.7相同，即当tail节点和尾节点的距离大于等于1时，更新tail。</p>
+</blockquote>
+<h3 id="poll-方法出队操作"><a href="#poll-方法出队操作" class="headerlink" title="poll()方法出队操作"></a>poll()方法出队操作</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> public E poll() &#123;</span><br><span class="line">    restartFromHead:</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        for (Node&lt;E&gt; h &#x3D; head, p &#x3D; h, q;;) &#123;</span><br><span class="line">            E item &#x3D; p.item;</span><br><span class="line">		&#x2F;&#x2F;item不为空和尝试设置p节点值为null</span><br><span class="line">            if (item !&#x3D; null &amp;&amp; p.casItem(item, null)) &#123;</span><br><span class="line">                &#x2F;&#x2F; Successful CAS is the linearization point</span><br><span class="line">                &#x2F;&#x2F; for item to be removed from this queue.</span><br><span class="line">                if (p !&#x3D; h) &#x2F;&#x2F; hop two nodes at a time</span><br><span class="line">                    updateHead(h, ((q &#x3D; p.next) !&#x3D; null) ? q : p);</span><br><span class="line">                return item;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;如果item为空或尝试设置失败就获得p的下一个节点，如果为空则说明队列为空</span><br><span class="line">            else if ((q &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">                updateHead(h, p);</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;重新开始循环</span><br><span class="line">            else if (p &#x3D;&#x3D; q)</span><br><span class="line">                continue restartFromHead;</span><br><span class="line">            &#x2F;&#x2F;设置p为p的下一个节点</span><br><span class="line">            else</span><br><span class="line">                p &#x3D; q;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>该方法的主要逻辑就是首先获取头节点的元素，然后判断头节点元素是否为空，如果为空，表示另外一个线程已经进行了一次出队操作将该节点的元素取走，如果不为空，则使用CAS的方式将头节点的引用设置成null，如果CAS成功，则直接返回头节点的元素，如果不成功，表示另外一个线程已经进行了一次出队操作更新了head节点，导致元素发生了变化，需要重新获取头节点。</p>
+</blockquote>
+<h3 id="peek-方法获得头部节点"><a href="#peek-方法获得头部节点" class="headerlink" title="peek()方法获得头部节点"></a>peek()方法获得头部节点</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> public E peek() &#123;</span><br><span class="line">    restartFromHead:</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        for (Node&lt;E&gt; h &#x3D; head, p &#x3D; h, q;;) &#123;</span><br><span class="line">            E item &#x3D; p.item;</span><br><span class="line">            if (item !&#x3D; null || (q &#x3D; p.next) &#x3D;&#x3D; null) &#123;</span><br><span class="line">                updateHead(h, p);</span><br><span class="line">                return item;</span><br><span class="line">            &#125;</span><br><span class="line">            else if (p &#x3D;&#x3D; q)</span><br><span class="line">                continue restartFromHead;</span><br><span class="line">            else</span><br><span class="line">                p &#x3D; q;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>获得头部节点不会弹出，执行该方法会将head节点指向第一个非空的节点</p>
+</blockquote>
+<h3 id="size-获得队列元素数量"><a href="#size-获得队列元素数量" class="headerlink" title="size()获得队列元素数量"></a>size()获得队列元素数量</h3> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> public int size() &#123;</span><br><span class="line">    int count &#x3D; 0;</span><br><span class="line">    for (Node&lt;E&gt; p &#x3D; first(); p !&#x3D; null; p &#x3D; succ(p))</span><br><span class="line">        if (p.item !&#x3D; null)</span><br><span class="line">            &#x2F;&#x2F; Collection.size() spec says to max out</span><br><span class="line">            if (++count &#x3D;&#x3D; Integer.MAX_VALUE)</span><br><span class="line">                break;</span><br><span class="line">    return count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由于没有加锁，所以返回可能不准确</p>
+</blockquote>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><blockquote>
+<p>ConcurrentLinkedQueue 的底层使用单向链表数据结构来保存队列元素，每个元素被 包装成一个 Node 节点。队列是靠头、尾节点来维护的，创建队列时头、尾节点指向一个 item 为 null 的哨兵节点。</p>
+</blockquote>
+</image>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1111,143 +1347,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">我的第一次博客</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2020-04-18 14:04:00 / Modified: 19:28:13" itemprop="dateCreated datePublished" datetime="2020-04-18T14:04:00+08:00">2020-04-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <p>开始于2020年4月18日</p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/18/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/18/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-04-18 11:33:01" itemprop="dateCreated datePublished" datetime="2020-04-18T11:33:01+08:00">2020-04-18</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1312,17 +1415,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>

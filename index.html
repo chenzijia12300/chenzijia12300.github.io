@@ -152,6 +152,207 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/11/%E5%99%A8%E6%B5%81%E9%87%8F%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E6%84%8F%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/11/%E5%99%A8%E6%B5%81%E9%87%8F%E5%B8%B8%E7%94%A8%E5%90%8D%E8%AF%8D%E6%84%8F%E4%B9%89/" class="post-title-link" itemprop="url">服务器性能常用名词意义和计算</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-10-11 18:14:00 / Modified: 18:47:54" itemprop="dateCreated datePublished" datetime="2020-10-11T18:14:00+08:00">2020-10-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">杂类</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="名词概念"><a href="#名词概念" class="headerlink" title="名词概念"></a>名词概念</h3><h4 id="QPS（每秒查询率）"><a href="#QPS（每秒查询率）" class="headerlink" title="QPS（每秒查询率）"></a>QPS（每秒查询率）</h4><blockquote>
+<p>（Queries Per Second），及每秒执行的查询总数。例如访问网站首页，不仅会返回首页的Html文件，还会放回内置的js、css、jpeg、png等文件。这些都算一个单独的查询次数。若一秒内返回了N个文件，则说该服务端的QPS为N。</p>
+</blockquote>
+<p><strong><em>QPS反映系统的吞吐能力，更偏向于读取文件，查询数据。</em></strong></p>
+<h4 id="TPS（吞吐量）"><a href="#TPS（吞吐量）" class="headerlink" title="TPS（吞吐量）"></a>TPS（吞吐量）</h4><blockquote>
+<p>(Transactions Per Second),及每秒执行的事务总数。一个事务指的是<strong><em>一个客户端向服务端发送请求，服务端进行反应的过程</em></strong>。客户端在发送请求时开始计时，收到服务端响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+</blockquote>
+<p>事务处理过程：</p>
+<ol>
+<li>客户端请求服务端</li>
+<li>服务端内部进行查询操作</li>
+<li>服务端返回信息给客户端</li>
+</ol>
+<p><strong><em>一般来说，评价系统的性能主要看系统的TPS，系统的整体性能取决于性能最低模块的TPS值。（木桶的容量取决于最短板）</em></strong></p>
+<h4 id="QPS和TPS的区别"><a href="#QPS和TPS的区别" class="headerlink" title="QPS和TPS的区别"></a>QPS和TPS的区别</h4><blockquote>
+<p>请求一次页面，形成一次TPS，但如果对页面的请求，产生多次对服务器的请求，就会计入QPS当中。</p>
+</blockquote>
+<h4 id="PV（页面访问量）"><a href="#PV（页面访问量）" class="headerlink" title="PV（页面访问量）"></a>PV（页面访问量）</h4><blockquote>
+<p>（Page View），对页面的每次访问都会累积PV数量。</p>
+</blockquote>
+<h4 id="UV-（独立访客量）"><a href="#UV-（独立访客量）" class="headerlink" title="UV （独立访客量）"></a>UV （独立访客量）</h4><blockquote>
+<p>（Unique visitor）,即同一页面，客户端多次点击只计算一次，访问量不累计。</p>
+</blockquote>
+<h3 id="常用计算"><a href="#常用计算" class="headerlink" title="常用计算"></a>常用计算</h3><h4 id="平常QPS计算"><a href="#平常QPS计算" class="headerlink" title="平常QPS计算"></a>平常QPS计算</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPS &#x3D; REQ&#x2F;SEC &#x3D; 请求数&#x2F;秒</span><br></pre></td></tr></table></figure>
+
+<h4 id="峰值QPS计算"><a href="#峰值QPS计算" class="headerlink" title="峰值QPS计算"></a>峰值QPS计算</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">( 总PV数 * 80% ) &#x2F; ( 每天秒数 * 20% ) &#x3D; 峰值时间每秒请求数(QPS)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="单台服务器PV计算"><a href="#单台服务器PV计算" class="headerlink" title="单台服务器PV计算"></a>单台服务器PV计算</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">公式1：每天总PV &#x3D; QPS * 3600 * 6</span><br><span class="line"></span><br><span class="line">公式2：每天总PV &#x3D; QPS * 3600 * 8</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="服务器数量计算"><a href="#服务器数量计算" class="headerlink" title="服务器数量计算"></a>服务器数量计算</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">服务器数量 &#x3D; ceil( 每天总PV &#x2F; 单台服务器每天总PV )</span><br><span class="line"></span><br><span class="line"> 需要的机器 &#x3D; 峰值时间每秒QPS &#x2F; 单台机器的QPS</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/26/okeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/26/okeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">Zookeeper学习笔记（二）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-09-26 19:11:00 / Modified: 19:45:18" itemprop="dateCreated datePublished" datetime="2020-09-26T19:11:00+08:00">2020-09-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/zookeeper/" itemprop="url" rel="index"><span itemprop="name">zookeeper</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><table>
+<thead>
+<tr>
+<th>环境</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SpringBoot</td>
+<td>2.1.4</td>
+</tr>
+<tr>
+<td>Zookeeper</td>
+<td>3.6.2</td>
+</tr>
+</tbody></table>
+<h3 id="原生Java-Api"><a href="#原生Java-Api" class="headerlink" title="原生Java Api"></a>原生Java Api</h3><h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>首先导入依赖</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.zookeeper&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;zookeeper&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.6.2&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>配置一下Zookeeper</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class ZookeeperConfig &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger log &#x3D; LoggerFactory.getLogger(ZookeeperConfig.class);</span><br><span class="line"></span><br><span class="line">    private String address &#x3D; &quot;127.0.0.1:2181&quot;;</span><br><span class="line"></span><br><span class="line">    private int timeout &#x3D; 4000;</span><br><span class="line"></span><br><span class="line">    @Bean(name &#x3D; &quot;zkClient&quot;)</span><br><span class="line">    public ZooKeeper zooKeeper() throws IOException &#123;</span><br><span class="line">        ZooKeeper zooKeeper &#x3D; null;</span><br><span class="line">        zooKeeper &#x3D; new ZooKeeper(address,timeout,(event)-&gt;&#123;</span><br><span class="line">            if (event.getState()&#x3D;&#x3D; Watcher.Event.KeeperState.SyncConnected)&#123;</span><br><span class="line">                log.info(&quot;连接成功！&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        return zooKeeper;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>然后手写波工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class ZookeeperUtils &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger log &#x3D; LoggerFactory.getLogger(ZookeeperUtils.class);</span><br><span class="line"></span><br><span class="line">    private static final Stat DEFAULT_STAT &#x3D; new Stat();</span><br><span class="line"></span><br><span class="line">    private static final int DEFAULT_VERSION &#x3D; -1;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private ZooKeeper zooKeeper;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 判断某个目录是否存在，flag是否使用zookeeper默认watcher</span><br><span class="line">     * @author czj</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;21 20:59</span><br><span class="line">     * @param path 路径</span><br><span class="line">     * @param flag 是否使用默认watcher</span><br><span class="line">     * @return org.apache.zookeeper.data.Stat</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public Stat exists(String path,boolean flag)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return zooKeeper.exists(path,flag);</span><br><span class="line">        &#125; catch (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 创建持久层节点，根据order值选择是否有序</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;21 21:14</span><br><span class="line">     * @param [path, data, isOrder]</span><br><span class="line">     * @return org.apache.zookeeper.data.Stat</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public Stat createPersistentNode(String path,String data,boolean isOrder)&#123;</span><br><span class="line">        return createNode(path,data,isOrder?CreateMode.PERSISTENT_SEQUENTIAL:CreateMode.PERSISTENT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 创建临时层节点，根据order值选择是否有序</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;21 21:15</span><br><span class="line">     * @param [path, data, isOrder]</span><br><span class="line">     * @return org.apache.zookeeper.data.Stat</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public Stat createEphemeralNode(String path,String data,boolean isOrder)&#123;</span><br><span class="line">        return createNode(path,data,isOrder?CreateMode.EPHEMERAL_SEQUENTIAL:CreateMode.EPHEMERAL);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private Stat createNode(String path,String data,CreateMode createMode)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            zooKeeper.create(path,data.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE,createMode);</span><br><span class="line">        &#125; catch (KeeperException e) &#123;</span><br><span class="line">            if (e instanceof KeeperException.NodeExistsException)&#123;</span><br><span class="line">                log.error(&quot;&#123;&#125;节点已存在，请勿重复创建！&quot;,path);</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">            log.error(&quot;创建节点出现错误:&#123;&#125;&quot;,e.getMessage());</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 删除节点，成功返回true，否则返回false</span><br><span class="line">     * @author czj</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;22 19:20</span><br><span class="line">     * @param [path]</span><br><span class="line">     * @return boolean</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean deleteNode(String path)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            zooKeeper.delete(path,DEFAULT_VERSION);</span><br><span class="line">            return true;</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 返回目录下的子目录</span><br><span class="line">     * @author czj</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;22 19:25</span><br><span class="line">     * @param [path]</span><br><span class="line">     * @return java.util.List&lt;java.lang.String&gt;</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public List&lt;String&gt; findChildren(String path)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return zooKeeper.getChildren(path,false);</span><br><span class="line">        &#125; catch (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return Collections.EMPTY_LIST;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 获得目录下的数据</span><br><span class="line">     * @date 2020&#x2F;9&#x2F;22 19:29</span><br><span class="line">     * @param [path]</span><br><span class="line">     * @return java.lang.String</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public String getData(String path)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return new String(zooKeeper.getData(path,false,DEFAULT_STAT));</span><br><span class="line">        &#125; catch (KeeperException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/16/ookeeper%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -183,7 +384,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-18 23:17:53" itemprop="dateModified" datetime="2020-09-18T23:17:53+08:00">2020-09-18</time>
+                <time title="Modified: 2020-09-22 20:31:11" itemprop="dateModified" datetime="2020-09-22T20:31:11+08:00">2020-09-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -211,11 +412,6 @@
 </blockquote>
 <h3 id="zookeeper有什么用"><a href="#zookeeper有什么用" class="headerlink" title="zookeeper有什么用?"></a>zookeeper有什么用?</h3><blockquote>
 <p>分布式应用程序可以基于ZooKeeper实现数据发布与订阅、负载均衡、命名服务、分布式协调与通知、集群管理、Leader选举、分布式锁、分布式队列等功能。</p>
-</blockquote>
-<hr>
-<p>ps:</p>
-<blockquote>
-<p><strong>*我们需要一个用起来像单机但是又比单机更可靠的东西。 *</strong></p>
 </blockquote>
 <h4 id="命名服务"><a href="#命名服务" class="headerlink" title="命名服务"></a>命名服务</h4><p>Zookeeper的命名服务功能主要是根据指定名字来获取资源或服务的地址，提供者等信息，依靠它的znode的特点和watcher机制，将其作为动态注册和获取服务信息的注册中心，统一管理服务名称和它的对应的服务器列表信息。</p>
 <h4 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h4><p>Zookeeper也可以作为配置中心来使用，通过修改节点配置来更新配置信息，动态修改系统中的配置。</p>
@@ -382,6 +578,32 @@
 <h4 id="delete（删除一个节点"><a href="#delete（删除一个节点" class="headerlink" title="delete（删除一个节点)"></a>delete（删除一个节点)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 27] delete &#x2F;ephemeral_node0000000007</span><br><span class="line">[zk: localhost:2181(CONNECTED) 28] ls &#x2F;ephemeral_node0000000007</span><br><span class="line">Node does not exist: &#x2F;ephemeral_node0000000007</span><br></pre></td></tr></table></figure>
 
 
+<h4 id="get-（获得目录下的值）"><a href="#get-（获得目录下的值）" class="headerlink" title="get （获得目录下的值）"></a>get （获得目录下的值）</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-s</td>
+<td>列出节点的状态信息</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>设置观察数据变化的watcher</td>
+</tr>
+</tbody></table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 10] get &#x2F;2020-09-22</span><br><span class="line">I am Tom</span><br></pre></td></tr></table></figure>
+
+<h4 id="getAllChildrenNumber-（获得目录下的子目录个数）"><a href="#getAllChildrenNumber-（获得目录下的子目录个数）" class="headerlink" title="getAllChildrenNumber （获得目录下的子目录个数）"></a>getAllChildrenNumber （获得目录下的子目录个数）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 16] getAllChildrenNumber &#x2F;2020-09-22</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="getEphemerals（获得目录下的临时节点）"><a href="#getEphemerals（获得目录下的临时节点）" class="headerlink" title="getEphemerals（获得目录下的临时节点）"></a>getEphemerals（获得目录下的临时节点）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[zk: localhost:2181(CONNECTED) 20] getEphemerals &#x2F;2020-09-22</span><br><span class="line">[&#x2F;2020-09-22&#x2F;child]</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> <strong>*我们需要一个用起来像单机但是又比单机更可靠的东西。 *</strong></p>
+<p> 下一步就去学java调用Zookeeper的Api拉~</p>
 
       
     </div>
@@ -1188,249 +1410,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/29/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/" class="post-title-link" itemprop="url">Elasticsearch学习笔记（二）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-29 10:22:00" itemprop="dateCreated datePublished" datetime="2020-06-29T10:22:00+08:00">2020-06-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-07-05 23:51:30" itemprop="dateModified" datetime="2020-07-05T23:51:30+08:00">2020-07-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h3><h4 id="返回所有记录"><a href="#返回所有记录" class="headerlink" title="返回所有记录"></a>返回所有记录</h4><blockquote>
-<p>请求方法：GET，路径：/index/type/_search</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request GET &#39;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 6,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 1,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 1.0,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 1.0,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;description&quot;: &quot;本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。&quot;,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中字段含义：</p>
-<ul>
-<li>total:返回记录的条数</li>
-<li>hits:返回记录的数组</li>
-<li>max_score:最高匹配的程度</li>
-</ul>
-<h4 id="全文本查询"><a href="#全文本查询" class="headerlink" title="全文本查询"></a>全文本查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;java&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 1,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 3,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 0.40388194,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.40388194,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;Jsrp_XIBKoNLJaiRi4mV&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.35667494,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Java并发编程实战&quot;,</span><br><span class="line">                    &quot;price&quot;: 69,</span><br><span class="line">                    &quot;author&quot;: &quot; Brian Goetz&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;J8rq_XIBKoNLJaiRW4n4&quot;,</span><br><span class="line">                &quot;_score&quot;: 0.33698124,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Effective java 中文版（第2版）&quot;,</span><br><span class="line">                    &quot;price&quot;: 52.00,</span><br><span class="line">                    &quot;author&quot;: &quot; [美] Joshua Bloch&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由返回的结果可以看出，elasticsearch返回了标题为java的文档，但match是模糊匹配，他会把查询的词<strong><em>先进行分词然后再去查询</em></strong>。例如下图的示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;编程思想&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 2,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 2,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 4.296419,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 4.296419,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;Jsrp_XIBKoNLJaiRi4mV&quot;,</span><br><span class="line">                &quot;_score&quot;: 1.3862944,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;Java并发编程实战&quot;,</span><br><span class="line">                    &quot;price&quot;: 69,</span><br><span class="line">                    &quot;author&quot;: &quot; Brian Goetz&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>由上图结果可以看到的确是进行了分词，那如果我们有时候不想要这样查询呢？我们可以换一个关键字match_phrase</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;_search&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;match_phrase&quot;:&#123;</span><br><span class="line">            &quot;title&quot;:&quot;编程思想&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;took&quot;: 100,</span><br><span class="line">    &quot;timed_out&quot;: false,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 1,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;skipped&quot;: 0,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;hits&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: &#123;</span><br><span class="line">            &quot;value&quot;: 1,</span><br><span class="line">            &quot;relation&quot;: &quot;eq&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &quot;max_score&quot;: 4.296419,</span><br><span class="line">        &quot;hits&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">                &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">                &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">                &quot;_score&quot;: 4.296419,</span><br><span class="line">                &quot;_source&quot;: &#123;</span><br><span class="line">                    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">                    &quot;price&quot;: 99.99,</span><br><span class="line">                    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="多字段查询"><a href="#多字段查询" class="headerlink" title="多字段查询"></a>多字段查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;multi_match&quot;:&#123;</span><br><span class="line">            &quot;query&quot;:&quot;java&quot;,</span><br><span class="line">            &quot;fields&quot;:[</span><br><span class="line">                &quot;title&quot;,</span><br><span class="line">                &quot;description&quot;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="语法查询"><a href="#语法查询" class="headerlink" title="语法查询"></a>语法查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;:&#123;</span><br><span class="line">        &quot;query_string&quot;:&#123;</span><br><span class="line">            &quot;query&quot;:&quot;编程思想 and c++&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="字段查询"><a href="#字段查询" class="headerlink" title="字段查询"></a>字段查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/27/lasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Elasticsearch学习笔记（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-27 22:02:00" itemprop="dateCreated datePublished" datetime="2020-06-27T22:02:00+08:00">2020-06-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-29 10:11:35" itemprop="dateModified" datetime="2020-06-29T10:11:35+08:00">2020-06-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="啥是Elasticsearch"><a href="#啥是Elasticsearch" class="headerlink" title="啥是Elasticsearch"></a>啥是Elasticsearch</h3><blockquote>
-<p>ElasticSearch是一个高度可扩展的开源搜索引擎并使用REST API，底层是开源库 Lucene。</p>
-</blockquote>
-<h3 id="Elasticsearch优点"><a href="#Elasticsearch优点" class="headerlink" title="Elasticsearch优点"></a>Elasticsearch优点</h3><ul>
-<li>横向可扩展性: 作为大型分布式集群，很容易就能扩展新的服务器到ES集群中；也可运行在单机上作为轻量级搜索引擎使用。</li>
-<li>更丰富的功能: 与传统关系型数据库相比，ES提供了全文检索、同义词处理、相关度排名、复杂数据分析、海量数据的近实时处理等功能。</li>
-<li>高可用: 提供副本(Replica)机制，一个分片可以设置多个副本，即使在某些服务器宕机后，集群仍能正常工作。</li>
-<li>开箱即用: 提供简单易用的 API，服务的搭建、部署和使用都很容易操作。</li>
-</ul>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="Node与Cluster"><a href="#Node与Cluster" class="headerlink" title="Node与Cluster"></a>Node与Cluster</h4><p>Elasticsearch本质上是一个分布式的数据库，它可以多台服务器协同工作，运行多个多个实例。<br><strong><em>单个实例被称为一个节点（Node），一组节点就被成为Cluster</em></strong></p>
-<h4 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h4><p>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
-<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
-<h4 id="Document"><a href="#Document" class="headerlink" title="Document"></a>Document</h4><p>Index里面单条的记录称为 Document（文档）。许多条Document构成了一个Index,<br>Document使用JSON格式表示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;小明&quot;,</span><br><span class="line">  &quot;age&quot;: 18,</span><br><span class="line">  &quot;sex&quot;: &quot;男&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="新建记录"><a href="#新建记录" class="headerlink" title="新建记录"></a>新建记录</h4><h5 id="不指定文档的ID"><a href="#不指定文档的ID" class="headerlink" title="不指定文档的ID"></a>不指定文档的ID</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;title&quot;: &quot;java编程思想&quot;,</span><br><span class="line">    &quot;price&quot;: 99.99,</span><br><span class="line">    &quot;description&quot;: &quot;本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。&quot;,</span><br><span class="line">    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;jV3J-HIBNIzRDJgGMzQj&quot;,</span><br><span class="line">    &quot;_version&quot;: 1,</span><br><span class="line">    &quot;result&quot;: &quot;created&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 0,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="指定文档的ID"><a href="#指定文档的ID" class="headerlink" title="指定文档的ID"></a>指定文档的ID</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request POST &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;1&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;title&quot;: &quot;java编程思想（第二版）&quot;,</span><br><span class="line">    &quot;price&quot;: 109.99,</span><br><span class="line">    &quot;description&quot;: &quot;本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。&quot;,</span><br><span class="line">    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 1,</span><br><span class="line">    &quot;result&quot;: &quot;created&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 1,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="返回结果字段解释："><a href="#返回结果字段解释：" class="headerlink" title="返回结果字段解释："></a>返回结果字段解释：</h5><ul>
-<li>_index:文档所在的索引名</li>
-<li>_type:文档所在的类型名</li>
-<li>_id:文档对应的ID</li>
-<li>_version:文档版本号</li>
-<li>_result:代表创建</li>
-<li>_shards: _shards表示索引操作的复制过程的信息</li>
-</ul>
-<h4 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h4><h5 id="存在查询ID的文档"><a href="#存在查询ID的文档" class="headerlink" title="存在查询ID的文档"></a>存在查询ID的文档</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request GET &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;1&#39;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 1,</span><br><span class="line">    &quot;_seq_no&quot;: 1,</span><br><span class="line">    &quot;_primary_term&quot;: 1,</span><br><span class="line">    &quot;found&quot;: true,</span><br><span class="line">    &quot;_source&quot;: &#123;</span><br><span class="line">        &quot;title&quot;: &quot;java编程思想（第二版）&quot;,</span><br><span class="line">        &quot;price&quot;: 109.99,</span><br><span class="line">        &quot;description&quot;: &quot;本书赢得了全球程序员的广泛赞誉，即使是最晦涩的概念，在Bruce Eckel的文字亲和力和小而直接的编程示例面前也会化解于无形。从Java的基础语法到最高级特性（深入的面向对象概念、多线程、自动项目构建、单元测试和调试等），本书都能逐步指导你轻松掌握。&quot;,</span><br><span class="line">        &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="不存在查询ID的文档"><a href="#不存在查询ID的文档" class="headerlink" title="不存在查询ID的文档"></a>不存在查询ID的文档</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request GET &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;2&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;2&quot;,</span><br><span class="line">    &quot;found&quot;: false</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h5 id="返回结果字段解释"><a href="#返回结果字段解释" class="headerlink" title="返回结果字段解释"></a>返回结果字段解释</h5><ul>
-<li>found:代表是否查询到了</li>
-<li>_source:如果查询到了，该字段代表文档的内容</li>
-</ul>
-<h4 id="更改文档"><a href="#更改文档" class="headerlink" title="更改文档"></a>更改文档</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request PUT &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;1&#39; \</span><br><span class="line">--header &#39;Content-Type: application&#x2F;json&#39; \</span><br><span class="line">--data-raw &#39;&#123;</span><br><span class="line">    &quot;title&quot;: &quot;java编程思想（第二版）&quot;,</span><br><span class="line">    &quot;price&quot;: 109.99,</span><br><span class="line">    &quot;description&quot;: &quot;从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、JavaI&#x2F;O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。&quot;,</span><br><span class="line">    &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">&#125;&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 2,</span><br><span class="line">    &quot;result&quot;: &quot;updated&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 2,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从返回结果我们可以看到，result字段变成updated，version也从1变成2了。这时候我们再来查询一下ID为1的文档</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request GET &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;1&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 2,</span><br><span class="line">    &quot;_seq_no&quot;: 2,</span><br><span class="line">    &quot;_primary_term&quot;: 1,</span><br><span class="line">    &quot;found&quot;: true,</span><br><span class="line">    &quot;_source&quot;: &#123;</span><br><span class="line">        &quot;title&quot;: &quot;java编程思想（第二版）&quot;,</span><br><span class="line">        &quot;price&quot;: 109.99,</span><br><span class="line">        &quot;description&quot;: &quot;从本书获得的各项大奖以及来自世界各地的读者评论中，不难看出这是一本经典之作。本书共22章，包括操作符、控制执行流程、访问权限控制、复用类、多态、接口、通过异常处理错误、字符串、泛型、数组、容器深入研究、JavaI&#x2F;O系统、枚举类型、并发以及图形化用户界面等内容。这些丰富的内容，包含了Java语言基础语法以及高级特性，适合各个层次的Java程序员阅读，同时也是高等院校讲授面向对象程序设计语言以及Java语言的绝佳教材和参考书。&quot;,</span><br><span class="line">        &quot;author&quot;: &quot;埃克尔&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到文档的description里的内容已经更改了。</p>
-<h4 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl --location --request DELETE &#39;http:&#x2F;&#x2F;localhost:9200&#x2F;blog&#x2F;doc&#x2F;1&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;_index&quot;: &quot;blog&quot;,</span><br><span class="line">    &quot;_type&quot;: &quot;doc&quot;,</span><br><span class="line">    &quot;_id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;_version&quot;: 3,</span><br><span class="line">    &quot;result&quot;: &quot;deleted&quot;,</span><br><span class="line">    &quot;_shards&quot;: &#123;</span><br><span class="line">        &quot;total&quot;: 2,</span><br><span class="line">        &quot;successful&quot;: 1,</span><br><span class="line">        &quot;failed&quot;: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;_seq_no&quot;: 3,</span><br><span class="line">    &quot;_primary_term&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从result字段可以看到该文档已被删除了</p>
-<h3 id="下一个"><a href="#下一个" class="headerlink" title="下一个"></a>下一个</h3><p>Elasticsearch的搜索功能</p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1495,17 +1478,17 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">52</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
