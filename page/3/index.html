@@ -152,7 +152,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/15/%E5%8D%95%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -166,7 +166,451 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/15/%E5%8D%95%E5%B7%A5%E7%A8%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工程模式</a>
+            <a href="/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">java BigDecimal详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-23 14:42:54 / Modified: 15:22:42" itemprop="dateCreated datePublished" datetime="2020-06-23T14:42:54+08:00">2020-06-23</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。</p>
+<p><img src="/images/pasted-62.png" alt="upload successful"></p>
+<h3 id="BigDecimal构造方法"><a href="#BigDecimal构造方法" class="headerlink" title="BigDecimal构造方法"></a>BigDecimal构造方法</h3><ol>
+<li>BigDecimal(int) </li>
+<li><del>BigDecimal(double)</del></li>
+<li>BigDecimal(long) </li>
+<li><strong><em>BigDecimal(String)</em></strong></li>
+</ol>
+<p>BigDecimal共有四种构造方法，但是其中构造参数为double类型的构造方法不推荐使用，为啥呢？看下面。</p>
+<p><img src="/images/pasted-63.png" alt="upload successful"></p>
+<p>使用double类型的构造方法具有不确定性，使用string类型的构造方法就具有确定性，传的啥，创建啥。</p>
+<h3 id="BigDecimal的四则运算"><a href="#BigDecimal的四则运算" class="headerlink" title="BigDecimal的四则运算"></a>BigDecimal的四则运算</h3><ol>
+<li>public BigDecimal add(BigDecimal value)//加法</li>
+<li>public BigDecimal subtract(BigDecimal value)//减法</li>
+<li>public BigDecimal multiply(BigDecimal value)//乘法</li>
+<li>public BigDecimal divide(BigDecimal value)//除法</li>
+</ol>
+<p><img src="/images/pasted-64.png" alt="upload successful"></p>
+<p><strong><em>加减乘除其实最终都返回的是一个新的BigDecimal对象，因为BigInteger与BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象</em></strong></p>
+<p>当divide除不尽的时候会抛出java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result异常。</p>
+<p><img src="/images/pasted-65.png" alt="upload successful"></p>
+<p>因此divide可以传三个参数</p>
+<ul>
+<li>public BigDecimal divide(BigDecimal divisor, int scale, int roundingMode) </li>
+</ul>
+<ul>
+<li>ROUND_UP ：向远离零的方向舍入。舍弃非零部分，并将非零舍弃部分相邻的一位数字加一。</li>
+<li>ROUND_DOWN ：向接近零的方向舍入。舍弃非零部分，同时不会非零舍弃部分相邻的一位数字加一，采取截取行为。</li>
+<li>ROUND_CEILING ：向正无穷的方向舍入。如果为正数，舍入结果同ROUND_UP一致；如果为负数，舍入结果同ROUND_DOWN一致。注意：此模式不会减少数值大小。</li>
+<li>ROUND_FLOOR ：向负无穷的方向舍入。如果为正数，舍入结果同ROUND_DOWN一致；如果为负数，舍入结果同ROUND_UP一致。注意：此模式不会增加数值大小。</li>
+<li>ROUND_HALF_UP ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向上舍入的舍入模式。如果舍弃部分&gt;= 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“四舍五入”。</li>
+<li>ROUND_HALF_DOWN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向下舍入的舍入模式。如果舍弃部分&gt; 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“五舍六入”。</li>
+<li>ROUND_HALF_EVEN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则相邻的偶数舍入。如果舍弃部分左边的数字奇数，则舍入行为与 ROUND_HALF_UP 相同；如果为偶数，则舍入行为与 ROUND_HALF_DOWN 相同。注意：在重复进行一系列计算时，此舍入模式可以将累加错误减到最小。此舍入模式也称为“银行家舍入法”，主要在美国使用。四舍六入，五分两种情况，如果前一位为奇数，则入位，否则舍去。</li>
+<li>ROUND_UNNECESSARY ：断言请求的操作具有精确的结果，因此不需要舍入。如果对获得精确结果的操作指定此舍入模式，则抛出ArithmeticException。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>商业计算使用BigDecimal。</li>
+<li>尽量使用参数类型为String的构造函数。</li>
+<li>BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象，所以在做加减乘除运算时千万要保存操作后的值。</li>
+</ol>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.cnblogs.com/Jason-Xiang/p/10220231.html" target="_blank" rel="noopener">Java BigDecimal详解</a></p>
+<p><a href="https://blog.csdn.net/qq_35868412/article/details/89029288" target="_blank" rel="noopener">java 中 BigDecimal 详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">活动启动模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-16 21:15:00 / Modified: 21:21:23" itemprop="dateCreated datePublished" datetime="2020-06-16T21:15:00+08:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">android基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="活动的启动模式"><a href="#活动的启动模式" class="headerlink" title="活动的启动模式"></a>活动的启动模式</h3><h4 id="standard"><a href="#standard" class="headerlink" title="standard"></a>standard</h4><p>tandard是活动默认的启动模式，在不进行显式指定的情况下，所有活动都会自动使用这种启动模式。在standard模式（即默认情况）下，每当启动一个新的活动，它就会在返回栈中入栈，并处于栈顶的位置。对于使用standard模式的活动，系统不会在乎这个活动是否已经在返回栈中存在，每次启动都会创建该活动的一个新的实例。</p>
+<p><img src="/images/pasted-58.png" alt="upload successful"></p>
+<h4 id="singleTop"><a href="#singleTop" class="headerlink" title="singleTop"></a>singleTop</h4><p>当活动的启动模式指定为singleTop，在启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例。不过当启动的活动并未处于栈顶位置时，这时再启动活动，还是会创建新的实例的。</p>
+<p><img src="/images/pasted-59.png" alt="upload successful"></p>
+<h4 id="singleTask"><a href="#singleTask" class="headerlink" title="singleTask"></a>singleTask</h4><p>当活动的启动模式指定为singleTask，每次启动该活动时系统首先会在返回栈中检查是否存在该活动的实例，如果发现已经存在则直接使用该实例，并把在这个活动之上的所有活动统统出栈，如果没有发现就会创建一个新的活动实例。</p>
+<p><img src="/images/pasted-60.png" alt="upload successful"></p>
+<h4 id="singleInstance"><a href="#singleInstance" class="headerlink" title="singleInstance"></a>singleInstance</h4><p>待学，暂时用不到。</p>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">活动的生命周期</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-16 21:03:00 / Modified: 21:16:13" itemprop="dateCreated datePublished" datetime="2020-06-16T21:03:00+08:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/android%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">android基础</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="活动的生命周期"><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h3><h4 id="返回栈"><a href="#返回栈" class="headerlink" title="返回栈"></a>返回栈</h4><blockquote>
+<p>Android是使用任务（Task）来管理活动的，一个任务就是一组存放在栈里的活动的集合，这个栈也被称作返回栈（Back Stack）。栈是一种后进先出的数据结构，在默认情况下，每当我们启动了一个新的活动，它会在返回栈中入栈，并处于栈顶的位置。而每当我们按下Back键或调用finish() 方法去销毁一个活动时，处于栈顶的活动会出栈，这时前一个入栈的活动就会重新处于栈顶的位置。系统总是会显示处于栈顶的活动给用户。</p>
+</blockquote>
+<p><img src="/images/pasted-56.png" alt="upload successful"></p>
+<h4 id="活动状态"><a href="#活动状态" class="headerlink" title="活动状态"></a>活动状态</h4><p>活动在其生命周期最多会有4中状态</p>
+<h5 id="运行状态"><a href="#运行状态" class="headerlink" title="运行状态"></a>运行状态</h5><p>当一个活动位于返回栈的栈顶时，这时活动就处于运行状态。系统最不愿意回收的就是处于运行状态的活动，因为这会带来非常差的用户体验。</p>
+<h5 id="暂停状态"><a href="#暂停状态" class="headerlink" title="暂停状态"></a>暂停状态</h5><p>当一个活动不再处于栈顶位置，但仍然可见时，这时活动就进入了暂停状态。系统也不愿意去回收这种活动（因为它还是可见的，回收可见的东西都会在用户体验方面有不好的影响），只有在内存极低的情况下，系统才会去考虑回收这种活动。</p>
+<h5 id="停止状态"><a href="#停止状态" class="headerlink" title="停止状态"></a>停止状态</h5><p>当一个活动不再处于栈顶位置，并且完全不可见的时候，就进入了停止状态。系统仍然会为这种活动保存相应的状态和成员变量，但是这并不是完全可靠的，当其他地方需要内存时，处于停止状态的活动有可能会被系统回收。</p>
+<h5 id="销毁状态"><a href="#销毁状态" class="headerlink" title="销毁状态"></a>销毁状态</h5><p>当一个活动从返回栈中移除后就变成了销毁状态。系统会最倾向于回收处于这种状态的活动，从而保证手机的内存充足。</p>
+<h4 id="活动7种回调方法"><a href="#活动7种回调方法" class="headerlink" title="活动7种回调方法"></a>活动7种回调方法</h4><ul>
+<li><p>onCreate()它会在活动第一次被创建的时候调用。你应该在这个方法中完成活动的初始化操作，比如说加载布局、绑定事件等。</p>
+</li>
+<li><p>onStart() 。这个方法在活动由不可见变为可见的时候调用。</p>
+</li>
+<li><p>onResume() 。这个方法在活动准备好和用户进行交互的时候调用。此时的活动一定位于返回栈的栈顶，并且处于运行状态。</p>
+</li>
+<li><p>onPause() 。这个方法在系统准备去启动或者恢复另一个活动的时候调用。我们通常会在这个方法中将一些消耗CPU的资源释放掉，以及保存一些关键数据，但这个方法的执行速度一定要快，不然会影响到新的栈顶活动的使用。</p>
+</li>
+<li><p>onStop() 。这个方法在活动完全不可见的时候调用。它和onPause() 方法的主要区别在于，如果启动的新活动是一个对话框式的活动，那么onPause() 方法会得到执行，而onStop() 方法并不会执行。</p>
+</li>
+<li><p>onDestroy() 。这个方法在活动被销毁之前调用，之后活动的状态将变为销毁状态。</p>
+</li>
+<li><p>onRestart() 。这个方法在活动由停止状态变为运行状态之前调用，也就是活动被重新启动了。</p>
+</li>
+</ul>
+<p><img src="/images/pasted-57.png" alt="upload successful"></p>
+<h4 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h4><blockquote>
+<p>Activity中还提供了一个onSaveInstanceState() 回调方法，这个方法可以保证在活动被回收之前一定会被调用，因此我们可以通过这个方法来解决活动被回收时临时数据得不到保存的问题。</p>
+</blockquote>
+<p>onSaveInstanceState() 方法会携带一个Bundle 类型的参数，Bundle 提供了一系列的方法用于保存数据，比如可以使用putString() 方法保存字符串，使用putInt() 方法保存整型数据，以此类推。每个保存方法需要传入两个参数，第一个参数是键，用于后面从Bundle 中取值，第二个参数是真正要保存的内容。</p>
+<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
+<li>全来自《第一行代码——Android（第2版）》</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">java类的加载机制(学习笔记)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-16 18:16:00" itemprop="dateCreated datePublished" datetime="2020-06-16T18:16:00+08:00">2020-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-26 15:12:49" itemprop="dateModified" datetime="2021-02-26T15:12:49+08:00">2021-02-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="啥是类加载"><a href="#啥是类加载" class="headerlink" title="啥是类加载"></a>啥是类加载</h3><blockquote>
+<p>类加载是指将class文件读入内存中，并对数据进行校验、转换解析、初始化，最后再<strong><em>堆区</em></strong>创建一个java.lang.Class对象，用来封装类在方法区的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
+</blockquote>
+<blockquote>
+<p>在Java语言里面，类型的加载、连接和初始化过程都是在程序运行期间完成的。</p>
+</blockquote>
+<p><strong><em>加载.class文件的方式</em></strong></p>
+<ul>
+<li>从本地系统中直接加载</li>
+<li>通过网络下载.class文件</li>
+<li>从zip，jar等归档文件中加载.class文件</li>
+<li>从专有数据库中提取.class文件</li>
+<li>将Java源文件动态编译为.class文件</li>
+</ul>
+<h3 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h3><p><img src="/images/pasted-61.png" alt="upload successful"></p>
+<p>类的加载过程包括了加载、验证、准备、解析、初始化这五个阶段。在这五个阶段中，加载、验证、准备和初始化这四个阶段发生的顺序是确定的，而解析阶段则不一定，它在某些情况下可以在初始化阶段之后开始，这是为了支持Java语言的运行时绑定（也成为动态绑定或晚期绑定）。另外注意这里的几个阶段是按顺序开始，而不是按顺序进行或完成，因为这些阶段通常都是互相交叉地混合进行的，通常在一个阶段执行的过程中调用或激活另一个阶段。</p>
+<h4 id="加载（Loading）"><a href="#加载（Loading）" class="headerlink" title="加载（Loading）"></a>加载（Loading）</h4><p>加载阶段负责<strong><em>查找和加载类的二进制数据</em></strong>。</p>
+<ol>
+<li>通过类的<strong><em>全限定名</em></strong>来获取其定义的二进制字节流。</li>
+<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
+<li>在Java堆中生成一个代表这个类的java.lang.Class对象，作为对方法区中这些数据的访问入口。</li>
+</ol>
+<p><strong><em>小知识：加载阶段是可控性最强的阶段，我们可以自定义类加载器（ClassLoader）来完成类的加载。</em></strong></p>
+<h4 id="验证（Verification）"><a href="#验证（Verification）" class="headerlink" title="验证（Verification）"></a>验证（Verification）</h4><p>验证阶段负责确保<strong><em>Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全</em></strong>。</p>
+<ul>
+<li>文件格式验证：验证字节流是否符合Class文件格式的规范；例如：是否以0xCAFEBABE开头、主次版本号是否在当前虚拟机的处理范围之内、常量池中的常量是否有不被支持的类型。</li>
+<li>元数据验证：对字节码描述的信息进行语义分析（注意：对比javac编译阶段的语义分析），以保证其描述的信息符合Java语言规范的要求；例如：这个类是否有父类，除了java.lang.Object之外。</li>
+<li>字节码验证：通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。</li>
+<li>符号引用验证：确保解析动作能正确执行。</li>
+</ul>
+<p><strong><em>小知识:验证阶段是非常重要的，但不是必须的，它对程序运行期没有影响，如果所引用的类经过反复验证，那么可以考虑采用-Xverifynone参数来关闭大部分的类验证措施，以缩短虚拟机类加载的时间。</em></strong></p>
+<h4 id="准备-Preparation"><a href="#准备-Preparation" class="headerlink" title="准备(Preparation)"></a>准备(Preparation)</h4><p>准备阶段负责为<strong><em>类的静态变量分配内存（方法区），并将其初始化为默认值</em></strong>。<br>注意事项：</p>
+<ol>
+<li>这时候进行内存分配的仅包括类变量（static），而不包括实例变量，实例变量会在对象实例化时随着对象一块分配在Java堆中。</li>
+<li>这里所设置的初始值通常情况下是数据类型默认的零值（如0、0L、null、false等），而不是被在Java代码中被显式地赋予的值。</li>
+<li>如果类字段的字段属性表中存在ConstantValue属性，即同时被final和static修饰，那么在准备阶段变量value就会被初始化为ConstValue属性所指定的值。</li>
+</ol>
+<p><strong><em>小知识：将static变量赋值为Java代码中被显式地赋予的值是在初始化阶段才会开始</em></strong></p>
+<h4 id="解析（Resolution）"><a href="#解析（Resolution）" class="headerlink" title="解析（Resolution）"></a>解析（Resolution）</h4><p>解析阶段负责将<strong><em>类中的符号引用转换为直接引用</em></strong>，解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。</p>
+<ul>
+<li><strong><em>符号引用</em></strong>就是一组符号来描述目标，可以是任何字面量。</li>
+<li><strong><em>直接引用</em></strong>就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。</li>
+</ul>
+<h4 id="初始化（initialization）"><a href="#初始化（initialization）" class="headerlink" title="初始化（initialization）"></a>初始化（initialization）</h4><p>初始化阶段负责为为<strong><em>类的静态变量赋予正确的初始值，JVM负责对类进行初始化，主要对类变量进行初始化</em></strong>，此阶段其实就是执行<strong><em>&lt;clinit&gt;()方法</em></strong>的过程。</p>
+<ul>
+<li><p>&lt;clinit&gt;() 不需要显式调用父类（接口除外，接口不需要调用父接口的初始化方法，只有使用到父接口中的静态变量时才需要调用）的初始化方法 &lt;clinit&gt;()，虚拟机会保证在子类的 &lt;clinit&gt;() 方法执行之前，父类的&lt;clinit&gt;() 方法已经执行完毕，也就意味着父类中定义的静态语句块要优先于子类的变量赋值操作。</p>
+</li>
+<li><p>&lt;clinit&gt;()  方法对于类或接口来说并不是必需的，如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成 &lt;clinit&gt;() 方法。</p>
+</li>
+<li><p>虚拟机会保证一个类的 &lt;clinit&gt;() 方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的&lt;clinit&gt;() 方法，其他线程都需要阻塞等待，直到活动线程执行&lt;clinit&gt;()方法完毕。</p>
+</li>
+</ul>
+<p><strong><em>类的初始化时机</em></strong></p>
+<ul>
+<li>创建类的实例</li>
+<li>访问或者赋值某个类或者接口的静态变量</li>
+<li>调用类的静态方法</li>
+<li>反射</li>
+<li>初始化其子类，则该类也会被初始化</li>
+</ul>
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>java语言自带三个类加载器</p>
+<ul>
+<li><p>Bootstrap ClassLoader(启动类加载器):负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载）。启动类加载器是无法被Java程序直接引用的。</p>
+</li>
+<li><p>Extention ClassLoader(扩展类加载器):该加载器sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
+</li>
+<li><p>Application ClassLoader(应用程序类加载器):该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
+</li>
+</ul>
+<blockquote>
+<p>应用程序都是由这三种类加载器互相配合进行加载的，如果有必要，我们还可以加入自定义的类加载器。因为JVM自带的ClassLoader只是懂得从本地文件系统加载标准的java class文件，因此如果编写了自己的ClassLoader，便可以做到如下几点：</p>
+</blockquote>
+<ol>
+<li>在执行非置信代码之前，自动验证数字签名。</li>
+<li>动态地创建符合用户特定需要的定制化构建类。</li>
+<li>从特定的场所取得java class，例如数据库中和网络中。</li>
+</ol>
+<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
+<p><strong><em>为了保证java程序安全稳定运行</em></strong></p>
+<ol>
+<li><p>当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。</p>
+</li>
+<li><p>当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。</p>
+</li>
+<li><p>如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载。</p>
+</li>
+<li><p>若ExtClassLoader也加载失败，则会使用AppClassLoader来加载，如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工程模式</a>
         </h2>
 
         <div class="post-meta">
@@ -226,6 +670,112 @@
 <ol>
 <li>不利于不同类型对象的创建</li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+		<div>
+			
+		</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="陈梓佳">
+      <meta itemprop="description" content="陈梓佳的学习笔记~">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="汤姆猫的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-14 23:42:00" itemprop="dateCreated datePublished" datetime="2020-06-14T23:42:00+08:00">2020-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-15 15:13:53" itemprop="dateModified" datetime="2020-06-15T15:13:53+08:00">2020-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+      
+          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>单例模式是java23中设计模式之一，也是最常见的一种模式。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li>整个程序运行中只允许有一个类的实例</li>
+<li>需要频繁创建然后销毁的对象</li>
+<li>创建对象时耗时过多或者耗资源过多，但又经常用到的对象</li>
+<li>方便资源相互通信的环境</li>
+</ul>
+<h3 id="单例的几种模式"><a href="#单例的几种模式" class="headerlink" title="单例的几种模式"></a>单例的几种模式</h3><h4 id="线程不安全的懒汉式"><a href="#线程不安全的懒汉式" class="headerlink" title="线程不安全的懒汉式"></a>线程不安全的懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程不安全懒汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:41</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            singleton &#x3D; new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在需要的时候才创建实例，节省内存空间，但是多线程同时访问会导致返回多个实例。</p>
+</blockquote>
+<h4 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton &#x3D; new Singleton();</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 饿汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:54</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Singleton getInstance()&#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过JVM的类加载机制实现了初始化，保证了线程安全。</p>
+</blockquote>
+<h4 id="线程安全懒汉式"><a href="#线程安全懒汉式" class="headerlink" title="线程安全懒汉式"></a>线程安全懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程安全懒汉式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:55</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            synchronized (Singleton.class)&#123;</span><br><span class="line">                if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    singleton &#x3D; new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过双重加锁判断实现了线程安全，但是效率就慢了。</p>
+</blockquote>
+<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder&#123;</span><br><span class="line">        public static Singleton singleton &#x3D; new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 静态内部类</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 14:59</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return Holder.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过JVM类加载机制保证线程安全。</p>
+</blockquote>
+<h4 id="枚举方式"><a href="#枚举方式" class="headerlink" title="枚举方式"></a>枚举方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 15:07</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">public enum SingletonEnum &#123;</span><br><span class="line">    INSTANCE(new Object());</span><br><span class="line"></span><br><span class="line">    private Object object;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 枚举单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 15:08</span><br><span class="line">     * @param [object]</span><br><span class="line">     * @return </span><br><span class="line">     *&#x2F;</span><br><span class="line">    SingletonEnum(Object object) &#123;</span><br><span class="line">        this.object &#x3D; object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过枚举方式创建的单例模式，能保证线程安全而且能防止序列化重新创建对象。</p>
+</blockquote>
 
       
     </div>
@@ -354,7 +904,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ava7-try-with-resource/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/java7-try-with-resource/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -368,7 +918,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/14/ava7-try-with-resource/" class="post-title-link" itemprop="url">java7 try-with-resource</a>
+            <a href="/2020/06/14/java7-try-with-resource/" class="post-title-link" itemprop="url">java7 try-with-resource</a>
         </h2>
 
         <div class="post-meta">
@@ -439,7 +989,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/ail-fast%E5%92%8Cfail-safe/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/fail-fast%E5%92%8Cfail-safe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -453,7 +1003,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/14/ail-fast%E5%92%8Cfail-safe/" class="post-title-link" itemprop="url">fail-fast和fail-safe</a>
+            <a href="/2020/06/14/fail-fast%E5%92%8Cfail-safe/" class="post-title-link" itemprop="url">fail-fast和fail-safe</a>
         </h2>
 
         <div class="post-meta">
@@ -555,7 +1105,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -569,7 +1119,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/09/pring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
+            <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
         </h2>
 
         <div class="post-meta">
@@ -688,507 +1238,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">集合面试题（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 14:54:00" itemprop="dateCreated datePublished" datetime="2020-06-09T14:54:00+08:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-15 15:16:42" itemprop="dateModified" datetime="2020-06-15T15:16:42+08:00">2020-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">集合面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h3><blockquote>
-<p>首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/07/%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">多线程面试题</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-07 17:10:00" itemprop="dateCreated datePublished" datetime="2020-06-07T17:10:00+08:00">2020-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-12 23:22:14" itemprop="dateModified" datetime="2020-06-12T23:22:14+08:00">2020-06-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">多线程面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="三个线程顺序执行依次输出ABCABCABCABC…"><a href="#三个线程顺序执行依次输出ABCABCABCABC…" class="headerlink" title="三个线程顺序执行依次输出ABCABCABCABC…"></a>三个线程顺序执行依次输出ABCABCABCABC…</h3><h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
-<p>三个线程顺序执行依次输出ABCABCABCABC…，让我们如何控制线程的同步访问，使得线程依次输出ABCABCABCABC…的结果。</p>
-</blockquote>
-<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><blockquote>
-<p>使用最简便最实用的信号量Semaphore，通过控制信号的获取以及释放，承接获取锁来实现线程得顺序执行以及临界资源的同步访问。这里要明白如果信号量（Semaphore）初始化为0的话，调用acquire()就会堵塞，直到调用relase()。</p>
-</blockquote>
-<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package com.czj.interview;</span><br><span class="line"></span><br><span class="line">import java.util.concurrent.Semaphore;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;7 17:06</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SemaphoreABC &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Semaphore semaphoreA &#x3D; new Semaphore(1);</span><br><span class="line">        Semaphore semaphoreB &#x3D; new Semaphore(0);</span><br><span class="line">        Semaphore semaphoreC &#x3D; new Semaphore(0);</span><br><span class="line">        new Thread(()-&gt;print(&quot;A&quot;,semaphoreA,semaphoreB)).start();</span><br><span class="line">        new Thread(()-&gt;print(&quot;B&quot;,semaphoreB,semaphoreC)).start();</span><br><span class="line">        new Thread(()-&gt;print(&quot;C&quot;,semaphoreC,semaphoreA)).start();</span><br><span class="line">    &#125;</span><br><span class="line">    public static void print(String word, Semaphore start, Semaphore end)&#123;</span><br><span class="line">        for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                start.acquire();</span><br><span class="line">                System.out.println(word);</span><br><span class="line">                end.release();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="线程和进程的区别"><a href="#线程和进程的区别" class="headerlink" title="线程和进程的区别"></a>线程和进程的区别</h3><ul>
-<li>进程是程序运行和资源分配的基本单位，一个程序至少有一个进程，一个进程至少有一个线程。</li>
-<li>进程在执行过程中拥有独立的内存单元，而多个线程共享内存资源，减少切换次数，从而效率更高。</li>
-<li>线程是进程的一个实体，是cpu调度和分派的基本单位，是比程序更小的能独立运行的基本单位。同一进程中的多个线程之间可以并发执行。</li>
-</ul>
-<h3 id="创建线程有哪几种方式"><a href="#创建线程有哪几种方式" class="headerlink" title="创建线程有哪几种方式"></a>创建线程有哪几种方式</h3><ol>
-<li>实现Runnable接口</li>
-<li>通过Callable和Future创建线程</li>
-<li>继承Thread类</li>
-</ol>
-<h3 id="死锁是什么，怎么防止死锁"><a href="#死锁是什么，怎么防止死锁" class="headerlink" title="死锁是什么，怎么防止死锁"></a>死锁是什么，怎么防止死锁</h3><blockquote>
-<p>死锁是指两个或两个以上的进程在执行过程中，因争夺资源而造成的一种互相等待的现象，若无外力作用，它们都将无法推进下去。</p>
-</blockquote>
-<h4 id="死锁的四个必要条件"><a href="#死锁的四个必要条件" class="headerlink" title="死锁的四个必要条件"></a>死锁的四个必要条件</h4><ul>
-<li>互斥条件：一个资源每次只能被一个线程使用</li>
-<li>请求和保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放</li>
-<li>不可剥夺条件：线程已获得的资源，在末使用完之前，不能强行剥夺</li>
-<li>环路等待条件：若干线程之间形成一种头尾相接的循环等待资源关系</li>
-</ul>
-<h3 id="为什么阿里开发手册说线程池不允许使用Executors去创建"><a href="#为什么阿里开发手册说线程池不允许使用Executors去创建" class="headerlink" title="为什么阿里开发手册说线程池不允许使用Executors去创建"></a>为什么阿里开发手册说线程池不允许使用Executors去创建</h3><ul>
-<li>FixedThreadPool和SingleThreadPool：允许的请求队列长度为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。 </li>
-<li>CachedThreadPool:允许的创建线程数量为Integer.MAX_VALUE,可能会创建大量的线程，从而导致OOM。 </li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">ThreadPoolExecutor线程池详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-04 14:14:00" itemprop="dateCreated datePublished" datetime="2020-06-04T14:14:00+08:00">2020-06-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-05 10:49:52" itemprop="dateModified" datetime="2020-06-05T10:49:52+08:00">2020-06-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="ThreadPoolExecutor线程池简介"><a href="#ThreadPoolExecutor线程池简介" class="headerlink" title="ThreadPoolExecutor线程池简介"></a>ThreadPoolExecutor线程池简介</h3><blockquote>
-<p>在阿里的开发手册里，注明了不能在项目中显示创建线程，而是要通过线程池来管理提供。这样做是因为可以减少线程创建和销毁的内存开销，合理控制项目中的线程数。</p>
-</blockquote>
-<p><img src="/images/ThreadPoolExecutor.png" alt="123"></p>
-<h3 id="ThreadPoolExecutor源码初探"><a href="#ThreadPoolExecutor源码初探" class="headerlink" title="ThreadPoolExecutor源码初探"></a>ThreadPoolExecutor源码初探</h3><h4 id="线程池状态成员字段"><a href="#线程池状态成员字段" class="headerlink" title="线程池状态成员字段"></a>线程池状态成员字段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 高3位表示线程池状态，低29位表示线程池个数（默认是RUNNING状态线程个数为0）</span><br><span class="line">private final AtomicInteger ctl &#x3D; new AtomicInteger(ctlOf(RUNNING, 0));</span><br><span class="line">   &#x2F;&#x2F; 线程个数掩码位数</span><br><span class="line">   private static final int COUNT_BITS &#x3D; Integer.SIZE - 3;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 线程最大个数29个二进制1</span><br><span class="line">   private static final int CAPACITY   &#x3D; (1 &lt;&lt; COUNT_BITS) - 1;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F; ***线程池状态***：</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 运行状态（高三位）111</span><br><span class="line">   private static final int RUNNING    &#x3D; -1 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 暂停状态（高三位）000</span><br><span class="line">   private static final int SHUTDOWN   &#x3D;  0 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 停止状态（高三位）001</span><br><span class="line">   private static final int STOP       &#x3D;  1 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 完成状态（高三位）010</span><br><span class="line">   private static final int TIDYING    &#x3D;  2 &lt;&lt; COUNT_BITS;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 终止状态（高三位）011</span><br><span class="line">   private static final int TERMINATED &#x3D;  3 &lt;&lt; COUNT_BITS;</span><br><span class="line"></span><br><span class="line">   &#x2F;&#x2F; 获得高三位（运行状态）</span><br><span class="line">   private static int runStateOf(int c)     &#123; return c &amp; ~CAPACITY; &#125;</span><br><span class="line">   </span><br><span class="line">   &#x2F;&#x2F; 获得低29位（线程个数）</span><br><span class="line">   private static int workerCountOf(int c)  &#123; return c &amp; CAPACITY; &#125;</span><br><span class="line">   </span><br><span class="line">   计算新值</span><br><span class="line">   private static int ctlOf(int rs, int wc) &#123; return rs | wc; &#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="线程池状态"><a href="#线程池状态" class="headerlink" title="线程池状态"></a>线程池状态</h5><ul>
-<li>RUNNING : 接受新的任务并且处理堵塞队列的任务</li>
-<li>SHUTDOWN : 不接受新的任务但是处理堵塞队列的任务</li>
-<li>STOP ： 不接受新的任务而且抛弃堵塞队列的任务，中断正在运行的任务</li>
-<li>TIDYING ：所有任务都执行完毕，活动线程个数为0，且准备调用terminated方法</li>
-<li>TERMINATED ： 终止状态，调用完terminated后的状态</li>
-</ul>
-<h4 id="线程池构造方法"><a href="#线程池构造方法" class="headerlink" title="线程池构造方法"></a>线程池构造方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          Executors.defaultThreadFactory(), defaultHandler);</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line">  public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           ThreadFactory threadFactory) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          threadFactory, defaultHandler);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           RejectedExecutionHandler handler) &#123;</span><br><span class="line">     this(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue,</span><br><span class="line">          Executors.defaultThreadFactory(), handler);</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">     public ThreadPoolExecutor(int corePoolSize,</span><br><span class="line">                           int maximumPoolSize,</span><br><span class="line">                           long keepAliveTime,</span><br><span class="line">                           TimeUnit unit,</span><br><span class="line">                           BlockingQueue&lt;Runnable&gt; workQueue,</span><br><span class="line">                           ThreadFactory threadFactory,</span><br><span class="line">                           RejectedExecutionHandler handler) &#123;</span><br><span class="line">     if (corePoolSize &lt; 0 ||</span><br><span class="line">         maximumPoolSize &lt;&#x3D; 0 ||</span><br><span class="line">         maximumPoolSize &lt; corePoolSize ||</span><br><span class="line">         keepAliveTime &lt; 0)</span><br><span class="line">         throw new IllegalArgumentException();</span><br><span class="line">     if (workQueue &#x3D;&#x3D; null || threadFactory &#x3D;&#x3D; null || handler &#x3D;&#x3D; null)</span><br><span class="line">         throw new NullPointerException();</span><br><span class="line">     this.acc &#x3D; System.getSecurityManager() &#x3D;&#x3D; null ?</span><br><span class="line">             null :</span><br><span class="line">             AccessController.getContext();</span><br><span class="line">     this.corePoolSize &#x3D; corePoolSize;</span><br><span class="line">     this.maximumPoolSize &#x3D; maximumPoolSize;</span><br><span class="line">     this.workQueue &#x3D; workQueue;</span><br><span class="line">     this.keepAliveTime &#x3D; unit.toNanos(keepAliveTime);</span><br><span class="line">     this.threadFactory &#x3D; threadFactory;</span><br><span class="line">     this.handler &#x3D; handler;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>从上面线程池的四个构造方法可以看出其实最后一个7参数才是真正的构造方法。</p>
-</blockquote>
-<h5 id="线程池构造参数"><a href="#线程池构造参数" class="headerlink" title="线程池构造参数"></a>线程池构造参数</h5><ul>
-<li>corePoolSize ： 线程池核心线程数</li>
-<li>maxinumPoolSize ： 线程池最大线程数，如果大于等于就会执行拒绝策略</li>
-<li>keepAliveTime ： 空闲线程存活时间，如果当前线程大于核心线程数且是空闲状态的最长休眠时间。</li>
-<li>unit ： 时间单位</li>
-<li>workQueue ：堵塞队列</li>
-<li>threadFactory ： 线程工厂</li>
-<li>handler ： 拒绝策略，当线程已满且到达maxinumPoolSize个数，采取的拒绝策略</li>
-</ul>
-<h4 id="execute-Runnable-command-方法"><a href="#execute-Runnable-command-方法" class="headerlink" title="execute(Runnable command)方法"></a>execute(Runnable command)方法</h4><blockquote>
-<p>execute方法负责将任务command提交到线程池中运行，ThreadPoolExecutor线程池其实是生产消费模型，当用户提交任务到队列中，相当于生产。当workers线程执行队列里的任务，相当于消费。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public void execute(Runnable command) &#123;</span><br><span class="line"></span><br><span class="line">    if (command &#x3D;&#x3D; null)</span><br><span class="line">        throw new NullPointerException();</span><br><span class="line">    &#x2F;&#x2F;获得当前线程池的状态和线程的个数组合值</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    &#x2F;&#x2F;如果当前工作线程数小于核心线程数则创建线程</span><br><span class="line">    if (workerCountOf(c) &lt; corePoolSize) &#123;</span><br><span class="line">        if (addWorker(command, true))</span><br><span class="line">            return;</span><br><span class="line">        c &#x3D; ctl.get();</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;如果线程池是运行状态，则入队</span><br><span class="line">    if (isRunning(c) &amp;&amp; workQueue.offer(command)) &#123;</span><br><span class="line">        int recheck &#x3D; ctl.get();</span><br><span class="line">        &#x2F;&#x2F;二次检测，如果不是运行状态了就移除该线程，并执行拒绝策略</span><br><span class="line">        if (! isRunning(recheck) &amp;&amp; remove(command))</span><br><span class="line">            reject(command);</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池为空，则添加一个线程</span><br><span class="line">        else if (workerCountOf(recheck) &#x3D;&#x3D; 0)</span><br><span class="line">            addWorker(null, false);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 如果队列满，则新增线程，新增线程则执行拒绝策略</span><br><span class="line">    else if (!addWorker(command, false))</span><br><span class="line">        reject(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="addWorker-Runnable-firstTask-boolean-core-方法"><a href="#addWorker-Runnable-firstTask-boolean-core-方法" class="headerlink" title="addWorker(Runnable firstTask, boolean core)方法"></a>addWorker(Runnable firstTask, boolean core)方法</h4><blockquote>
-<p>addWorker()尝试把新增任务添加到任务队列中，这里代码比较长，但是其实主要分为两部分。</p>
-</blockquote>
-<ol>
-<li>双重循环通过CAS操作自增线程数。</li>
-<li>加锁把新增任务加入到workers里。<br>下面我们分段来看这段代码</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">retry:</span><br><span class="line">for (;;) &#123;</span><br><span class="line">    int c &#x3D; ctl.get();</span><br><span class="line">    int rs &#x3D; runStateOf(c);</span><br><span class="line">			</span><br><span class="line">    &#x2F;&#x2F;这里比较绕下面会分析</span><br><span class="line">    if (rs &gt;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">        ! (rs &#x3D;&#x3D; SHUTDOWN &amp;&amp;</span><br><span class="line">           firstTask &#x3D;&#x3D; null &amp;&amp;</span><br><span class="line">           ! workQueue.isEmpty()))</span><br><span class="line">        return false;</span><br><span class="line">				 </span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int wc &#x3D; workerCountOf(c);</span><br><span class="line">        &#x2F;&#x2F;如果当前运行线程超过了限制就会返回false</span><br><span class="line">        if (wc &gt;&#x3D; CAPACITY ||</span><br><span class="line">            wc &gt;&#x3D; (core ? corePoolSize : maximumPoolSize))</span><br><span class="line">            return false;</span><br><span class="line">        &#x2F;&#x2F;同一时间只会有一个线程操作成功</span><br><span class="line">        if (compareAndIncrementWorkerCount(c))</span><br><span class="line">            break retry;</span><br><span class="line">        c &#x3D; ctl.get();  &#x2F;&#x2F; Re-read ctl</span><br><span class="line">        &#x2F;&#x2F;如果当前线程池状态被改变则回到上层循环重新获得线程池状态</span><br><span class="line">        if (runStateOf(c) !&#x3D; rs)</span><br><span class="line">            continue retry;</span><br><span class="line">        &#x2F;&#x2F; else CAS failed due to workerCount change; retry inner loop</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>判断那里在三种情况下会返回false</p>
-</blockquote>
-<ol>
-<li>当前线程池状态为STOP,TIDYING,TERMINATED</li>
-<li>当前线程池状态为SHUTDOWN而且有第一个任务</li>
-<li>当前线程池状态为SHUTDOWN而且任务队列为空</li>
-</ol>
-<h3 id="任务队列和拒绝策略"><a href="#任务队列和拒绝策略" class="headerlink" title="任务队列和拒绝策略"></a>任务队列和拒绝策略</h3><h4 id="workQueue任务队列"><a href="#workQueue任务队列" class="headerlink" title="workQueue任务队列"></a>workQueue任务队列</h4><blockquote>
-<p>任务队列一般分为4种，直接提交队列，有界队列，无界队列，优先队列。</p>
-</blockquote>
-<h4 id="SynchronousQueue-直接提交队列"><a href="#SynchronousQueue-直接提交队列" class="headerlink" title="SynchronousQueue(直接提交队列)"></a>SynchronousQueue(直接提交队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class TestThreadPoolExecutor &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">        for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">            threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class HelloTask implements Runnable&#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName()+&quot; Hello World! &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果为:</p>
-<blockquote>
-<p>pool-1-thread-1 Hello World!<br>pool-1-thread-2 Hello World!<br>Exception in thread “main” java.util.concurrent.RejectedExecutionException: Task Thread[线程2,5,main] rejected from java.util.concurrent.ThreadPoolExecutor@14ae5a5[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]<br>    at java.util.concurrent.ThreadPoolExecutor$AbortPolicy.rejectedExecution(ThreadPoolExecutor.java:2063)<br>    at java.util.concurrent.ThreadPoolExecutor.reject(ThreadPoolExecutor.java:830)<br>    at java.util.concurrent.ThreadPoolExecutor.execute(ThreadPoolExecutor.java:1379)<br>    at com.czj.example01.TestThreadPoolExceutor.main(TestThreadPoolExceutor.java:12)</p>
-</blockquote>
-<blockquote>
-<p>可以看到当队列为SynchronousQueue时，当创建的线程数超过了maxinumPoolSize时就会直接执行拒绝策略。<br>使用SynchronousQueue队列，提交的任务不会被保存，总是会马上提交执行。如果用于执行任务的线程数量小于maximumPoolSize，则尝试创建新的进程，如果达到maximumPoolSize设置的最大值，则根据你设置的handler执行拒绝策略。因此这种方式你提交的任务不会被缓存起来，而是会被马上执行，在这种情况下，你需要对你程序的并发量有个准确的评估，才能设置合适的maximumPoolSize数量，否则很容易就会执行拒绝策略；</p>
-</blockquote>
-<h4 id="ArrayBlockingQueue-有界任务队列"><a href="#ArrayBlockingQueue-有界任务队列" class="headerlink" title="ArrayBlockingQueue(有界任务队列)"></a>ArrayBlockingQueue(有界任务队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new ArrayBlockingQueue&lt;Runnable&gt;(16));</span><br><span class="line">    for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">        threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用ArrayBlockingQueue有界任务队列，若有新的任务需要执行时，线程池会创建新的线程，直到创建的线程数量达到corePoolSize时，则会将新的任务加入到等待队列中。若等待队列已满，即超过ArrayBlockingQueue初始化的容量，则继续创建线程，直到线程数量达到maximumPoolSize设置的最大线程数量，若大于maximumPoolSize，则执行拒绝策略。在这种情况下，线程数量的上限与有界任务队列的状态有直接关系，如果有界队列初始容量较大或者没有达到超负荷的状态，线程数将一直维持在corePoolSize以下，反之当任务队列已满时，则会以maximumPoolSize为最大线程数上限。</p>
-</blockquote>
-<h4 id="LinkedBlockingQueue-无界任务队列"><a href="#LinkedBlockingQueue-无界任务队列" class="headerlink" title="LinkedBlockingQueue(无界任务队列)"></a>LinkedBlockingQueue(无界任务队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,2,100, TimeUnit.SECONDS,new LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">    for (int i&#x3D;0;i&lt;5;i++)&#123;</span><br><span class="line">        threadPoolExecutor.execute(new Thread(new HelloTask(),&quot;线程&quot;+i));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>使用无界任务队列，线程池的任务队列可以无限制的添加新的任务，而线程池创建的最大线程数量就是你corePoolSize设置的数量，也就是说在这种情况下maximumPoolSize这个参数是无效的，哪怕你的任务队列中缓存了很多未执行的任务，当线程池的线程数达到corePoolSize后，就不会再增加了；若后续有新的任务加入，则直接进入队列等待，当使用这种任务队列模式时，一定要注意你任务提交与处理之间的协调与控制，不然会出现队列中的任务由于无法及时处理导致一直增长，直到最后资源耗尽的问题。</p>
-</blockquote>
-<h4 id="PriorityBlockingQueue-优先队列"><a href="#PriorityBlockingQueue-优先队列" class="headerlink" title="PriorityBlockingQueue(优先队列)"></a>PriorityBlockingQueue(优先队列)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public class TestThreadPoolExecutor &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadPoolExecutor threadPoolExecutor &#x3D; new ThreadPoolExecutor(1,10,100, TimeUnit.SECONDS,new PriorityBlockingQueue&lt;&gt;());</span><br><span class="line">        for (int i&#x3D;0;i&lt;10;i++)&#123;</span><br><span class="line">            threadPoolExecutor.execute(new HelloTask(&quot;线程&quot;+i,i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    public static class HelloTask implements Runnable,Comparable&lt;HelloTask&gt;&#123;</span><br><span class="line"></span><br><span class="line">        private int priority;</span><br><span class="line"></span><br><span class="line">        private String name;</span><br><span class="line">        public HelloTask(String name,int priority) &#123;</span><br><span class="line">            this.name &#x3D; name;</span><br><span class="line">            this.priority &#x3D; priority;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(name+&quot; Start Hello World! &quot;);</span><br><span class="line">            try &#123;</span><br><span class="line">                Thread.sleep(1000);</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(name+&quot; End Goodbye &quot;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compareTo(HelloTask o) &#123;</span><br><span class="line">            if (this&#x3D;&#x3D;o)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            int num &#x3D; this.priority-o.priority;</span><br><span class="line">            if (num&#x3D;&#x3D;0)&#123;</span><br><span class="line">                return 0;</span><br><span class="line">            &#125;</span><br><span class="line">            &#x2F;&#x2F;PriorityBlockingQueue底层实现是最小堆，所以比较越小越优先。</span><br><span class="line">            return num&gt;0?-1:1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果</p>
-<blockquote>
-<p>线程0 Start Hello World!<br>线程0 End Goodbye<br>线程9 Start Hello World!<br>线程9 End Goodbye<br>线程8 Start Hello World!<br>线程8 End Goodbye<br>线程7 Start Hello World!<br>线程7 End Goodbye<br>线程6 Start Hello World!<br>线程6 End Goodbye<br>线程5 Start Hello World!<br>线程5 End Goodbye<br>线程4 Start Hello World!<br>线程4 End Goodbye<br>线程3 Start Hello World!<br>线程3 End Goodbye<br>线程2 Start Hello World!<br>线程2 End Goodbye<br>线程1 Start Hello World!<br>线程1 End Goodbye </p>
-</blockquote>
-<blockquote>
-<p>大家可以看到除了第一个任务直接创建线程执行外，其他的任务都被放入了优先任务队列，按优先级进行了重新排列执行，且线程池的线程数一直为corePoolSize，也就是只有一个。<br>通过运行的代码我们可以看出PriorityBlockingQueue它其实是一个特殊的无界队列，它其中无论添加了多少个任务，线程池创建的线程数也不会超过corePoolSize的数量，只不过其他队列一般是按照先进先出的规则处理任务，而PriorityBlockingQueue队列可以自定义规则根据任务的优先级顺序先后执行。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">Unix的五种I/O模型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-02 10:21:25" itemprop="dateCreated datePublished" datetime="2020-06-02T10:21:25+08:00">2020-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-04 11:02:25" itemprop="dateModified" datetime="2020-06-04T11:02:25+08:00">2020-06-04</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="堵塞形I-O模型"><a href="#堵塞形I-O模型" class="headerlink" title="堵塞形I/O模型"></a>堵塞形I/O模型</h3><p><img src="/images/pasted-50.png" alt></p>
-<blockquote>
-<p>上图为堵塞形I/O模型，进程调用recvfrom命令，进程一直等待直到数据报被复制到进程的缓冲区或者发生错误才返回。进程从调用recvfrom开始到它返回的整段时间内是被阻塞的。</p>
-</blockquote>
-<h3 id="非堵塞形I-O模型"><a href="#非堵塞形I-O模型" class="headerlink" title="非堵塞形I/O模型"></a>非堵塞形I/O模型</h3><p><img src="/images/pasted-51.png" alt></p>
-<h3 id="多路复用I-O模型"><a href="#多路复用I-O模型" class="headerlink" title="多路复用I/O模型"></a>多路复用I/O模型</h3><p><img src="/images/pasted-52.png" alt></p>
-<h3 id="信号驱动I-O模型"><a href="#信号驱动I-O模型" class="headerlink" title="信号驱动I/O模型"></a>信号驱动I/O模型</h3><p><img src="/images/pasted-53.png" alt></p>
-<h3 id="异步I-O模型"><a href="#异步I-O模型" class="headerlink" title="异步I/O模型"></a>异步I/O模型</h3><p><img src="/images/pasted-54.png" alt></p>
-<h3 id="五种模型异同"><a href="#五种模型异同" class="headerlink" title="五种模型异同"></a>五种模型异同</h3><blockquote>
-<p>上面五种I/O模型中，前四种都是同步I/O模型，因为他们在真的的I/O操作时，都堵塞了进程，在将数据从内核空间复制到用户空间时都是堵塞状态。</p>
-</blockquote>
-<blockquote>
-<p>一般I/O操作可以分为两步，第一步：发起IO请求，第二步：实际IO操作<br>堵塞IO和非堵塞IO的区别就在于第一步发起请求是否堵塞，如果堵塞直到完成就是传统的堵塞IO模型，否则就是非堵塞IO模型<br>同步IO和异步IO的区别就在于第二步实际IO操作是否堵塞，如果实际的IO读写阻塞请求进程，那么就是同步IO，因此阻塞IO、非阻塞IO、IO复用、信号驱动IO都是同步IO，如果不阻塞，而是操作系统做完IO两个阶段的操作再将结果返回，那么就是异步IO。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/29/java%E6%9E%9A%E4%B8%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/29/java%E6%9E%9A%E4%B8%BE/" class="post-title-link" itemprop="url">java枚举</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-05-29 18:23:00" itemprop="dateCreated datePublished" datetime="2020-05-29T18:23:00+08:00">2020-05-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-07 15:13:25" itemprop="dateModified" datetime="2020-06-07T15:13:25+08:00">2020-06-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="枚举简介"><a href="#枚举简介" class="headerlink" title="枚举简介"></a>枚举简介</h3><blockquote>
-<p>枚举是java1.5引入的一个新特性，它继承于java.lang.Enum类。我们使用枚举来替换常量。例如下面是一个B站视频状态的枚举类，以这种方式定义的常量使代码更具可读性，允许进行编译时检查，预先记录可接受值的列表，并避免由于传入无效值而引起的意外行为。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">package com.example.item.constant;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;5&#x2F;30 21:18</span><br><span class="line"> *&#x2F;</span><br><span class="line">public enum VideoPublishStatus &#123;</span><br><span class="line">    DRAFT,AUDIT,PUBLISH</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>在这里我定义了三个视频状态，分别是草稿（draft），审核（audit），发布（publish）。如果我们不用枚举会怎么样呢？下面是一个处理视频发布的方法，它不使用枚举做为方法参数。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public void handlerVideoStatus(int status)&#123;</span><br><span class="line">    &#x2F;&#x2F;假装是代码</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这个方法如方法名一样就是处理一下视频的状态，这里参数的理想状态是VideoPublishStatus的任意一种，但是由于没有<strong><em>类型参数限制</em></strong>，这里传啥都行。<br>如果使用枚举来传参就会有更明显的意图和安全性了。</p>
-</blockquote>
-<h3 id="枚举基本用法"><a href="#枚举基本用法" class="headerlink" title="枚举基本用法"></a>枚举基本用法</h3><h4 id="values-返回所有枚举常量的数组集合"><a href="#values-返回所有枚举常量的数组集合" class="headerlink" title="values()返回所有枚举常量的数组集合"></a>values()返回所有枚举常量的数组集合</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (VideoPublishStatus status:VideoPublishStatus.values())&#123;</span><br><span class="line">    System.out.println(status);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*   输出</span><br><span class="line">    DRAFT</span><br><span class="line">    AUDIT</span><br><span class="line">    PUBLISH</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h4 id="ordinal-返回枚举常量定义序数从0开始"><a href="#ordinal-返回枚举常量定义序数从0开始" class="headerlink" title="ordinal()返回枚举常量定义序数从0开始"></a>ordinal()返回枚举常量定义序数从0开始</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">for (VideoPublishStatus status:VideoPublishStatus.values())&#123;</span><br><span class="line">    System.out.println(status.ordinal());</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;*   输出</span><br><span class="line">    0</span><br><span class="line">    1</span><br><span class="line">    2</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
-
-<h4 id="valueOf-返回指定名称的枚举常量"><a href="#valueOf-返回指定名称的枚举常量" class="headerlink" title="valueOf()返回指定名称的枚举常量"></a>valueOf()返回指定名称的枚举常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VideoPublishStatus.valueOf(&quot;DRAFT&quot;);</span><br><span class="line">VideoPublishStatus.valueOf(&quot;AUDIT&quot;);</span><br><span class="line">VideoPublishStatus.valueOf(&quot;PUBLISH&quot;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="枚举常用使用场景"><a href="#枚举常用使用场景" class="headerlink" title="枚举常用使用场景"></a>枚举常用使用场景</h3><h4 id="常量定义"><a href="#常量定义" class="headerlink" title="常量定义"></a>常量定义</h4><h4 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h4><h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><h3 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h3>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1257,7 +1306,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">54</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1267,7 +1316,7 @@
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -1294,7 +1343,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
