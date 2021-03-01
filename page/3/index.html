@@ -1,1398 +1,1538 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<html lang="zh-Hans">
+  <head hexo-theme='https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+      
+        <meta name="robots" content="noindex,follow">
+      
+    
+  
+  <!-- 渲染优化 -->
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <link rel="preload" href="/css/first.css" as="style">
+  
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="陈梓佳的学习笔记~">
-<meta property="og:type" content="website">
-<meta property="og:title" content="汤姆猫的博客">
-<meta property="og:url" content="http://yoursite.com/page/3/index.html">
-<meta property="og:site_name" content="汤姆猫的博客">
-<meta property="og:description" content="陈梓佳的学习笔记~">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="陈梓佳">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://yoursite.com/page/3/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'en'
-  };
-</script>
-
+  <!-- 页面元数据 -->
+  
   <title>汤姆猫的博客</title>
   
 
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  
+
+  <!-- import link -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/first.css">
+
+  
+
+  
+  <link rel="stylesheet" href="/css/style.css" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css"></noscript>
+  
+
+  <script id="loadcss"></script>
+
+  
+<script>
+if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
+    document.write(
+	'<style>'+
+		'html{'+
+			'overflow-x: hidden !important;'+
+			'overflow-y: hidden !important;'+
+		'}'+
+		'.kill-ie{'+
+			'text-align:center;'+
+			'height: 100%;'+
+			'margin-top: 15%;'+
+			'margin-bottom: 5500%;'+
+		'}'+
+	'</style>'+
+    '<div class="kill-ie">'+
+        '<h1><b>抱歉，您的浏览器无法访问本站</b></h1>'+
+        '<h3>微软已经于2016年终止了对 Internet Explorer (IE) 10 及更早版本的支持，<br/>'+
+        '继续使用存在极大的安全隐患，请使用当代主流的浏览器进行访问。</h3><br/>'+
+        '<a href="https://www.microsoft.com/zh-cn/WindowsForBusiness/End-of-IE-support" target="_blank" rel="noopener"><strong>了解详情 ></strong></a>'+
+    '</div>');
+</script>
 
 
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
+<noscript>
+	<style>
+		html{
+			overflow-x: hidden !important;
+			overflow-y: hidden !important;
+		}
+		.kill-noscript{
+			text-align:center;
+			height: 100%;
+			margin-top: 15%;
+			margin-bottom: 5500%;
+		}
+	</style>
+    <div class="kill-noscript">
+        <h1><b>抱歉，您的浏览器无法访问本站</b></h1>
+        <h3>本页面需要浏览器支持（启用）JavaScript</h3><br/>
+        <a href="https://www.baidu.com/s?wd=启用JavaScript" target="_blank" rel="noopener"><strong>了解详情 ></strong></a>
+    </div>
 </noscript>
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-	<a href="https://github.com/chenzijia12300" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">汤姆猫的博客</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-主页">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>主页</a>
-
-  </li>
-        <li class="menu-item menu-item-分类">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-档案">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>档案</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
+  <body>
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
+<header id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
+  <div class='container'>
+  <div id='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h m-phone' id="pjax-header-nav-list">
+        <li><a id="s-comment" class="fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a id="s-toc" class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
           
+            <img no-lazy class='logo' src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+          
+          
+          
+        </a>
+      
 
-          <div class="content index posts-expand">
+			<div class='menu navigation'>
+				<ul class='nav-list-h m-pc'>
+          
+          
+          
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
           
-            <a href="/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">java BigDecimal详解</a>
-        </h2>
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h m-phone'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
               
-
-              <time title="Created: 2020-06-23 14:42:54 / Modified: 15:22:42" itemprop="dateCreated datePublished" datetime="2020-06-23T14:42:54+08:00">2020-06-23</time>
-            </span>
-
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。</p>
-<p><img src="/images/pasted-62.png" alt="upload successful"></p>
-<h3 id="BigDecimal构造方法"><a href="#BigDecimal构造方法" class="headerlink" title="BigDecimal构造方法"></a>BigDecimal构造方法</h3><ol>
-<li>BigDecimal(int) </li>
-<li><del>BigDecimal(double)</del></li>
-<li>BigDecimal(long) </li>
-<li><strong><em>BigDecimal(String)</em></strong></li>
-</ol>
-<p>BigDecimal共有四种构造方法，但是其中构造参数为double类型的构造方法不推荐使用，为啥呢？看下面。</p>
-<p><img src="/images/pasted-63.png" alt="upload successful"></p>
-<p>使用double类型的构造方法具有不确定性，使用string类型的构造方法就具有确定性，传的啥，创建啥。</p>
-<h3 id="BigDecimal的四则运算"><a href="#BigDecimal的四则运算" class="headerlink" title="BigDecimal的四则运算"></a>BigDecimal的四则运算</h3><ol>
-<li>public BigDecimal add(BigDecimal value)//加法</li>
-<li>public BigDecimal subtract(BigDecimal value)//减法</li>
-<li>public BigDecimal multiply(BigDecimal value)//乘法</li>
-<li>public BigDecimal divide(BigDecimal value)//除法</li>
-</ol>
-<p><img src="/images/pasted-64.png" alt="upload successful"></p>
-<p><strong><em>加减乘除其实最终都返回的是一个新的BigDecimal对象，因为BigInteger与BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象</em></strong></p>
-<p>当divide除不尽的时候会抛出java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result异常。</p>
-<p><img src="/images/pasted-65.png" alt="upload successful"></p>
-<p>因此divide可以传三个参数</p>
-<ul>
-<li>public BigDecimal divide(BigDecimal divisor, int scale, int roundingMode) </li>
-</ul>
-<ul>
-<li>ROUND_UP ：向远离零的方向舍入。舍弃非零部分，并将非零舍弃部分相邻的一位数字加一。</li>
-<li>ROUND_DOWN ：向接近零的方向舍入。舍弃非零部分，同时不会非零舍弃部分相邻的一位数字加一，采取截取行为。</li>
-<li>ROUND_CEILING ：向正无穷的方向舍入。如果为正数，舍入结果同ROUND_UP一致；如果为负数，舍入结果同ROUND_DOWN一致。注意：此模式不会减少数值大小。</li>
-<li>ROUND_FLOOR ：向负无穷的方向舍入。如果为正数，舍入结果同ROUND_DOWN一致；如果为负数，舍入结果同ROUND_UP一致。注意：此模式不会增加数值大小。</li>
-<li>ROUND_HALF_UP ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向上舍入的舍入模式。如果舍弃部分&gt;= 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“四舍五入”。</li>
-<li>ROUND_HALF_DOWN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则为向下舍入的舍入模式。如果舍弃部分&gt; 0.5，则舍入行为与ROUND_UP相同；否则舍入行为与ROUND_DOWN相同。这种模式也就是我们常说的我们的“五舍六入”。</li>
-<li>ROUND_HALF_EVEN ：向“最接近”的数字舍入，如果与两个相邻数字的距离相等，则相邻的偶数舍入。如果舍弃部分左边的数字奇数，则舍入行为与 ROUND_HALF_UP 相同；如果为偶数，则舍入行为与 ROUND_HALF_DOWN 相同。注意：在重复进行一系列计算时，此舍入模式可以将累加错误减到最小。此舍入模式也称为“银行家舍入法”，主要在美国使用。四舍六入，五分两种情况，如果前一位为奇数，则入位，否则舍去。</li>
-<li>ROUND_UNNECESSARY ：断言请求的操作具有精确的结果，因此不需要舍入。如果对获得精确结果的操作指定此舍入模式，则抛出ArithmeticException。</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
-<li>商业计算使用BigDecimal。</li>
-<li>尽量使用参数类型为String的构造函数。</li>
-<li>BigDecimal都是不可变的（immutable）的，在进行每一步运算时，都会产生一个新的对象，所以在做加减乘除运算时千万要保存操作后的值。</li>
-</ol>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a href="https://www.cnblogs.com/Jason-Xiang/p/10220231.html" target="_blank" rel="noopener">Java BigDecimal详解</a></p>
-<p><a href="https://blog.csdn.net/qq_35868412/article/details/89029288" target="_blank" rel="noopener">java 中 BigDecimal 详解</a></p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">活动启动模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+            
               
-
-              <time title="Created: 2020-06-16 21:15:00 / Modified: 21:21:23" itemprop="dateCreated datePublished" datetime="2020-06-16T21:15:00+08:00">2020-06-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">android基础</span></a>
-                </span>
-            </span>
-
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="活动的启动模式"><a href="#活动的启动模式" class="headerlink" title="活动的启动模式"></a>活动的启动模式</h3><h4 id="standard"><a href="#standard" class="headerlink" title="standard"></a>standard</h4><p>tandard是活动默认的启动模式，在不进行显式指定的情况下，所有活动都会自动使用这种启动模式。在standard模式（即默认情况）下，每当启动一个新的活动，它就会在返回栈中入栈，并处于栈顶的位置。对于使用standard模式的活动，系统不会在乎这个活动是否已经在返回栈中存在，每次启动都会创建该活动的一个新的实例。</p>
-<p><img src="/images/pasted-58.png" alt="upload successful"></p>
-<h4 id="singleTop"><a href="#singleTop" class="headerlink" title="singleTop"></a>singleTop</h4><p>当活动的启动模式指定为singleTop，在启动活动时如果发现返回栈的栈顶已经是该活动，则认为可以直接使用它，不会再创建新的活动实例。不过当启动的活动并未处于栈顶位置时，这时再启动活动，还是会创建新的实例的。</p>
-<p><img src="/images/pasted-59.png" alt="upload successful"></p>
-<h4 id="singleTask"><a href="#singleTask" class="headerlink" title="singleTask"></a>singleTask</h4><p>当活动的启动模式指定为singleTask，每次启动该活动时系统首先会在返回栈中检查是否存在该活动的实例，如果发现已经存在则直接使用该实例，并把在这个活动之上的所有活动统统出栈，如果没有发现就会创建一个新的活动实例。</p>
-<p><img src="/images/pasted-60.png" alt="upload successful"></p>
-<h4 id="singleInstance"><a href="#singleInstance" class="headerlink" title="singleInstance"></a>singleInstance</h4><p>待学，暂时用不到。</p>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="post-title-link" itemprop="url">活动的生命周期</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+            
               
-
-              <time title="Created: 2020-06-16 21:03:00 / Modified: 21:16:13" itemprop="dateCreated datePublished" datetime="2020-06-16T21:03:00+08:00">2020-06-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/android%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">android基础</span></a>
-                </span>
-            </span>
-
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="活动的生命周期"><a href="#活动的生命周期" class="headerlink" title="活动的生命周期"></a>活动的生命周期</h3><h4 id="返回栈"><a href="#返回栈" class="headerlink" title="返回栈"></a>返回栈</h4><blockquote>
-<p>Android是使用任务（Task）来管理活动的，一个任务就是一组存放在栈里的活动的集合，这个栈也被称作返回栈（Back Stack）。栈是一种后进先出的数据结构，在默认情况下，每当我们启动了一个新的活动，它会在返回栈中入栈，并处于栈顶的位置。而每当我们按下Back键或调用finish() 方法去销毁一个活动时，处于栈顶的活动会出栈，这时前一个入栈的活动就会重新处于栈顶的位置。系统总是会显示处于栈顶的活动给用户。</p>
-</blockquote>
-<p><img src="/images/pasted-56.png" alt="upload successful"></p>
-<h4 id="活动状态"><a href="#活动状态" class="headerlink" title="活动状态"></a>活动状态</h4><p>活动在其生命周期最多会有4中状态</p>
-<h5 id="运行状态"><a href="#运行状态" class="headerlink" title="运行状态"></a>运行状态</h5><p>当一个活动位于返回栈的栈顶时，这时活动就处于运行状态。系统最不愿意回收的就是处于运行状态的活动，因为这会带来非常差的用户体验。</p>
-<h5 id="暂停状态"><a href="#暂停状态" class="headerlink" title="暂停状态"></a>暂停状态</h5><p>当一个活动不再处于栈顶位置，但仍然可见时，这时活动就进入了暂停状态。系统也不愿意去回收这种活动（因为它还是可见的，回收可见的东西都会在用户体验方面有不好的影响），只有在内存极低的情况下，系统才会去考虑回收这种活动。</p>
-<h5 id="停止状态"><a href="#停止状态" class="headerlink" title="停止状态"></a>停止状态</h5><p>当一个活动不再处于栈顶位置，并且完全不可见的时候，就进入了停止状态。系统仍然会为这种活动保存相应的状态和成员变量，但是这并不是完全可靠的，当其他地方需要内存时，处于停止状态的活动有可能会被系统回收。</p>
-<h5 id="销毁状态"><a href="#销毁状态" class="headerlink" title="销毁状态"></a>销毁状态</h5><p>当一个活动从返回栈中移除后就变成了销毁状态。系统会最倾向于回收处于这种状态的活动，从而保证手机的内存充足。</p>
-<h4 id="活动7种回调方法"><a href="#活动7种回调方法" class="headerlink" title="活动7种回调方法"></a>活动7种回调方法</h4><ul>
-<li><p>onCreate()它会在活动第一次被创建的时候调用。你应该在这个方法中完成活动的初始化操作，比如说加载布局、绑定事件等。</p>
-</li>
-<li><p>onStart() 。这个方法在活动由不可见变为可见的时候调用。</p>
-</li>
-<li><p>onResume() 。这个方法在活动准备好和用户进行交互的时候调用。此时的活动一定位于返回栈的栈顶，并且处于运行状态。</p>
-</li>
-<li><p>onPause() 。这个方法在系统准备去启动或者恢复另一个活动的时候调用。我们通常会在这个方法中将一些消耗CPU的资源释放掉，以及保存一些关键数据，但这个方法的执行速度一定要快，不然会影响到新的栈顶活动的使用。</p>
-</li>
-<li><p>onStop() 。这个方法在活动完全不可见的时候调用。它和onPause() 方法的主要区别在于，如果启动的新活动是一个对话框式的活动，那么onPause() 方法会得到执行，而onStop() 方法并不会执行。</p>
-</li>
-<li><p>onDestroy() 。这个方法在活动被销毁之前调用，之后活动的状态将变为销毁状态。</p>
-</li>
-<li><p>onRestart() 。这个方法在活动由停止状态变为运行状态之前调用，也就是活动被重新启动了。</p>
-</li>
-</ul>
-<p><img src="/images/pasted-57.png" alt="upload successful"></p>
-<h4 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h4><blockquote>
-<p>Activity中还提供了一个onSaveInstanceState() 回调方法，这个方法可以保证在活动被回收之前一定会被调用，因此我们可以通过这个方法来解决活动被回收时临时数据得不到保存的问题。</p>
-</blockquote>
-<p>onSaveInstanceState() 方法会携带一个Bundle 类型的参数，Bundle 提供了一系列的方法用于保存数据，比如可以使用putString() 方法保存字符串，使用putInt() 方法保存整型数据，以此类推。每个保存方法需要传入两个参数，第一个参数是键，用于后面从Bundle 中取值，第二个参数是真正要保存的内容。</p>
-<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><ul>
-<li>全来自《第一行代码——Android（第2版）》</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">java类的加载机制(学习笔记)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-16 18:16:00" itemprop="dateCreated datePublished" datetime="2020-06-16T18:16:00+08:00">2020-06-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-26 15:12:49" itemprop="dateModified" datetime="2021-02-26T15:12:49+08:00">2021-02-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JVM/" itemprop="url" rel="index"><span itemprop="name">JVM</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="啥是类加载"><a href="#啥是类加载" class="headerlink" title="啥是类加载"></a>啥是类加载</h3><blockquote>
-<p>类加载是指将class文件读入内存中，并对数据进行校验、转换解析、初始化，最后再<strong><em>堆区</em></strong>创建一个java.lang.Class对象，用来封装类在方法区的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。</p>
-</blockquote>
-<blockquote>
-<p>在Java语言里面，类型的加载、连接和初始化过程都是在程序运行期间完成的。</p>
-</blockquote>
-<p><strong><em>加载.class文件的方式</em></strong></p>
-<ul>
-<li>从本地系统中直接加载</li>
-<li>通过网络下载.class文件</li>
-<li>从zip，jar等归档文件中加载.class文件</li>
-<li>从专有数据库中提取.class文件</li>
-<li>将Java源文件动态编译为.class文件</li>
-</ul>
-<h3 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h3><p><img src="/images/pasted-61.png" alt="upload successful"></p>
-<p>类的加载过程包括了加载、验证、准备、解析、初始化这五个阶段。在这五个阶段中，加载、验证、准备和初始化这四个阶段发生的顺序是确定的，而解析阶段则不一定，它在某些情况下可以在初始化阶段之后开始，这是为了支持Java语言的运行时绑定（也成为动态绑定或晚期绑定）。另外注意这里的几个阶段是按顺序开始，而不是按顺序进行或完成，因为这些阶段通常都是互相交叉地混合进行的，通常在一个阶段执行的过程中调用或激活另一个阶段。</p>
-<h4 id="加载（Loading）"><a href="#加载（Loading）" class="headerlink" title="加载（Loading）"></a>加载（Loading）</h4><p>加载阶段负责<strong><em>查找和加载类的二进制数据</em></strong>。</p>
-<ol>
-<li>通过类的<strong><em>全限定名</em></strong>来获取其定义的二进制字节流。</li>
-<li>将这个字节流所代表的静态存储结构转化为方法区的运行时数据结构。</li>
-<li>在Java堆中生成一个代表这个类的java.lang.Class对象，作为对方法区中这些数据的访问入口。</li>
-</ol>
-<p><strong><em>小知识：加载阶段是可控性最强的阶段，我们可以自定义类加载器（ClassLoader）来完成类的加载。</em></strong></p>
-<h4 id="验证（Verification）"><a href="#验证（Verification）" class="headerlink" title="验证（Verification）"></a>验证（Verification）</h4><p>验证阶段负责确保<strong><em>Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全</em></strong>。</p>
-<ul>
-<li>文件格式验证：验证字节流是否符合Class文件格式的规范；例如：是否以0xCAFEBABE开头、主次版本号是否在当前虚拟机的处理范围之内、常量池中的常量是否有不被支持的类型。</li>
-<li>元数据验证：对字节码描述的信息进行语义分析（注意：对比javac编译阶段的语义分析），以保证其描述的信息符合Java语言规范的要求；例如：这个类是否有父类，除了java.lang.Object之外。</li>
-<li>字节码验证：通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。</li>
-<li>符号引用验证：确保解析动作能正确执行。</li>
-</ul>
-<p><strong><em>小知识:验证阶段是非常重要的，但不是必须的，它对程序运行期没有影响，如果所引用的类经过反复验证，那么可以考虑采用-Xverifynone参数来关闭大部分的类验证措施，以缩短虚拟机类加载的时间。</em></strong></p>
-<h4 id="准备-Preparation"><a href="#准备-Preparation" class="headerlink" title="准备(Preparation)"></a>准备(Preparation)</h4><p>准备阶段负责为<strong><em>类的静态变量分配内存（方法区），并将其初始化为默认值</em></strong>。<br>注意事项：</p>
-<ol>
-<li>这时候进行内存分配的仅包括类变量（static），而不包括实例变量，实例变量会在对象实例化时随着对象一块分配在Java堆中。</li>
-<li>这里所设置的初始值通常情况下是数据类型默认的零值（如0、0L、null、false等），而不是被在Java代码中被显式地赋予的值。</li>
-<li>如果类字段的字段属性表中存在ConstantValue属性，即同时被final和static修饰，那么在准备阶段变量value就会被初始化为ConstValue属性所指定的值。</li>
-</ol>
-<p><strong><em>小知识：将static变量赋值为Java代码中被显式地赋予的值是在初始化阶段才会开始</em></strong></p>
-<h4 id="解析（Resolution）"><a href="#解析（Resolution）" class="headerlink" title="解析（Resolution）"></a>解析（Resolution）</h4><p>解析阶段负责将<strong><em>类中的符号引用转换为直接引用</em></strong>，解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。</p>
-<ul>
-<li><strong><em>符号引用</em></strong>就是一组符号来描述目标，可以是任何字面量。</li>
-<li><strong><em>直接引用</em></strong>就是直接指向目标的指针、相对偏移量或一个间接定位到目标的句柄。</li>
-</ul>
-<h4 id="初始化（initialization）"><a href="#初始化（initialization）" class="headerlink" title="初始化（initialization）"></a>初始化（initialization）</h4><p>初始化阶段负责为为<strong><em>类的静态变量赋予正确的初始值，JVM负责对类进行初始化，主要对类变量进行初始化</em></strong>，此阶段其实就是执行<strong><em>&lt;clinit&gt;()方法</em></strong>的过程。</p>
-<ul>
-<li><p>&lt;clinit&gt;() 不需要显式调用父类（接口除外，接口不需要调用父接口的初始化方法，只有使用到父接口中的静态变量时才需要调用）的初始化方法 &lt;clinit&gt;()，虚拟机会保证在子类的 &lt;clinit&gt;() 方法执行之前，父类的&lt;clinit&gt;() 方法已经执行完毕，也就意味着父类中定义的静态语句块要优先于子类的变量赋值操作。</p>
-</li>
-<li><p>&lt;clinit&gt;()  方法对于类或接口来说并不是必需的，如果一个类中没有静态语句块，也没有对变量的赋值操作，那么编译器可以不为这个类生成 &lt;clinit&gt;() 方法。</p>
-</li>
-<li><p>虚拟机会保证一个类的 &lt;clinit&gt;() 方法在多线程环境中被正确地加锁、同步，如果多个线程同时去初始化一个类，那么只会有一个线程去执行这个类的&lt;clinit&gt;() 方法，其他线程都需要阻塞等待，直到活动线程执行&lt;clinit&gt;()方法完毕。</p>
-</li>
-</ul>
-<p><strong><em>类的初始化时机</em></strong></p>
-<ul>
-<li>创建类的实例</li>
-<li>访问或者赋值某个类或者接口的静态变量</li>
-<li>调用类的静态方法</li>
-<li>反射</li>
-<li>初始化其子类，则该类也会被初始化</li>
-</ul>
-<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><p>java语言自带三个类加载器</p>
-<ul>
-<li><p>Bootstrap ClassLoader(启动类加载器):负责加载存放在JDK\jre\lib(JDK代表JDK的安装目录，下同)下，或被-Xbootclasspath参数指定的路径中的，并且能被虚拟机识别的类库（如rt.jar，所有的java.*开头的类均被Bootstrap ClassLoader加载）。启动类加载器是无法被Java程序直接引用的。</p>
-</li>
-<li><p>Extention ClassLoader(扩展类加载器):该加载器sun.misc.Launcher$ExtClassLoader实现，它负责加载JDK\jre\lib\ext目录中，或者由java.ext.dirs系统变量指定的路径中的所有类库（如javax.*开头的类），开发者可以直接使用扩展类加载器。</p>
-</li>
-<li><p>Application ClassLoader(应用程序类加载器):该类加载器由sun.misc.Launcher$AppClassLoader来实现，它负责加载用户类路径（ClassPath）所指定的类，开发者可以直接使用该类加载器，如果应用程序中没有自定义过自己的类加载器，一般情况下这个就是程序中默认的类加载器。</p>
-</li>
-</ul>
-<blockquote>
-<p>应用程序都是由这三种类加载器互相配合进行加载的，如果有必要，我们还可以加入自定义的类加载器。因为JVM自带的ClassLoader只是懂得从本地文件系统加载标准的java class文件，因此如果编写了自己的ClassLoader，便可以做到如下几点：</p>
-</blockquote>
-<ol>
-<li>在执行非置信代码之前，自动验证数字签名。</li>
-<li>动态地创建符合用户特定需要的定制化构建类。</li>
-<li>从特定的场所取得java class，例如数据库中和网络中。</li>
-</ol>
-<h3 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h3><p>双亲委派模型的工作流程是：如果一个类加载器收到了类加载的请求，它首先不会自己去尝试加载这个类，而是把请求委托给父加载器去完成，依次向上，因此，所有的类加载请求最终都应该被传递到顶层的启动类加载器中，只有当父加载器在它的搜索范围中没有找到所需的类时，即无法完成该加载，子加载器才会尝试自己去加载该类。</p>
-<p><strong><em>为了保证java程序安全稳定运行</em></strong></p>
-<ol>
-<li><p>当AppClassLoader加载一个class时，它首先不会自己去尝试加载这个类，而是把类加载请求委派给父类加载器ExtClassLoader去完成。</p>
-</li>
-<li><p>当ExtClassLoader加载一个class时，它首先也不会自己去尝试加载这个类，而是把类加载请求委派给BootStrapClassLoader去完成。</p>
-</li>
-<li><p>如果BootStrapClassLoader加载失败（例如在$JAVA_HOME/jre/lib里未查找到该class），会使用ExtClassLoader来尝试加载。</p>
-</li>
-<li><p>若ExtClassLoader也加载失败，则会使用AppClassLoader来加载，如果AppClassLoader也加载失败，则会报出异常ClassNotFoundException。</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">简单工程模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+            
               
-
-              <time title="Created: 2020-06-15 21:20:00 / Modified: 21:40:53" itemprop="dateCreated datePublished" datetime="2020-06-15T21:20:00+08:00">2020-06-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>简单工厂模式是创建形的设计模式，对实现了同一接口的一些类进行实例的创建。简单工厂模式的实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类（这些产品类继承自一个父类或接口）的实例。</p>
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><p>首先来个手机的接口（基类）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 18:31</span><br><span class="line"> *&#x2F;</span><br><span class="line">public interface Phone &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 描述手机信息</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public void info();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后来几个手机具体类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class XiaoMiPhone implements Phone&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是小米手机&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class OppoPhone implements Phone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是oppo手机&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class HuaWeiPhone implements Phone &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void info() &#123;</span><br><span class="line">        System.out.println(&quot;我是华为手机拉&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在整个枚举类表示手机类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public enum PhoneType &#123;</span><br><span class="line">    XIAOMI(1),HUAWEI(2),OPPO(3);</span><br><span class="line"></span><br><span class="line">    private int code;</span><br><span class="line"></span><br><span class="line">    PhoneType(int code) &#123;</span><br><span class="line">        this.code &#x3D; code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>所需要的配件都搞定拉，现在工厂启动！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class BasePhoneFactory implements PhoneFactory &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Phone produce(PhoneType type) &#123;</span><br><span class="line">        switch (type)&#123;</span><br><span class="line">            case XIAOMI:</span><br><span class="line">                return new XiaoMiPhone();</span><br><span class="line">            case OPPO:</span><br><span class="line">                return new OppoPhone();</span><br><span class="line">            case HUAWEI:</span><br><span class="line">                return new HuaWeiPhone();</span><br><span class="line">            default:</span><br><span class="line">                throw new AssertionError(&quot;没有该类型的手机&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        PhoneFactory phoneFactory &#x3D; new BasePhoneFactory();</span><br><span class="line">        Phone phone &#x3D; phoneFactory.produce(PhoneType.XIAOMI);</span><br><span class="line">        phone.info();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果</p>
-<blockquote>
-<p>我是小米手机</p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
-<li>优点</li>
-</ul>
-<ol>
-<li>便于对象的扩展，比如要创建苹果手机，只需要继承Phone接口即可，在工厂中对增加的类进行注册，既可以通过PhoneFactory来获取到增加的对象。</li>
-<li>将同一类型的对象进行分装提取，共性都放在接口中，个性放在具体类中。</li>
-</ol>
-<ul>
-<li>缺点：</li>
-</ul>
-<ol>
-<li>不利于不同类型对象的创建</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-14 23:42:00" itemprop="dateCreated datePublished" datetime="2020-06-14T23:42:00+08:00">2020-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-15 15:13:53" itemprop="dateModified" datetime="2020-06-15T15:13:53+08:00">2020-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>单例模式是java23中设计模式之一，也是最常见的一种模式。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>整个程序运行中只允许有一个类的实例</li>
-<li>需要频繁创建然后销毁的对象</li>
-<li>创建对象时耗时过多或者耗资源过多，但又经常用到的对象</li>
-<li>方便资源相互通信的环境</li>
-</ul>
-<h3 id="单例的几种模式"><a href="#单例的几种模式" class="headerlink" title="单例的几种模式"></a>单例的几种模式</h3><h4 id="线程不安全的懒汉式"><a href="#线程不安全的懒汉式" class="headerlink" title="线程不安全的懒汉式"></a>线程不安全的懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程不安全懒汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:41</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            singleton &#x3D; new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在需要的时候才创建实例，节省内存空间，但是多线程同时访问会导致返回多个实例。</p>
-</blockquote>
-<h4 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton &#x3D; new Singleton();</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 饿汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:54</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Singleton getInstance()&#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM的类加载机制实现了初始化，保证了线程安全。</p>
-</blockquote>
-<h4 id="线程安全懒汉式"><a href="#线程安全懒汉式" class="headerlink" title="线程安全懒汉式"></a>线程安全懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程安全懒汉式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:55</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            synchronized (Singleton.class)&#123;</span><br><span class="line">                if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    singleton &#x3D; new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过双重加锁判断实现了线程安全，但是效率就慢了。</p>
-</blockquote>
-<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder&#123;</span><br><span class="line">        public static Singleton singleton &#x3D; new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 静态内部类</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 14:59</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return Holder.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM类加载机制保证线程安全。</p>
-</blockquote>
-<h4 id="枚举方式"><a href="#枚举方式" class="headerlink" title="枚举方式"></a>枚举方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 15:07</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">public enum SingletonEnum &#123;</span><br><span class="line">    INSTANCE(new Object());</span><br><span class="line"></span><br><span class="line">    private Object object;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 枚举单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 15:08</span><br><span class="line">     * @param [object]</span><br><span class="line">     * @return </span><br><span class="line">     *&#x2F;</span><br><span class="line">    SingletonEnum(Object object) &#123;</span><br><span class="line">        this.object &#x3D; object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过枚举方式创建的单例模式，能保证线程安全而且能防止序列化重新创建对象。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">单例模式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-14 23:42:00" itemprop="dateCreated datePublished" datetime="2020-06-14T23:42:00+08:00">2020-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-06-15 15:13:53" itemprop="dateModified" datetime="2020-06-15T15:13:53+08:00">2020-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>单例模式是java23中设计模式之一，也是最常见的一种模式。</p>
-<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>整个程序运行中只允许有一个类的实例</li>
-<li>需要频繁创建然后销毁的对象</li>
-<li>创建对象时耗时过多或者耗资源过多，但又经常用到的对象</li>
-<li>方便资源相互通信的环境</li>
-</ul>
-<h3 id="单例的几种模式"><a href="#单例的几种模式" class="headerlink" title="单例的几种模式"></a>单例的几种模式</h3><h4 id="线程不安全的懒汉式"><a href="#线程不安全的懒汉式" class="headerlink" title="线程不安全的懒汉式"></a>线程不安全的懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程不安全懒汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:41</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            singleton &#x3D; new Singleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在需要的时候才创建实例，节省内存空间，但是多线程同时访问会导致返回多个实例。</p>
-</blockquote>
-<h4 id="饿汉式"><a href="#饿汉式" class="headerlink" title="饿汉式"></a>饿汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton &#x3D; new Singleton();</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 饿汉式单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:54</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">     public static Singleton getInstance()&#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM的类加载机制实现了初始化，保证了线程安全。</p>
-</blockquote>
-<h4 id="线程安全懒汉式"><a href="#线程安全懒汉式" class="headerlink" title="线程安全懒汉式"></a>线程安全懒汉式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private static Singleton singleton</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 线程安全懒汉式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;14 23:55</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">            synchronized (Singleton.class)&#123;</span><br><span class="line">                if (singleton&#x3D;&#x3D;null)&#123;</span><br><span class="line">                    singleton &#x3D; new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>通过双重加锁判断实现了线程安全，但是效率就慢了。</p>
-</blockquote>
-<h4 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;14 23:38</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class Singleton &#123;</span><br><span class="line"></span><br><span class="line">    private Singleton()&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static class Holder&#123;</span><br><span class="line">        public static Singleton singleton &#x3D; new Singleton();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 静态内部类</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 14:59</span><br><span class="line">     * @param []</span><br><span class="line">     * @return com.czj.design.Singleton</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Singleton getInstance()&#123;</span><br><span class="line">        return Holder.singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过JVM类加载机制保证线程安全。</p>
-</blockquote>
-<h4 id="枚举方式"><a href="#枚举方式" class="headerlink" title="枚举方式"></a>枚举方式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 创建在 2020&#x2F;6&#x2F;15 15:07</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">public enum SingletonEnum &#123;</span><br><span class="line">    INSTANCE(new Object());</span><br><span class="line"></span><br><span class="line">    private Object object;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @author czj</span><br><span class="line">     * 枚举单例模式</span><br><span class="line">     * @date 2020&#x2F;6&#x2F;15 15:08</span><br><span class="line">     * @param [object]</span><br><span class="line">     * @return </span><br><span class="line">     *&#x2F;</span><br><span class="line">    SingletonEnum(Object object) &#123;</span><br><span class="line">        this.object &#x3D; object;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>通过枚举方式创建的单例模式，能保证线程安全而且能防止序列化重新创建对象。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/java7-try-with-resource/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/java7-try-with-resource/" class="post-title-link" itemprop="url">java7 try-with-resource</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+            
               
-
-              <time title="Created: 2020-06-14 15:46:00 / Modified: 15:51:40" itemprop="dateCreated datePublished" datetime="2020-06-14T15:46:00+08:00">2020-06-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
-
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
           
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="java7之前"><a href="#java7之前" class="headerlink" title="java7之前"></a>java7之前</h3><blockquote>
-<p>在java7版本之前我们使用资源后，都需要把资源关闭，在try-catch-finally中的finally关闭资源。</p>
-</blockquote>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">long currentTime &#x3D; System.currentTimeMillis();</span><br><span class="line">BufferedReader bufferedReader &#x3D; null;</span><br><span class="line">try&#123;</span><br><span class="line">    bufferedReader &#x3D; new BufferedReader(new FileReader(&quot;C:&#x2F;Users&#x2F;ZJ&#x2F;Desktop&#x2F;spring.log&quot;));</span><br><span class="line">    String line &#x3D; null;</span><br><span class="line">    while((line &#x3D; bufferedReader.readLine())!&#x3D;null)&#123;</span><br><span class="line">        System.out.println(line);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println((System.currentTimeMillis()-currentTime)&#x2F;1000.0+&quot;秒&quot;);</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;finally &#123;</span><br><span class="line">    if (bufferedReader!&#x3D;null)&#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            bufferedReader.close();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>这个代码莫得问题，但是太杂乱了，因此java7提供了一个新的语法糖：try-with-resource。</p>
-</blockquote>
-<h3 id="java7以后"><a href="#java7以后" class="headerlink" title="java7以后"></a>java7以后</h3><blockquote>
-<p>try-with-resources 方式来管理资源，在try中声明资源，当程序执行完后，会自动将声明的资源关闭掉</p>
-</blockquote>
-<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">long currentTime &#x3D; System.currentTimeMillis();</span><br><span class="line">try(BufferedReader bufferedReader &#x3D; new BufferedReader(new FileReader(&quot;C:&#x2F;Users&#x2F;ZJ&#x2F;Desktop&#x2F;spring.log&quot;)))&#123;</span><br><span class="line">    String line &#x3D; null;</span><br><span class="line">    while((line &#x3D; bufferedReader.readLine())!&#x3D;null)&#123;</span><br><span class="line">        System.out.println(line);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println((System.currentTimeMillis()-currentTime)&#x2F;1000.0+&quot;秒&quot;);</span><br><span class="line">&#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125; catch (IOException e) &#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>我们可以很明显的看到代码量少了很多，而且再也不会因为忘记close而导致出问题拉。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/fail-fast%E5%92%8Cfail-safe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/fail-fast%E5%92%8Cfail-safe/" class="post-title-link" itemprop="url">fail-fast和fail-safe</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
+            
               
+            
+              <li>
+                <a class="menuitem flat-box faa-parent animated-hover" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
 
-              <time title="Created: 2020-06-14 14:51:00 / Modified: 15:29:47" itemprop="dateCreated datePublished" datetime="2020-06-14T14:51:00+08:00">2020-06-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-                </span>
-            </span>
+    <div id="l_body">
+      <div id="l_cover">
+  
+    
+        <div id="full" class='cover-wrapper  dock' style="display: none;">
+          
+            <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/volantis-x/cdn-wallpaper-minimalist/2020/052.jpg"></div>
+          
+          <div class='cover-body'>
+  <div class='top'>
+    
+    
+      <p class="title">Volantis</p>
+    
+    
+  </div>
+  <div class='bottom'>
+    <div class='menu navigation'>
+      <div class='list-h'>
+        
+          
+            <a href="/"
+              
+              
+              id="home">
+              <i class='fas fa-rss fa-fw'></i><p>博客</p>
+            </a>
+          
+            <a href="/categories/"
+              
+              
+              id="categories">
+              <i class='fas fa-folder-open fa-fw'></i><p>分类</p>
+            </a>
+          
+            <a href="/tags/"
+              
+              
+              id="tags">
+              <i class='fas fa-tags fa-fw'></i><p>标签</p>
+            </a>
+          
+            <a href="/archives/"
+              
+              
+              id="archives">
+              <i class='fas fa-archive fa-fw'></i><p>归档</p>
+            </a>
+          
+            <a href="/friends/"
+              
+              
+              id="friends">
+              <i class='fas fa-link fa-fw'></i><p>友链</p>
+            </a>
+          
+            <a href="/about/"
+              
+              
+              id="about">
+              <i class='fas fa-info-circle fa-fw'></i><p>关于</p>
+            </a>
+          
+        
+      </div>
+    </div>
+  </div>
+</div>
 
+          <div id="scroll-down" style="display: none;"><i class="fa fa-chevron-down scroll-down-effects"></i></div>
+        </div>
+    
+  
+  </div>
+
+      <div id="safearea">
+        <div class="body-wrapper" id="pjax-container">
           
 
-        </div>
-      </header>
-
+<div class='l_main'>
+  
+  <section class="post-list">
     
     
-    
-    <div class="post-body" itemprop="articleBody">
       
-          <h3 id="fail-fast"><a href="#fail-fast" class="headerlink" title="fail-fast"></a>fail-fast</h3><p>首先啥是fail-fast？下面引用别人的解释:</p>
-<blockquote>
-<p>在系统设计中，快速失效系统一种可以立即报告任何可能表明故障的情况的系统。快速失效系统通常设计用于停止正常操作，而不是试图继续可能存在缺陷的过程。这种设计通常会在操作中的多个点检查系统的状态，因此可以及早检测到任何故障。快速失败模块的职责是检测错误，然后让系统的下一个最高级别处理错误。</p>
-</blockquote>
-<p>他的意思就是写程序<strong><em>先考虑异常情况</em></strong>，如果遇到就直接抛出处理。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public int divide(int divisor,int dividend)&#123;</span><br><span class="line">    if(dividend &#x3D;&#x3D; 0)&#123;</span><br><span class="line">        throw new RuntimeException(&quot;dividend can&#39;t be null&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return divisor&#x2F;dividend;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/">
+        java BigDecimal详解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。
 
-<blockquote>
-<p>例如上面的方法，对除数进行检测如果是0则直接抛出异常，并标明异常原因。这样做的好处就是可以预先识别出一些错误情况，一方面可以避免执行复杂的其他代码，另外一方面，这种异常情况被识别之后也可以针对性的做一些单独处理。</p>
-</blockquote>
-<h4 id="集合中的fail-fast"><a href="#集合中的fail-fast" class="headerlink" title="集合中的fail-fast"></a>集合中的fail-fast</h4><blockquote>
-<p>我们通常说的Java中的fail-fast机制，默认指的是Java集合的一种错误检测机制。当多个线程对部分集合进行结构上的改变的操作时，有可能会产生fail-fast机制，这个时候就会抛出ConcurrentModificationException。下面来看看例子:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new ArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">   for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>上面使用foreach来遍历list并删除元素值为5的元素，执行结果：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.util.ConcurrentModificationException</span><br><span class="line">	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:909)</span><br><span class="line">	at java.util.ArrayList$Itr.next(ArrayList.java:859)</span><br><span class="line">	at com.czj.example01.TestList.main(TestList.java:17)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以看到抛出了ConcurrentModificationException异常，这是因为list的fast-fail的机制。</p>
-</blockquote>
-<h4 id="list源码分析"><a href="#list源码分析" class="headerlink" title="list源码分析"></a>list源码分析</h4><blockquote>
-<p>下面是ArrayList里的内部类Itr的remove()源码,可以看到在执行移除前会执行checkForComodification()方法。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public void remove() &#123;</span><br><span class="line">         if (lastRet &lt; 0)</span><br><span class="line">             throw new IllegalStateException();</span><br><span class="line">         checkForComodification();</span><br><span class="line"></span><br><span class="line">         try &#123;</span><br><span class="line">             ArrayList.this.remove(lastRet);</span><br><span class="line">             cursor &#x3D; lastRet;</span><br><span class="line">             lastRet &#x3D; -1;</span><br><span class="line">             expectedModCount &#x3D; modCount;</span><br><span class="line">         &#125; catch (IndexOutOfBoundsException ex) &#123;</span><br><span class="line">             throw new ConcurrentModificationException();</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">final void checkForComodification() &#123;</span><br><span class="line">    if (modCount !&#x3D; expectedModCount)</span><br><span class="line">        throw new ConcurrentModificationException();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>可以看到这里就是抛出ConcurrentModificationException异常的地方，那么modCount和expectedModCount分别代表什么呢？</p>
-</blockquote>
-<ul>
-<li>modCount:ArrayList的成员变量，代表集合的修改次数，初始值为0</li>
-<li>expected:Itr的成员变量，代表迭代器预期集合的修改次数，初始值等于创建itr时的修改次数，只有通过迭代器对集合进行操作，该值才会改变。</li>
-</ul>
-<blockquote>
-<p>通过foreach来遍历集合，其实就是通过集合的迭代器（Iterator）来遍历的，如果不通过迭代器来修改集合内的元素，只要他发现有某一次修改是未经过自己进行的，那么就会抛出异常。</p>
-</blockquote>
-<h3 id="fail-safe"><a href="#fail-safe" class="headerlink" title="fail-safe"></a>fail-safe</h3><blockquote>
-<p>fail-safe字面理解<strong><em>安全失败</em></strong>，java.util包下面的所有的集合类都是快速失败的，而java.util.concurrent包下面的所有的类都是安全失败的。快速失败的迭代器会抛出ConcurrentModificationException异常，而安全失败的迭代器永远不会抛出这样的异常。</p>
-</blockquote>
-<h4 id="集合中的fail-safe"><a href="#集合中的fail-safe" class="headerlink" title="集合中的fail-safe"></a>集合中的fail-safe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; list &#x3D; new CopyOnWriteArrayList&lt;Integer&gt;()&#123;&#123;</span><br><span class="line">    for (int i&#x3D;1;i&lt;&#x3D;10;i++)&#123;</span><br><span class="line">        add(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&#125;;</span><br><span class="line"></span><br><span class="line">for (Integer integer:list)&#123;</span><br><span class="line">    if (integer&#x3D;&#x3D;5)&#123;</span><br><span class="line">        list.remove(integer);</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(integer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>上面使用CopyOnWriteArrayList这个类来演示fail-safe，这样的集合容器在遍历时不是直接在集合内容上访问的，而是先复制原有集合内容，在拷贝的集合上进行遍历。迭代器遍历的是开始遍历那一刻拿到的集合拷贝，在遍历期间原集合发生的修改迭代器是不知道的。</p>
-</blockquote>
-
+BigDecimal构造方法
+BigDecima...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-23</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/'>
+            閱讀全文
+          </a>
+        </div>
       
     </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="陈梓佳">
-      <meta itemprop="description" content="陈梓佳的学习笔记~">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="汤姆猫的博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/" class="post-title-link" itemprop="url">spring面试题（一）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-09 15:22:00" itemprop="dateCreated datePublished" datetime="2020-06-09T15:22:00+08:00">2020-06-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-10-28 18:10:34" itemprop="dateModified" datetime="2020-10-28T18:10:34+08:00">2020-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" itemprop="url" rel="index"><span itemprop="name">spring面试题</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-      
-          <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="/images/pasted-55.png" alt="upload successful"></p>
-<blockquote>
-<p>如上图我们大致可以将spring生命周期分为12个步骤</p>
-</blockquote>
-<ol>
-<li>通过反射实例化对象。</li>
-<li>设置对象的属性。</li>
-<li>如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法</li>
-<li>如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。</li>
-<li>如果对象实现了ApplicationContextAware接口，spring将bean所在应用上下文传给setApplicationContext()方法。</li>
-<li>如果对象实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessBeforeInitialization()方法。</li>
-<li>如果对象实现了InitializingBean接口，spring将调用afterPropertiesSet()方法。</li>
-<li>如果对象声明了init-method方法，spring将调用该方法。</li>
-<li>如果Bean 实现了BeanPostProcessor接口，Spring就将调用他们的。postProcessAfterInitialization()方法。</li>
-<li>对象使用中。</li>
-<li>如果对象实现了DisposableBean()接口，spring将调用destroy()方法。</li>
-<li>如果对象声明了destroy-method方法，spring将调用该方法。</li>
-</ol>
-<h3 id="Spring是什么？"><a href="#Spring是什么？" class="headerlink" title="Spring是什么？"></a>Spring是什么？</h3><p>Spring是一个轻量级的IOC和AOP的框架，是为java应用程序提供基础服务的一套框架。目的是用于简化企业应用程序的开发，使开发者只用关心业务的开发。</p>
-<p>主要由以下几个模块组成:<br>|–|–|<br>|模块名|介绍|<br>|Spring Core|核心类库，提供IOC服务|<br>|Spring Context|提供框架的Bean服务，以及企业级功能<br>|Spring Aop|提供Aop服务|<br>|Spring ORM|提供对ORM框架支持|<br>|Spring Web|面向Web服务|</p>
-<h3 id="Spring你用过哪些注解？"><a href="#Spring你用过哪些注解？" class="headerlink" title="Spring你用过哪些注解？"></a>Spring你用过哪些注解？</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><blockquote>
-<p>这个注解是 Spring Boot 项目的基石，创建 SpringBoot 项目之后会默认在主类加上。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class SpringSecurityJwtGuideApplication &#123;</span><br><span class="line">      public static void main(java.lang.String[] args) &#123;</span><br><span class="line">        SpringApplication.run(SpringSecurityJwtGuideApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>源码:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F; Source code recreated from a .class file by IntelliJ IDEA</span><br><span class="line">&#x2F;&#x2F; (powered by Fernflower decompiler)</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line"></span><br><span class="line">package org.springframework.boot.autoconfigure;</span><br><span class="line"></span><br><span class="line">import java.lang.annotation.Documented;</span><br><span class="line">import java.lang.annotation.ElementType;</span><br><span class="line">import java.lang.annotation.Inherited;</span><br><span class="line">import java.lang.annotation.Retention;</span><br><span class="line">import java.lang.annotation.RetentionPolicy;</span><br><span class="line">import java.lang.annotation.Target;</span><br><span class="line">import org.springframework.boot.SpringBootConfiguration;</span><br><span class="line">import org.springframework.boot.context.TypeExcludeFilter;</span><br><span class="line">import org.springframework.context.annotation.ComponentScan;</span><br><span class="line">import org.springframework.context.annotation.Configuration;</span><br><span class="line">import org.springframework.context.annotation.FilterType;</span><br><span class="line">import org.springframework.context.annotation.ComponentScan.Filter;</span><br><span class="line">import org.springframework.core.annotation.AliasFor;</span><br><span class="line"></span><br><span class="line">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Documented</span><br><span class="line">@Inherited</span><br><span class="line">@SpringBootConfiguration</span><br><span class="line">@EnableAutoConfiguration</span><br><span class="line">@ComponentScan(</span><br><span class="line">    excludeFilters &#x3D; &#123;@Filter(</span><br><span class="line">    type &#x3D; FilterType.CUSTOM,</span><br><span class="line">    classes &#x3D; &#123;TypeExcludeFilter.class&#125;</span><br><span class="line">), @Filter(</span><br><span class="line">    type &#x3D; FilterType.CUSTOM,</span><br><span class="line">    classes &#x3D; &#123;AutoConfigurationExcludeFilter.class&#125;</span><br><span class="line">)&#125;</span><br><span class="line">)</span><br><span class="line">public @interface SpringBootApplication &#123;</span><br><span class="line">    @AliasFor(</span><br><span class="line">        annotation &#x3D; EnableAutoConfiguration.class</span><br><span class="line">    )</span><br><span class="line">    Class&lt;?&gt;[] exclude() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(</span><br><span class="line">        annotation &#x3D; EnableAutoConfiguration.class</span><br><span class="line">    )</span><br><span class="line">    String[] excludeName() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(</span><br><span class="line">        annotation &#x3D; ComponentScan.class,</span><br><span class="line">        attribute &#x3D; &quot;basePackages&quot;</span><br><span class="line">    )</span><br><span class="line">    String[] scanBasePackages() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(</span><br><span class="line">        annotation &#x3D; ComponentScan.class,</span><br><span class="line">        attribute &#x3D; &quot;basePackageClasses&quot;</span><br><span class="line">    )</span><br><span class="line">    Class&lt;?&gt;[] scanBasePackageClasses() default &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    @AliasFor(</span><br><span class="line">        annotation &#x3D; Configuration.class</span><br><span class="line">    )</span><br><span class="line">    boolean proxyBeanMethods() default true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>将SpringBootApplication可以分为三个注解 <strong><em>@SpringBootConfiguration（跟Configuration一样滴）</em></strong>，<strong>* @EnableAutoConfiguration *</strong>, <strong><em>@ComponentScan</em></strong>的组合。<br>这三个注解的作用如下：</p>
-<blockquote>
-</blockquote>
-<ul>
-<li>@EnableAutoConfiguration：启用 SpringBoot 的自动配置机制</li>
-<li>@ComponentScan： 扫描被@Component (@Service,@Controller)注解的 bean，注解默认会扫描该类所在的包下所有的类。</li>
-<li>@Configuration：允许在 Spring 上下文中注册额外的 bean 或导入其他配置类</li>
-</ul>
-<h4 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h4><blockquote>
-<p>将相同类型的对象注入进被@Autowired修饰的对象中</p>
-</blockquote>
-<h4 id="Component-Repository-Service-Controller-Configuration"><a href="#Component-Repository-Service-Controller-Configuration" class="headerlink" title="@Component,@Repository,@Service,@Controller,@Configuration"></a>@Component,@Repository,@Service,@Controller,@Configuration</h4><ul>
-<li>@Component ：通用的注解，可标注任意类为 Spring 组件。如果一个 Bean 不知道属于哪个层，可以使用@Component 注解标注。</li>
-<li>@Repository : 对应持久层即 Dao 层，主要用于数据库相关操作。</li>
-<li>@Service : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao 层。</li>
-<li>@Controller : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面。    </li>
-<li>@Configuration : 一般用来声明配置类。</li>
-</ul>
-<h4 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h4><blockquote>
-<p>@RestController注解是@Controller和@ResponseBody的合集,表示这是个控制器 bean,并且是将函数的返回值直 接填入 HTTP 响应体中,是 REST 风格的控制器。</p>
-</blockquote>
-<h4 id="GetMapping-PostMapping-PutMapping-DeleteMapping"><a href="#GetMapping-PostMapping-PutMapping-DeleteMapping" class="headerlink" title="@GetMapping,@PostMapping,@PutMapping,@DeleteMapping"></a>@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</h4><ul>
-<li>@GetMapping: 对应Get请求，请求从服务器获得一个资源</li>
-<li>@PostMapping: 对应Post请求，在服务器上创建一个新的资源</li>
-<li>@PutMapping: 对应Put请求，修改服务器一个资源</li>
-<li>@DeleteMapping: 对应Delete请求，删除服务器一个资源</li>
-</ul>
-<h4 id="PathVariable-RequestParam-RequestBody"><a href="#PathVariable-RequestParam-RequestBody" class="headerlink" title="@PathVariable,@RequestParam,@RequestBody"></a>@PathVariable,@RequestParam,@RequestBody</h4><ul>
-<li>@PathVariable: 获得请求路径上的参数</li>
-<li>@RequestParam: 获得请求路径后的请求参数</li>
-<li>@RequestBody: 获得请求体中的JSON数据格式，并映射成所需对象</li>
-</ul>
-<h4 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h4><p>读取配置文件的值</p>
-<h3 id="Spring声明Bean的几种方式"><a href="#Spring声明Bean的几种方式" class="headerlink" title="Spring声明Bean的几种方式"></a>Spring声明Bean的几种方式</h3><h4 id="基于XML的配置"><a href="#基于XML的配置" class="headerlink" title="基于XML的配置"></a>基于XML的配置</h4><h4 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h4><h4 id="基于java类的配置"><a href="#基于java类的配置" class="headerlink" title="基于java类的配置"></a>基于java类的配置</h4><h3 id="Spring默认是单例还是多例，怎么实现多例"><a href="#Spring默认是单例还是多例，怎么实现多例" class="headerlink" title="Spring默认是单例还是多例，怎么实现多例"></a>Spring默认是单例还是多例，怎么实现多例</h3><p>答：默认是单例，如果要实现多例需要在scope属性上设置为“prototype”</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XML</span><br><span class="line"></span><br><span class="line">&lt;bean id&#x3D;&quot;自定义id(一般为类名小写)&quot; class&#x3D;&quot;自定义类&quot; init-method&#x3D;&quot;init&quot; scope&#x3D;&quot;prototype&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Java</span><br><span class="line"></span><br><span class="line">@Scope(&quot;prototype&quot;)</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-		<div>
-			
-		</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
+</div>
 
           </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
+        活动启动模式
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        活动的启动模式standardtandard是活动默认的启动模式，在不进行显式指定的情况下，所有活动都会自动使用这种启动模式。在standard模式（即默认情况）下，每当启动一个新的活动，它就会在返回栈中入栈，并处于栈顶的位置。对于使用standard模式的活动，系统不会在乎这个活动是否已经在返回栈中存在，每次启动都会创建该活动的一个新的实例。
+
+singleTop当活动的启动模式指定为si...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-16</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/android%E5%9F%BA%E7%A1%80/">android基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
+        活动的生命周期
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        活动的生命周期返回栈
+Android是使用任务（Task）来管理活动的，一个任务就是一组存放在栈里的活动的集合，这个栈也被称作返回栈（Back Stack）。栈是一种后进先出的数据结构，在默认情况下，每当我们启动了一个新的活动，它会在返回栈中入栈，并处于栈顶的位置。而每当我们按下Back键或调用finish() 方法去销毁一个活动时，处于栈顶的活动会出栈，这时前一个入栈的活动就会重新处于栈顶...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-16</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/android%E5%9F%BA%E7%A1%80/">android基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+        java类的加载机制(学习笔记)
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        啥是类加载
+类加载是指将class文件读入内存中，并对数据进行校验、转换解析、初始化，最后再堆区创建一个java.lang.Class对象，用来封装类在方法区的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。
+
+
+在Java语言里面，类型的加载、连接和初始化过程都是在程序运行期间完成...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-16</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/JVM/">JVM</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">
+        简单工程模式
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介简单工厂模式是创建形的设计模式，对实现了同一接口的一些类进行实例的创建。简单工厂模式的实质是由一个工厂类根据传入的参数，动态决定应该创建哪一个产品类（这些产品类继承自一个父类或接口）的实例。
+例子首先来个手机的接口（基类）
+12345678910&#x2F;** * 创建在 2020&#x2F;6&#x2F;15 18:31 *&#x2F;public interface Phone &...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-15</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/15/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+        单例模式
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介单例模式是java23中设计模式之一，也是最常见的一种模式。
+使用场景
+整个程序运行中只允许有一个类的实例
+需要频繁创建然后销毁的对象
+创建对象时耗时过多或者耗资源过多，但又经常用到的对象
+方便资源相互通信的环境
+
+单例的几种模式线程不安全的懒汉式123456789101112131415161718192021public class Singleton &#123;    priva...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/%E6%A8%A1%E5%BC%8F/">
+        单例模式
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介单例模式是java23中设计模式之一，也是最常见的一种模式。
+使用场景
+整个程序运行中只允许有一个类的实例
+需要频繁创建然后销毁的对象
+创建对象时耗时过多或者耗资源过多，但又经常用到的对象
+方便资源相互通信的环境
+
+单例的几种模式线程不安全的懒汉式123456789101112131415161718192021public class Singleton &#123;    priva...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/%E6%A8%A1%E5%BC%8F/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/java7-try-with-resource/">
+        java7 try-with-resource
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        java7之前
+在java7版本之前我们使用资源后，都需要把资源关闭，在try-catch-finally中的finally关闭资源。
+
+例子12345678910111213141516171819202122long currentTime &#x3D; System.currentTimeMillis();BufferedReader bufferedReader &#x3D; nul...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/java7-try-with-resource/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/fail-fast%E5%92%8Cfail-safe/">
+        fail-fast和fail-safe
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        fail-fast首先啥是fail-fast？下面引用别人的解释:
+
+在系统设计中，快速失效系统一种可以立即报告任何可能表明故障的情况的系统。快速失效系统通常设计用于停止正常操作，而不是试图继续可能存在缺陷的过程。这种设计通常会在操作中的多个点检查系统的状态，因此可以及早检测到任何故障。快速失败模块的职责是检测错误，然后让系统的下一个最高级别处理错误。
+
+他的意思就是写程序先考虑异常情况，如...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/fail-fast%E5%92%8Cfail-safe/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        spring面试题（一）
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        Spring中bean的生命周期
+
+如上图我们大致可以将spring生命周期分为12个步骤
+
+
+通过反射实例化对象。
+设置对象的属性。
+如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法
+如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。
+如果对象实...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-09</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/">spring面试题</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+    
+  </section>
+  
+    
+      <br>
+      <div class="prev-next">
+        
+          <a class="prev" rel="prev" href="/page/2/">
+            <section class="post prev white-box shadow" >
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
+            </section>
+          </a>
+        
+        <p class="current">
+          3 / 6
+        </p>
+        
+          <a class="next" rel="next" href="/page/4/">
+            <section class="post next white-box shadow">
+              &nbsp;下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </section>
+          </a>
+        
+      </div>
+    
+  
+
+
+</div>
+<aside class='l_side'>
+  
+  
+    
+    
+
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img no-lazy src='https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/blog/Logo-NavBar@3x.png'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+        
+          <p><span id="jinrishici-sentence">汤姆猫的博客</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
           
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/volantis-x/"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
+    
+  <header>
+    
+      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
+            id="categoriesElasticsearch"
+            ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/JVM/" href="/categories/JVM/"
+            id="categoriesJVM"
+            ><div class='name'>JVM</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Spring-Cloud/" href="/categories/Spring-Cloud/"
+            id="categoriesSpring-Cloud"
+            ><div class='name'>Spring Cloud</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/android%E5%9F%BA%E7%A1%80/" href="/categories/android%E5%9F%BA%E7%A1%80/"
+            id="categoriesandroidE59FBAE7A180"
+            ><div class='name'>android基础</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/"
+            id="categoriesdalidaliE9A1B9E79BAEE5AE9EE78EB0"
+            ><div class='name'>dalidali项目实现</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"
+            id="categoriesdalidaliE9A1B9E79BAEE8AEBEE8AEA1"
+            ><div class='name'>dalidali项目设计</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/docker/" href="/categories/docker/"
+            id="categoriesdocker"
+            ><div class='name'>docker</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/http/" href="/categories/http/"
+            id="categorieshttp"
+            ><div class='name'>http</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/java%E5%9F%BA%E7%A1%80/" href="/categories/java%E5%9F%BA%E7%A1%80/"
+            id="categoriesjavaE59FBAE7A180"
+            ><div class='name'>java基础</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/mysql/" href="/categories/mysql/"
+            id="categoriesmysql"
+            ><div class='name'>mysql</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/redis/" href="/categories/redis/"
+            id="categoriesredis"
+            ><div class='name'>redis</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesspringE99DA2E8AF95E9A298"
+            ><div class='name'>spring面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/zookeeper/" href="/categories/zookeeper/"
+            id="categorieszookeeper"
+            ><div class='name'>zookeeper</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
+            id="categoriesE5A49AE7BABFE7A88B"
+            ><div class='name'>多线程</div><div class='badge'>(8)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesE5A49AE7BABFE7A88BE99DA2E8AF95E9A298"
+            ><div class='name'>多线程面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
+            id="categoriesE695B0E68DAEE7BB93E69E84"
+            ><div class='name'>数据结构</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%9D%82%E7%B1%BB/" href="/categories/%E6%9D%82%E7%B1%BB/"
+            id="categoriesE69D82E7B1BB"
+            ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%BD%91%E7%BB%9C/" href="/categories/%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7BD91E7BB9C"
+            ><div class='name'>网络</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
+            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9B%86%E5%90%88/" href="/categories/%E9%9B%86%E5%90%88/"
+            id="categoriesE99B86E59088"
+            ><div class='name'>集合</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesE99B86E59088E99DA2E8AF95E9A298"
+            ><div class='name'>集合面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
+            id="categoriesE99DA2E8AF95"
+            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
+    </div>
+  </section>
+
+
+  
+
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
+    
+  <header>
+    
+      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Elasticsearch/" style="font-size: 17.33px; color: #828282">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/JVM/" style="font-size: 20.67px; color: #6c6c6c">JVM</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring-Cloud/" style="font-size: 17.33px; color: #828282">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 17.33px; color: #828282">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 17.33px; color: #828282">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 17.33px; color: #828282">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 24px; color: #555">java基础</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 17.33px; color: #828282">zookeeper</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 14px; color: #999">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 20.67px; color: #6c6c6c">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 14px; color: #999">面试</a>
+    </div>
+  </section>
+
+
+  
+
+  
+
+
+</aside>
+
+
+
+		  
+		  <!--此文件用来存放一些不方便取值的变量-->
+<!--思路大概是将值藏到重加载的区域内-->
 
 <script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
+  window.pdata={}
+  pdata.ispage=false;
+  pdata.postTitle="";
+  pdata.commentPath="";
+  pdata.commentPlaceholder="";
+  // header 这里无论是否开启pjax都需要
+  var l_header=document.getElementById("l_header");
+  
+  l_header.classList.add("show");
+  
+  
+    // cover
+    var cover_wrapper=document.querySelector('.cover-wrapper');
+    
+    cover_wrapper.id="none";
+    cover_wrapper.style.display="none";
+    
+  
 </script>
 
         </div>
+        
+  
+  <footer class="footer clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
           
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">陈梓佳</p>
-  <div class="site-description" itemprop="description">陈梓佳的学习笔记~</div>
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+          
+            
+          
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives">
-          <span class="site-state-item-count">59</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-        <span class="site-state-item-count">22</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">25</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
+      
+    
+      
+        
+          <div><p><span id="lc-sv">本站总访问量为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 次</span> <span id="lc-uv">访客数为 <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span> 人</span></p>
 </div>
+        
+      
+    
+      
+        本站使用
+        <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
+        作為主題
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="/">Copyright © 2017-2020 XXX</a></p>
+
+        </div>
+      
+    
+  </footer>
 
 
-
+        <a id="s-top" class="fas fa-arrow-up fa-fw" href="javascript:void(0)"></a>
       </div>
-
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">
+    <div>
+      <script>
+/************这个文件存放不需要重载的全局变量和全局函数*********/
+window.volantis={};
+window.volantis.loadcss=document.getElementById("loadcss");
+/******************** Pjax ********************************/
+function VPjax(){
+	this.list=[] // 存放回调函数
+	this.start=()=>{
+	  for(var i=0;i<this.list.length;i++){
+		this.list[i].run();
+	  }
+	}
+	this.push=(fn,name)=>{
+		var f=new PjaxItem(fn,name);
+		this.list.push(f);
+	}
+	// 构造一个可以run的对象
+	function PjaxItem(fn,name){
+		// 函数名称
+		this.name = name || fn.name
+		// run方法
+		this.run=()=>{
+			fn()
+		}
+	}
+}
+volantis.pjax={}
+volantis.pjax.method={
+	complete: new VPjax(),
+	error: new VPjax(),
+	send: new VPjax()
+}
+volantis.pjax={
+	...volantis.pjax,
+	push: volantis.pjax.method.complete.push,
+	error: volantis.pjax.method.error.push,
+	send: volantis.pjax.method.send.push
+}
+/********************脚本懒加载函数********************************/
+// 已经加入了setTimeout
+function loadScript(src, cb) {
+	setTimeout(function() {
+		var HEAD = document.getElementsByTagName('head')[0] || document.documentElement;
+		var script = document.createElement('script');
+		script.setAttribute('type','text/javascript');
+		if (cb) script.onload = cb;
+		script.setAttribute('src', src);
+		HEAD.appendChild(script);
+	});
+}
+//https://github.com/filamentgroup/loadCSS
+var loadCSS = function( href, before, media, attributes ){
+	var doc = window.document;
+	var ss = doc.createElement( "link" );
+	var ref;
+	if( before ){
+		ref = before;
+	}
+	else {
+		var refs = ( doc.body || doc.getElementsByTagName( "head" )[ 0 ] ).childNodes;
+		ref = refs[ refs.length - 1];
+	}
+	var sheets = doc.styleSheets;
+	if( attributes ){
+		for( var attributeName in attributes ){
+			if( attributes.hasOwnProperty( attributeName ) ){
+				ss.setAttribute( attributeName, attributes[attributeName] );
+			}
+		}
+	}
+	ss.rel = "stylesheet";
+	ss.href = href;
+	ss.media = "only x";
+	function ready( cb ){
+		if( doc.body ){
+			return cb();
+		}
+		setTimeout(function(){
+			ready( cb );
+		});
+	}
+	ready( function(){
+		ref.parentNode.insertBefore( ss, ( before ? ref : ref.nextSibling ) );
+	});
+	var onloadcssdefined = function( cb ){
+		var resolvedHref = ss.href;
+		var i = sheets.length;
+		while( i-- ){
+			if( sheets[ i ].href === resolvedHref ){
+				return cb();
+			}
+		}
+		setTimeout(function() {
+			onloadcssdefined( cb );
+		});
+	};
+	function loadCB(){
+		if( ss.addEventListener ){
+			ss.removeEventListener( "load", loadCB );
+		}
+		ss.media = media || "all";
+	}
+	if( ss.addEventListener ){
+		ss.addEventListener( "load", loadCB);
+	}
+	ss.onloadcssdefined = onloadcssdefined;
+	onloadcssdefined( loadCB );
+	return ss;
+};
+</script>
+<script>
   
-  &copy; 
-  <span itemprop="copyrightYear">2021</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">陈梓佳</span>
-</div>
-<div class="powered-by">
-<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
-  本站访客数:<span id="busuanzi_value_site_uv"></span>
-</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
-  </div>
+  loadCSS("https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14/css/all.min.css", window.volantis.loadcss);
+  
+  
+  
+  
+</script>
+<!-- required -->
 
-        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script>
+
+<script>
+  function pjax_fancybox() {
+    $(".md .gallery").find("img").each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("class", "fancybox");
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 判断当前页面是否存在描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".md .gallery").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  function SCload_fancybox() {
+    if ($(".md .gallery").find("img").length == 0) return;
+    loadCSS("https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css", document.getElementById("loadcss"));
+    loadScript('https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js', pjax_fancybox)
+  };
+  $(function () {
+    SCload_fancybox();
+  });
+  function Pjax_SCload_fancybox(){
+	if (typeof $.fancybox == "undefined") {
+	 SCload_fancybox();
+    } else {
+	 pjax_fancybox();
+    }
+  }
+  volantis.pjax.push(Pjax_SCload_fancybox)
+  volantis.pjax.send(()=>{
+      if (typeof $.fancybox != "undefined") {
+        $.fancybox.close();    // 关闭弹窗
+      }
+  },'fancybox')
+</script>
+
+
+<!-- internal -->
 
 
 
 
+<script>
+  function loadIssuesJS() {
+    if ($(".md").find(".issues-api").length == 0) return;
+	
+	  loadScript('/js/issues.js');
+	
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  volantis.pjax.push(()=>{
+	if (typeof IssuesAPI == "undefined") {
+	  loadIssuesJS();
+	}
+  },"IssuesJS")
+</script>
 
 
 
+  <script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
 
-      </div>
-    </footer>
-  </div>
+
+
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
+<script>
+  window.FPConfig = {
+	delay: 0,
+	ignoreKeywords: [],
+	maxRPS: 5,
+	hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"></script>
 
 
 
@@ -1405,8 +1545,565 @@
 
 
   
+  
+<script src="/js/valine.js"></script>
+
+
+<script>
+  function emoji(path, idx, ext) {
+    return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  function pjax_valine() {
+    if(!document.querySelectorAll("#valine_container")[0])return;
+    let pagePlaceholder = pdata.commentPlaceholder || "快来评论吧~";
+    let path = pdata.commentPath;
+    if (path.length == 0) {
+      let defaultPath = '';
+      path = defaultPath || decodeURI(window.location.pathname);
+    }
+    var valine = new Valine();
+    valine.init(Object.assign({"path":null,"placeholder":"快来评论吧~","appId":null,"appKey":null,"meta":["nick","mail","link"],"requiredFields":["nick","mail"],"enableQQ":true,"recordIP":false,"avatar":"robohash","pageSize":10,"lang":"zh-cn","highlight":true,"mathJax":false}, {
+      el: '#valine_container',
+      path: path,
+      placeholder: pagePlaceholder,
+      emojiCDN: 'https://cdn.jsdelivr.net/gh/volantis-x/cdn-emoji/valine/',
+      emojiMaps: emojiMaps,
+    }))
+  }
+  $(function () {
+    pjax_valine();
+  });
+  volantis.pjax.push(pjax_valine);
+</script>
+
+
+
+
+
 
   
+<script src="/js/app.js"></script>
 
-</body>
+
+
+<!-- optional -->
+
+  <script>
+const SearchServiceimagePath="https://cdn.jsdelivr.net/gh/volantis-x/cdn-volantis@master/img/";
+const ROOT =  ("/" || "/").endsWith('/') ? ("/" || "/") : ("//" || "/" );
+
+$('.input.u-search-input').one('focus',function(){
+	
+		loadScript('/js/search/hexo.js',setSearchService);
+	
+})
+
+function listenSearch(){
+  
+    customSearch = new HexoSearch({
+      imagePath: SearchServiceimagePath
+    });
+  
+}
+function setSearchService() {
+	listenSearch();
+	
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  <script defer>
+
+  const LCCounter = {
+    app_id: 'u9j57bwJod4EDmXWdxrwuqQT-MdYXbMMI',
+    app_key: 'jfHtEKVE24j0IVCGHbvuFClp',
+    custom_api_server: '',
+
+    // 查询存储的记录
+    getRecord(Counter, url, title) {
+      return new Promise(function (resolve, reject) {
+        Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({url})))
+          .then(resp => resp.json())
+          .then(({results, code, error}) => {
+            if (code === 401) {
+              throw error;
+            }
+            if (results && results.length > 0) {
+              var record = results[0];
+              resolve(record);
+            } else {
+              Counter('post', '/classes/Counter', {url, title: title, times: 0})
+                .then(resp => resp.json())
+                .then((record, error) => {
+                  if (error) {
+                    throw error;
+                  }
+                  resolve(record);
+                }).catch(error => {
+                console.error('Failed to create', error);
+                reject(error);
+              });
+            }
+          }).catch((error) => {
+          console.error('LeanCloud Counter Error:', error);
+          reject(error);
+        });
+      })
+    },
+
+    // 发起自增请求
+    increment(Counter, incrArr) {
+      return new Promise(function (resolve, reject) {
+        Counter('post', '/batch', {
+          "requests": incrArr
+        }).then((res) => {
+          res = res.json();
+          if (res.error) {
+            throw res.error;
+          }
+          resolve(res);
+        }).catch((error) => {
+          console.error('Failed to save visitor count', error);
+          reject(error);
+        });
+      });
+    },
+
+    // 构建自增请求体
+    buildIncrement(objectId) {
+      return {
+        "method": "PUT",
+        "path": `/1.1/classes/Counter/${ objectId }`,
+        "body": {
+          "times": {
+            '__op': 'Increment',
+            'amount': 1
+          }
+        }
+      }
+    },
+
+    // 校验是否为有效的 UV
+    validUV() {
+      var key = 'LeanCloudUVTimestamp';
+      var flag = localStorage.getItem(key);
+      if (flag) {
+        // 距离标记小于 24 小时则不计为 UV
+        if (new Date().getTime() - parseInt(flag) <= 86400000) {
+          return false;
+        }
+      }
+      localStorage.setItem(key, new Date().getTime().toString());
+      return true;
+    },
+
+    addCount(Counter) {
+      var enableIncr = '' === 'true' && window.location.hostname !== 'localhost';
+      enableIncr = true;
+      var getterArr = [];
+      var incrArr = [];
+      // 请求 PV 并自增
+      var pvCtn = document.querySelector('#lc-sv');
+      if (pvCtn || enableIncr) {
+        var pvGetter = this.getRecord(Counter, 'http://yoursite.com' + '/#lc-sv', 'Visits').then((record) => {
+          incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-sv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + 1;
+              if (pvCtn) {
+                pvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(pvGetter);
+      }
+
+      // 请求 UV 并自增
+      var uvCtn = document.querySelector('#lc-uv');
+      if (uvCtn || enableIncr) {
+        var uvGetter = this.getRecord(Counter, 'http://yoursite.com' + '/#lc-uv', 'Visitors').then((record) => {
+          var vuv = this.validUV();
+          vuv && incrArr.push(this.buildIncrement(record.objectId))
+          var eles = document.querySelectorAll('#lc-uv #number');
+          if (eles.length > 0) {
+            eles.forEach((el,index,array)=>{
+              el.innerText = record.times + (vuv ? 1 : 0);
+              if (uvCtn) {
+                uvCtn.style.display = 'inline';
+              }
+            })
+          }
+        });
+        getterArr.push(uvGetter);
+      }
+
+      // 请求文章的浏览数，如果是当前页面就自增
+      var allPV = document.querySelectorAll('#lc-pv');
+      if (allPV.length > 0 || enableIncr) {
+        for (i = 0; i < allPV.length; i++) {
+          let pv = allPV[i];
+          let title = pv.getAttribute('data-title');
+          var url = 'http://yoursite.com' + pv.getAttribute('data-path');
+          if (url) {
+            var viewGetter = this.getRecord(Counter, url, title).then((record) => {
+              // 是当前页面就自增
+              let curPath = window.location.pathname;
+              if (curPath.includes('index.html')) {
+                curPath = curPath.substring(0, curPath.lastIndexOf('index.html'));
+              }
+              if (pv.getAttribute('data-path') == curPath) {
+                incrArr.push(this.buildIncrement(record.objectId));
+              }
+              if (pv) {
+                var ele = pv.querySelector('#lc-pv #number');
+                if (ele) {
+                  if (pv.getAttribute('data-path') == curPath) {
+                    ele.innerText = (record.times || 0) + 1;
+                  } else {
+                    ele.innerText = record.times || 0;
+                  }
+                  pv.style.display = 'inline';
+                }
+              }
+            });
+            getterArr.push(viewGetter);
+          }
+        }
+      }
+
+      // 如果启动计数自增，批量发起自增请求
+      if (enableIncr) {
+        Promise.all(getterArr).then(() => {
+          incrArr.length > 0 && this.increment(Counter, incrArr);
+        })
+      }
+
+    },
+
+
+    fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${ api_server }/1.1${ url }`, {
+          method,
+          headers: {
+            'X-LC-Id': this.app_id,
+            'X-LC-Key': this.app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      this.addCount(Counter);
+    },
+
+    refreshCounter() {
+      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+      if (api_server) {
+        this.fetchData(api_server);
+      } else {
+        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
+          .then(resp => resp.json())
+          .then(({api_server}) => {
+            this.fetchData('https://' + api_server);
+          });
+      }
+    }
+
+  };
+
+  LCCounter.refreshCounter();
+
+  document.addEventListener('pjax:complete', function () {
+    LCCounter.refreshCounter();
+  });
+</script>
+
+
+
+
+  <script>
+const rootElement = document.documentElement;
+const darkModeStorageKey = "user-color-scheme";
+const rootElementDarkModeAttributeName = "data-user-color-scheme";
+
+const setLS = (k, v) => {
+    localStorage.setItem(k, v);
+};
+
+const removeLS = (k) => {
+    localStorage.removeItem(k);
+};
+
+const getLS = (k) => {
+    return localStorage.getItem(k);
+};
+
+const getModeFromCSSMediaQuery = () => {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
+
+const resetRootDarkModeAttributeAndLS = () => {
+  rootElement.removeAttribute(rootElementDarkModeAttributeName);
+  removeLS(darkModeStorageKey);
+};
+
+const validColorModeKeys = {
+  dark: true,
+  light: true,
+};
+
+const applyCustomDarkModeSettings = (mode) => {
+  const currentSetting = mode || getLS(darkModeStorageKey);
+
+  if (currentSetting === getModeFromCSSMediaQuery()) {
+    resetRootDarkModeAttributeAndLS();
+  } else if (validColorModeKeys[currentSetting]) {
+    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
+  } else {
+    resetRootDarkModeAttributeAndLS();
+  }
+};
+
+const invertDarkModeObj = {
+  dark: "light",
+  light: "dark",
+};
+
+/**
+ * get target mode
+ */
+const toggleCustomDarkMode = () => {
+  let currentSetting = getLS(darkModeStorageKey);
+
+  if (validColorModeKeys[currentSetting]) {
+    currentSetting = invertDarkModeObj[currentSetting];
+  } else if (currentSetting === null) {
+    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
+  } else {
+    return;
+  }
+  setLS(darkModeStorageKey, currentSetting);
+  return currentSetting;
+};
+
+/**
+ * bind click event for toggle button
+ */
+var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
+function bindToggleButton() {
+    btn.on('click',(e) => {
+      const mode = toggleCustomDarkMode();
+      applyCustomDarkModeSettings(mode);
+    });
+}
+
+applyCustomDarkModeSettings();
+document.addEventListener("DOMContentLoaded", bindToggleButton);
+volantis.pjax.push(bindToggleButton);
+volantis.pjax.send(()=>{
+	btn.unbind('click');
+},'toggle-mode-btn-unbind');
+</script>
+
+
+
+
+
+
+
+
+<script>
+function listennSidebarTOC() {
+  const navItems = document.querySelectorAll(".toc li");
+  if (!navItems.length) return;
+  const sections = [...navItems].map((element) => {
+    const link = element.querySelector(".toc-link");
+    const target = document.getElementById(
+      decodeURI(link.getAttribute("href")).replace("#", "")
+    );
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({
+		top: target.offsetTop + 100,
+		
+		behavior: "smooth"
+		
+	  });
+    });
+    return target;
+  });
+
+  function activateNavByIndex(target) {
+    if (target.classList.contains("active-current")) return;
+
+    document.querySelectorAll(".toc .active").forEach((element) => {
+      element.classList.remove("active", "active-current");
+    });
+    target.classList.add("active", "active-current");
+    let parent = target.parentNode;
+    while (!parent.matches(".toc")) {
+      if (parent.matches("li")) parent.classList.add("active");
+      parent = parent.parentNode;
+    }
+  }
+
+  function findIndex(entries) {
+    let index = 0;
+    let entry = entries[index];
+    if (entry.boundingClientRect.top > 0) {
+      index = sections.indexOf(entry.target);
+      return index === 0 ? 0 : index - 1;
+    }
+    for (; index < entries.length; index++) {
+      if (entries[index].boundingClientRect.top <= 0) {
+        entry = entries[index];
+      } else {
+        return sections.indexOf(entry.target);
+      }
+    }
+    return sections.indexOf(entry.target);
+  }
+
+  function createIntersectionObserver(marginTop) {
+    marginTop = Math.floor(marginTop + 10000);
+    let intersectionObserver = new IntersectionObserver(
+      (entries, observe) => {
+        let scrollHeight = document.documentElement.scrollHeight + 100;
+        if (scrollHeight > marginTop) {
+          observe.disconnect();
+          createIntersectionObserver(scrollHeight);
+          return;
+        }
+        let index = findIndex(entries);
+        activateNavByIndex(navItems[index]);
+      },
+      {
+        rootMargin: marginTop + "px 0px -100% 0px",
+        threshold: 0,
+      }
+    );
+    sections.forEach((element) => {
+      element && intersectionObserver.observe(element);
+    });
+  }
+  createIntersectionObserver(document.documentElement.scrollHeight);
+}
+
+document.addEventListener("DOMContentLoaded", listennSidebarTOC);
+document.addEventListener("pjax:success", listennSidebarTOC);
+</script>
+
+<!-- more -->
+
+ 
+	   
+	    
+
+
+<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
+
+
+<script>
+    var pjax;
+    document.addEventListener('DOMContentLoaded', function () {
+      pjax = new Pjax({
+        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
+        selectors: [
+          "title",
+          
+          "#pjax-container",
+          "#pjax-header-nav-list"
+        ],
+        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+        timeout: 5000
+      });
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+      //window.stop(); // 相当于点击了浏览器的停止按钮
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      window.subData = null; // 移除标题（用于一二级导航栏切换处）
+
+      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
+      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
+      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
+
+      // 解绑事件 避免重复监听
+      volantis.$topBtn.unbind('click');
+      $('.menu a').unbind('click');
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.send.start();
+    });
+
+    document.addEventListener('pjax:complete', function () {
+      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
+      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+      try{
+		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
+		volantis.pjax.method.complete.start();
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
+	  volantis.pjax.method.error.start();
+      window.location.href = e.triggerElement.href;
+    });
+</script>
+ 
+	  
+    </div>
+  </body>
 </html>
