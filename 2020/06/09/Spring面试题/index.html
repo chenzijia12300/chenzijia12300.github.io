@@ -562,8 +562,91 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>@RequestBody: 获得请求体中的JSON数据格式，并映射成所需对象</li>
 </ul>
 <h4 id="Value"><a href="#Value" class="headerlink" title="@Value"></a>@Value</h4><p>读取配置文件的值</p>
-<h3 id="Spring声明Bean的几种方式"><a href="#Spring声明Bean的几种方式" class="headerlink" title="Spring声明Bean的几种方式"></a>Spring声明Bean的几种方式</h3><h4 id="基于XML的配置"><a href="#基于XML的配置" class="headerlink" title="基于XML的配置"></a>基于XML的配置</h4><h4 id="基于注解的配置"><a href="#基于注解的配置" class="headerlink" title="基于注解的配置"></a>基于注解的配置</h4><h4 id="基于java类的配置"><a href="#基于java类的配置" class="headerlink" title="基于java类的配置"></a>基于java类的配置</h4><h3 id="Spring默认是单例还是多例，怎么实现多例"><a href="#Spring默认是单例还是多例，怎么实现多例" class="headerlink" title="Spring默认是单例还是多例，怎么实现多例"></a>Spring默认是单例还是多例，怎么实现多例</h3><p>答：默认是单例，如果要实现多例需要在scope属性上设置为“prototype”</p>
+<h3 id="Spring声明Bean的几种方式"><a href="#Spring声明Bean的几种方式" class="headerlink" title="Spring声明Bean的几种方式"></a>Spring声明Bean的几种方式</h3><ol>
+<li>基于XML配置</li>
+<li>基于注解配置</li>
+<li>基于Java类的配置</li>
+</ol>
+<h3 id="Spring默认是单例还是多例，怎么实现多例"><a href="#Spring默认是单例还是多例，怎么实现多例" class="headerlink" title="Spring默认是单例还是多例，怎么实现多例"></a>Spring默认是单例还是多例，怎么实现多例</h3><p>答：默认是单例，如果要实现多例需要在scope属性上设置为“prototype”</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">XML</span><br><span class="line"></span><br><span class="line">&lt;bean id&#x3D;&quot;自定义id(一般为类名小写)&quot; class&#x3D;&quot;自定义类&quot; init-method&#x3D;&quot;init&quot; scope&#x3D;&quot;prototype&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Java</span><br><span class="line"></span><br><span class="line">@Scope(&quot;prototype&quot;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="说一下什么是Spring"><a href="#说一下什么是Spring" class="headerlink" title="说一下什么是Spring"></a>说一下什么是Spring</h3><blockquote>
+<p>Spring<strong>是一种轻量级开发框架</strong>，主旨在于提高开发者的效率和系统的维护性。我们一般说Spring框架指的是Spring Framework使用这些模块可以很方便的协助我们开发。这些模块是：核心容器、数据访问/集成、Web、AOP（面向切面编程）、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。</p>
+</blockquote>
+<img src="/.com//Typora\笔记\img\Spring模块.png" class="lazyload" data-srcset="D:\Typora\笔记\img\Spring模块.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+
+<p>Spring模块中的七大模块：</p>
+<ol>
+<li>Spring Core 核心容器提供基本功能。</li>
+<li>Spring Context上下文则是一个配置文件，负责提供上下文信息，进行国际化、电子邮箱、等功能。</li>
+<li>Spring Aop提供面向对象编程。</li>
+<li>Spring ORM 插入了若干个ORM框架，从而提供了ORM对象的关系工具，其中包括了Hibernate、JDO和 IBatis SQL Map等，所有这些都遵从Spring的通用事物和DAO异常层次结构。</li>
+<li>JDBC、DAO的抽象层提供了有意义的异常层次结构，可用该结构来管理异常处理，和不同数据库供应商所抛出的错误信息。异常层次结构简化了错误处理，并且极大的降低了需要编写的代码数量，比如打开和关闭链接。</li>
+<li>Spring Web上下文模块建立在应用程序上下文模块之上，为基于web的应用程序提供了上下文。所以Spring框架支持与Struts集成，web模块还简化了处理多部分请求以及将请求参数绑定到域对象的工作。</li>
+<li>Spring MVC框架是一个全功能的构建Web应用程序的MVC实现。通过策略接口，MVC框架变成为高度可配置的。MVC容纳了大量视图技术，其中包括JSP、POI等，模型来有JavaBean来构成，存放于m当中，而视图是一个街口，负责实现模型，控制器表示逻辑代码，由c的事情。Spring框架的功能可以用在任何J2EE服务器当中，大多数功能也适用于不受管理的环境。Spring的核心要点就是支持不绑定到特定J2EE服务的可重用业务和数据的访问的对象，毫无疑问这样的对象可以在不同的J2EE环境，独立应用程序和测试环境之间重用。</li>
+</ol>
+<h3 id="使用Spring的好处"><a href="#使用Spring的好处" class="headerlink" title="使用Spring的好处"></a>使用Spring的好处</h3><blockquote>
+<p>Spring框架能够让我们更高效的编程和易于维护系统</p>
+<ol>
+<li>轻量：相对于其他框架Spring显得更轻量。</li>
+<li>控制反转：Spring通过控制反转实现了低耦合，对象给出他们的依赖，而不是创建或者查找对象所需的依赖。</li>
+<li>面向切面编程：Spring支持面向切面编程，并且把业务逻辑和系统服务分开。</li>
+<li>MVC框架：Spring的WEB框架是个精心设计的框架，是WEB框架的一个很好的替代品。</li>
+<li>事务管理：Spring提供一个持续的事务管理接口，提供声明式事务和编程式事务。</li>
+</ol>
+</blockquote>
+<p><strong>ps：耦合指的是模块之间的依赖程度</strong></p>
+<h3 id="什么是Spring-IOC"><a href="#什么是Spring-IOC" class="headerlink" title="什么是Spring IOC"></a>什么是Spring IOC</h3><blockquote>
+<p>“spring ioc指的是控制反转,IOC容器负责实例化、定位、配置应用程序中的对象及建立这些对象间的依赖。交由Spring来管理这些,实现解耦”</p>
+</blockquote>
+<h3 id="说说IOC的优缺点"><a href="#说说IOC的优缺点" class="headerlink" title="说说IOC的优缺点"></a>说说IOC的优缺点</h3><blockquote>
+<p>优点是实现了组件的解耦，<strong>提高程序的灵活性和健壮性和可维护性</strong></p>
+<p>缺点是IOC容器生成对象是通过反射来实现的，在效率上会有先损耗，但对于IOC容器带来的灵活性和可维护性来说，是微不足道的。</p>
+</blockquote>
+<h3 id="什么是Spring-AOP"><a href="#什么是Spring-AOP" class="headerlink" title="什么是Spring AOP"></a>什么是Spring AOP</h3><blockquote>
+<p>Aop（面向切面编程）能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的扩展性和可维护性。</p>
+</blockquote>
+<h3 id="说说Spring-bean的作用域"><a href="#说说Spring-bean的作用域" class="headerlink" title="说说Spring bean的作用域"></a>说说Spring bean的作用域</h3><blockquote>
+<p>singleton：唯一Bean实例，Spring中的Bean默认都是单例的。</p>
+<p>prototype：每次请求都会创建一个新的bean实例。</p>
+<p>request：每次HTTP请求都会产生一个新的Bean，该Bean仅在当前HTTP request内有效。</p>
+<p>session：每次HTTP请产生一个新的Bean，该Bean仅在当前HTTP session内有效。</p>
+</blockquote>
+<h3 id="说说-Component和-Bean的区别"><a href="#说说-Component和-Bean的区别" class="headerlink" title="说说@Component和@Bean的区别"></a>说说@Component和@Bean的区别</h3><blockquote>
+<ol>
+<li>作用对象不同：@Component作用于类，@Bean作用于方法。</li>
+<li>@Component通常是通过类路径扫描来自动侦测以及自动装配到Spring容器中（使用@ComponentScan注解定义要扫描的路径从中找出识别了需要装配的类自动装配到spring的Bean容器中）。@Bean注解通常是在标有该注解的方法中定义产生这个bean，@Bean告诉Spring这是某个类的实例，当我需要用它的时候还给我。</li>
+<li>@Bean注解比@Component注解的自定义性更强，而且很多地方只能通过@Bean注解来注册Bean，比如第三方库中的类。</li>
+</ol>
+</blockquote>
+<h3 id="SpringMVC从接受请求到返回结果的整个流程"><a href="#SpringMVC从接受请求到返回结果的整个流程" class="headerlink" title="SpringMVC从接受请求到返回结果的整个流程"></a>SpringMVC从接受请求到返回结果的整个流程</h3><blockquote>
+<ol>
+<li>客户端（浏览器）发送请求，直接请求到DispatcherServlet。</li>
+<li>DispatcherServlet根据请求细节调用HandlerMapping，解析请求对应的Handler。</li>
+<li>解析到对应的Handler（也就是Controller）后，开始由HandlerAdapter适配器处理。</li>
+<li>HandlerAdapter会根据Handler来调用真正的处理器来处理请求，并处理相应的业务逻辑。</li>
+<li>处理器处理完业务后，会返回一个ModelAndView对象，Model是返回的数据对象，View是个逻辑上的View。</li>
+<li>ViewResolver会根据View查找实际的View。</li>
+<li>DispatcherServlet把返回的Model传给View（视图渲染）。</li>
+<li>把View返回给请求者（浏览器）。</li>
+</ol>
+</blockquote>
+<h3 id="说说Spring的事务"><a href="#说说Spring的事务" class="headerlink" title="说说Spring的事务"></a>说说Spring的事务</h3><blockquote>
+<p>Spring中的事务分为两种：声明式事务和编码式事务</p>
+<ol>
+<li>编程式事务：在代码中硬编码（不推荐）</li>
+<li>声明式事务：<ol>
+<li>基于XML方式</li>
+<li>基于注解方式</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+
   
   
     
@@ -597,10 +680,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-28T18:10:34+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-02T20:28:00+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Oct 28, 2020</p>
+    <p>更新于：Mar 2, 2021</p>
   </a>
 </div>
 
@@ -730,7 +813,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基于XML的配置"><span class="toc-text">基于XML的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于注解的配置"><span class="toc-text">基于注解的配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基于java类的配置"><span class="toc-text">基于java类的配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下什么是Spring"><span class="toc-text">说一下什么是Spring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring的好处"><span class="toc-text">使用Spring的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-IOC"><span class="toc-text">什么是Spring IOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说IOC的优缺点"><span class="toc-text">说说IOC的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-AOP"><span class="toc-text">什么是Spring AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring-bean的作用域"><span class="toc-text">说说Spring bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说-Component和-Bean的区别"><span class="toc-text">说说@Component和@Bean的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC从接受请求到返回结果的整个流程"><span class="toc-text">SpringMVC从接受请求到返回结果的整个流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务"><span class="toc-text">说说Spring的事务</span></a></li></ol>
     </div>
   </section>
 
@@ -795,7 +878,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -809,7 +892,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作為主題
+        作为主题
       
     
       
