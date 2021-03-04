@@ -646,6 +646,27 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </li>
 </ol>
 </blockquote>
+<h3 id="说说Spring的事务传播行为"><a href="#说说Spring的事务传播行为" class="headerlink" title="说说Spring的事务传播行为"></a>说说Spring的事务传播行为</h3><ol>
+<li><strong>PROPAGATION_REQUIRED：如果当前事务没有事务的话，就创建一个新事务，如果当前存在事务，就加入该事务。（最常用）</strong></li>
+<li>PROPAGATION_SUPPORTS：如果当前事务存在，就加入该事务，否则就以非事务状态运行。（不常用）</li>
+<li>PROPAGATION_MANDATORY：如果当前事务存在，就加入该事务，否则就抛出异常。（不常用）</li>
+<li><strong>PROPAGATION_REQUIRES_NEW：无论当前事务是否存在，都新建一个事务运行。（有用到过）</strong></li>
+<li>PROPAGATION_NO_SUPPORTED：如果当前事务存在，就将他挂起，以非事务状态运行。（不常用）</li>
+<li>PROPAGATION_NEVER：如果当前事务存在，就抛出异常。（不常用）</li>
+<li>PROPAGATION_NESTED：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则按REQUIRED属性执行（常用）。</li>
+</ol>
+<h3 id="说说Spring的事务隔离级别"><a href="#说说Spring的事务隔离级别" class="headerlink" title="说说Spring的事务隔离级别"></a>说说Spring的事务隔离级别</h3><ol>
+<li>ISOLATION_DEFAULT：使用底层数据库的默认级别，数据库设置什么就使用什么级别。</li>
+<li>ISOLATION_READ_UNCOMMITTED：未提交读，最低隔离级别、事务未提交前，就会被其他事务所读取到。会出现幻读、脏读、不可重复读等问题。</li>
+<li>ISOLATION_READ_COMMITED：提交读，一个事务提交后才会被其他事务所读取到,SQL_SERVER的默认级别。会出现幻读、不可重复读等问题。</li>
+<li>ISOLATION_REPEATABLE_READ：可重复读，保证再一个事务中多次读取一个数据时，结果一致。但会出现幻读。</li>
+<li>ISOLATON_SERIALIZABLE：序列化，代价最高的隔离级别，该级别能够防止出现脏读、不可重复读、幻读。</li>
+</ol>
+<blockquote>
+<p>脏读：表示一个事务能够读取另一个事务中还未提交的数据。比如，某个事务尝试插入记录 A，此时该事务还未提交，然后另一个事务尝试读取到了记录 A。</p>
+<p>不可重复读：表示再一个事务中多次读取一个数据时，结果不一致。</p>
+<p>幻读：在一个事务中使用相同的 SQL 两次读取，第二次读取到了其他事务新插入的行。</p>
+</blockquote>
 
   
   
@@ -680,10 +701,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-02T20:28:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-04T19:54:21+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 2, 2021</p>
+    <p>更新于：Mar 4, 2021</p>
   </a>
 </div>
 
@@ -813,7 +834,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下什么是Spring"><span class="toc-text">说一下什么是Spring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring的好处"><span class="toc-text">使用Spring的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-IOC"><span class="toc-text">什么是Spring IOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说IOC的优缺点"><span class="toc-text">说说IOC的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-AOP"><span class="toc-text">什么是Spring AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring-bean的作用域"><span class="toc-text">说说Spring bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说-Component和-Bean的区别"><span class="toc-text">说说@Component和@Bean的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC从接受请求到返回结果的整个流程"><span class="toc-text">SpringMVC从接受请求到返回结果的整个流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务"><span class="toc-text">说说Spring的事务</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下什么是Spring"><span class="toc-text">说一下什么是Spring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring的好处"><span class="toc-text">使用Spring的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-IOC"><span class="toc-text">什么是Spring IOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说IOC的优缺点"><span class="toc-text">说说IOC的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-AOP"><span class="toc-text">什么是Spring AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring-bean的作用域"><span class="toc-text">说说Spring bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说-Component和-Bean的区别"><span class="toc-text">说说@Component和@Bean的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC从接受请求到返回结果的整个流程"><span class="toc-text">SpringMVC从接受请求到返回结果的整个流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务"><span class="toc-text">说说Spring的事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务传播行为"><span class="toc-text">说说Spring的事务传播行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务隔离级别"><span class="toc-text">说说Spring的事务隔离级别</span></a></li></ol>
     </div>
   </section>
 
@@ -878,7 +899,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
       
     
@@ -890,9 +911,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        Use
+        本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        as theme
+        作為主題
       
     
       
