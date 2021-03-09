@@ -501,8 +501,81 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h3 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h3><blockquote>
+  <h1 id="JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><a href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树" class="headerlink" title="JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?"></a>JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</h1><blockquote>
 <p>首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。</p>
+</blockquote>
+<h1 id="HashSet和TreeSet的区别"><a href="#HashSet和TreeSet的区别" class="headerlink" title="HashSet和TreeSet的区别"></a>HashSet和TreeSet的区别</h1><table>
+<thead>
+<tr>
+<th>类</th>
+<th>底层数据结构</th>
+<th>顺序</th>
+<th>存放null值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HashSet</td>
+<td>哈希表</td>
+<td>无序</td>
+<td>能够存放一个null值</td>
+</tr>
+<tr>
+<td>TreeSet</td>
+<td>二叉树</td>
+<td>有序；分为自然排序和定制排序</td>
+<td>不能够存放null值</td>
+</tr>
+</tbody></table>
+<h1 id="HashSet的底层原理"><a href="#HashSet的底层原理" class="headerlink" title="HashSet的底层原理"></a>HashSet的底层原理</h1><blockquote>
+<p>HashSet的底层就是在HashMap的基础上包装了一层，只不过存储的时候的value是默认存储了一个Object的静态常量，存取都是使用key。</p>
+</blockquote>
+<h1 id="LinkedHashMap底层原理"><a href="#LinkedHashMap底层原理" class="headerlink" title="LinkedHashMap底层原理"></a>LinkedHashMap底层原理</h1><blockquote>
+<p>LinkedHashMap通过维护一个运行于所有条目的双向链表,保证了集合元素迭代的顺序,这个顺序可以是插入顺序或者访问顺序。</p>
+<p>LinkedHashMap可以看作是HashMap和LinkedList的集合，它使用HashMap来存储数据，使用LinkedList来维护顺序。</p>
+</blockquote>
+<h1 id="为什么集合类没有实现Cloneable和Serializable接口"><a href="#为什么集合类没有实现Cloneable和Serializable接口" class="headerlink" title="为什么集合类没有实现Cloneable和Serializable接口"></a>为什么集合类没有实现Cloneable和Serializable接口</h1><blockquote>
+<p>克隆（cloning）或者序列化（serialization）的语义和含义是跟具体的实现相关的。因此应该由集合类的具体实现类来决定如何被克隆或者序列化</p>
+</blockquote>
+<h1 id="Iterator和ListInterator的区别"><a href="#Iterator和ListInterator的区别" class="headerlink" title="Iterator和ListInterator的区别"></a>Iterator和ListInterator的区别</h1><blockquote>
+<p>ListIterator 继承 Iterator</p>
+<p>ListIterator 比 Iterator多方法</p>
+<ul>
+<li>使用范围不同，Iterator可以迭代所有集合；ListIterator 只能用于List及其子类</li>
+<li>ListIterator 有 add 方法，可以向 List 中添加对象；Iterator 不能</li>
+<li>ListIterator 有 hasPrevious() 和 previous() 方法，可以实现逆向遍历；Iterator不可以</li>
+<li>ListIterator 有 nextIndex() 和previousIndex() 方法，可定位当前索引的位置；Iterator不可以</li>
+<li>ListIterator 有 set()方法，可以实现对 List 的修改；Iterator 仅能遍历，不能修改</li>
+</ul>
+</blockquote>
+<h1 id="Collection和Collections的区别"><a href="#Collection和Collections的区别" class="headerlink" title="Collection和Collections的区别"></a>Collection和Collections的区别</h1><blockquote>
+<ul>
+<li>java.util.Collection是一个顶层集合接口，它定义了对集合对象的基本操作的通用方法</li>
+<li>java.util.Collections是一个工具类，它提供了一系列静态方法，用于对集合进行排序、搜索、创建线程集合等操作</li>
+</ul>
+</blockquote>
+<h1 id="如何实现数组和-List-之间的转换？"><a href="#如何实现数组和-List-之间的转换？" class="headerlink" title="如何实现数组和 List 之间的转换？"></a>如何实现数组和 List 之间的转换？</h1><blockquote>
+<p>数组转List使用：Arrays.asList()。</p>
+<p>List转数组使用：list.toArray()和list.toArray(数组类型)，例如：list.toArray(new String[0])</p>
+</blockquote>
+<h1 id="ArrayList-和-Vector-的区别是什么？"><a href="#ArrayList-和-Vector-的区别是什么？" class="headerlink" title="ArrayList 和 Vector 的区别是什么？"></a>ArrayList 和 Vector 的区别是什么？</h1><blockquote>
+<p>Vector使用了Synchronized实现了线程安全，但效率就变得很慢，同时Vector在每扩容的时候会每次增加一倍。</p>
+<p>ArrayList是线程不安全的，但效率就会比Vector快的多，同时ArrayList每次增加50%。</p>
+</blockquote>
+<h1 id="Array-和-ArrayList-有何区别？"><a href="#Array-和-ArrayList-有何区别？" class="headerlink" title="Array 和 ArrayList 有何区别？"></a>Array 和 ArrayList 有何区别？</h1><blockquote>
+<p>Array最高效但容量初始化时就固定了且无法动态改变。</p>
+<p>ArrayList容量可以动态增加，但牺牲了效率，同时不能够存放基本类型。</p>
+</blockquote>
+<h1 id="Queue中的方法们不同点是啥？"><a href="#Queue中的方法们不同点是啥？" class="headerlink" title="Queue中的方法们不同点是啥？"></a>Queue中的方法们不同点是啥？</h1><h4 id="offer-和add"><a href="#offer-和add" class="headerlink" title="offer()和add()"></a>offer()和add()</h4><blockquote>
+<p>两个方法都是再往队列里面添加一个元素、但在队列已经满了的时候，调用 <strong>add方法就会抛出一个unchecked异常</strong>，<strong>调用offer方法就返回一个false</strong></p>
+</blockquote>
+<h4 id="peek-和element"><a href="#peek-和element" class="headerlink" title="peek()和element()"></a>peek()和element()</h4><blockquote>
+<p>两个方法都是在不移除的情况下返回当前头部的元素、但在队列为空的情况下，调用 <strong>element方法就会抛出一个NoSuchElementException异常</strong>、<strong>调用peek方法就返回null</strong></p>
+</blockquote>
+<h5 id="poll-和remove"><a href="#poll-和remove" class="headerlink" title="poll()和remove()"></a>poll()和remove()</h5><blockquote>
+<p>两个方法都是移除当前的头部元素、但是在队列为空的情况下，<strong>调用remove()方法就会抛出一个NoSuchElementException异常</strong>、<strong>调用poll()方法返回null</strong></p>
+</blockquote>
+<h1 id="怎么确保一个集合不能被修改？"><a href="#怎么确保一个集合不能被修改？" class="headerlink" title="怎么确保一个集合不能被修改？"></a>怎么确保一个集合不能被修改？</h1><blockquote>
+<p>调用Collections.unmodifiablexxx()方法。</p>
 </blockquote>
 
   
@@ -538,10 +611,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-15T15:16:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-09T20:50:07+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 15, 2020</p>
+    <p>更新于：Mar 9, 2021</p>
   </a>
 </div>
 
@@ -677,7 +750,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK1-8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树"><span class="toc-text">JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#offer-和add"><span class="toc-text">offer()和add()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#peek-和element"><span class="toc-text">peek()和element()</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#poll-和remove"><span class="toc-text">poll()和remove()</span></a></li></ol></li></ol>
     </div>
   </section>
 

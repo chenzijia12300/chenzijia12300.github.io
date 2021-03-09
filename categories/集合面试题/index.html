@@ -465,7 +465,20 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?
 首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。
 
+HashSet和TreeSet的区别
 
+
+类
+底层数据结构
+顺序
+存放null值
+
+
+
+HashSet
+哈希表
+无序
+能够存放一个nu...
       
     
   </div>
