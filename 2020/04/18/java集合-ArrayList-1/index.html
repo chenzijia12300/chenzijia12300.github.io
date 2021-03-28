@@ -436,7 +436,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <blockquote>
 <p>ArrayList实现了RandomAccess接口,RandomAccess接口是一个标识接口，表示该类支持快速随机访问。另外：”根据官方说法被该接口标识的类使用for循环来遍历要优于迭代器来遍历”</p>
 </blockquote>
-<img src="/images/pasted-2.png" class="lazyload" data-srcset="/images/pasted-2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+<img src="    /images/pasted-2.png" class="lazyload" data-srcset="    /images/pasted-2.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
 
 
 <h3 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a>ArrayList源码分析</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package java.util;</span><br><span class="line"></span><br><span class="line">import java.util.function.Consumer;</span><br><span class="line">import java.util.function.Predicate;</span><br><span class="line">import java.util.function.UnaryOperator;</span><br><span class="line">import sun.misc.SharedSecrets;</span><br><span class="line"></span><br><span class="line">public class ArrayList&lt;E&gt; extends AbstractList&lt;E&gt;</span><br><span class="line">        implements List&lt;E&gt;, RandomAccess, Cloneable, java.io.Serializable</span><br><span class="line">&#123;</span><br><span class="line">    private static final long serialVersionUID &#x3D; 8683452581122892189L;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 默认初始化容量.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final int DEFAULT_CAPACITY &#x3D; 10;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 空数组</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final Object[] EMPTY_ELEMENTDATA &#x3D; &#123;&#125;;</span><br><span class="line"></span><br><span class="line">		&#x2F;&#x2F;用于默认大小空实例的共享空数组实例。</span><br><span class="line">      &#x2F;&#x2F;我们把它从EMPTY_ELEMENTDATA数组中区分出来，以知道在添加第一个元素时容量需要增加多少。</span><br><span class="line">    private static final Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA &#x3D; &#123;&#125;;</span><br><span class="line"></span><br><span class="line">	  &#x2F;&#x2F;用于保存ArrayList数据的数组</span><br><span class="line">     &#x2F;&#x2F;这里用了transient关键字来表示该数组不被序列化，在这里是为了避免java自带的序列化操作，并定义了两个方法，实现自定的序列化操作。</span><br><span class="line">      </span><br><span class="line">    transient Object[] elementData; &#x2F;&#x2F; non-private to simplify nested class access</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * The size of the ArrayList (the number of elements it contains).</span><br><span class="line">     * 当前元素个数</span><br><span class="line">     * @serial</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private int size;</span><br></pre></td></tr></table></figure>
@@ -453,6 +453,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <blockquote>
 <p> src:源数组；<br>  srcPos:源数组要复制的起始位置；<br>  dest:目的数组；<br>  destPos:目的数组放置的起始位置；<br>  length:复制的长度。<br>  注意：src and dest都必须是同类型或者可以进行转换类型的数组．</p>
 </blockquote>
+<p>​    </p>
 <blockquote>
 <p>在toArray方法中通过Arrays.copyOf()方法在转换成数组</p>
 </blockquote>
@@ -499,10 +500,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-18T23:43:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-23T19:58:34+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 18, 2020</p>
+    <p>更新于：Mar 23, 2021</p>
   </a>
 </div>
 
