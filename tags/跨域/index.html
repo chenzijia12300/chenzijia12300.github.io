@@ -5,6 +5,8 @@
   <!-- SEO相关 -->
   
     
+      <meta name="robots" content="noindex,follow">
+    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -22,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>ArrayBlockingQueue详解 - 汤姆猫的博客</title>
+  <title>Tag: 跨域 - 汤姆猫的博客</title>
   
 
   
@@ -289,7 +291,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper post dock' style="display: none;">
+        <div id="full" class='cover-wrapper  dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -350,243 +352,82 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
+
 <div class='l_main'>
-  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
-
-
-  
-  <div class="article-meta" id="top">
     
-    
-    
-      <h1 class="title">
-        ArrayBlockingQueue详解
-      </h1>
-      <div class='new-meta-box'>
-        
-          
-            
-<div class='new-meta-item author'>
-  <a class='author' href="/" rel="nofollow">
-    <img no-lazy src="">
-    <p>Orange Add</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-
-          
-        
-          
-            <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Apr 30, 2020</p>
-  </a>
-</div>
-
-          
-        
-          
-            
-  <div class="new-meta-item browse leancloud">
-    <a class='notlink'>
       
-      <div id="lc-pv" data-title="ArrayBlockingQueue详解" data-path="/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
-        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
-        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-        次浏览
-      </div>
-    </a>
-  </div>
-
-
+  <section class="post-list">
+    
+      
+        
           
         
-      </div>
+      
+    
+    
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/">
+        跨域-CORS
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        前言最近在做项目，当我将项目丢到生产环境给前端使用接口时，出现了跨域问题，很难受发现一如既往的CrossOrigin不好使了，同时也发现自己对跨域没有了解过，因此今天就来学习一下拉。
+跨域什么是跨域
+当一个请求URL的协议、域名（IP地址）、端口三者之间任意一个与当前URL不同就为跨域。
+ps：（跨域是浏览器正确做出请求，服务器也能正确做出响应，是浏览器拒绝接收跨域服务器返回的数据；）
+
+
+...
+      
     
   </div>
-
-
   
-  
-  <h3 id="ArrayBlockingQueue简介"><a href="#ArrayBlockingQueue简介" class="headerlink" title="ArrayBlockingQueue简介"></a>ArrayBlockingQueue简介</h3><blockquote>
-<p>ArrayBlockingQueue是一个有界，堵塞/非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。</p>
-</blockquote>
-<image src="/images/ArrayBlockingQueue.png">
-
-<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;存放元素的数组</span><br><span class="line">  final Object[] items;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;出队操作的下标</span><br><span class="line">  int takeIndex;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F;入队操作的下标</span><br><span class="line">  int putIndex;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;元素个数</span><br><span class="line">  int count;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;入队操作和出队操作的独占锁</span><br><span class="line">  final ReentrantLock lock;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">  private final Condition notEmpty;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">  private final Condition notFull;</span><br></pre></td></tr></table></figure>
-<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public ArrayBlockingQueue(int capacity) &#123;</span><br><span class="line">       this(capacity, false);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair) &#123;</span><br><span class="line">       if (capacity &lt;&#x3D; 0)</span><br><span class="line">           throw new IllegalArgumentException();</span><br><span class="line">       this.items &#x3D; new Object[capacity];&#x2F;&#x2F;创建指定大小的数组</span><br><span class="line">       lock &#x3D; new ReentrantLock(fair);&#x2F;&#x2F;创建锁</span><br><span class="line">       notEmpty &#x3D; lock.newCondition();</span><br><span class="line">       notFull &#x3D;  lock.newCondition();</span><br><span class="line">  &#125;</span><br><span class="line">&#x2F;&#x2F;根据指定集合创建数组</span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair,</span><br><span class="line">                             Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">       this(capacity, fair);</span><br><span class="line"></span><br><span class="line">       final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">       lock.lock(); &#x2F;&#x2F; Lock only for visibility, not mutual exclusion&#x2F;&#x2F;上锁</span><br><span class="line">       try &#123;</span><br><span class="line">           int i &#x3D; 0;</span><br><span class="line">           try &#123;</span><br><span class="line">               for (E e : c) &#123;</span><br><span class="line">                   checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">                   items[i++] &#x3D; e;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (ArrayIndexOutOfBoundsException ex) &#123;</span><br><span class="line">               throw new IllegalArgumentException();</span><br><span class="line">           &#125;</span><br><span class="line">           count &#x3D; i;</span><br><span class="line">           putIndex &#x3D; (i &#x3D;&#x3D; capacity) ? 0 : i;</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>三种构造方法都要指定队列大小，另外fair参数控制独占锁是否为公平非公平锁。</p>
-</blockquote>
-<h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满直接返回false</span><br><span class="line">            return false;</span><br><span class="line">        else &#123;</span><br><span class="line">            enqueue(e);&#x2F;&#x2F;把值添加到队列尾部</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="enqueue-E-x"><a href="#enqueue-E-x" class="headerlink" title="enqueue(E x)"></a>enqueue(E x)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private void enqueue(E x) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert lock.getHoldCount() &#x3D;&#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; assert items[putIndex] &#x3D;&#x3D; null;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    items[putIndex] &#x3D; x;&#x2F;&#x2F;赋值</span><br><span class="line">    if (++putIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果入队下标等于队列边界则把入队下标设置为0</span><br><span class="line">        putIndex &#x3D; 0;</span><br><span class="line">    count++;</span><br><span class="line">    notEmpty.signal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id><a href="#" class="headerlink" title></a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满则休眠</span><br><span class="line">            notFull.await();</span><br><span class="line">        enqueue(e);入队</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>offer()和put()都可以用来添加新的元素，但offer()入队时发现队列已满会直接返回false，put()则会堵塞等待队列不为满在添加。</p>
-</blockquote>
-<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        return (count &#x3D;&#x3D; 0) ? null : dequeue();&#x2F;&#x2F;如果队列个数为空则直接返回null否则调用dequeue()</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="dequeue"><a href="#dequeue" class="headerlink" title="dequeue()"></a>dequeue()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private E dequeue() &#123;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    E x &#x3D; (E) items[takeIndex];&#x2F;&#x2F;根据出队下标获得值</span><br><span class="line">    items[takeIndex] &#x3D; null;</span><br><span class="line">    if (++takeIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;计算出队下标的值，如果等于队列长度则设置为0</span><br><span class="line">        takeIndex &#x3D; 0;</span><br><span class="line">    count--;</span><br><span class="line">    if (itrs !&#x3D; null)</span><br><span class="line">        itrs.elementDequeued();</span><br><span class="line">    notFull.signal();</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则休眠</span><br><span class="line">            notEmpty.await();</span><br><span class="line">        return dequeue();&#x2F;&#x2F;进行出队操作</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>poll()和take()都可以进行出队操作，区别是运行poll()时如果队列为空则直接返回null，take()则会堵塞当前线程直到队列不为空。</p>
-</blockquote>
-</image>
-  
-  
-    
-    <div class='footer'>
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-04-15</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+        
+      </div>
       
-      
-      
-        <div class='copyright'>
-          <blockquote>
-            
-              
-                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
-
-              
-            
-              
-                <p>本文永久链接是：<a href=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/>http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/</a></p>
-              
-            
-          </blockquote>
+        <div>
+          <a class='readmore' href='/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/'>
+            Read More
+          </a>
         </div>
       
-      
     </div>
   
-  
-    
 
-
-  <div class='article-meta' id="bottom">
-    <div class='new-meta-box'>
-      
-        
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-02T16:44:14+08:00">
-  <a class='notlink'>
-    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 2, 2020</p>
-  </a>
 </div>
 
+          </div>
         
       
-        
-          
-
-        
-      
-        
-          
-  <div class="new-meta-item share -mob-share-list">
-  <div class="-mob-share-list share-body">
     
-      
-        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
-          
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
-          
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
-          
-          >
-          
-            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
-          
-        </a>
-      
-    
-      
-    
-      
-    
-  </div>
-</div>
-
-
-
-        
-      
-    </div>
-  </div>
-
-
+  </section>
   
+    
   
 
-  
-    <div class="prev-next">
-      
-        <a class='prev' href='/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>数据结构-堆</p>
-          <p class='content'>堆的定义
-堆在逻辑上是一种完全二叉树，物理结构上是一维数组，按照根节点大小分为最大堆和最小堆，如下图。最小堆：所有节点的左右孩子节点都大于或者等于父节点最大堆：所有节点的左右孩子节点都小于或者等...</p>
-        </a>
-      
-      
-        <a class='next' href='/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/'>
-          <p class='title'>LinkedBlockingQueue详解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>LinkedBlockingQueue简介
-LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线程安全队列。由下类图可以看到他的基本实现。它也是由单向链表实现，也是分...</p>
-        </a>
-      
-    </div>
-  
-</article>
 
-
-  
-
-  <article class="post white-box reveal shadow" id="comments">
-    <p ct><i class='fas fa-comments'></i> 评论</p>
     
-    <div id="valine_container" class="valine_thread">
-  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-</div>
-
-  </article>
-
-
-
-
-
-
+  
 </div>
 <aside class='l_side'>
   
@@ -594,28 +435,246 @@ LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线
     
     
 
+<section class="widget blogger shadow desktop mobile">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='https://www.kugou.com/song/#hash=3DD936AC7157B7207B0404A824751482&album_id=962521' target="_blank" rel="noopener">
+          <img no-lazy src='http://8.129.67.113:9147/image/view_1.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+        
+          <p>毫无代价唱最幸福的歌</p>
 
+        
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/chenzijia12300"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/"
+              class="social fas fa-headphones-alt flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
 
-  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+  
+
+  
+    
+    
+  
+
+  <section class="widget category shadow desktop">
     
   <header>
     
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
     
   </header>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayBlockingQueue简介"><span class="toc-text">ArrayBlockingQueue简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码详解"><span class="toc-text">源码详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员分析"><span class="toc-text">成员分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造方法分析"><span class="toc-text">构造方法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入队操作"><span class="toc-text">入队操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#offer"><span class="toc-text">offer()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#enqueue-E-x"><span class="toc-text">enqueue(E x)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出队操作"><span class="toc-text">出队操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#poll"><span class="toc-text">poll()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dequeue"><span class="toc-text">dequeue()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#take"><span class="toc-text">take()</span></a></li></ol></li></ol></li></ol>
+      <ul class="entry navigation">
+        
+          <li><a class="flat-box"
+            title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
+            id="categoriesElasticsearch"
+            ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/JVM/" href="/categories/JVM/"
+            id="categoriesJVM"
+            ><div class='name'>JVM</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Mybatis/" href="/categories/Mybatis/"
+            id="categoriesMybatis"
+            ><div class='name'>Mybatis</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Nginx/" href="/categories/Nginx/"
+            id="categoriesNginx"
+            ><div class='name'>Nginx</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Redis/" href="/categories/Redis/"
+            id="categoriesRedis"
+            ><div class='name'>Redis</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Spring-Cloud/" href="/categories/Spring-Cloud/"
+            id="categoriesSpring-Cloud"
+            ><div class='name'>Spring Cloud</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/android%E5%9F%BA%E7%A1%80/" href="/categories/android%E5%9F%BA%E7%A1%80/"
+            id="categoriesandroidE59FBAE7A180"
+            ><div class='name'>android基础</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/"
+            id="categoriesdalidaliE9A1B9E79BAEE5AE9EE78EB0"
+            ><div class='name'>dalidali项目实现</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"
+            id="categoriesdalidaliE9A1B9E79BAEE8AEBEE8AEA1"
+            ><div class='name'>dalidali项目设计</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/docker/" href="/categories/docker/"
+            id="categoriesdocker"
+            ><div class='name'>docker</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/http/" href="/categories/http/"
+            id="categorieshttp"
+            ><div class='name'>http</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/java%E5%9F%BA%E7%A1%80/" href="/categories/java%E5%9F%BA%E7%A1%80/"
+            id="categoriesjavaE59FBAE7A180"
+            ><div class='name'>java基础</div><div class='badge'>(7)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/mysql/" href="/categories/mysql/"
+            id="categoriesmysql"
+            ><div class='name'>mysql</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesspringE99DA2E8AF95E9A298"
+            ><div class='name'>spring面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/zookeeper/" href="/categories/zookeeper/"
+            id="categorieszookeeper"
+            ><div class='name'>zookeeper</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
+            id="categoriesE5A49AE7BABFE7A88B"
+            ><div class='name'>多线程</div><div class='badge'>(8)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesE5A49AE7BABFE7A88BE99DA2E8AF95E9A298"
+            ><div class='name'>多线程面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
+            id="categoriesE695B0E68DAEE7BB93E69E84"
+            ><div class='name'>数据结构</div><div class='badge'>(4)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E6%9D%82%E7%B1%BB/" href="/categories/%E6%9D%82%E7%B1%BB/"
+            id="categoriesE69D82E7B1BB"
+            ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%88%AC%E8%99%AB/" href="/categories/%E7%88%AC%E8%99%AB/"
+            id="categoriesE788ACE899AB"
+            ><div class='name'>爬虫</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E7%BD%91%E7%BB%9C/" href="/categories/%E7%BD%91%E7%BB%9C/"
+            id="categoriesE7BD91E7BB9C"
+            ><div class='name'>网络</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
+            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9B%86%E5%90%88/" href="/categories/%E9%9B%86%E5%90%88/"
+            id="categoriesE99B86E59088"
+            ><div class='name'>集合</div><div class='badge'>(3)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/"
+            id="categoriesE99B86E59088E99DA2E8AF95E9A298"
+            ><div class='name'>集合面试题</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
+            id="categoriesE99DA2E8AF95"
+            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
+        
+      </ul>
     </div>
   </section>
 
 
   
 
+  
+    
+    
+  
+
+  <section class="widget tagcloud shadow desktop mobile">
+    
+  <header>
+    
+      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      <a href="/tags/Elasticsearch/" style="font-size: 17.33px; color: #828282">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/JVM/" style="font-size: 20.67px; color: #6c6c6c">JVM</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring-Cloud/" style="font-size: 17.33px; color: #828282">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 17.33px; color: #828282">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 17.33px; color: #828282">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 17.33px; color: #828282">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 24px; color: #555">java基础</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 17.33px; color: #828282">zookeeper</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 14px; color: #999">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 17.33px; color: #828282">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 20.67px; color: #6c6c6c">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 14px; color: #999">面试</a>
+    </div>
+  </section>
+
+
+  
+
+  
+
 
 </aside>
-
 
 
 		  
@@ -624,8 +683,8 @@ LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线
 
 <script>
   window.pdata={}
-  pdata.ispage=true;
-  pdata.postTitle="ArrayBlockingQueue详解";
+  pdata.ispage=false;
+  pdata.postTitle="";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

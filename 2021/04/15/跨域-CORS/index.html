@@ -22,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>ArrayBlockingQueue详解 - 汤姆猫的博客</title>
+  <title>跨域-CORS - 汤姆猫的博客</title>
+  
+    <meta name="keywords" content="跨域">
   
 
   
@@ -361,7 +363,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        ArrayBlockingQueue详解
+        跨域-CORS
       </h1>
       <div class='new-meta-box'>
         
@@ -378,6 +380,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
             
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+    </a>
+  </div>
+
 
           
         
@@ -385,7 +394,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Apr 30, 2020</p>
+    <p>发布于：Apr 15, 2021</p>
   </a>
 </div>
 
@@ -396,7 +405,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="ArrayBlockingQueue详解" data-path="/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
+      <div id="lc-pv" data-title="跨域-CORS" data-path="/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -414,36 +423,127 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h3 id="ArrayBlockingQueue简介"><a href="#ArrayBlockingQueue简介" class="headerlink" title="ArrayBlockingQueue简介"></a>ArrayBlockingQueue简介</h3><blockquote>
-<p>ArrayBlockingQueue是一个有界，堵塞/非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。</p>
+  <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在做项目，当我将项目丢到生产环境给前端使用接口时，出现了跨域问题，很难受发现一如既往的CrossOrigin不好使了，同时也发现自己对跨域没有了解过，因此今天就来学习一下拉。</p>
+<h1 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h1><h3 id="什么是跨域"><a href="#什么是跨域" class="headerlink" title="什么是跨域"></a>什么是跨域</h3><blockquote>
+<p>当一个请求URL的协议、域名（IP地址）、端口三者之间任意一个与当前URL不同就为跨域。</p>
+<p>ps：（<strong>跨域是浏览器正确做出请求，服务器也能正确做出响应，是浏览器拒绝接收跨域服务器返回的数据</strong>；）</p>
 </blockquote>
-<image src="/images/ArrayBlockingQueue.png">
-
-<h3 id="源码详解"><a href="#源码详解" class="headerlink" title="源码详解"></a>源码详解</h3><h4 id="成员分析"><a href="#成员分析" class="headerlink" title="成员分析"></a>成员分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;存放元素的数组</span><br><span class="line">  final Object[] items;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;出队操作的下标</span><br><span class="line">  int takeIndex;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F;入队操作的下标</span><br><span class="line">  int putIndex;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;元素个数</span><br><span class="line">  int count;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;入队操作和出队操作的独占锁</span><br><span class="line">  final ReentrantLock lock;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列为空时，进行出队操作的线程会被放进这个条件队列等待</span><br><span class="line">  private final Condition notEmpty;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;当队列已满，进行入队操作的线程会被放进该这个条件队列等待</span><br><span class="line">  private final Condition notFull;</span><br></pre></td></tr></table></figure>
-<h4 id="构造方法分析"><a href="#构造方法分析" class="headerlink" title="构造方法分析"></a>构造方法分析</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">public ArrayBlockingQueue(int capacity) &#123;</span><br><span class="line">       this(capacity, false);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair) &#123;</span><br><span class="line">       if (capacity &lt;&#x3D; 0)</span><br><span class="line">           throw new IllegalArgumentException();</span><br><span class="line">       this.items &#x3D; new Object[capacity];&#x2F;&#x2F;创建指定大小的数组</span><br><span class="line">       lock &#x3D; new ReentrantLock(fair);&#x2F;&#x2F;创建锁</span><br><span class="line">       notEmpty &#x3D; lock.newCondition();</span><br><span class="line">       notFull &#x3D;  lock.newCondition();</span><br><span class="line">  &#125;</span><br><span class="line">&#x2F;&#x2F;根据指定集合创建数组</span><br><span class="line">  public ArrayBlockingQueue(int capacity, boolean fair,</span><br><span class="line">                             Collection&lt;? extends E&gt; c) &#123;</span><br><span class="line">       this(capacity, fair);</span><br><span class="line"></span><br><span class="line">       final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">       lock.lock(); &#x2F;&#x2F; Lock only for visibility, not mutual exclusion&#x2F;&#x2F;上锁</span><br><span class="line">       try &#123;</span><br><span class="line">           int i &#x3D; 0;</span><br><span class="line">           try &#123;</span><br><span class="line">               for (E e : c) &#123;</span><br><span class="line">                   checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">                   items[i++] &#x3D; e;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; catch (ArrayIndexOutOfBoundsException ex) &#123;</span><br><span class="line">               throw new IllegalArgumentException();</span><br><span class="line">           &#125;</span><br><span class="line">           count &#x3D; i;</span><br><span class="line">           putIndex &#x3D; (i &#x3D;&#x3D; capacity) ? 0 : i;</span><br><span class="line">       &#125; finally &#123;</span><br><span class="line">           lock.unlock();</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
+<table>
+<thead>
+<tr>
+<th>当前请求页面URL</th>
+<th>被请求页面URL</th>
+<th>是否跨域</th>
+<th>跨域原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://www.test.com/" target="_blank" rel="noopener">http://www.test.com/</a></td>
+<td><a href="http://www.test.com/index.html" target="_blank" rel="noopener">http://www.test.com/index.html</a></td>
+<td>否</td>
+<td>同源（协议、域名、端口号相同）</td>
+</tr>
+<tr>
+<td><a href="http://www.test.com/" target="_blank" rel="noopener">http://www.test.com/</a></td>
+<td><a href="https://www.test.com/index.html" target="_blank" rel="noopener">https://www.test.com/index.html</a></td>
+<td>是</td>
+<td>协议不同（http/https）</td>
+</tr>
+<tr>
+<td><a href="http://www.test.com/" target="_blank" rel="noopener">http://www.test.com/</a></td>
+<td><a href="http://www.baidu.com/" target="_blank" rel="noopener">http://www.baidu.com/</a></td>
+<td>是</td>
+<td>主域名不同（test/baidu）</td>
+</tr>
+<tr>
+<td><a href="http://www.test.com/" target="_blank" rel="noopener">http://www.test.com/</a></td>
+<td><a href="http://blog.test.com/" target="_blank" rel="noopener">http://blog.test.com/</a></td>
+<td>是</td>
+<td>子域名不同（www/blog）</td>
+</tr>
+<tr>
+<td><a href="http://www.test.com:8080/" target="_blank" rel="noopener">http://www.test.com:8080/</a></td>
+<td><a href="http://www.test.com:7001/" target="_blank" rel="noopener">http://www.test.com:7001/</a></td>
+<td>是</td>
+<td>端口号不同（8080/7001）</td>
+</tr>
+</tbody></table>
+<h3 id="为什么会出现跨域问题"><a href="#为什么会出现跨域问题" class="headerlink" title="为什么会出现跨域问题"></a>为什么会出现跨域问题</h3><blockquote>
+<p>出于浏览器的同源策略限制。同源策略（Sameoriginpolicy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。同源策略会阻止一个域的javascript脚本和另外一个域的内容进行交互。所谓同源（即指在同一个域）就是两个页面具有相同的协议（protocol），主机（host）和端口号（port）。</p>
+</blockquote>
+<h3 id="非同源的限制"><a href="#非同源的限制" class="headerlink" title="非同源的限制"></a>非同源的限制</h3><ol>
+<li>无法读取非同源网页的 Cookie、LocalStorage 和 IndexedDB</li>
+<li>无法接触非同源网页的 DOM</li>
+<li>无法向非同源地址发送 AJAX 请求</li>
+</ol>
+<h3 id="如何解决跨域的问题"><a href="#如何解决跨域的问题" class="headerlink" title="如何解决跨域的问题"></a>如何解决跨域的问题</h3><h4 id="同域代理"><a href="#同域代理" class="headerlink" title="同域代理"></a>同域代理</h4><blockquote>
+<p>用域代理就是向同域下的后台服务器发送请求、同时携带真实的请求和地址以及参数，后台接受请求后直接根据地址及参数转发请求，因为后台是可以直接模拟HTTP客户端发送请求的，所以没有跨域问题，而后台接受到响应数据后再原样返回给前端浏览器，从而实现跨域数据交互。（<strong>跨域问题只出现在浏览器中，这种方法就是绕过了浏览器</strong>）</p>
+</blockquote>
+<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><blockquote>
+<p>JSONP是利用了 script 标签的 src 属性来实现跨域数据交互的，因为浏览器解析HTML代码时，<strong>原生</strong>具有src属性的标签，浏览器都赋予其HTTP请求的能力，而且不受跨域限制，使用src发送HTTP请求，服务器直接返回一段JS代码的<strong>函数调用</strong>，将服务器数据放在函数实参中，前端提前写好响应的函数准备回调，接收数据，实现跨域数据交互。（<strong>要注意JSONP只支持GET请求，不支持POST请求</strong>）</p>
+</blockquote>
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><blockquote>
+<p>CORS跨域资源共享(Cross-Origin resource sharing)，得益于HTTP/1.1版本中添加的许多头部字段，使得浏览器可以通过HTTP头部字段来分辨，这些请求头有两个作用</p>
+<pre><code>1. 用于阻止还是允许浏览器向其他域名发起请求;
+2. 用于接受还是拒绝其他域名返回的响应数据；</code></pre></blockquote>
 <blockquote>
-<p>三种构造方法都要指定队列大小，另外fair参数控制独占锁是否为公平非公平锁。</p>
+<p>当浏览器发送请求时发现是跨域请求的话，就会添加上<code>Origin</code>请求头，用来标识请求来自于哪一个站点。当服务端允许本次响应消息可以被共享的话，就要添加一个<code>Access-Control-Allow-Origin</code>响应体指名可以共享数据的域。当值为<code>*</code>时代表可以与任意域进行数据共享。</p>
 </blockquote>
-<h4 id="入队操作"><a href="#入队操作" class="headerlink" title="入队操作"></a>入队操作</h4><h5 id="offer"><a href="#offer" class="headerlink" title="offer()"></a>offer()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public boolean offer(E e) &#123;</span><br><span class="line">    checkNotNull(e);&#x2F;&#x2F;判空</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        if (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满直接返回false</span><br><span class="line">            return false;</span><br><span class="line">        else &#123;</span><br><span class="line">            enqueue(e);&#x2F;&#x2F;把值添加到队列尾部</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="enqueue-E-x"><a href="#enqueue-E-x" class="headerlink" title="enqueue(E x)"></a>enqueue(E x)</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private void enqueue(E x) &#123;</span><br><span class="line">    &#x2F;&#x2F; assert lock.getHoldCount() &#x3D;&#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; assert items[putIndex] &#x3D;&#x3D; null;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    items[putIndex] &#x3D; x;&#x2F;&#x2F;赋值</span><br><span class="line">    if (++putIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果入队下标等于队列边界则把入队下标设置为0</span><br><span class="line">        putIndex &#x3D; 0;</span><br><span class="line">    count++;</span><br><span class="line">    notEmpty.signal();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id><a href="#" class="headerlink" title></a></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public void put(E e) throws InterruptedException &#123;</span><br><span class="line">    checkNotNull(e);</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; items.length)&#x2F;&#x2F;如果队列已满则休眠</span><br><span class="line">            notFull.await();</span><br><span class="line">        enqueue(e);入队</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>offer()和put()都可以用来添加新的元素，但offer()入队时发现队列已满会直接返回false，put()则会堵塞等待队列不为满在添加。</p>
+<p>在CORS中所有跨域请求被分为两个类型、一个是简单请求、一种是复杂请求。简单请求与普通的ajax请求无异；但复杂请求，必须在正式发送请求前先发送一个OPTIONS方法的请求已得到服务器的同意，若没有得到服务器的同意，浏览器不会发送正式请求；</p>
 </blockquote>
-<h4 id="出队操作"><a href="#出队操作" class="headerlink" title="出队操作"></a>出队操作</h4><h5 id="poll"><a href="#poll" class="headerlink" title="poll()"></a>poll()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public E poll() &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lock();&#x2F;&#x2F;上锁</span><br><span class="line">    try &#123;</span><br><span class="line">        return (count &#x3D;&#x3D; 0) ? null : dequeue();&#x2F;&#x2F;如果队列个数为空则直接返回null否则调用dequeue()</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="dequeue"><a href="#dequeue" class="headerlink" title="dequeue()"></a>dequeue()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">private E dequeue() &#123;</span><br><span class="line">    final Object[] items &#x3D; this.items;</span><br><span class="line">    E x &#x3D; (E) items[takeIndex];&#x2F;&#x2F;根据出队下标获得值</span><br><span class="line">    items[takeIndex] &#x3D; null;</span><br><span class="line">    if (++takeIndex &#x3D;&#x3D; items.length)&#x2F;&#x2F;计算出队下标的值，如果等于队列长度则设置为0</span><br><span class="line">        takeIndex &#x3D; 0;</span><br><span class="line">    count--;</span><br><span class="line">    if (itrs !&#x3D; null)</span><br><span class="line">        itrs.elementDequeued();</span><br><span class="line">    notFull.signal();</span><br><span class="line">    return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h5 id="take"><a href="#take" class="headerlink" title="take()"></a>take()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public E take() throws InterruptedException &#123;</span><br><span class="line">    final ReentrantLock lock &#x3D; this.lock;</span><br><span class="line">    lock.lockInterruptibly();&#x2F;&#x2F;获得可以被中断的独占锁</span><br><span class="line">    try &#123;</span><br><span class="line">        while (count &#x3D;&#x3D; 0)&#x2F;&#x2F;如果队列为空则休眠</span><br><span class="line">            notEmpty.await();</span><br><span class="line">        return dequeue();&#x2F;&#x2F;进行出队操作</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <blockquote>
-<p>poll()和take()都可以进行出队操作，区别是运行poll()时如果队列为空则直接返回null，take()则会堵塞当前线程直到队列不为空。</p>
+<p>满足以下所有条件，被视为简单类型的请求：</p>
+<ol>
+<li>请求方法必须是 GET、HEAD、POST中的一种，其他方法不行；</li>
+<li>请求头类型只能是 Accept、Accept-Language、Content-Language、Content-Type，添加其他额外请求头不行；</li>
+<li>请求头 Content-Type 如果有，值只能是 text/plain、multipart/form-data、application/x-www-form-urlencoded 中的一种，其他值不行；</li>
+<li>请求中的任意 XMLHttpRequestUpload 对象均没有注册任何事件监听器；</li>
+<li>请求中没有使用 ReadableStream 对象。</li>
+</ol>
+<p><strong>而以上的条件有任意一条不满足，则视为复杂类型的请求</strong></p>
 </blockquote>
-</image>
+<h4 id="跨域CORS头部字段"><a href="#跨域CORS头部字段" class="headerlink" title="跨域CORS头部字段"></a>跨域CORS头部字段</h4><table>
+<thead>
+<tr>
+<th>CORS头信息</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Access-Control-Allow-Origin（响应）</td>
+<td>指示请求的资源能共享给哪些域，可以是具体的域名或者*表示所有域。</td>
+</tr>
+<tr>
+<td>Access-Control-Allow-Credentials（响应）</td>
+<td>指示当请求的凭证标记为 true 时 是否响应该请求。</td>
+</tr>
+<tr>
+<td>Access-Control-Allow-Headers（响应）</td>
+<td>用在对预请求的响应中，指示实际的请求中可以使用哪些 HTTP 头。</td>
+</tr>
+<tr>
+<td>Access-Control-Allow-Methods （响应）</td>
+<td>指定对预请求的响应中， 哪些 HTTP 方法允许访问请求的资源。</td>
+</tr>
+<tr>
+<td>Access-Control-Request-Headers （请求）</td>
+<td>用于发起一个预请求，告知服务器正式请求会使用那些 HTTP 头。</td>
+</tr>
+<tr>
+<td>Access-Control-Request-Method （请求）</td>
+<td>用于发起一个预请求，告知服务器正式请求会使用哪一种 HTTP 请求方法。</td>
+</tr>
+<tr>
+<td>Origin（请求）</td>
+<td>指示获取资源的请求是从什么域发起的</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
   
   
     
@@ -460,7 +560,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/>http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/</a></p>
+                <p>本文永久链接是：<a href=http://yoursite.com/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/>http://yoursite.com/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/</a></p>
               
             
           </blockquote>
@@ -477,10 +577,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-02T16:44:14+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-15T09:37:05+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 2, 2020</p>
+    <p>更新于：Apr 15, 2021</p>
   </a>
 </div>
 
@@ -488,6 +588,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>跨域</p></a></div>
+
 
         
       
@@ -499,7 +602,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/&title=跨域-CORS - 汤姆猫的博客&summary="
           
           >
           
@@ -511,7 +614,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/&title=跨域-CORS - 汤姆猫的博客&summary="
           
           >
           
@@ -523,7 +626,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/&title=ArrayBlockingQueue详解 - 汤姆猫的博客&summary="
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/04/15/%E8%B7%A8%E5%9F%9F-CORS/&title=跨域-CORS - 汤姆猫的博客&summary="
           
           >
           
@@ -553,17 +656,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/04/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E5%A0%86/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>数据结构-堆</p>
-          <p class='content'>堆的定义
-堆在逻辑上是一种完全二叉树，物理结构上是一维数组，按照根节点大小分为最大堆和最小堆，如下图。最小堆：所有节点的左右孩子节点都大于或者等于父节点最大堆：所有节点的左右孩子节点都小于或者等...</p>
-        </a>
       
-      
-        <a class='next' href='/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/'>
-          <p class='title'>LinkedBlockingQueue详解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>LinkedBlockingQueue简介
-LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线程安全队列。由下类图可以看到他的基本实现。它也是由单向链表实现，也是分...</p>
+        <a class='next' href='/2021/04/13/Nginx%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+          <p class='title'>Nginx学习笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>Nginx
+Nginx是一个 高性能 的HTTP和 反向代理 服务器,特点是 占有内存少、并发能力强。Nginx通常被用来实现 正向代理、反向代理、负载均衡、动静分离等功能。
+
+基本概念正向代理...</p>
         </a>
       
     </div>
@@ -606,7 +705,7 @@ LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ArrayBlockingQueue简介"><span class="toc-text">ArrayBlockingQueue简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#源码详解"><span class="toc-text">源码详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#成员分析"><span class="toc-text">成员分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造方法分析"><span class="toc-text">构造方法分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入队操作"><span class="toc-text">入队操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#offer"><span class="toc-text">offer()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#enqueue-E-x"><span class="toc-text">enqueue(E x)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#"><span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#出队操作"><span class="toc-text">出队操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#poll"><span class="toc-text">poll()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dequeue"><span class="toc-text">dequeue()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#take"><span class="toc-text">take()</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是跨域"><span class="toc-text">什么是跨域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为什么会出现跨域问题"><span class="toc-text">为什么会出现跨域问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#非同源的限制"><span class="toc-text">非同源的限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何解决跨域的问题"><span class="toc-text">如何解决跨域的问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同域代理"><span class="toc-text">同域代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JSONP"><span class="toc-text">JSONP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#CORS"><span class="toc-text">CORS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跨域CORS头部字段"><span class="toc-text">跨域CORS头部字段</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -625,7 +724,7 @@ LinkedBlockingQueue类是堵塞/非堵塞（看你用啥方法），有边界线
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="ArrayBlockingQueue详解";
+  pdata.postTitle="跨域-CORS";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
