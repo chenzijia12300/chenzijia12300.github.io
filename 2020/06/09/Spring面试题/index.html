@@ -423,7 +423,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="/images/pasted-55.png" class="lazyload" data-srcset="/images/pasted-55.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
+  <h3 id="Spring中bean的生命周期"><a href="#Spring中bean的生命周期" class="headerlink" title="Spring中bean的生命周期"></a>Spring中bean的生命周期</h3><p><img src="./images/pasted-55.png" class="lazyload" data-srcset="./images/pasted-55.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
 <blockquote>
 <p>如上图我们大致可以将spring生命周期分为12个步骤</p>
 </blockquote>
@@ -442,7 +442,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>如果对象声明了destroy-method方法，spring将调用该方法。</li>
 </ol>
 <h3 id="Spring是什么？"><a href="#Spring是什么？" class="headerlink" title="Spring是什么？"></a>Spring是什么？</h3><p>Spring是一个轻量级的IOC和AOP的框架，是为java应用程序提供基础服务的一套框架。目的是用于简化企业应用程序的开发，使开发者只用关心业务的开发。</p>
-<p>主要由以下几个模块组成:<br>|–|–|<br>|模块名|介绍|<br>|Spring Core|核心类库，提供IOC服务|<br>|Spring Context|提供框架的Bean服务，以及企业级功能<br>|Spring Aop|提供Aop服务|<br>|Spring ORM|提供对ORM框架支持|<br>|Spring Web|面向Web服务|</p>
+<p>主要由以下几个模块组成:</p>
+<p>|模块名|介绍|<br>|Spring Core|核心类库，提供IOC服务|<br>|Spring Context|提供框架的Bean服务，以及企业级功能|<br>|Spring Aop|提供Aop服务|<br>|Spring ORM|提供对ORM框架支持|<br>|Spring Web|面向Web服务|</p>
 <h3 id="Spring你用过哪些注解？"><a href="#Spring你用过哪些注解？" class="headerlink" title="Spring你用过哪些注解？"></a>Spring你用过哪些注解？</h3><h4 id="SpringBootApplication"><a href="#SpringBootApplication" class="headerlink" title="@SpringBootApplication"></a>@SpringBootApplication</h4><blockquote>
 <p>这个注解是 Spring Boot 项目的基石，创建 SpringBoot 项目之后会默认在主类加上。</p>
 </blockquote>
@@ -589,6 +590,17 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>不可重复读：表示再一个事务中多次读取一个数据时，结果不一致。</p>
 <p>幻读：在一个事务中使用相同的 SQL 两次读取，第二次读取到了其他事务新插入的行。</p>
 </blockquote>
+<h3 id="Spring-AOP-and-AspectJ-AOP-有什么区别？"><a href="#Spring-AOP-and-AspectJ-AOP-有什么区别？" class="headerlink" title="Spring AOP and AspectJ AOP 有什么区别？"></a>Spring AOP and AspectJ AOP 有什么区别？</h3><ul>
+<li>AspectJ是静态代理的增强、所谓静态代理，就是AOP框架会在编译阶段生成AOP代理类，因此也称为<code>编译时增强</code>，他会在编译时期将AspectJ织入Java字节码中，这样运行时就是增加后的AOP对象。</li>
+<li>Spring AOP使用的动态代理分为JDK动态代理、CGLIB代理，所谓的动态代理就是不会取修改字节码，而是在每次运行的时候在内存里生成一个AOP对象，这个AOP对象包含了目标对象的全部方法，并且在特定的切点做了增强的处理。<ul>
+<li>JDK代理只提供接口的代理，不支持类的代理，即需要代理类去实现InvocationHandler接口</li>
+<li>CGLIB是通过继承的方式来实现动态代理，如果一个类被标记为final，那么它是无法使用CGLIB来做动态代理的</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>静态代理与动态代理区别在于生成AOP代理对象的时机不同，相对来说AspectJ的静态代理方式拥有更好的性能，但是AspectJ需要特定的编译器进行处理，而Spring AOP则无需特定的编译器处理。</p>
+</blockquote>
 
   
   
@@ -623,10 +635,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-03-04T19:54:21+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-19T14:00:17+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Mar 4, 2021</p>
+    <p>更新于：Apr 19, 2021</p>
   </a>
 </div>
 
@@ -756,7 +768,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下什么是Spring"><span class="toc-text">说一下什么是Spring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring的好处"><span class="toc-text">使用Spring的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-IOC"><span class="toc-text">什么是Spring IOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说IOC的优缺点"><span class="toc-text">说说IOC的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-AOP"><span class="toc-text">什么是Spring AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring-bean的作用域"><span class="toc-text">说说Spring bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说-Component和-Bean的区别"><span class="toc-text">说说@Component和@Bean的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC从接受请求到返回结果的整个流程"><span class="toc-text">SpringMVC从接受请求到返回结果的整个流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务"><span class="toc-text">说说Spring的事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务传播行为"><span class="toc-text">说说Spring的事务传播行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务隔离级别"><span class="toc-text">说说Spring的事务隔离级别</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring中bean的生命周期"><span class="toc-text">Spring中bean的生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring是什么？"><span class="toc-text">Spring是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring你用过哪些注解？"><span class="toc-text">Spring你用过哪些注解？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SpringBootApplication"><span class="toc-text">@SpringBootApplication</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Autowired"><span class="toc-text">@Autowired</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Component-Repository-Service-Controller-Configuration"><span class="toc-text">@Component,@Repository,@Service,@Controller,@Configuration</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RestController"><span class="toc-text">@RestController</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GetMapping-PostMapping-PutMapping-DeleteMapping"><span class="toc-text">@GetMapping,@PostMapping,@PutMapping,@DeleteMapping</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PathVariable-RequestParam-RequestBody"><span class="toc-text">@PathVariable,@RequestParam,@RequestBody</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Value"><span class="toc-text">@Value</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring声明Bean的几种方式"><span class="toc-text">Spring声明Bean的几种方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring默认是单例还是多例，怎么实现多例"><span class="toc-text">Spring默认是单例还是多例，怎么实现多例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说一下什么是Spring"><span class="toc-text">说一下什么是Spring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Spring的好处"><span class="toc-text">使用Spring的好处</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-IOC"><span class="toc-text">什么是Spring IOC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说IOC的优缺点"><span class="toc-text">说说IOC的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是Spring-AOP"><span class="toc-text">什么是Spring AOP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring-bean的作用域"><span class="toc-text">说说Spring bean的作用域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说-Component和-Bean的区别"><span class="toc-text">说说@Component和@Bean的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SpringMVC从接受请求到返回结果的整个流程"><span class="toc-text">SpringMVC从接受请求到返回结果的整个流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务"><span class="toc-text">说说Spring的事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务传播行为"><span class="toc-text">说说Spring的事务传播行为</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#说说Spring的事务隔离级别"><span class="toc-text">说说Spring的事务隔离级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Spring-AOP-and-AspectJ-AOP-有什么区别？"><span class="toc-text">Spring AOP and AspectJ AOP 有什么区别？</span></a></li></ol>
     </div>
   </section>
 
@@ -821,7 +833,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -833,9 +845,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        Use
+        本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        as theme
+        作为主题
       
     
       
