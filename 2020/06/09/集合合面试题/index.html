@@ -551,6 +551,16 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>JDK1.8大部分都与之前一样，只是在解决<code>哈希冲突</code>的地方有了比较大的变化。当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间。</p>
 <p>ps:红黑树是一个自平衡的二叉查找树.</p>
 </blockquote>
+<h1 id="HashSet-TreeSet和LinkedHashSet三者的异同之处"><a href="#HashSet-TreeSet和LinkedHashSet三者的异同之处" class="headerlink" title="HashSet,TreeSet和LinkedHashSet三者的异同之处"></a>HashSet,TreeSet和LinkedHashSet三者的异同之处</h1><ul>
+<li>如果需要一个访问快速的Set，就用HashSet</li>
+<li>如果需要一个排序的Set，就用TreeSet</li>
+<li>如果需要记录插入时的顺序，就用LinkedHashSet</li>
+</ul>
+<h1 id="HashMap长度为什么是2的幂次方"><a href="#HashMap长度为什么是2的幂次方" class="headerlink" title="HashMap长度为什么是2的幂次方"></a>HashMap长度为什么是2的幂次方</h1><blockquote>
+<p>为了<strong>加快哈希计算</strong>以及<strong>减少哈希冲突</strong></p>
+<p><strong>“取余(%)操作中如果除数是 2 的幂次则等价于与其除数减一的与(&amp;)操作（也就是说 hash%length==hash&amp;(length-1)的前提是 length 是 2 的 n 次方；）。”</strong> 并且 <strong>采用二进制位操作 &amp;，相对于%能够提高运算效率，这就解释了 HashMap 的长度为什么是 2 的幂次方。</strong></p>
+<p><strong>length 为偶数时</strong>，length-1 为奇数，奇数的二进制最后一位是 1，这样便保证了 hash &amp;(length-1) 的最后一位可能为 0，也可能为 1（这取决于 h 的值），即 &amp; 运算后的结果可能为偶数，也可能为奇数，<strong>这样便可以保证散列的均匀性</strong>。</p>
+</blockquote>
 
   
   
@@ -585,10 +595,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-14T20:12:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T20:12:56+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 14, 2021</p>
+    <p>更新于：May 12, 2021</p>
   </a>
 </div>
 
@@ -789,7 +799,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -803,7 +813,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作為主題
+        作为主题
       
     
       

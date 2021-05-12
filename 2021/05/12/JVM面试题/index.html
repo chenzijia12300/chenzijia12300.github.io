@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>標籤：面试 - 汤姆猫的博客</title>
+  <title>JVM面试题 - 汤姆猫的博客</title>
+  
+    <meta name="keywords" content="JVM">
   
 
   
@@ -291,7 +291,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -352,79 +352,240 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        JVM面试题
+      </h1>
+      <div class='new-meta-box'>
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/11/08/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95%E9%A2%98/">
-        java基础-面试题
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        JDK和JRE有什么区别？
-JRE：Java Runtime Environment（java运行时环境）。即java程序的运行时环境，包含了java虚拟机，java基础类库。
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>Orange Add</p>
+  </a>
+</div>
 
-JDK：Java Development Kit（java开发工具包）。即java语言编写的程序所需的开发工具包。JDK包含了JRE，同时还包括java源码的编译器javac、监控工具jconsole、分析工具jv...
-      
-    
+          
+        
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/JVM/">JVM</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2020-11-08</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：May 12, 2021</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="JVM面试题" data-path="/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h1 id="JVM垃圾回收算法有哪些"><a href="#JVM垃圾回收算法有哪些" class="headerlink" title="JVM垃圾回收算法有哪些"></a>JVM垃圾回收算法有哪些</h1><ul>
+<li>标记-清除</li>
+<li>标记-复制</li>
+<li>标记-整理</li>
+</ul>
+<h1 id="JVM-GC的全流程"><a href="#JVM-GC的全流程" class="headerlink" title="JVM GC的全流程"></a>JVM GC的全流程</h1><ol>
+<li>当现在有一个新的对象产生，那么对象一定需要内存空间，于是现在就需要为该对象进行内存空间的申请；</li>
+<li>首先会判断Eden区是否有内存空间，如果此时有内存空间，则直接将新对象保存在Eden区；</li>
+<li>但是如果此时Eden区的内存空间不足，那么会自动执行一个MinorGC操作，将Eden区的无用内存空间进行清理，清理之后会继续判断Eden区的内存空间是否充足？如果内存空间充足，则将新的对象直接在Eden区进行空间分配；</li>
+<li>如果执行了Minor GC之后发现Eden区的内存依然不足，那么这个时候会进行Survivor区判断，如果Survivor有剩余空间，则将Eden区的部分活跃对象保存在Survivor区，那么随后继续判断Eden区的内存空间是否充足，如果充足，则在Eden区进行新对象的空间分配；</li>
+<li>如果此时Survivor也已经没有内存空间了，则继续判断老年区，如果此时老年区空间充足，则将Survivor区中的活跃对象保存到老年代，而后Survivor就会存现有空余空间，随后Eden区将活跃对象保存在Survivor之中，而后在Eden区里为新对象开辟空间；</li>
+<li>如果这个时候老年代也满了，那么这个时候将产生M ajor GC（FullGC），进行老年代的内存清理。</li>
+<li>如果老年代执行了Full GC之后发现依然无法进行对象的保存，就会产生OOM异常“OutOfMemoryError”</li>
+</ol>
+<h1 id="JVM中-新生代和老年代分别使用什么回收方法"><a href="#JVM中-新生代和老年代分别使用什么回收方法" class="headerlink" title="JVM中 新生代和老年代分别使用什么回收方法"></a>JVM中 新生代和老年代分别使用什么回收方法</h1><ul>
+<li>新生代使用：标记-复制算法</li>
+<li>老年代使用：标记-整理算法</li>
+</ul>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2020/11/08/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            閱讀全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://yoursite.com/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/>http://yoursite.com/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T20:16:28+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：May 12, 2021</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/JVM/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>JVM</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/&title=JVM面试题 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/&title=JVM面试题 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/05/12/JVM%E9%9D%A2%E8%AF%95%E9%A2%98/&title=JVM面试题 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/05/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/'>
+          <p class='title'>多线程基本知识<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>多线程模型用户级线程
+用户级线程由应用程序通过线程库实现，所有线程管理工作都由应用程序负责。
+用户级线程对用户不透明，对操作系统透明。
+用户级线程即为从“用户视角可以看到的线程”。
+
+内核级线程...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -432,251 +593,28 @@ JDK：Java Development Kit（java开发工具包）。即java语言编写的程�
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='https://www.kugou.com/song/#hash=3DD936AC7157B7207B0404A824751482&album_id=962521' target="_blank" rel="noopener">
-          <img no-lazy src='./view_1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>毫无代价唱最幸福的歌</p>
 
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/chenzijia12300"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
-
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
         
-          <li><a class="flat-box"
-            title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
-            id="categoriesElasticsearch"
-            ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/JVM/" href="/categories/JVM/"
-            id="categoriesJVM"
-            ><div class='name'>JVM</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Linux/" href="/categories/Linux/"
-            id="categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Mybatis/" href="/categories/Mybatis/"
-            id="categoriesMybatis"
-            ><div class='name'>Mybatis</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Nginx/" href="/categories/Nginx/"
-            id="categoriesNginx"
-            ><div class='name'>Nginx</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Redis/" href="/categories/Redis/"
-            id="categoriesRedis"
-            ><div class='name'>Redis</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Spring-Cloud/" href="/categories/Spring-Cloud/"
-            id="categoriesSpring-Cloud"
-            ><div class='name'>Spring Cloud</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/android%E5%9F%BA%E7%A1%80/" href="/categories/android%E5%9F%BA%E7%A1%80/"
-            id="categoriesandroidE59FBAE7A180"
-            ><div class='name'>android基础</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/"
-            id="categoriesdalidaliE9A1B9E79BAEE5AE9EE78EB0"
-            ><div class='name'>dalidali项目实现</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"
-            id="categoriesdalidaliE9A1B9E79BAEE8AEBEE8AEA1"
-            ><div class='name'>dalidali项目设计</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/docker/" href="/categories/docker/"
-            id="categoriesdocker"
-            ><div class='name'>docker</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/http/" href="/categories/http/"
-            id="categorieshttp"
-            ><div class='name'>http</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/java%E5%9F%BA%E7%A1%80/" href="/categories/java%E5%9F%BA%E7%A1%80/"
-            id="categoriesjavaE59FBAE7A180"
-            ><div class='name'>java基础</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/mysql/" href="/categories/mysql/"
-            id="categoriesmysql"
-            ><div class='name'>mysql</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesspringE99DA2E8AF95E9A298"
-            ><div class='name'>spring面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/zookeeper/" href="/categories/zookeeper/"
-            id="categorieszookeeper"
-            ><div class='name'>zookeeper</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
-            id="categoriesE5A49AE7BABFE7A88B"
-            ><div class='name'>多线程</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE5A49AE7BABFE7A88BE99DA2E8AF95E9A298"
-            ><div class='name'>多线程面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
-            id="categoriesE695B0E68DAEE7BB93E69E84"
-            ><div class='name'>数据结构</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E7%B1%BB/" href="/categories/%E6%9D%82%E7%B1%BB/"
-            id="categoriesE69D82E7B1BB"
-            ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%88%AC%E8%99%AB/" href="/categories/%E7%88%AC%E8%99%AB/"
-            id="categoriesE788ACE899AB"
-            ><div class='name'>爬虫</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%BD%91%E7%BB%9C/" href="/categories/%E7%BD%91%E7%BB%9C/"
-            id="categoriesE7BD91E7BB9C"
-            ><div class='name'>网络</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88/" href="/categories/%E9%9B%86%E5%90%88/"
-            id="categoriesE99B86E59088"
-            ><div class='name'>集合</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE99B86E59088E99DA2E8AF95E9A298"
-            ><div class='name'>集合面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
-            id="categoriesE99DA2E8AF95"
-            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Elasticsearch/" style="font-size: 17.33px; color: #828282">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/JVM/" style="font-size: 20.67px; color: #6c6c6c">JVM</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring-Cloud/" style="font-size: 17.33px; color: #828282">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 17.33px; color: #828282">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 17.33px; color: #828282">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 17.33px; color: #828282">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 24px; color: #555">java基础</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 17.33px; color: #828282">zookeeper</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 17.33px; color: #828282">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 17.33px; color: #828282">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 20.67px; color: #6c6c6c">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9D%A2%E8%AF%95/" style="font-size: 14px; color: #999">面试</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
 		  
@@ -685,8 +623,8 @@ JDK：Java Development Kit（java开发工具包）。即java语言编写的程�
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="JVM面试题";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
@@ -732,7 +670,7 @@ JDK：Java Development Kit（java开发工具包）。即java语言编写的程�
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -746,7 +684,7 @@ JDK：Java Development Kit（java开发工具包）。即java语言编写的程�
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作為主題
+        作为主题
       
     
       
