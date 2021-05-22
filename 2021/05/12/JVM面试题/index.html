@@ -423,12 +423,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="JVM垃圾回收算法有哪些"><a href="#JVM垃圾回收算法有哪些" class="headerlink" title="JVM垃圾回收算法有哪些"></a>JVM垃圾回收算法有哪些</h1><ul>
+  <h3 id="JVM垃圾回收算法有哪些"><a href="#JVM垃圾回收算法有哪些" class="headerlink" title="JVM垃圾回收算法有哪些"></a>JVM垃圾回收算法有哪些</h3><ul>
 <li>标记-清除</li>
 <li>标记-复制</li>
 <li>标记-整理</li>
 </ul>
-<h1 id="JVM-GC的全流程"><a href="#JVM-GC的全流程" class="headerlink" title="JVM GC的全流程"></a>JVM GC的全流程</h1><ol>
+<h3 id="JVM-GC的全流程"><a href="#JVM-GC的全流程" class="headerlink" title="JVM GC的全流程"></a>JVM GC的全流程</h3><ol>
 <li>当现在有一个新的对象产生，那么对象一定需要内存空间，于是现在就需要为该对象进行内存空间的申请；</li>
 <li>首先会判断Eden区是否有内存空间，如果此时有内存空间，则直接将新对象保存在Eden区；</li>
 <li>但是如果此时Eden区的内存空间不足，那么会自动执行一个MinorGC操作，将Eden区的无用内存空间进行清理，清理之后会继续判断Eden区的内存空间是否充足？如果内存空间充足，则将新的对象直接在Eden区进行空间分配；</li>
@@ -437,7 +437,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>如果这个时候老年代也满了，那么这个时候将产生M ajor GC（FullGC），进行老年代的内存清理。</li>
 <li>如果老年代执行了Full GC之后发现依然无法进行对象的保存，就会产生OOM异常“OutOfMemoryError”</li>
 </ol>
-<h1 id="JVM中-新生代和老年代分别使用什么回收方法"><a href="#JVM中-新生代和老年代分别使用什么回收方法" class="headerlink" title="JVM中 新生代和老年代分别使用什么回收方法"></a>JVM中 新生代和老年代分别使用什么回收方法</h1><ul>
+<h3 id="JVM中-新生代和老年代分别使用什么回收方法"><a href="#JVM中-新生代和老年代分别使用什么回收方法" class="headerlink" title="JVM中 新生代和老年代分别使用什么回收方法"></a>JVM中 新生代和老年代分别使用什么回收方法</h3><ul>
 <li>新生代使用：标记-复制算法</li>
 <li>老年代使用：标记-整理算法</li>
 </ul>
@@ -475,10 +475,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T20:16:28+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-13T08:52:57+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 12, 2021</p>
+    <p>更新于：May 13, 2021</p>
   </a>
 </div>
 
@@ -554,6 +554,12 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
+        <a class='prev' href='/2021/05/22/%E7%A6%8F%E7%94%B0%E6%95%99%E8%82%B2%E5%B1%80%E5%85%9A%E5%BB%BA-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/'>
+          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>福田教育局党建-开发总结</p>
+          <p class='content'>项目介绍
+此项目是为福田教育局的党建知识竞赛微信小程序，本项目核心功能就是答题模块，项目逻辑、需求本身并不复杂，但由于本人在开发中没有考虑到各种情况所导致了很多不必要的麻烦。因此，来次总结，回顾...</p>
+        </a>
+      
       
         <a class='next' href='/2021/05/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/'>
           <p class='title'>多线程基本知识<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
@@ -605,7 +611,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM垃圾回收算法有哪些"><span class="toc-text">JVM垃圾回收算法有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM-GC的全流程"><span class="toc-text">JVM GC的全流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JVM中-新生代和老年代分别使用什么回收方法"><span class="toc-text">JVM中 新生代和老年代分别使用什么回收方法</span></a></li></ol>
     </div>
   </section>
 

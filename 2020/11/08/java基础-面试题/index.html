@@ -423,44 +423,44 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <h1 id="JDK和JRE有什么区别？"><a href="#JDK和JRE有什么区别？" class="headerlink" title="JDK和JRE有什么区别？"></a>JDK和JRE有什么区别？</h1><ul>
+  <h3 id="JDK和JRE有什么区别？"><a href="#JDK和JRE有什么区别？" class="headerlink" title="JDK和JRE有什么区别？"></a>JDK和JRE有什么区别？</h3><ul>
 <li><p>JRE：Java Runtime Environment（java运行时环境）。即java程序的运行时环境，包含了java虚拟机，java基础类库。</p>
 </li>
 <li><p>JDK：Java Development Kit（java开发工具包）。即java语言编写的程序所需的开发工具包。JDK包含了JRE，同时还包括java源码的编译器javac、监控工具jconsole、分析工具jvisualvm等。</p>
 </li>
 </ul>
-<h1 id="和equals的区别是什么"><a href="#和equals的区别是什么" class="headerlink" title="==和equals的区别是什么"></a>==和equals的区别是什么</h1><ol>
+<h3 id="和equals的区别是什么"><a href="#和equals的区别是什么" class="headerlink" title="==和equals的区别是什么"></a>==和equals的区别是什么</h3><ol>
 <li>==是操作符，equals是Object超类的一个方法</li>
 <li>==对于基本类型来说是值比较，对于引用类型来说是比较的是引用；而 equals 默认情况下是引用比较，只是很多类重新了 equals 方法，比如 String、Integer 等把它变成了值比较，所以一般情况下 equals 比较的是值是否相等。</li>
 </ol>
-<h1 id="两个对象的hashCode-相同，则equals-也一定为-true，对吗？"><a href="#两个对象的hashCode-相同，则equals-也一定为-true，对吗？" class="headerlink" title="两个对象的hashCode()相同，则equals()也一定为 true，对吗？"></a>两个对象的hashCode()相同，则equals()也一定为 true，对吗？</h1><p>答：不对，可能是哈希冲突</p>
+<h3 id="两个对象的hashCode-相同，则equals-也一定为-true，对吗？"><a href="#两个对象的hashCode-相同，则equals-也一定为-true，对吗？" class="headerlink" title="两个对象的hashCode()相同，则equals()也一定为 true，对吗？"></a>两个对象的hashCode()相同，则equals()也一定为 true，对吗？</h3><p>答：不对，可能是哈希冲突</p>
 <ul>
 <li>两个对象equals相等，则它们的hashcode必须相等，反之则不一定。</li>
 <li>两个对象==相等，则其hashcode一定相等，反之不一定成立。</li>
 </ul>
-<h1 id="final在Java中有什么作用？"><a href="#final在Java中有什么作用？" class="headerlink" title="final在Java中有什么作用？"></a>final在Java中有什么作用？</h1><ol>
+<h3 id="final在Java中有什么作用？"><a href="#final在Java中有什么作用？" class="headerlink" title="final在Java中有什么作用？"></a>final在Java中有什么作用？</h3><ol>
 <li>修饰类，表示该类不能被继承</li>
 <li>修饰方法，表示父类的final方法不能被子类覆盖（PS:类的private方法会隐式地被指定为final方法）</li>
 <li>修饰变量, final成员变量表示常量，只能被赋值一次，赋值后值不再改变。</li>
 </ol>
-<h1 id="Java-中的-Math-round-1-5-等于多少？"><a href="#Java-中的-Math-round-1-5-等于多少？" class="headerlink" title="Java 中的 Math. round(-1. 5) 等于多少？"></a>Java 中的 Math. round(-1. 5) 等于多少？</h1><blockquote>
+<h3 id="Java-中的-Math-round-1-5-等于多少？"><a href="#Java-中的-Math-round-1-5-等于多少？" class="headerlink" title="Java 中的 Math. round(-1. 5) 等于多少？"></a>Java 中的 Math. round(-1. 5) 等于多少？</h3><blockquote>
 <p>它返回的是一个最接近参数的long值，如果出现向上向下距离一样的数值例如-1.5，则取最大的结果。因此-1.5两个边界为-1和-2，-1最大因此答案为它。</p>
 </blockquote>
-<h1 id="String-属于基础的数据类型吗？"><a href="#String-属于基础的数据类型吗？" class="headerlink" title="String 属于基础的数据类型吗？"></a>String 属于基础的数据类型吗？</h1><p>答：不属于喔，它是final修饰的Java类。随便来复习一下Java的基本数据类型</p>
+<h3 id="String-属于基础的数据类型吗？"><a href="#String-属于基础的数据类型吗？" class="headerlink" title="String 属于基础的数据类型吗？"></a>String 属于基础的数据类型吗？</h3><p>答：不属于喔，它是final修饰的Java类。随便来复习一下Java的基本数据类型</p>
 <blockquote>
-</blockquote>
 <p>byte：8位，最大存储数据量是255，存放的数据范围是-128<del>127之间。<br>short：16位，最大数据存储量是65536，数据范围是-32768</del>32767之间。<br>int：32位，最大数据存储容量是2的32次方减1，数据范围是负的2的31次方到正的2的31次方减1。<br>long：64位，最大数据存储容量是2的64次方减1，数据范围为负的2的63次方到正的2的63次方减1。<br>float：32位，数据范围在3.4e-45<del>1.4e38，直接赋值时必须在数字后加上f或F。<br>double：64位，数据范围在4.9e-324</del>1.8e308，赋值时可以加d或D也可以不加。<br>boolean：只有true和false两个取值。<br>char：16位，存储Unicode码，用单引号赋值。</p>
-<h1 id="Java中操作字符串都有哪些类？它们之间有什么区别？"><a href="#Java中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="Java中操作字符串都有哪些类？它们之间有什么区别？"></a>Java中操作字符串都有哪些类？它们之间有什么区别？</h1><ul>
+</blockquote>
+<h3 id="Java中操作字符串都有哪些类？它们之间有什么区别？"><a href="#Java中操作字符串都有哪些类？它们之间有什么区别？" class="headerlink" title="Java中操作字符串都有哪些类？它们之间有什么区别？"></a>Java中操作字符串都有哪些类？它们之间有什么区别？</h3><ul>
 <li>String     不可变，线程不安全</li>
 <li>StringBuilder  可变,线程不安全，速度快</li>
 <li>StringBuffer  可变，线程安全，速度略慢</li>
 </ul>
-<h1 id="String-str-”i”与-String-str-new-String-“i”-一样吗？"><a href="#String-str-”i”与-String-str-new-String-“i”-一样吗？" class="headerlink" title="String str=”i”与 String str=new String(“i”)一样吗？"></a>String str=”i”与 String str=new String(“i”)一样吗？</h1><p>答：字符串一样，但不是同一个对象。第一个通过常量池拿取，如果不存在则创建然后存放里常量池。第二个无论怎么样都会创建一个新的对象。</p>
-<h1 id="如何将字符串反转？"><a href="#如何将字符串反转？" class="headerlink" title="如何将字符串反转？"></a>如何将字符串反转？</h1><ol>
+<h3 id="String-str-”i”与-String-str-new-String-“i”-一样吗？"><a href="#String-str-”i”与-String-str-new-String-“i”-一样吗？" class="headerlink" title="String str=”i”与 String str=new String(“i”)一样吗？"></a>String str=”i”与 String str=new String(“i”)一样吗？</h3><p>答：字符串一样，但不是同一个对象。第一个通过常量池拿取，如果不存在则创建然后存放里常量池。第二个无论怎么样都会创建一个新的对象。</p>
+<h3 id="如何将字符串反转？"><a href="#如何将字符串反转？" class="headerlink" title="如何将字符串反转？"></a>如何将字符串反转？</h3><ol>
 <li>使用StringBuilder或者StringBuffer的reverse方法。</li>
 <li>使用String.charAt(),然后遍历拼接字符串。</li>
 </ol>
-<h1 id="String类的常用方法都有那些？"><a href="#String类的常用方法都有那些？" class="headerlink" title="String类的常用方法都有那些？"></a>String类的常用方法都有那些？</h1><table>
+<h3 id="String类的常用方法都有那些？"><a href="#String类的常用方法都有那些？" class="headerlink" title="String类的常用方法都有那些？"></a>String类的常用方法都有那些？</h3><table>
 <thead>
 <tr>
 <th>方法</th>
@@ -496,28 +496,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <td>判断参数str是否包含于字符串中，如果存在则返回true，否则返回false</td>
 </tr>
 </tbody></table>
-<h1 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h1><p>答：不是，抽象类可以没有抽象方法。<br>ps：如果一个类有抽象方法，则该类一定是抽象类~</p>
-<h1 id="普通类和抽象类有哪些区别？"><a href="#普通类和抽象类有哪些区别？" class="headerlink" title="普通类和抽象类有哪些区别？"></a>普通类和抽象类有哪些区别？</h1><ol>
+<h3 id="抽象类必须要有抽象方法吗？"><a href="#抽象类必须要有抽象方法吗？" class="headerlink" title="抽象类必须要有抽象方法吗？"></a>抽象类必须要有抽象方法吗？</h3><p>答：不是，抽象类可以没有抽象方法。<br>ps：如果一个类有抽象方法，则该类一定是抽象类~</p>
+<h3 id="普通类和抽象类有哪些区别？"><a href="#普通类和抽象类有哪些区别？" class="headerlink" title="普通类和抽象类有哪些区别？"></a>普通类和抽象类有哪些区别？</h3><ol>
 <li>普通类不能有抽象方法，可以被实例化</li>
 <li>抽象类可以有抽象方法，不可以被实例化</li>
 </ol>
-<h1 id="抽象类能使用-final-修饰吗？"><a href="#抽象类能使用-final-修饰吗？" class="headerlink" title="抽象类能使用 final 修饰吗？"></a>抽象类能使用 final 修饰吗？</h1><p>答：不能，final修饰的类不能被继承，不可以有子类，而抽象类就是要被继承。两个修饰符的意图完全冲突拉~</p>
-<h1 id="接口和抽象类有什么区别？"><a href="#接口和抽象类有什么区别？" class="headerlink" title="接口和抽象类有什么区别？"></a>接口和抽象类有什么区别？</h1><ol>
+<h3 id="抽象类能使用-final-修饰吗？"><a href="#抽象类能使用-final-修饰吗？" class="headerlink" title="抽象类能使用 final 修饰吗？"></a>抽象类能使用 final 修饰吗？</h3><p>答：不能，final修饰的类不能被继承，不可以有子类，而抽象类就是要被继承。两个修饰符的意图完全冲突拉~</p>
+<h3 id="接口和抽象类有什么区别？"><a href="#接口和抽象类有什么区别？" class="headerlink" title="接口和抽象类有什么区别？"></a>接口和抽象类有什么区别？</h3><ol>
 <li>抽象类可以有方法实现，接口不能有。</li>
 <li>理念不同，抽象类表示is-a关系，接口表示like-a</li>
 <li>抽象类可以用普通成员变量，接口只能有静态常量</li>
 </ol>
-<h1 id="Java-中-IO-流分为几种？"><a href="#Java-中-IO-流分为几种？" class="headerlink" title="Java 中 IO 流分为几种？"></a>Java 中 IO 流分为几种？</h1><ol>
+<h3 id="Java-中-IO-流分为几种？"><a href="#Java-中-IO-流分为几种？" class="headerlink" title="Java 中 IO 流分为几种？"></a>Java 中 IO 流分为几种？</h3><ol>
 <li>从流的方向来说，分为输入流和输出流</li>
 <li>从流的操作单元来说，分为字符流和字节流</li>
 <li>从流的角色来说，分为节点流和处理流</li>
 </ol>
-<h1 id="BIO、NIO、AIO-有什么区别？"><a href="#BIO、NIO、AIO-有什么区别？" class="headerlink" title="BIO、NIO、AIO 有什么区别？"></a>BIO、NIO、AIO 有什么区别？</h1><ul>
+<h3 id="BIO、NIO、AIO-有什么区别？"><a href="#BIO、NIO、AIO-有什么区别？" class="headerlink" title="BIO、NIO、AIO 有什么区别？"></a>BIO、NIO、AIO 有什么区别？</h3><ul>
 <li>BIO:同步阻塞I/O模式，数据的读取写入必须阻塞在一个线程内等待其完成</li>
 <li>NIO:同步非阻塞的I/O模式</li>
 <li>AIO:异步非阻塞的IO模式</li>
 </ul>
-<h1 id="Files常用方法有哪些？"><a href="#Files常用方法有哪些？" class="headerlink" title="Files常用方法有哪些？"></a>Files常用方法有哪些？</h1><blockquote>
+<h3 id="Files常用方法有哪些？"><a href="#Files常用方法有哪些？" class="headerlink" title="Files常用方法有哪些？"></a>Files常用方法有哪些？</h3><blockquote>
 </blockquote>
 <p>Files.exists()：检测文件路径是否存在。</p>
 <p>Files.createFile()：创建文件。</p>
@@ -549,7 +549,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <li>private:只对本类可见 使用对象：变量、方法</li>
 </ul>
 <p><img src="../images/pasted-94.png" class="lazyload" data-srcset="../images/pasted-94.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
-<h1 id="进程跟线程"><a href="#进程跟线程" class="headerlink" title="进程跟线程"></a>进程跟线程</h1><p> 进程:</p>
+<h3 id="进程跟线程"><a href="#进程跟线程" class="headerlink" title="进程跟线程"></a>进程跟线程</h3><p> 进程:</p>
 <blockquote>
 <p>进程是操作系统调用的最小单位，是系统进行资源分配和调度的独立单位。</p>
 </blockquote>
@@ -558,13 +558,13 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <p>因为进程的创建、销毁、切换产生大量的时间和空间的开销，进程的数量不能太多，而线程是比进程更小的能独立运行的基本单位，他是进程的一个实体，是CPU调度的最小单位。线程可以减少程序并发执行时的时间和空间开销，使得操作系统具有更好的并发性。</p>
 <p>线程基本不拥有系统资源，只有一些运行时必不可少的资源，比如程序计数器、寄存器和栈，进程则占有堆、栈。线程，Java默认有两个线程 main 跟GC。Java是没有权限开线程的，无法操作硬件，都是调用的 <strong>native</strong> 的 <strong>start0</strong> 方法 由 <strong>C++</strong> 实现</p>
 </blockquote>
-<h1 id="面向过程语言和面向对象语言的区别"><a href="#面向过程语言和面向对象语言的区别" class="headerlink" title="面向过程语言和面向对象语言的区别"></a>面向过程语言和面向对象语言的区别</h1><ul>
+<h3 id="面向过程语言和面向对象语言的区别"><a href="#面向过程语言和面向对象语言的区别" class="headerlink" title="面向过程语言和面向对象语言的区别"></a>面向过程语言和面向对象语言的区别</h3><ul>
 <li><strong>面向过程</strong> ：<strong>面向过程性能比面向对象高。</strong> 因为类调用时需要实例化，开销比较大，比较消耗资源，所以当性能是最重要的考量因素的时候，比如单片机、嵌入式开发、Linux/Unix 等一般采用面向过程开发。但是，<strong>面向过程没有面向对象易维护、易复用、易扩展。</strong></li>
 <li><strong>面向对象</strong> ：<strong>面向对象易维护、易复用、易扩展。</strong> 因为面向对象有封装、继承、多态性的特性，所以可以设计出低耦合的系统，使系统更加灵活、更加易于维护。但是，<strong>面向对象性能比面向过程低</strong>。</li>
 </ul>
 <h1 id="并行跟并发"><a href="#并行跟并发" class="headerlink" title="并行跟并发"></a>并行跟并发</h1><ul>
 <li>并发：<strong>concurrency</strong> : 多线程操作同一个资源，单核CPU极速的切换运行多个任务,逻辑上同时进行</li>
-<li>并发：<strong>parallelism</strong> ：多个CPU同时使用，CPU多核 真正的同时执行,物理上同时进行</li>
+<li>并行：<strong>parallelism</strong> ：多个CPU同时使用，CPU多核 真正的同时执行,物理上同时进行</li>
 </ul>
 <h1 id="堵塞和等待的区别"><a href="#堵塞和等待的区别" class="headerlink" title="堵塞和等待的区别"></a>堵塞和等待的区别</h1><p>堵塞：</p>
 <blockquote>
@@ -756,10 +756,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-12T20:15:35+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-13T12:02:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 12, 2021</p>
+    <p>更新于：May 13, 2021</p>
   </a>
 </div>
 
@@ -889,7 +889,7 @@ sec...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是内部类？内部类的作用"><span class="toc-text">什么是内部类？内部类的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问修饰符-public-private-protected-以及不写（默认）时的区别"><span class="toc-text">访问修饰符 public,private,protected,以及不写（默认）时的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说hashCode和equals方法的理解"><span class="toc-text">说说hashCode和equals方法的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#那请问hashCode有什么作用呢？为什么要这么规范"><span class="toc-text">那请问hashCode有什么作用呢？为什么要这么规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说重载的定义"><span class="toc-text">说说重载的定义</span></a>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK和JRE有什么区别？"><span class="toc-text">JDK和JRE有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#和equals的区别是什么"><span class="toc-text">&#x3D;&#x3D;和equals的区别是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#两个对象的hashCode-相同，则equals-也一定为-true，对吗？"><span class="toc-text">两个对象的hashCode()相同，则equals()也一定为 true，对吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final在Java中有什么作用？"><span class="toc-text">final在Java中有什么作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-中的-Math-round-1-5-等于多少？"><span class="toc-text">Java 中的 Math. round(-1. 5) 等于多少？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-属于基础的数据类型吗？"><span class="toc-text">String 属于基础的数据类型吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java中操作字符串都有哪些类？它们之间有什么区别？"><span class="toc-text">Java中操作字符串都有哪些类？它们之间有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String-str-”i”与-String-str-new-String-“i”-一样吗？"><span class="toc-text">String str&#x3D;”i”与 String str&#x3D;new String(“i”)一样吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何将字符串反转？"><span class="toc-text">如何将字符串反转？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String类的常用方法都有那些？"><span class="toc-text">String类的常用方法都有那些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类必须要有抽象方法吗？"><span class="toc-text">抽象类必须要有抽象方法吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#普通类和抽象类有哪些区别？"><span class="toc-text">普通类和抽象类有哪些区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类能使用-final-修饰吗？"><span class="toc-text">抽象类能使用 final 修饰吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口和抽象类有什么区别？"><span class="toc-text">接口和抽象类有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java-中-IO-流分为几种？"><span class="toc-text">Java 中 IO 流分为几种？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BIO、NIO、AIO-有什么区别？"><span class="toc-text">BIO、NIO、AIO 有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Files常用方法有哪些？"><span class="toc-text">Files常用方法有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是内部类？内部类的作用"><span class="toc-text">什么是内部类？内部类的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#访问修饰符-public-private-protected-以及不写（默认）时的区别"><span class="toc-text">访问修饰符 public,private,protected,以及不写（默认）时的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#进程跟线程"><span class="toc-text">进程跟线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向过程语言和面向对象语言的区别"><span class="toc-text">面向过程语言和面向对象语言的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说hashCode和equals方法的理解"><span class="toc-text">说说hashCode和equals方法的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#那请问hashCode有什么作用呢？为什么要这么规范"><span class="toc-text">那请问hashCode有什么作用呢？为什么要这么规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#说说重载的定义"><span class="toc-text">说说重载的定义</span></a>
     </div>
   </section>
 
