@@ -426,6 +426,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <h1 id="Linux部署运维笔记"><a href="#Linux部署运维笔记" class="headerlink" title="Linux部署运维笔记"></a>Linux部署运维笔记</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
 <p>通常开发完一个项目就要进行部署啦，但苦逼的我还要负责部署，在部署的途中也遇到了很多问题，下面就来填一下踩到的<code>坑</code>吧。</p>
 </blockquote>
+<h3 id="Linux部署常用命令"><a href="#Linux部署常用命令" class="headerlink" title="Linux部署常用命令"></a>Linux部署常用命令</h3><h4 id="查看服务器运行的java程序"><a href="#查看服务器运行的java程序" class="headerlink" title="查看服务器运行的java程序"></a>查看服务器运行的java程序</h4><blockquote>
+<p>ps -ef | grep java</p>
+</blockquote>
+<h4 id="杀死进程"><a href="#杀死进程" class="headerlink" title="杀死进程"></a>杀死进程</h4><blockquote>
+<p>kill -9 进程号</p>
+</blockquote>
+<h4 id="后台启动jar包"><a href="#后台启动jar包" class="headerlink" title="后台启动jar包"></a>后台启动jar包</h4><blockquote>
+<p>nohup java -jar jar包名 &amp;</p>
+</blockquote>
+<h4 id="后台启动SpringBoot-jar包并且指定输出文件"><a href="#后台启动SpringBoot-jar包并且指定输出文件" class="headerlink" title="后台启动SpringBoot jar包并且指定输出文件"></a>后台启动SpringBoot jar包并且指定输出文件</h4><blockquote>
+<p>nohup java -jar jar包名 &gt; log.log &amp;</p>
+</blockquote>
 <h3 id="创建对应数据库用户"><a href="#创建对应数据库用户" class="headerlink" title="创建对应数据库用户"></a>创建对应数据库用户</h3><blockquote>
 <p>通常为了安全考虑，我们会为专门创建一个用户来进行此项目的数据库CRUD操作，所以我们通常都要创建用户并为其授予权限。</p>
 </blockquote>
@@ -578,10 +590,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-04-29T12:26:51+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-05-31T10:57:14+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 29, 2021</p>
+    <p>更新于：May 31, 2021</p>
   </a>
 </div>
 
@@ -714,7 +726,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对应数据库用户"><span class="toc-text">创建对应数据库用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建用户"><span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#授予权限"><span class="toc-text">授予权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL定时备份"><span class="toc-text">MySQL定时备份</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备份脚本创建"><span class="toc-text">备份脚本创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定时任务创建"><span class="toc-text">定时任务创建</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#cron服务"><span class="toc-text">cron服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#crontab语法"><span class="toc-text">crontab语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建cron脚本"><span class="toc-text">创建cron脚本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#注意事项"><span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux部署常用命令"><span class="toc-text">Linux部署常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看服务器运行的java程序"><span class="toc-text">查看服务器运行的java程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#杀死进程"><span class="toc-text">杀死进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#后台启动jar包"><span class="toc-text">后台启动jar包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#后台启动SpringBoot-jar包并且指定输出文件"><span class="toc-text">后台启动SpringBoot jar包并且指定输出文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建对应数据库用户"><span class="toc-text">创建对应数据库用户</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建用户"><span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#授予权限"><span class="toc-text">授予权限</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MySQL定时备份"><span class="toc-text">MySQL定时备份</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#备份脚本创建"><span class="toc-text">备份脚本创建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#定时任务创建"><span class="toc-text">定时任务创建</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#cron服务"><span class="toc-text">cron服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#crontab语法"><span class="toc-text">crontab语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建cron脚本"><span class="toc-text">创建cron脚本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#注意事项"><span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </section>
 
