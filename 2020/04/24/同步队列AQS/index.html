@@ -24,6 +24,8 @@
   
   <title>抽象同步队列AQS - 汤姆猫的博客</title>
   
+    <meta name="keywords" content="多线程">
+  
 
   
 
@@ -424,11 +426,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <h3 id="AQS简介"><a href="#AQS简介" class="headerlink" title="AQS简介"></a>AQS简介</h3><blockquote>
 <p>AbstractQueuedSynchronizer类简称为（AQS）,它是实现同步器的基本组件，内部使用int类型来表示同步状态，并提供CAS方法来操作这个同步状态。如常用的ReentrantLock/Semaphore/CountDownLatch等等就是基于AQS实现的，用法是通过继承AQS实现其模版方法，然后将子类作为同步组件的内部类。</p>
 </blockquote>
-<p><img src="/images/pasted-12.png" class="lazyload" data-srcset="/images/pasted-12.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
+<p><img src="/.com//pasted-12.png" class="lazyload" data-srcset="%E5%90%8C%E6%AD%A5%E9%98%9F%E5%88%97AQS/pasted-12.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
 <blockquote>
 <p>上图是该类的属性，AQS是一个FIFO的双向队列，内部通过head和tail记录头部和尾部节点，队列元素为Node。当一个线程试图获得锁时，如果该锁已被占用就会新创一个Node节点把他插入到尾部。头部节点是成功获得锁的节点，当头部节点被释放的时候，会唤醒后面的节点。</p>
 </blockquote>
-<p><img src="/images/pasted-13.png" class="lazyload" data-srcset="/images/pasted-13.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
+<p><img src="/.com//D:%5Chexo%5Csource%5Cimages%5Cpasted-13.png" class="lazyload" data-srcset="D:%5Chexo%5Csource%5Cimages%5Cpasted-13.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
 <blockquote>
 <p>在AQS中最重要的就是对状态值state的操作，操作state的方式分为两种。</p>
 </blockquote>
@@ -540,10 +542,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-04-26T12:00:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-14T23:43:19+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Apr 26, 2020</p>
+    <p>更新于：Jun 14, 2021</p>
   </a>
 </div>
 
@@ -551,6 +553,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>多线程</p></a></div>
+
 
         
       
@@ -737,7 +742,7 @@ Reentr...</p>
       
     
       
-        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -749,9 +754,9 @@ Reentr...</p>
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       

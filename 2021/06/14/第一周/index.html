@@ -22,7 +22,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>redis学习笔记(三)---持久化 - 汤姆猫的博客</title>
+  <title>第一周 - 汤姆猫的博客</title>
   
 
   
@@ -361,7 +361,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
       <h1 class="title">
-        redis学习笔记(三)---持久化
+        第一周
       </h1>
       <div class='new-meta-box'>
         
@@ -385,7 +385,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
             <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 15, 2020</p>
+    <p>发布于：Jun 14, 2021</p>
   </a>
 </div>
 
@@ -396,7 +396,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <div class="new-meta-item browse leancloud">
     <a class='notlink'>
       
-      <div id="lc-pv" data-title="redis学习笔记(三)---持久化" data-path="/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/">
+      <div id="lc-pv" data-title="第一周" data-path="/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/">
         <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
         <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
         次浏览
@@ -414,58 +414,47 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
   
   
-  <p>持久化<br>author: John Doe<br>date: 2020-05-15 21:28:55<br>tags:</p>
-<hr>
-<h3 id="持久化简介"><a href="#持久化简介" class="headerlink" title="持久化简介"></a>持久化简介</h3><blockquote>
-<p>redis是内存数据库，它的数据都存放在内存(RAM)中，这意味着如果断电数据将会全部丢失。因此需要把数据写入硬盘(ROM)中,来保证数据可用性。这种机制就是redis的持久化机制，它会将内存中的数据库状态保存到硬盘中。</p>
-</blockquote>
-<blockquote>
-<p>redis支持两种的持久化方式：</p>
-</blockquote>
-<ol>
-<li>RDB快照，在指定的时间间隔对数据进行快照存储。</li>
-<li>AOF，记录服务器每次的写操作，将操作记录追加到硬盘中存储。</li>
-</ol>
-<h3 id="持久化过程"><a href="#持久化过程" class="headerlink" title="持久化过程"></a>持久化过程</h3><p><img src="/images/pasted-47.png" class="lazyload" data-srcset="/images/pasted-47.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
-<ol>
-<li>客户端向数据库 发送写命令(数据在客户端的内存中)</li>
-<li>数据库接收到客户端的写请求(数据在服务器的内存中)</li>
-<li>数据库调用系统API将数据写入磁盘(数据在内核缓冲区中)</li>
-<li>操作系统将写缓冲区传输到磁盘控控制器(数据在磁盘缓存中)</li>
-<li>操作系统的磁盘控制器将数据写入实际的物理媒介(数据在磁盘中)</li>
-</ol>
-<blockquote>
-<p>对于软件来说执行完第3步就认为数据已经成功持久化了，但是如果发生断电宕机等情况数据一样丢失，所以执行完第5步才是客观上真正持久化了。Linux系统中写操作会被写入缓存区中（为了提高IO速度），默认情况下是30秒在真正写入进硬盘中。如果宕机redis30秒内的数据就全没了，所以一般在生产环境的服务器中，redis通常是每隔1s左右执行一次fsync操作。</p>
-</blockquote>
-<h3 id="持久化方式"><a href="#持久化方式" class="headerlink" title="持久化方式"></a>持久化方式</h3><h4 id="RDB快照方式"><a href="#RDB快照方式" class="headerlink" title="RDB快照方式"></a>RDB快照方式</h4><blockquote>
-<p>RDB快照当满足特定条件后例如当m秒内发生n次，执行bgsave命令生成数据集的时间点快照，或者手动输入bgsave命令生成快照。</p>
-</blockquote>
-<blockquote>
-<p>BGSAVE 命令执行之后立即返回 OK ，然后 Redis fork 出一个新子进程，原来的 Redis 进程(父进程)继续处理客户端请求，而子进程则负责将数据保存到磁盘，然后退出。</p>
-</blockquote>
-<p><img src="/images/pasted-48.png" class="lazyload" data-srcset="/images/pasted-48.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># redis默认文件配置</span><br><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 第一周-周结</span><br><span class="line">date: 2021-06-14 12:00:00</span><br><span class="line">tags: 周结</span><br><span class="line">categories: 周结</span><br></pre></td></tr></table></figure>
 
-<h4 id="AOF方式"><a href="#AOF方式" class="headerlink" title="AOF方式"></a>AOF方式</h4><blockquote>
-<p>AOF(Append Only File - 仅追加文件)它的工作方式非常简单:每次执行修改内存中数据集的写操作时，都会记录该操作。假设AOF日志记录了自 redis实例创建以来所有的修改性指令序列，那么就可以通过对一个空的 redis 实例顺序执行所有的指令，也就是重放,来恢复redis当前实例的内存数据结构的状态。</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#AOF测试例子</span><br><span class="line">127.0.0.1:6379&gt; set str Hello</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; append str &quot; World!&quot;</span><br><span class="line">(integer) 12</span><br><span class="line">127.0.0.1:6379&gt; del str</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; del no_existing_str</span><br><span class="line">(integer) 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#AOF文件</span><br><span class="line">*2</span><br><span class="line">$6</span><br><span class="line">SELECT</span><br><span class="line">$1</span><br><span class="line">0</span><br><span class="line">*3</span><br><span class="line">$3</span><br><span class="line">set</span><br><span class="line">$3</span><br><span class="line">str</span><br><span class="line">$5</span><br><span class="line">Hello</span><br><span class="line">*3</span><br><span class="line">$6</span><br><span class="line">append</span><br><span class="line">$3</span><br><span class="line">str</span><br><span class="line">$7</span><br><span class="line"> World!</span><br><span class="line">*2</span><br><span class="line">$3</span><br><span class="line">del</span><br><span class="line">$3</span><br></pre></td></tr></table></figure>
 
+
+
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。</p>
+<h4 id="上班生活"><a href="#上班生活" class="headerlink" title="上班生活"></a>上班生活</h4><p>从学校出来到公司已经有两周了，在这两周也学习到了很多知识，也了解到了社畜是咋样的（/(ㄒoㄒ)/~~）。来到一个新的环境，人际关系、思维想法都是会改变的。不过目前感觉一切还好，就是要加班哈哈，不过能够从事自己喜欢的工作也是一种快乐呀。</p>
+<img src="/.com//image/01.jpg" class="lazyload" data-srcset="../image/01.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" style="zoom:33%;">
+
+<center><font color="gray" size="2">PS:公司楼下吃完饭拍的</font></center>
+
+
+
+<h3 id="编程知识学习"><a href="#编程知识学习" class="headerlink" title="编程知识学习"></a>编程知识学习</h3><h4 id="通用模块提取成lib"><a href="#通用模块提取成lib" class="headerlink" title="通用模块提取成lib"></a>通用模块提取成lib</h4><blockquote>
+<p>这周要开发一个项目，其中用到了feign调用，因此要定义很多model，这个时候如果服务提供方是本公司项目你就可以把它通用的model提取出来成lib，里面定义model和feign。这样服务消费端只用依赖这个lib就可以啦，不用进行额外的model定义开发，提高开发效率。</p>
+</blockquote>
+<h4 id="服务提供端下线及时通知服务消费端"><a href="#服务提供端下线及时通知服务消费端" class="headerlink" title="服务提供端下线及时通知服务消费端"></a>服务提供端下线及时通知服务消费端</h4><blockquote>
+<p>还是这周我滴同事让我去搞一搞服务提供端下线及时通知服务消费端，注册中心是阿里的Nacos，服务间调用通过feign，ribbon作为负载均衡。其实整体思路很简单大致思路如下：</p>
+<ol>
+<li>服务端添加一个下线钩子，调用nacos的通知下线API。</li>
+<li>消费端监听nacos的服务列表，发现服务下线就将ribbon的缓存列表更改一下。</li>
+</ol>
+<p>但思路是怎么个思路，再写demo的时候就发现了好多问题，例如如何监听服务列表，如何拿到ribbon缓存列表、如何清空等，在这个期间也看了一些源码了解到了一些东西。</p>
+</blockquote>
+<h4 id="Caffeine高性能本地缓存组件"><a href="#Caffeine高性能本地缓存组件" class="headerlink" title="Caffeine高性能本地缓存组件"></a>Caffeine高性能本地缓存组件</h4><blockquote>
+<p>公司的本地缓存组件使用的是caffeine ，这个还不了解，下周再来了解一下啦。</p>
+</blockquote>
+<h3 id="人生知识学习"><a href="#人生知识学习" class="headerlink" title="人生知识学习"></a>人生知识学习</h3><h4 id="《被讨厌的勇气》"><a href="#《被讨厌的勇气》" class="headerlink" title="《被讨厌的勇气》"></a>《被讨厌的勇气》</h4><blockquote>
+<p>决定我们的自身的不是过去的经历，而是我们自己赋予经历的意思。</p>
+</blockquote>
+<p>作者认为经历本身并不会决定什么关键，我们给过去赋予了怎么样的意义这决定了我们的生活。人生并不是由别人赋予的，而是自己选择的，是自己选择了自己想要的生活。</p>
+<p>或许这就是我们常说的保持乐观的态度去面对一件事情吧。</p>
 <blockquote>
-<p>可以看到最后一个del指令不见了，因为它没有对redis数据进行修改。</p>
+<p>你的不幸，皆是自己【<strong>选择</strong>】的</p>
 </blockquote>
-<h4 id="AOF文件重写"><a href="#AOF文件重写" class="headerlink" title="AOF文件重写"></a>AOF文件重写</h4><blockquote>
-<p>redis在长期运行的情况下，AOF文件会越来越大，所以需要进行重写，将内存中的数据重新以命令的方式写入aof文件。在重写的过程中，由于redis还会有新的写入，为了避免数据丢失，会开辟一块内存用于存放重写期间产生的写入操作，等到重写完毕后会将这块内存中的操作再追加到aof文件中。</p>
-</blockquote>
-<h5 id="为啥要重写"><a href="#为啥要重写" class="headerlink" title="为啥要重写"></a>为啥要重写</h5><blockquote>
-<p>例如一个计数器你不断递增几千次，AOF文件里就会存储几千次的递增操作。但是我们其实只需要递增最后的结果值。像哪些被频繁调用的key，可能会产生很多条数据，会使得AOF文件膨胀。</p>
-</blockquote>
-<h5 id="如何解决"><a href="#如何解决" class="headerlink" title="如何解决"></a>如何解决</h5><blockquote>
-<p>redis提供了bgrewriteaof指令用于对AOF日志进行瘦身。其原理就是开辟一个子进程 对内存进行遍历转换成一系列redis的操作指令，序列化到一个新的AOF日志文件中。序列化完毕后再将操作期间发生的增量AOF日志追加到这个新的AOF日志文件中，追加完毕后就立即替代旧的AOF日志文件了，瘦身工作就完成了。</p>
-</blockquote>
-<h4 id="redis4-0混合持久化"><a href="#redis4-0混合持久化" class="headerlink" title="redis4.0混合持久化"></a>redis4.0混合持久化</h4><blockquote>
-<p>重启redis时，我们很少使用 rdb 来恢复内存状态，因为会丢失大量数据。我们通常使用 AOF 日志重放，但是重放 AOF 日志性能相对 rdb 来说要慢很多，这样在redis实例很大的情况下，启动需要花费很长的时间。<br>redis4.0为了解决这个问题，带来了一个新的持久化选项——混合持久化。将rdb文件的内容和增量的AOF日志文件存在一起。这里的AOF日志不再是全量的日志，而是自持久化开始到持久化结束 的这段时间发生的增量AOF日志，通常这部分AOF日志很小：<br>于是在redis重启的时候，可以先加载rdb的内容，然后再重放增量AOF日志就可以完全替代之前的AOF全量文件重放，重启效率因此大幅得到提升。</p>
-</blockquote>
+<p>上面这段话是作为本书的一个小节的标题，在本小节中作者提出：<strong>你在人生的某个阶段里选择了【不幸】。这既不是你生在了不幸的环境中，也不是你陷入了不幸的境地中，而是你认为【不幸】对你自身而言是一种【善】</strong>。</p>
+<p>ps：这里的<strong>善</strong>仅仅是【<strong>有好处</strong>】的意思。</p>
+<p>面对改变产生的【不安】与不变带来的【不满】，我们往往是选择了后者，因为不改变总是轻松的。</p>
+<p>上面的内容都来自本书中【第一夜 我们的不幸是谁的错？】。这一章中，提出<strong>否定心理创伤</strong>，提出<strong>目的论</strong>，提出<strong>现在的不幸都是自己选择出来的，现在的不幸对于我们肯定存在于一种善</strong>，提出<strong>无论之前的人生发生过什么，都对今后的人生度过没有影响，决定人生的只有现在</strong>等观点。</p>
+<p>里面的很多观点都对我有醍醐灌顶的感觉，在慢慢读下去吧。</p>
 
   
   
@@ -483,7 +472,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
               
             
               
-                <p>本文永久链接是：<a href=http://yoursite.com/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/>http://yoursite.com/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/</a></p>
+                <p>本文永久链接是：<a href=http://yoursite.com/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/>http://yoursite.com/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/</a></p>
               
             
           </blockquote>
@@ -500,10 +489,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-16T10:55:45+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-14T23:39:36+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 16, 2020</p>
+    <p>更新于：Jun 14, 2021</p>
   </a>
 </div>
 
@@ -522,7 +511,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/&title=redis学习笔记(三)---持久化 - 汤姆猫的博客&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/&title=第一周 - 汤姆猫的博客&summary="
           
           >
           
@@ -534,7 +523,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/&title=redis学习笔记(三)---持久化 - 汤姆猫的博客&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/&title=第一周 - 汤姆猫的博客&summary="
           
           >
           
@@ -546,7 +535,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/15/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%89-%E6%8C%81%E4%B9%85%E5%8C%96/&title=redis学习笔记(三)---持久化 - 汤姆猫的博客&summary="
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/&title=第一周 - 汤姆猫的博客&summary="
           
           >
           
@@ -576,17 +565,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     <div class="prev-next">
       
-        <a class='prev' href='/2020/05/27/java%E6%B3%9B%E5%9E%8B/'>
-          <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>java泛型</p>
-          <p class='content'>啥是泛型概述
-泛型即参数化类型,Java泛型（ generics） 是JDK 5中引⼊的⼀个新特性， 允许在定义类和接⼜的时候使⽤类型参数（ type parameter） 。声明的类型参数在使...</p>
-        </a>
       
-      
-        <a class='next' href='/2020/05/14/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/'>
-          <p class='title'>redis学习笔记(二)---集群<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-          <p class='content'>redis集群简介
-首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们...</p>
+        <a class='next' href='/2021/05/22/%E7%A6%8F%E7%94%B0%E6%95%99%E8%82%B2%E5%B1%80%E5%85%9A%E5%BB%BA-%E5%BC%80%E5%8F%91%E6%80%BB%E7%BB%93/'>
+          <p class='title'>福田教育局党建-开发总结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>项目介绍
+此项目是为福田教育局的党建知识竞赛微信小程序，本项目核心功能就是答题模块，项目逻辑、需求本身并不复杂，但由于本人在开发中没有考虑到各种情况所导致了很多不必要的麻烦。因此，来次总结，回顾...</p>
         </a>
       
     </div>
@@ -629,7 +612,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#持久化简介"><span class="toc-text">持久化简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久化过程"><span class="toc-text">持久化过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#持久化方式"><span class="toc-text">持久化方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RDB快照方式"><span class="toc-text">RDB快照方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOF方式"><span class="toc-text">AOF方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AOF文件重写"><span class="toc-text">AOF文件重写</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#为啥要重写"><span class="toc-text">为啥要重写</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#如何解决"><span class="toc-text">如何解决</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#redis4-0混合持久化"><span class="toc-text">redis4.0混合持久化</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上班生活"><span class="toc-text">上班生活</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编程知识学习"><span class="toc-text">编程知识学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#通用模块提取成lib"><span class="toc-text">通用模块提取成lib</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务提供端下线及时通知服务消费端"><span class="toc-text">服务提供端下线及时通知服务消费端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Caffeine高性能本地缓存组件"><span class="toc-text">Caffeine高性能本地缓存组件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#人生知识学习"><span class="toc-text">人生知识学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#《被讨厌的勇气》"><span class="toc-text">《被讨厌的勇气》</span></a></li></ol></li></ol>
     </div>
   </section>
 
@@ -648,7 +631,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <script>
   window.pdata={}
   pdata.ispage=true;
-  pdata.postTitle="redis学习笔记(三)---持久化";
+  pdata.postTitle="第一周";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
@@ -694,7 +677,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
 </div>
       
     
@@ -706,9 +689,9 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
     
       
-        本站使用
+        Use
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作为主题
+        as theme
       
     
       
