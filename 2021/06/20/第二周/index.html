@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,7 +22,9 @@
 
   <!-- 页面元数据 -->
   
-  <title>Category: android基础 - 汤姆猫的博客</title>
+  <title>第二周 - 汤姆猫的博客</title>
+  
+    <meta name="keywords" content="周记">
   
 
   
@@ -291,7 +291,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -352,127 +352,252 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        第二周
+      </h1>
+      <div class='new-meta-box'>
         
+          
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>Orange Add</p>
+  </a>
+</div>
+
           
         
           
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
-        活动启动模式
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        活动的启动模式standardtandard是活动默认的启动模式，在不进行显式指定的情况下，所有活动都会自动使用这种启动模式。在standard模式（即默认情况）下，每当启动一个新的活动，它就会在返回栈中入栈，并处于栈顶的位置。对于使用standard模式的活动，系统不会在乎这个活动是否已经在返回栈中存在，每次启动都会创建该活动的一个新的实例。
+            
 
-singleTop当活动的启动模式指定为si...
+          
+        
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Jun 20, 2021</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
       
-    
+      <div id="lc-pv" data-title="第二周" data-path="/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-06-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/android%E5%9F%BA%E7%A1%80/">android基础</a>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。</p>
+<h4 id="上班生活"><a href="#上班生活" class="headerlink" title="上班生活"></a>上班生活</h4><p>这周也进入了公司的开发状态了，也了解到了很多新的东东，日志监控平台、自动化部署、数据库开发规范等，对技术的收获还是很多的。不过每天上下班挤地铁，大小周还是有点烦人的/(ㄒoㄒ)/~~，下面就来学习一下相关知识把。</p>
+<h3 id="编程知识"><a href="#编程知识" class="headerlink" title="编程知识"></a>编程知识</h3><h4 id="gitlab-ci自动化部署工具"><a href="#gitlab-ci自动化部署工具" class="headerlink" title="gitlab-ci自动化部署工具"></a>gitlab-ci自动化部署工具</h4><blockquote>
+<p>通过在项目根目录下配置<strong>.gitlab-ci.yml</strong>文件，可以控制ci流程的不同阶段，例如install/检查/编译/部署服务器。gitlab平台会扫描.gitlab-ci.yml文件，并据此处理ci流程。</p>
+</blockquote>
+<p>通过gitlab-ci，我们提交完代码后就可以不用管了，ci流程会自动部署到测试或集成环境的服务器。很大程度上节约了开发时间，不然我们还要在开发和部署之间的状态切换。下面就来了解一下gitlab-ci.yml中常用的关键字把！</p>
+<ul>
+<li>stages</li>
+<li>stage</li>
+<li>script</li>
+<li>tags</li>
+</ul>
+<h5 id="stages-amp-stage"><a href="#stages-amp-stage" class="headerlink" title="stages &amp;stage"></a>stages &amp;stage</h5><blockquote>
+<p>stages定义在YML文件的最外层，它的值是一个数组，用于定义一个pipeline不同的流程节点。</p>
+<p>stage是一个字符串，且是stages数组的一个子项，表示的是当前的pipeline节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stages: # 分段</span><br><span class="line">  - install</span><br><span class="line">  - eslint</span><br><span class="line">  - build</span><br><span class="line">  - deploy</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="script"><a href="#script" class="headerlink" title="script"></a>script</h5><blockquote>
+<p>它是当前pipeline节点运行的shell脚本（以项目根目录为上下文执行）。</p>
+<p>这个script是我们控制CI流程的核心，我们所有的工作：从安装，编译到部署都是通过script中定义的shell脚本来完成的。</p>
+<p>如果脚本执行成功，pipeline就会进入下一个Job节点，如果执行失败那么pipeline就会终止</p>
+</blockquote>
+<h5 id="tags"><a href="#tags" class="headerlink" title="tags"></a>tags</h5><blockquote>
+<p>tags是当前Job的标记，<strong>这个tags关键字是很重要，因为gitlab的runner会通过tags去判断能否执行当前这个Job</strong></p>
+</blockquote>
+<h4 id="依赖Jar包中的版本更新问题"><a href="#依赖Jar包中的版本更新问题" class="headerlink" title="依赖Jar包中的版本更新问题"></a>依赖Jar包中的版本更新问题</h4><p>在引用内部库中的时候，经常会出现需要更新依赖的库，但这个时候你sync并不能及时将最新的依赖库拉下来，这是因为gradle为了加快构建的速度，对依赖的库会缓存24小时，缓存之后就不在请求远程仓库了，这个时候我们可以设置一下。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">configurations.all</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">//</span> <span class="string">check</span> <span class="string">for</span> <span class="string">updates</span> <span class="string">every</span> <span class="string">build</span></span><br><span class="line">    <span class="string">resolutionStrategy.cacheChangingModulesFor</span> <span class="number">0</span><span class="string">,</span> <span class="string">'seconds'</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在开发依赖库发布的时候最好加上SNAPSHOT快照来发布，这样发布的时候每次都可以覆盖旧的依赖版本，这样不用每次都修改版本号。</p>
+<h3 id="生活知识"><a href="#生活知识" class="headerlink" title="生活知识"></a>生活知识</h3><h4 id="海姆利克急救法"><a href="#海姆利克急救法" class="headerlink" title="海姆利克急救法"></a>海姆利克急救法</h4><img src="/.com//01.jpg" class="lazyload" data-srcset="./第二周/01.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+
+<blockquote>
+<p>如果是成人，救护者站在受害者<strong>身后</strong>，从背后抱住其腹部，双臂围环其<strong>腰腹部</strong>，一手握拳，拳心向内按压于受害人的<strong>肚脐和肋骨之间</strong>的部位；另一手成掌<strong>捂按在拳头之上</strong>，双手急速用力向里<strong>向上挤压</strong>，反复实施，直至阻塞物吐出为止。</p>
+</blockquote>
+<blockquote>
+<p>当无人在场时</p>
+<p>可采用上图所示的方法，稍稍弯下腰去，靠在一个固定的<strong>水平物体</strong>上（如桌子边缘、椅背、扶手栏杆等），以物体边缘<strong>压迫上腹部</strong>，快速向上冲击。</p>
+</blockquote>
+<h4 id="《被讨厌的勇气》"><a href="#《被讨厌的勇气》" class="headerlink" title="《被讨厌的勇气》"></a>《被讨厌的勇气》</h4><blockquote>
+<p>TODO 代写</p>
+</blockquote>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/'>
-            Read More
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://yoursite.com/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/>http://yoursite.com/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-20T23:44:13+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Jun 20, 2021</p>
+  </a>
 </div>
 
-          </div>
         
       
         
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
+          
   
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">
-        活动的生命周期
-      </a>
-    </h2>
-  
-  <div class='md'>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%91%A8%E8%AE%B0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>周记</p></a></div>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
       
-        活动的生命周期返回栈
-Android是使用任务（Task）来管理活动的，一个任务就是一组存放在栈里的活动的集合，这个栈也被称作返回栈（Back Stack）。栈是一种后进先出的数据结构，在默认情况下，每当我们启动了一个新的活动，它会在返回栈中入栈，并处于栈顶的位置。而每当我们按下Back键或调用finish() 方法去销毁一个活动时，处于栈顶的活动会出栈，这时前一个入栈的活动就会重新处于栈顶...
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/&title=第二周 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/&title=第二周 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/06/20/%E7%AC%AC%E4%BA%8C%E5%91%A8/&title=第二周 - 汤姆猫的博客&summary="
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
       
     
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+</div>
+
+
+
         
-        <time>2020-06-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/android%E5%9F%BA%E7%A1%80/">android基础</a>
-        
-      </div>
       
-        <div>
-          <a class='readmore' href='/2020/06/16/%E6%B4%BB%E5%8A%A8%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/'>
-            Read More
-          </a>
-        </div>
+    </div>
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/06/14/%E7%AC%AC%E4%B8%80%E5%91%A8/'>
+          <p class='title'>第一周-周结<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>前言这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+上班生活从学校出来到公司已经有两周了，在这两周也学习到了很多知识，也了解...</p>
+        </a>
       
     </div>
   
+</article>
 
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
 </div>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-  
+  </article>
 
 
-    
-  
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -480,256 +605,28 @@ Android是使用任务（Task）来管理活动的，一个任务就是一组存
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='https://www.kugou.com/song/#hash=3DD936AC7157B7207B0404A824751482&album_id=962521' target="_blank" rel="noopener">
-          <img no-lazy src='./view_1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>毫无代价唱最幸福的歌</p>
 
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/chenzijia12300"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
-
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
-            id="categoriesElasticsearch"
-            ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/JVM/" href="/categories/JVM/"
-            id="categoriesJVM"
-            ><div class='name'>JVM</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Linux/" href="/categories/Linux/"
-            id="categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Mybatis/" href="/categories/Mybatis/"
-            id="categoriesMybatis"
-            ><div class='name'>Mybatis</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Nginx/" href="/categories/Nginx/"
-            id="categoriesNginx"
-            ><div class='name'>Nginx</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Redis/" href="/categories/Redis/"
-            id="categoriesRedis"
-            ><div class='name'>Redis</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Spring-Cloud/" href="/categories/Spring-Cloud/"
-            id="categoriesSpring-Cloud"
-            ><div class='name'>Spring Cloud</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/android%E5%9F%BA%E7%A1%80/" href="/categories/android%E5%9F%BA%E7%A1%80/"
-            id="categoriesandroidE59FBAE7A180"
-            ><div class='name'>android基础</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/"
-            id="categoriesdalidaliE9A1B9E79BAEE5AE9EE78EB0"
-            ><div class='name'>dalidali项目实现</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"
-            id="categoriesdalidaliE9A1B9E79BAEE8AEBEE8AEA1"
-            ><div class='name'>dalidali项目设计</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/docker/" href="/categories/docker/"
-            id="categoriesdocker"
-            ><div class='name'>docker</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/http/" href="/categories/http/"
-            id="categorieshttp"
-            ><div class='name'>http</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/java%E5%9F%BA%E7%A1%80/" href="/categories/java%E5%9F%BA%E7%A1%80/"
-            id="categoriesjavaE59FBAE7A180"
-            ><div class='name'>java基础</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/mysql/" href="/categories/mysql/"
-            id="categoriesmysql"
-            ><div class='name'>mysql</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesspringE99DA2E8AF95E9A298"
-            ><div class='name'>spring面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/zookeeper/" href="/categories/zookeeper/"
-            id="categorieszookeeper"
-            ><div class='name'>zookeeper</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
-            id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
-            id="categoriesE5A49AE7BABFE7A88B"
-            ><div class='name'>多线程</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE5A49AE7BABFE7A88BE99DA2E8AF95E9A298"
-            ><div class='name'>多线程面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
-            id="categoriesE695B0E68DAEE7BB93E69E84"
-            ><div class='name'>数据结构</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E7%B1%BB/" href="/categories/%E6%9D%82%E7%B1%BB/"
-            id="categoriesE69D82E7B1BB"
-            ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%88%AC%E8%99%AB/" href="/categories/%E7%88%AC%E8%99%AB/"
-            id="categoriesE788ACE899AB"
-            ><div class='name'>爬虫</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%BD%91%E7%BB%9C/" href="/categories/%E7%BD%91%E7%BB%9C/"
-            id="categoriesE7BD91E7BB9C"
-            ><div class='name'>网络</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88/" href="/categories/%E9%9B%86%E5%90%88/"
-            id="categoriesE99B86E59088"
-            ><div class='name'>集合</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE99B86E59088E99DA2E8AF95E9A298"
-            ><div class='name'>集合面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
-            id="categoriesE99DA2E8AF95"
-            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上班生活"><span class="toc-text">上班生活</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编程知识"><span class="toc-text">编程知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#gitlab-ci自动化部署工具"><span class="toc-text">gitlab-ci自动化部署工具</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#stages-amp-stage"><span class="toc-text">stages &amp;stage</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#script"><span class="toc-text">script</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#tags"><span class="toc-text">tags</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#依赖Jar包中的版本更新问题"><span class="toc-text">依赖Jar包中的版本更新问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生活知识"><span class="toc-text">生活知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#海姆利克急救法"><span class="toc-text">海姆利克急救法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#《被讨厌的勇气》"><span class="toc-text">《被讨厌的勇气》</span></a></li></ol></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Elasticsearch/" style="font-size: 16.5px; color: #888">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/JVM/" style="font-size: 21.5px; color: #666">JVM</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring-Cloud/" style="font-size: 16.5px; color: #888">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 16.5px; color: #888">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 16.5px; color: #888">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 16.5px; color: #888">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 24px; color: #555">java基础</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 16.5px; color: #888">zookeeper</a> <a href="/tags/%E5%91%A8%E7%BB%93/" style="font-size: 14px; color: #999">周结</a> <a href="/tags/%E5%91%A8%E8%AE%B0/" style="font-size: 14px; color: #999">周记</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 19px; color: #777">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 16.5px; color: #888">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 19px; color: #777">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" style="font-size: 14px; color: #999">项目总结</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
 		  
@@ -738,8 +635,8 @@ Android是使用任务（Task）来管理活动的，一个任务就是一组存
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="第二周";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要

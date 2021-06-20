@@ -424,7 +424,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <h3 id="跳跃表-skiplist-简介"><a href="#跳跃表-skiplist-简介" class="headerlink" title="跳跃表(skiplist)简介"></a>跳跃表(skiplist)简介</h3><blockquote>
 <p>跳跃表(skiplist)是一种随机化的数据结构，其实就是给顺序单链表加了多个多层索引，高层次的索引跳跃节点大于底层的，增加是以随机化的方式进行的，在列表中查找的可以快速的跳过部分列表，提高查询效率。 跳跃表以有序的方式在层次化的链表中保存元素， 效率和平衡树媲美 —— 查找、删除、添加等操作都可以在对数期望时间下完成， 并且比起平衡树来说， 跳跃表的实现要简单直观得多。</p>
 </blockquote>
-<p><img src="/images/pasted-36.png" class="lazyload" data-srcset="/images/pasted-36.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
+<p><img src="images/pasted-36.png" class="lazyload" data-srcset="images/pasted-36.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" alt="upload successful"></p>
 <blockquote>
 <p>从图中可以分为4个部分构成：<br>head：负责维护跳跃表的节点指针<br>跳跃表节点：保存元素值<br>层：保持着其他元素的指针，高层的指针越过元素数量大于等于低层的指针，为了提高效率，程序总是从高层开始访问，然后随着范围的缩小，降低层次。</p>
 </blockquote>
@@ -462,10 +462,10 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-14T10:59:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-06-14T23:46:06+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 14, 2020</p>
+    <p>更新于：Jun 14, 2021</p>
   </a>
 </div>
 
