@@ -369,6 +369,100 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/24/mysql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">
+        mysql中select+update并发的更新问题
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        小知识补充首先，我们要知道在mysql中update操作都是线程安全的，mysql引擎会update的行加上排他锁，其他对该行的update操作需要等到第一个update操作提交成功或者回滚，才能获取这个排他锁，从而对该行进行操作。
+例子表结构
+小知识点:表必备三字段：id, create_time, update_time。说明：其中id 必为主键，类型为bigint unsigned、单...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-24</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/mysql/">mysql</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/24/mysql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/">
+        java BigDecimal详解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介首先我们都知道float和dobule会产生精度的问题，这是因为他们在设计时就是为了科学计算和工程计算，在广域数值范围上提供较为精确的快速近似计算而精心设计的。但是在商业计算中就不行啦，商业计算要求计算准确，精准,你想想，如果你的支付宝账户余额显示233.9999988888，那是一种怎么样的体验？这个时候BigDecimal就有用了。
+
+BigDecimal构造方法
+BigDecima...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-23</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
         活动启动模式
       </a>
@@ -562,59 +656,6 @@ Android是使用任务（Task）来管理活动的，一个任务就是一组存
   
     
     <h2 class="article-title" >
-      <a href="/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-        单例模式
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        简介单例模式是java23中设计模式之一，也是最常见的一种模式。
-使用场景
-整个程序运行中只允许有一个类的实例
-需要频繁创建然后销毁的对象
-创建对象时耗时过多或者耗资源过多，但又经常用到的对象
-方便资源相互通信的环境
-
-单例的几种模式线程不安全的懒汉式123456789101112131415161718192021public class Singleton &#123;    priva...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-06-14</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
       <a href="/2020/06/14/%E6%A8%A1%E5%BC%8F/">
         单例模式
       </a>
@@ -647,6 +688,59 @@ Android是使用任务（Task）来管理活动的，一个任务就是一组存
       
         <div>
           <a class='readmore' href='/2020/06/14/%E6%A8%A1%E5%BC%8F/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+        单例模式
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介单例模式是java23中设计模式之一，也是最常见的一种模式。
+使用场景
+整个程序运行中只允许有一个类的实例
+需要频繁创建然后销毁的对象
+创建对象时耗时过多或者耗资源过多，但又经常用到的对象
+方便资源相互通信的环境
+
+单例的几种模式线程不安全的懒汉式123456789101112131415161718192021public class Singleton &#123;    priva...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/'>
             阅读全文
           </a>
         </div>
@@ -746,123 +840,6 @@ Android是使用任务（Task）来管理活动的，一个任务就是一组存
       
         <div>
           <a class='readmore' href='/2020/06/14/fail-fast%E5%92%8Cfail-safe/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
-        spring面试题（一）
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Spring中bean的生命周期
-
-如上图我们大致可以将spring生命周期分为12个步骤
-
-
-通过反射实例化对象。
-设置对象的属性。
-如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法
-如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。
-如果对象实...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-06-09</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/">spring面试题</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
-        集合面试题（一）
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?
-首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。
-
-HashSet和TreeSet的区别
-
-
-类
-底层数据结构
-顺序
-存放null值
-
-
-
-HashSet
-哈希表
-无序
-能够存放一个nu...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-06-09</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">集合面试题</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/'>
             阅读全文
           </a>
         </div>
@@ -1080,7 +1057,7 @@ HashSet
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(5)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(6)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
