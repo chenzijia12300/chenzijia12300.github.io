@@ -369,6 +369,103 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        多线程面试题
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        三个线程顺序执行依次输出ABCABCABCABC…题目描述
+三个线程顺序执行依次输出ABCABCABCABC…，让我们如何控制线程的同步访问，使得线程依次输出ABCABCABCABC…的结果。
+
+解题思路
+使用最简便最实用的信号量Semaphore，通过控制信号的获取以及释放，承接获取锁来实现线程得顺序执行以及临界资源的同步访问。这里要明白如果信号量（Semaphore）初始化为0的话，调用...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-07</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/">多线程面试题</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/">
+        ThreadPoolExecutor线程池详解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        ThreadPoolExecutor线程池简介
+在阿里的开发手册里，注明了不能在项目中显示创建线程，而是要通过线程池来管理提供。这样做是因为可以减少线程创建和销毁的内存开销，合理控制项目中的线程数。
+
+
+ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516171819202122232425262728293031323334&#x2F...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-04</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/">
         Unix的五种I/O模型
       </a>
@@ -400,7 +497,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -449,7 +546,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2020/05/29/java%E6%9E%9A%E4%B8%BE/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -497,7 +594,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/28/http%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -546,7 +643,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/27/java%E6%B3%9B%E5%9E%8B/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -604,7 +701,7 @@ cluster模式
       
         <div>
           <a class='readmore' href='/2020/05/14/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -651,7 +748,7 @@ cluster模式
       
         <div>
           <a class='readmore' href='/2020/05/14/%E8%B7%B3%E8%B7%83%E8%A1%A8/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -704,7 +801,7 @@ set...
       
         <div>
           <a class='readmore' href='/2020/05/10/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -751,113 +848,7 @@ TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选�
       
         <div>
           <a class='readmore' href='/2020/05/08/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/07/%E7%BA%A2%E9%BB%91%E6%A0%91/">
-        红黑树
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        红黑树简介
-红黑树一种自平衡的二叉树，先了解一下什么是二叉树把。
-
-二叉树的性质
-
-
-在二叉树的第I层上最多有2i-1(i&gt;=1)
-
-二叉树中如果深度为K，那么该二叉树最多有2k-1个节点（k&gt;=1）
-
-n0 = n1+1 其中n0表示度数为0的节点数，n1表示度数为2的节点数
-
-在完全二叉树中，具有n个节点的完全二叉树的深度为[log2n]+1，其中[log2n]是向下取整
-
-...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-07</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/07/%E7%BA%A2%E9%BB%91%E6%A0%91/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/07/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
-        布隆过滤器
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        
-title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07 21:58:33tags: 数据结构
-布隆过滤器简介
-布隆过滤器是一个位数组和哈希函数实现的一种数据结构，它相对于其他我们平常用的List，Set等更节省内存空间，不过它存在误判概率。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-07</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/07/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/'>
-            Read More
+            阅读全文
           </a>
         </div>
       
@@ -878,7 +869,7 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
         
           <a class="prev" rel="prev" href="/page/6/">
             <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
             </section>
           </a>
         
@@ -888,7 +879,7 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
         
           <a class="next" rel="next" href="/page/8/">
             <section class="post next white-box shadow">
-              &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -990,6 +981,11 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
             title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
             id="categoriesElasticsearch"
             ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
+        
+          <li><a class="flat-box"
+            title="/categories/Golang/" href="/categories/Golang/"
+            id="categoriesGolang"
+            ><div class='name'>Golang</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/JVM/" href="/categories/JVM/"
@@ -1112,6 +1108,11 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
             ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
         
           <li><a class="flat-box"
+            title="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"
+            id="categoriesE6B688E681AFE9989FE58897"
+            ><div class='name'>消息队列</div><div class='badge'>(1)</div></a></li>
+        
+          <li><a class="flat-box"
             title="/categories/%E7%88%AC%E8%99%AB/" href="/categories/%E7%88%AC%E8%99%AB/"
             id="categoriesE788ACE899AB"
             ><div class='name'>爬虫</div><div class='badge'>(1)</div></a></li>
@@ -1168,7 +1169,7 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
 
 
     <div class='content'>
-      <a href="/tags/Elasticsearch/" style="font-size: 16px; color: #8b8b8b">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/JVM/" style="font-size: 20px; color: #707070">JVM</a> <a href="/tags/JWT/" style="font-size: 14px; color: #999">JWT</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Linux/" style="font-size: 16px; color: #8b8b8b">Linux</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring/" style="font-size: 16px; color: #8b8b8b">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 16px; color: #8b8b8b">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 16px; color: #8b8b8b">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 18px; color: #7e7e7e">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 22px; color: #636363">java基础</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 16px; color: #8b8b8b">zookeeper</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 14px; color: #999">中间件</a> <a href="/tags/%E5%91%A8%E7%BB%93/" style="font-size: 24px; color: #555">周结</a> <a href="/tags/%E5%91%A8%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">周记</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 18px; color: #7e7e7e">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 16px; color: #8b8b8b">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 18px; color: #7e7e7e">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 14px; color: #999">音视频</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" style="font-size: 14px; color: #999">项目总结</a>
+      <a href="/tags/Elasticsearch/" style="font-size: 16px; color: #8b8b8b">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/Golang/" style="font-size: 14px; color: #999">Golang</a> <a href="/tags/JVM/" style="font-size: 20px; color: #707070">JVM</a> <a href="/tags/JWT/" style="font-size: 14px; color: #999">JWT</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Linux/" style="font-size: 16px; color: #8b8b8b">Linux</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring/" style="font-size: 16px; color: #8b8b8b">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 16px; color: #8b8b8b">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 16px; color: #8b8b8b">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 18px; color: #7e7e7e">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 22px; color: #636363">java基础</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 16px; color: #8b8b8b">zookeeper</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 14px; color: #999">中间件</a> <a href="/tags/%E5%91%A8%E7%BB%93/" style="font-size: 24px; color: #555">周结</a> <a href="/tags/%E5%91%A8%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">周记</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 18px; color: #7e7e7e">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 14px; color: #999">消息队列</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 16px; color: #8b8b8b">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 18px; color: #7e7e7e">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 14px; color: #999">音视频</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" style="font-size: 14px; color: #999">项目总结</a>
     </div>
   </section>
 
@@ -1235,7 +1236,7 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
       
     
       
-        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -1247,9 +1248,9 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
       
     
       
-        Use
+        本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        as theme
+        作为主题
       
     
       
