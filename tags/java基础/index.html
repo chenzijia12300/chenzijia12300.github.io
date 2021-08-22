@@ -24,7 +24,7 @@
 
   <!-- 页面元数据 -->
   
-  <title>标签：Java基础 - 汤姆猫的博客</title>
+  <title>标签：java基础 - 汤姆猫的博客</title>
   
 
   
@@ -363,6 +363,18 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         
           
         
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
     
     
@@ -376,18 +388,281 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
-      <a href="/2020/06/14/java7-try-with-resource/">
-        java7 try-with-resource
+      <a href="/2021/02/26/String%E5%B8%B8%E9%87%8F%E6%B1%A0/">
+        String常量池
       </a>
     </h2>
   
   <div class='md'>
     
       
-        java7之前
-在java7版本之前我们使用资源后，都需要把资源关闭，在try-catch-finally中的finally关闭资源。
+        String常量池和String.intern方法学习JDK1.6
+在JDK1.6中，字符串常量池是在方法区里，它属于永久代。因此字符串字面量和字符串对象是在两个不同的空间的，他们的地址肯定不一样。
 
-例子12345678910111213141516171819202122long currentTime &#x3D; System.currentTimeMillis();BufferedReader bufferedReader &#x3D; nul...
+
+JDK1.6中intern方法的作用是，检查字符串常量池里是否有该字符串，如果有就返回字符串常量池里的字符串，否则在字符串常量池里新建一个字符串，并返回。
+
+JDK1.7
+在JDK1.7中，...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2021-02-26</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2021/02/26/String%E5%B8%B8%E9%87%8F%E6%B1%A0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/11/08/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        java基础-面试题
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        JDK和JRE有什么区别？
+JRE：Java Runtime Environment（java运行时环境）。即java程序的运行时环境，包含了java虚拟机，java基础类库。
+
+JDK：Java Development Kit（java开发工具包）。即java语言编写的程序所需的开发工具包。JDK包含了JRE，同时还包括java源码的编译器javac、监控工具jconsole、分析工具jv...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-11-08</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/11/08/java%E5%9F%BA%E7%A1%80-%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/08/28/java%E5%9F%BA%E7%A1%80-%E5%8C%85%E8%A3%85%E7%B1%BB%E7%BC%93%E5%AD%98%E6%B1%A0/">
+        java基础-包装类缓存池
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        拆箱和装箱
+自动装箱和拆箱从Java 1.5开始引入，目的是将原始类型值转自动地转换成对应的对象。自动装箱与拆箱的机制可以让我们在Java的变量赋值或者是方法调用等情况下使用原始类型或者对象类型更加简单直接。
+
+在一般情况下，java会帮助我们进行自动装箱和拆箱,例如下面得例子
+12Integer integerValue &#x3D; 100; 	&#x2F;&#x2F;Integer i...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-08-28</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/08/28/java%E5%9F%BA%E7%A1%80-%E5%8C%85%E8%A3%85%E7%B1%BB%E7%BC%93%E5%AD%98%E6%B1%A0/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/07/01/java%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/">
+        java移位运算符
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        简介java中移位运算符包括：左移运算符（&lt;&lt;）,右移运算符（&gt;&gt;），无符号右移运算符（&gt;&gt;&gt;）,移位运算符操作的是对象的二进制位。
+
+
+
+运算符
+含义
+
+
+
+&lt;&lt;
+左移运算符，将运算符左边的对象向左移动运算符右边指定的位数（在低位补0）
+
+
+&gt;&gt;
+“有符号”右移运算 符，将运算符左边的对象向右移动运算符右边指定的位数。如果是...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-01</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/07/01/java%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
+        java类的加载机制(学习笔记)
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        啥是类加载
+类加载是指将class文件读入内存中，并对数据进行校验、转换解析、初始化，最后再堆区创建一个java.lang.Class对象，用来封装类在方法区的数据结构。类的加载的最终产品是位于堆区中的Class对象，Class对象封装了类在方法区内的数据结构，并且向Java程序员提供了访问方法区内的数据结构的接口。
+
+
+在Java语言里面，类型的加载、连接和初始化过程都是在程序运行期间完成...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-16</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/JVM/">JVM</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/16/java%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/14/fail-fast%E5%92%8Cfail-safe/">
+        fail-fast和fail-safe
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        fail-fast首先啥是fail-fast？下面引用别人的解释:
+
+在系统设计中，快速失效系统一种可以立即报告任何可能表明故障的情况的系统。快速失效系统通常设计用于停止正常操作，而不是试图继续可能存在缺陷的过程。这种设计通常会在操作中的多个点检查系统的状态，因此可以及早检测到任何故障。快速失败模块的职责是检测错误，然后让系统的下一个最高级别处理错误。
+
+他的意思就是写程序先考虑异常情况，如...
       
     
   </div>
@@ -403,7 +678,56 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       </div>
       
         <div>
-          <a class='readmore' href='/2020/06/14/java7-try-with-resource/'>
+          <a class='readmore' href='/2020/06/14/fail-fast%E5%92%8Cfail-safe/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/05/29/java%E6%9E%9A%E4%B8%BE/">
+        java枚举
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        枚举简介
+枚举是java1.5引入的一个新特性，它继承于java.lang.Enum类。我们使用枚举来替换常量。例如下面是一个B站视频状态的枚举类，以这种方式定义的常量使代码更具可读性，允许进行编译时检查，预先记录可接受值的列表，并避免由于传入无效值而引起的意外行为。
+
+12345678package com.example.item.constant;&#x2F;** * 创建在 2020...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-05-29</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/05/29/java%E6%9E%9A%E4%B8%BE/'>
             阅读全文
           </a>
         </div>
@@ -617,7 +941,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(8)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(9)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
@@ -1367,301 +1691,6 @@ function setSearchService() {
         return fetch(`${ api_server }/1.1${ url }`, {
           method,
           headers: {
-            'X-LC-Id': this.app_id,
-            'X-LC-Key': this.app_key,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
-        });
-      };
-      this.addCount(Counter);
-    },
-
-    refreshCounter() {
-      var api_server = this.app_id.slice(-9) !== '-MdYXbMMI' ? this.custom_api_server : `https://${ this.app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
-      if (api_server) {
-        this.fetchData(api_server);
-      } else {
-        fetch('https://app-router.leancloud.cn/2/route?appId=' + this.app_id)
-          .then(resp => resp.json())
-          .then(({api_server}) => {
-            this.fetchData('https://' + api_server);
-          });
-      }
-    }
-
-  };
-
-  LCCounter.refreshCounter();
-
-  document.addEventListener('pjax:complete', function () {
-    LCCounter.refreshCounter();
-  });
-</script>
-
-
-
-
-  <script>
-const rootElement = document.documentElement;
-const darkModeStorageKey = "user-color-scheme";
-const rootElementDarkModeAttributeName = "data-user-color-scheme";
-
-const setLS = (k, v) => {
-    localStorage.setItem(k, v);
-};
-
-const removeLS = (k) => {
-    localStorage.removeItem(k);
-};
-
-const getLS = (k) => {
-    return localStorage.getItem(k);
-};
-
-const getModeFromCSSMediaQuery = () => {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
-
-const resetRootDarkModeAttributeAndLS = () => {
-  rootElement.removeAttribute(rootElementDarkModeAttributeName);
-  removeLS(darkModeStorageKey);
-};
-
-const validColorModeKeys = {
-  dark: true,
-  light: true,
-};
-
-const applyCustomDarkModeSettings = (mode) => {
-  const currentSetting = mode || getLS(darkModeStorageKey);
-
-  if (currentSetting === getModeFromCSSMediaQuery()) {
-    resetRootDarkModeAttributeAndLS();
-  } else if (validColorModeKeys[currentSetting]) {
-    rootElement.setAttribute(rootElementDarkModeAttributeName, currentSetting);
-  } else {
-    resetRootDarkModeAttributeAndLS();
-  }
-};
-
-const invertDarkModeObj = {
-  dark: "light",
-  light: "dark",
-};
-
-/**
- * get target mode
- */
-const toggleCustomDarkMode = () => {
-  let currentSetting = getLS(darkModeStorageKey);
-
-  if (validColorModeKeys[currentSetting]) {
-    currentSetting = invertDarkModeObj[currentSetting];
-  } else if (currentSetting === null) {
-    currentSetting = invertDarkModeObj[getModeFromCSSMediaQuery()];
-  } else {
-    return;
-  }
-  setLS(darkModeStorageKey, currentSetting);
-  return currentSetting;
-};
-
-/**
- * bind click event for toggle button
- */
-var btn=$("#wrapper .toggle-mode-btn,#rightmenu-wrapper .toggle-mode-btn");
-function bindToggleButton() {
-    btn.on('click',(e) => {
-      const mode = toggleCustomDarkMode();
-      applyCustomDarkModeSettings(mode);
-    });
-}
-
-applyCustomDarkModeSettings();
-document.addEventListener("DOMContentLoaded", bindToggleButton);
-volantis.pjax.push(bindToggleButton);
-volantis.pjax.send(()=>{
-	btn.unbind('click');
-},'toggle-mode-btn-unbind');
-</script>
-
-
-
-
-
-
-
-
-<script>
-function listennSidebarTOC() {
-  const navItems = document.querySelectorAll(".toc li");
-  if (!navItems.length) return;
-  const sections = [...navItems].map((element) => {
-    const link = element.querySelector(".toc-link");
-    const target = document.getElementById(
-      decodeURI(link.getAttribute("href")).replace("#", "")
-    );
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      window.scrollTo({
-		top: target.offsetTop + 100,
-		
-		behavior: "smooth"
-		
-	  });
-    });
-    return target;
-  });
-
-  function activateNavByIndex(target) {
-    if (target.classList.contains("active-current")) return;
-
-    document.querySelectorAll(".toc .active").forEach((element) => {
-      element.classList.remove("active", "active-current");
-    });
-    target.classList.add("active", "active-current");
-    let parent = target.parentNode;
-    while (!parent.matches(".toc")) {
-      if (parent.matches("li")) parent.classList.add("active");
-      parent = parent.parentNode;
-    }
-  }
-
-  function findIndex(entries) {
-    let index = 0;
-    let entry = entries[index];
-    if (entry.boundingClientRect.top > 0) {
-      index = sections.indexOf(entry.target);
-      return index === 0 ? 0 : index - 1;
-    }
-    for (; index < entries.length; index++) {
-      if (entries[index].boundingClientRect.top <= 0) {
-        entry = entries[index];
-      } else {
-        return sections.indexOf(entry.target);
-      }
-    }
-    return sections.indexOf(entry.target);
-  }
-
-  function createIntersectionObserver(marginTop) {
-    marginTop = Math.floor(marginTop + 10000);
-    let intersectionObserver = new IntersectionObserver(
-      (entries, observe) => {
-        let scrollHeight = document.documentElement.scrollHeight + 100;
-        if (scrollHeight > marginTop) {
-          observe.disconnect();
-          createIntersectionObserver(scrollHeight);
-          return;
-        }
-        let index = findIndex(entries);
-        activateNavByIndex(navItems[index]);
-      },
-      {
-        rootMargin: marginTop + "px 0px -100% 0px",
-        threshold: 0,
-      }
-    );
-    sections.forEach((element) => {
-      element && intersectionObserver.observe(element);
-    });
-  }
-  createIntersectionObserver(document.documentElement.scrollHeight);
-}
-
-document.addEventListener("DOMContentLoaded", listennSidebarTOC);
-document.addEventListener("pjax:success", listennSidebarTOC);
-</script>
-
-<!-- more -->
-
- 
-	   
-	    
-
-
-<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script>
-
-
-<script>
-    var pjax;
-    document.addEventListener('DOMContentLoaded', function () {
-      pjax = new Pjax({
-        elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([pjax-fancybox])',
-        selectors: [
-          "title",
-          
-          "#pjax-container",
-          "#pjax-header-nav-list"
-        ],
-        cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
-        timeout: 5000
-      });
-    });
-
-    document.addEventListener('pjax:send', function (e) {
-      //window.stop(); // 相当于点击了浏览器的停止按钮
-
-      try {
-        var currentUrl = window.location.pathname;
-        var targetUrl = e.triggerElement.href;
-        var banUrl = [""];
-        if (banUrl[0] != "") {
-          banUrl.forEach(item => {
-            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
-              window.location.href = targetUrl;
-            }
-          });
-        }
-      } catch (error) {}
-
-      window.subData = null; // 移除标题（用于一二级导航栏切换处）
-
-      volantis.$switcher.removeClass('active'); // 关闭移动端激活的搜索框
-      volantis.$header.removeClass('z_search-open'); // 关闭移动端激活的搜索框
-      volantis.$wrapper.removeClass('sub'); // 跳转页面时关闭二级导航
-
-      // 解绑事件 避免重复监听
-      volantis.$topBtn.unbind('click');
-      $('.menu a').unbind('click');
-      $(window).unbind('resize');
-      $(window).unbind('scroll');
-      $(document).unbind('scroll');
-      $(document).unbind('click');
-      $('body').unbind('click');
-	  // 使用 volantis.pjax.send 方法传入pjax:send回调函数 参见layout/_partial/scripts/global.ejs
-	  volantis.pjax.method.send.start();
-    });
-
-    document.addEventListener('pjax:complete', function () {
-      $('.nav-main').find('.list-v').not('.menu-phone').removeAttr("style",""); // 移除小尾巴的移除
-      $('.menu-phone.list-v').removeAttr("style",""); // 移除小尾巴的移除
-      $('script[data-pjax], .pjax-reload script').each(function () {
-        $(this).parent().append($(this).remove());
-      });
-      try{
-		// 使用 volantis.pjax.push 方法传入重载函数 参见layout/_partial/scripts/global.ejs
-		volantis.pjax.method.complete.start();
-      } catch (e) {
-        console.log(e);
-      }
-    });
-
-    document.addEventListener('pjax:error', function (e) {
-	  // 使用 volantis.pjax.error 方法传入pjax:error回调函数 参见layout/_partial/scripts/global.ejs
-	  volantis.pjax.method.error.start();
-      window.location.href = e.triggerElement.href;
-    });
-</script>
- 
-	  
-    </div>
-  </body>
-</html>
-rs: {
             'X-LC-Id': this.app_id,
             'X-LC-Key': this.app_key,
             'Content-Type': 'application/json',
