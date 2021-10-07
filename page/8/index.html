@@ -369,6 +369,58 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/">
+        Unix的五种I/O模型
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        堵塞形I/O模型
+
+上图为堵塞形I/O模型，进程调用recvfrom命令，进程一直等待直到数据报被复制到进程的缓冲区或者发生错误才返回。进程从调用recvfrom开始到它返回的整段时间内是被阻塞的。
+
+非堵塞形I/O模型
+多路复用I/O模型
+信号驱动I/O模型
+异步I/O模型
+五种模型异同
+上面五种I/O模型中，前四种都是同步I/O模型，因为他们在真的的I/O操作时，都堵塞了进程，在将数据从...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-02</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/05/29/java%E6%9E%9A%E4%B8%BE/">
         java枚举
       </a>
@@ -817,56 +869,6 @@ title: 布隆过滤器author: Orange Addcategories: 数据结构date: 2020-05-07
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/03/PiorityBlockingQueue/">
-        PriorityBlockingQueue
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        PriorityBlockingQueue简介
-PriorityBlockingQueue是一种优先级，无界堵塞，线程安全的队列，每次出队返回优先级高或低的元素，内部通过堆实现。
-
-
-源码详解属性分析123456789101112131415161718192021&#x2F;&#x2F;队列默认大小   private static final int DEFAULT_INITIAL_CA...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-03</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/03/PiorityBlockingQueue/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1087,7 +1089,7 @@ PriorityBlockingQueue是一种优先级，无界堵塞，线程安全的队列�
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(13)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(14)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
