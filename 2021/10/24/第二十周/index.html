@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta http-equiv='x-dns-prefetch-control' content='on' />
@@ -24,9 +22,16 @@
 
   <!-- 页面元数据 -->
   
-  <title>分類：mysql - 汤姆猫的博客</title>
+  <title>第二十周 - 汤姆猫的博客</title>
+  
+    <meta name="keywords" content="周结">
   
 
+  
+    <meta name="description" content="前言​    这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+
+
+在红岭参加成考">
   
 
   <!-- feed -->
@@ -291,7 +296,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       <div id="l_cover">
   
     
-        <div id="full" class='cover-wrapper  dock' style="display: none;">
+        <div id="full" class='cover-wrapper post dock' style="display: none;">
           
             <div id='cover-backstretch'></div>
           
@@ -352,78 +357,253 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper" id="pjax-container">
           
 
-
 <div class='l_main'>
+  <article class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
   
+
+
+  
+  <div class="article-meta" id="top">
     
-      
-  <section class="post-list">
     
-      
+    
+      <h1 class="title">
+        第二十周
+      </h1>
+      <div class='new-meta-box'>
         
           
+            
+<div class='new-meta-item author'>
+  <a class='author' href="/" rel="nofollow">
+    <img no-lazy src="">
+    <p>Orange Add</p>
+  </a>
+</div>
+
+          
         
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/24/mysql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">
-        mysql中select+update并发的更新问题
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        小知识补充首先，我们要知道在mysql中update操作都是线程安全的，mysql引擎会update的行加上排他锁，其他对该行的update操作需要等到第一个update操作提交成功或者回滚，才能获取这个排他锁，从而对该行进行操作。
-例子表结构
-小知识点:表必备三字段：id, create_time, update_time。说明：其中id 必为主键，类型为bigint unsigned、单...
-      
-    
+          
+            
+  <div class='new-meta-item category'>
+    <a class='notlink'>
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <a class="category-link" href="/categories/%E5%91%A8%E7%BB%93/">周结</a>
+    </a>
   </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
+
+
+          
         
-        <time>2020-06-24</time>
+          
+            <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 24, 2021</p>
+  </a>
+</div>
+
+          
         
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/mysql/">mysql</a>
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="第二十周" data-path="/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/">
+        <i class="fas fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
         
       </div>
+    
+  </div>
+
+
+  
+  
+  <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    <strong>这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。</strong></p>
+<img src="https://tva1.sinaimg.cn/large/005z6pKrgy1gvqrj54un7j60o01hcte202.jpg" class="lazyload" data-srcset="https://tva1.sinaimg.cn/large/005z6pKrgy1gvqrj54un7j60o01hcte202.jpg" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" width="50%" referrerpolicy="no-referrer">
+
+<center><i>在红岭参加成考</i></center>
+
+<a id="more"></a>
+
+<h4 id="上班生活"><a href="#上班生活" class="headerlink" title="上班生活"></a>上班生活</h4><p>这周业务上的开发暂时告一段落摆脱了每日的CRUD，感觉上班的时间都变得快乐起来了。同事大佬让我去找一个高性能的BeanUtils框架代替掉现在的Spring BeanUtils框架，我花了这一整周的时间，找到对应的MapStruct框架，然后进行源码修改然后封装，下周写一篇关于这个的文章，总结一下。感觉自己还是很叼的O(∩_∩)O，原来我讨厌的只是每日的重复生活而已。</p>
+<h4 id="下班生活"><a href="#下班生活" class="headerlink" title="下班生活"></a>下班生活</h4><p>成考终于结束了，也不知道结果如何，下一个目标专插本，努力当个全日制本科人上人，以后的下班生活就是跟英语作伴啦。</p>
+<h3 id="编程知识"><a href="#编程知识" class="headerlink" title="编程知识"></a>编程知识</h3><h4 id="面试官问我MySQL调优，我真的是-掘金-juejin-cn"><a href="#面试官问我MySQL调优，我真的是-掘金-juejin-cn" class="headerlink" title="面试官问我MySQL调优，我真的是 - 掘金 (juejin.cn)"></a><a href="https://juejin.cn/post/7017969370206830623" target="_blank" rel="noopener">面试官问我MySQL调优，我真的是 - 掘金 (juejin.cn)</a></h4><blockquote>
+<p>这是一篇介绍在平常开发中，如何对MySQL数据库进行调优的文章，深入浅出的介绍了<code>索引优化</code>,<code>读写分离</code>,<code>分库分表</code>等相关知识。</p>
+</blockquote>
+<h4 id="为什么需要Java内存模型？-掘金-juejin-cn"><a href="#为什么需要Java内存模型？-掘金-juejin-cn" class="headerlink" title="为什么需要Java内存模型？ - 掘金 (juejin.cn)"></a><a href="https://juejin.cn/post/7018709013223178247" target="_blank" rel="noopener">为什么需要Java内存模型？ - 掘金 (juejin.cn)</a></h4><blockquote>
+<p>这篇文章介绍了Java内存模型（JMM）的作用，为什么需要Java内存模型，他为我们带来什么好处。</p>
+</blockquote>
+<h4 id="【JAVA】OpenFegin-实现接口参数签名认证（一）-掘金-juejin-cn"><a href="#【JAVA】OpenFegin-实现接口参数签名认证（一）-掘金-juejin-cn" class="headerlink" title="【JAVA】OpenFegin 实现接口参数签名认证（一） - 掘金 (juejin.cn)"></a><a href="https://juejin.cn/post/7018579522039578660" target="_blank" rel="noopener">【JAVA】OpenFegin 实现接口参数签名认证（一） - 掘金 (juejin.cn)</a></h4><blockquote>
+<p>这篇文章介绍了使用第三方接口的时候，所常见的签名验证例如<code>appKey</code>,<code>sign</code>,<code>appSecret</code>等常见的参数，根据我自身对接第三方接口，也确实主要是这三种类型。</p>
+</blockquote>
+<h3 id="生活知识"><a href="#生活知识" class="headerlink" title="生活知识"></a>生活知识</h3><p><strong>生活知识就是英语的学习！</strong></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这周要总结一下封装<code>MapStruct框架</code>时学到的知识，写一篇文章，并发布到Github上，同时努力学习英语！</p>
+
+  
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2020/06/24/mysql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/'>
-            閱讀全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://yoursite.com/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/>http://yoursite.com/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2021-10-24T22:20:39+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Oct 24, 2021</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
-    
-  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%91%A8%E7%BB%93/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>周结</p></a></div>
 
 
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/&title=第二十周 - 汤姆猫的博客&summary=前言​    这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+
+
+在红岭参加成考"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qq.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/&title=第二十周 - 汤姆猫的博客&summary=前言​    这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+
+
+在红岭参加成考"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/qzone.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/10/24/%E7%AC%AC%E4%BA%8C%E5%8D%81%E5%91%A8/&title=第二十周 - 汤姆猫的博客&summary=前言​    这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+
+
+在红岭参加成考"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/volantis-x/cdn-org/logo/128/weibo.png" srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2021/10/18/%E7%AC%AC%E5%8D%81%E5%85%AB%E5%92%8C%E7%AC%AC%E5%8D%81%E4%B9%9D%E5%91%A8/'>
+          <p class='title'>第十八和第十九周<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>前言​    这里是记录一周的学习情况，了解到的新知识，新想法、新见解的地方，每周我都会来整理一下、调整一下。期望自己能够有改变。
+
+
+加班的一晚
+
+
+
+上班生活国庆后的第一周上两天放一天就结束...</p>
+        </a>
+      
+    </div>
+  
+</article>
+
+
+  
+
+  <article class="post white-box reveal shadow" id="comments">
+    <p ct><i class='fas fa-comments'></i> 评论</p>
+    
+    <div id="valine_container" class="valine_thread">
+  <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+</div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside class='l_side'>
   
@@ -431,291 +611,28 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='https://www.kugou.com/song/#hash=3DD936AC7157B7207B0404A824751482&album_id=962521' target="_blank" rel="noopener">
-          <img no-lazy src='./view_1.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-          <p>毫无代价唱最幸福的歌</p>
 
-        
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/chenzijia12300"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
-
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop">
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/Elasticsearch/" href="/categories/Elasticsearch/"
-            id="categoriesElasticsearch"
-            ><div class='name'>Elasticsearch</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Golang/" href="/categories/Golang/"
-            id="categoriesGolang"
-            ><div class='name'>Golang</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/JVM/" href="/categories/JVM/"
-            id="categoriesJVM"
-            ><div class='name'>JVM</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/JWT/" href="/categories/JWT/"
-            id="categoriesJWT"
-            ><div class='name'>JWT</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Linux/" href="/categories/Linux/"
-            id="categoriesLinux"
-            ><div class='name'>Linux</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Mybatis/" href="/categories/Mybatis/"
-            id="categoriesMybatis"
-            ><div class='name'>Mybatis</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Nginx/" href="/categories/Nginx/"
-            id="categoriesNginx"
-            ><div class='name'>Nginx</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Redis/" href="/categories/Redis/"
-            id="categoriesRedis"
-            ><div class='name'>Redis</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Spring-Cloud/" href="/categories/Spring-Cloud/"
-            id="categoriesSpring-Cloud"
-            ><div class='name'>Spring Cloud</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/Spring/" href="/categories/Spring/"
-            id="categoriesSpring"
-            ><div class='name'>Spring</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/android%E5%9F%BA%E7%A1%80/" href="/categories/android%E5%9F%BA%E7%A1%80/"
-            id="categoriesandroidE59FBAE7A180"
-            ><div class='name'>android基础</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/"
-            id="categoriesdalidaliE9A1B9E79BAEE5AE9EE78EB0"
-            ><div class='name'>dalidali项目实现</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/"
-            id="categoriesdalidaliE9A1B9E79BAEE8AEBEE8AEA1"
-            ><div class='name'>dalidali项目设计</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/docker/" href="/categories/docker/"
-            id="categoriesdocker"
-            ><div class='name'>docker</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/http/" href="/categories/http/"
-            id="categorieshttp"
-            ><div class='name'>http</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/java%E5%9F%BA%E7%A1%80/" href="/categories/java%E5%9F%BA%E7%A1%80/"
-            id="categoriesjavaE59FBAE7A180"
-            ><div class='name'>java基础</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/mysql/" href="/categories/mysql/"
-            id="categoriesmysql"
-            ><div class='name'>mysql</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesspringE99DA2E8AF95E9A298"
-            ><div class='name'>spring面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/zookeeper/" href="/categories/zookeeper/"
-            id="categorieszookeeper"
-            ><div class='name'>zookeeper</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"
-            id="categoriesE4B8ADE997B4E4BBB6"
-            ><div class='name'>中间件</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
-            id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(16)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
-            id="categoriesE591A8E8AEB0"
-            ><div class='name'>周记</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
-            id="categoriesE5A49AE7BABFE7A88B"
-            ><div class='name'>多线程</div><div class='badge'>(9)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE5A49AE7BABFE7A88BE99DA2E8AF95E9A298"
-            ><div class='name'>多线程面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"
-            id="categoriesE695B0E68DAEE7BB93E69E84"
-            ><div class='name'>数据结构</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E7%B1%BB/" href="/categories/%E6%9D%82%E7%B1%BB/"
-            id="categoriesE69D82E7B1BB"
-            ><div class='name'>杂类</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"
-            id="categoriesE6B688E681AFE9989FE58897"
-            ><div class='name'>消息队列</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%88%AC%E8%99%AB/" href="/categories/%E7%88%AC%E8%99%AB/"
-            id="categoriesE788ACE899AB"
-            ><div class='name'>爬虫</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E7%BD%91%E7%BB%9C/" href="/categories/%E7%BD%91%E7%BB%9C/"
-            id="categoriesE7BD91E7BB9C"
-            ><div class='name'>网络</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
-            id="categoriesE8AEBEE8AEA1E6A8A1E5BC8F"
-            ><div class='name'>设计模式</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88/" href="/categories/%E9%9B%86%E5%90%88/"
-            id="categoriesE99B86E59088"
-            ><div class='name'>集合</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/"
-            id="categoriesE99B86E59088E99DA2E8AF95E9A298"
-            ><div class='name'>集合面试题</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9D%A2%E8%AF%95/" href="/categories/%E9%9D%A2%E8%AF%95/"
-            id="categoriesE99DA2E8AF95"
-            ><div class='name'>面试</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/" href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91/"
-            id="categoriesE99FB3E8A786E9A291"
-            ><div class='name'>音视频</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#上班生活"><span class="toc-text">上班生活</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#下班生活"><span class="toc-text">下班生活</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编程知识"><span class="toc-text">编程知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#面试官问我MySQL调优，我真的是-掘金-juejin-cn"><span class="toc-text">面试官问我MySQL调优，我真的是 - 掘金 (juejin.cn)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么需要Java内存模型？-掘金-juejin-cn"><span class="toc-text">为什么需要Java内存模型？ - 掘金 (juejin.cn)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#【JAVA】OpenFegin-实现接口参数签名认证（一）-掘金-juejin-cn"><span class="toc-text">【JAVA】OpenFegin 实现接口参数签名认证（一） - 掘金 (juejin.cn)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生活知识"><span class="toc-text">生活知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/Elasticsearch/" style="font-size: 16px; color: #8b8b8b">Elasticsearch</a> <a href="/tags/Eureka/" style="font-size: 14px; color: #999">Eureka</a> <a href="/tags/Golang/" style="font-size: 14px; color: #999">Golang</a> <a href="/tags/JVM/" style="font-size: 20px; color: #707070">JVM</a> <a href="/tags/JWT/" style="font-size: 14px; color: #999">JWT</a> <a href="/tags/Java%E5%9F%BA%E7%A1%80/" style="font-size: 14px; color: #999">Java基础</a> <a href="/tags/Linux/" style="font-size: 16px; color: #8b8b8b">Linux</a> <a href="/tags/Mybatis/" style="font-size: 14px; color: #999">Mybatis</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Redis/" style="font-size: 14px; color: #999">Redis</a> <a href="/tags/Ribbon/" style="font-size: 14px; color: #999">Ribbon</a> <a href="/tags/Spring/" style="font-size: 18px; color: #7e7e7e">Spring</a> <a href="/tags/Spring-Cloud/" style="font-size: 16px; color: #8b8b8b">Spring Cloud</a> <a href="/tags/android%E5%9F%BA%E7%A1%80/" style="font-size: 16px; color: #8b8b8b">android基础</a> <a href="/tags/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">android学习笔记</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0/" style="font-size: 14px; color: #999">dalidali项目实现</a> <a href="/tags/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">dalidali项目设计</a> <a href="/tags/docker/" style="font-size: 18px; color: #7e7e7e">docker</a> <a href="/tags/http/" style="font-size: 14px; color: #999">http</a> <a href="/tags/java%E5%9F%BA%E7%A1%80/" style="font-size: 22px; color: #636363">java基础</a> <a href="/tags/kafka/" style="font-size: 14px; color: #999">kafka</a> <a href="/tags/mysql/" style="font-size: 14px; color: #999">mysql</a> <a href="/tags/spring%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">spring面试题</a> <a href="/tags/zookeeper/" style="font-size: 16px; color: #8b8b8b">zookeeper</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 14px; color: #999">中间件</a> <a href="/tags/%E5%91%A8%E7%BB%93/" style="font-size: 24px; color: #555">周结</a> <a href="/tags/%E5%91%A8%E8%AE%B0/" style="font-size: 16px; color: #8b8b8b">周记</a> <a href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" style="font-size: 18px; color: #7e7e7e">多线程</a> <a href="/tags/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" style="font-size: 14px; color: #999">工厂模式</a> <a href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" style="font-size: 14px; color: #999">搜索引擎</a> <a href="/tags/%E6%9D%82%E7%B1%BB/" style="font-size: 14px; color: #999">杂类</a> <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" style="font-size: 14px; color: #999">消息队列</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 16px; color: #8b8b8b">网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1/" style="font-size: 14px; color: #999">设计</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 18px; color: #7e7e7e">设计模式</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 14px; color: #999">跨域</a> <a href="/tags/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 14px; color: #999">集合面试题</a> <a href="/tags/%E9%9F%B3%E8%A7%86%E9%A2%91/" style="font-size: 14px; color: #999">音视频</a> <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" style="font-size: 14px; color: #999">项目总结</a>
-    </div>
-  </section>
-
-
-  
 
   
 
 
 </aside>
+
 
 
 		  
@@ -724,8 +641,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="第二十周";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   // header 这里无论是否开启pjax都需要
