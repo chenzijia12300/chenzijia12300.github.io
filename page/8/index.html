@@ -369,6 +369,123 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        spring面试题（一）
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        Spring中bean的生命周期
+
+如上图我们大致可以将spring生命周期分为12个步骤
+
+
+通过反射实例化对象。
+设置对象的属性。
+如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法
+如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。
+如果对象实...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-09</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/">spring面试题</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
+      <a href="/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        集合面试题（一）
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        JDK1.8中HashMap在出现hash碰撞时链表长度超过8一定会变成红黑树?
+首先答案是：否,因为实际上转换红黑树有个大前提,就是当前hash table的长度也就是HashMap的capacity(不是size)不能小于64.小于64就只是做个扩容。
+
+HashSet和TreeSet的区别
+
+
+类
+底层数据结构
+顺序
+存放null值
+
+
+
+HashSet
+哈希表
+无序
+能够存放一个nu...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-09</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E9%9B%86%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">集合面试题</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/06/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/">
         多线程面试题
       </a>
@@ -760,106 +877,6 @@ cluster模式
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/10/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
-        redis学习笔记(一)
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        redis简介
-redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。
-
-
-string(字符串类型)
-hash(散列/哈希类型)
-list(列表类型)
-set...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-10</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Redis/">Redis</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/10/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/'>
-            閱讀全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/08/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-        TCP协议
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        TCP协议
-传输控制协议 TCP（Transmission Control Protocol）–提供面向连接的，可靠的数据传输服务，位于运输层。
-
-
-TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选取一个32位长的序列号（Initial Sequence Number），假设A的初始序列号为1000，以该序列号为原点，对自己将要发送的每个字节的数据进行编号，1001，1002，...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-08</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/08/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%92%8C%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/'>
-            閱讀全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1080,7 +1097,7 @@ TCP可靠传输的精髓：TCP连接的一方A，由操作系统动态随机选�
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(16)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(17)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
