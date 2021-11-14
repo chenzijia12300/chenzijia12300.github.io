@@ -369,6 +369,60 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/04/27/ConcurrentLinkedQueue%E8%AF%A6%E8%A7%A3/">
+        ConcurrentLinkedQueue详解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        ConcurrentLinkedQueue简介
+ConcurrentLinkedQueue是一种无边界非堵塞线程安全的队列，底层通过单向链表实现，线程安全通过CAS操作实现。下图是它的类图关系，它继承了AbstractQueue类，实现Queue接口，具有Queue的基本特性。
+
+
+
+
+该类内部通过两个volatile类型的Node节点来分别指向队列的首，尾节点。
+
+构造方法1234&#x2...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-04-27</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/04/27/ConcurrentLinkedQueue%E8%AF%A6%E8%A7%A3/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/04/24/java%E5%B8%B8%E7%94%A8%E9%94%81/">
         java常用锁
       </a>
@@ -818,50 +872,6 @@ ArrayList实现...
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/04/18/hello-world/">
-        Hello World
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-04-18</time>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/04/18/hello-world/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -876,8 +886,14 @@ Qu...
           </a>
         
         <p class="current">
-          10 / 10
+          10 / 11
         </p>
+        
+          <a class="next" rel="next" href="/page/11/">
+            <section class="post next white-box shadow">
+              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+            </section>
+          </a>
         
       </div>
     
@@ -1076,7 +1092,7 @@ Qu...
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(18)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(19)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
