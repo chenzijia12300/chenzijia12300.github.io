@@ -369,6 +369,54 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/">
+        ArrayBlockingQueue详解
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        ArrayBlockingQueue简介
+ArrayBlockingQueue是一个有界，堵塞/非堵塞线程安全的队列。它是基于数组实现的，内部通过ReentrantLock独占锁来控制入队出队操作,通过两个条件变量控制队列为空为满的情况。
+
+
+
+源码详解成员分析1234567891011121314151617181920&#x2F;&#x2F;存放元素的数组  final Object[]...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-04-30</time>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/04/30/ArrayBlockingQueue%E8%AF%A6%E8%A7%A3/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/04/29/LinkedBlockingQueue%E8%AF%A6%E8%A7%A3/">
         LinkedBlockingQueue详解
       </a>
@@ -825,59 +873,6 @@ Link...
           </div>
         
       
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/04/18/java%E9%9B%86%E5%90%88-ArrayList-1/">
-        java集合-ArrayList
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        ArrayList简介
-ArrayList数据结构是基于数组，与java原本数组不一样的是它能够动态增长，继承于AbstractList,实现了List,Serializable,RandomAccess,Cloneable等接口。
-
-
-ArrayList 继承了AbstractList，实现了List。它是一个数组队列，提供了相关的添加、删除、修改、遍历等功能。
-
-
-ArrayList实现...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-04-18</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/%E9%9B%86%E5%90%88/">集合</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/04/18/java%E9%9B%86%E5%90%88-ArrayList-1/'>
-            阅读全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
     
   </section>
   
@@ -1098,7 +1093,7 @@ ArrayList实现...
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(20)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(21)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
