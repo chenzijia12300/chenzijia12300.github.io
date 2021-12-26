@@ -369,6 +369,60 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/07/11/%E5%93%92%E7%90%86%E5%93%92%E7%90%86%E5%90%8E%E5%8F%B0%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/">
+        哒理哒理后台技术问题
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        数据库中评论表的设计方案
+第一种表中只存用户主键，查询时关联用户表获得用户头像、用户名。
+第二中表中存用户主键、用户头像、用户名。
+
+问题
+第一种方案的问题在于需要关联用户表，我怀疑会出现效率问题。
+第二中方案的问题在于空间占用和数据不一致问题（用户修改了用户名、头像等）
+
+结果查阅了资料后：第一种方案一般不会出现效率问题正常加上索引就足够了，而且评论一般都是只看TopN的几个。第二种：不太...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-07-11</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/dalidali%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1/">dalidali项目设计</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/07/11/%E5%93%92%E7%90%86%E5%93%92%E7%90%86%E5%90%8E%E5%8F%B0%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/07/06/Spring-Cloud%E7%9A%84Ribbon%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
         Spring Cloud的Ribbon学习笔记
       </a>
@@ -398,7 +452,7 @@ Ribbon是Neflix发布的负载均衡器，它有助于控制HTTP和TCP客户端�
       
         <div>
           <a class='readmore' href='/2020/07/06/Spring-Cloud%E7%9A%84Ribbon%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -446,7 +500,7 @@ Spring Cloud Eureka 是对Netflix公司的Eureka的二次封装，它实现了�
       
         <div>
           <a class='readmore' href='/2020/07/05/Spring-Cloud%E7%9A%84Eureka/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -498,7 +552,7 @@ docker inspect
       
         <div>
           <a class='readmore' href='/2020/07/01/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -558,7 +612,7 @@ docker inspect
       
         <div>
           <a class='readmore' href='/2020/07/01/java%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -608,7 +662,7 @@ docker inspect
       
         <div>
           <a class='readmore' href='/2020/06/29/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -659,7 +713,7 @@ Elasticsearch优点
       
         <div>
           <a class='readmore' href='/2020/06/27/elasticsearch%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -708,7 +762,7 @@ Docker 是一个开源的应用容器引擎，可以轻松的为任何应用创�
       
         <div>
           <a class='readmore' href='/2020/06/26/docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -756,7 +810,7 @@ Docker 是一个开源的应用容器引擎，可以轻松的为任何应用创�
       
         <div>
           <a class='readmore' href='/2020/06/24/mysql%E4%B8%ADselect-update%E5%B9%B6%E5%8F%91%E7%9A%84%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -802,55 +856,7 @@ BigDecima...
       
         <div>
           <a class='readmore' href='/2020/06/23/java-BigDecimal%E8%AF%A6%E8%A7%A3/'>
-            閱讀全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/">
-        活动启动模式
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        活动的启动模式standardtandard是活动默认的启动模式，在不进行显式指定的情况下，所有活动都会自动使用这种启动模式。在standard模式（即默认情况）下，每当启动一个新的活动，它就会在返回栈中入栈，并处于栈顶的位置。对于使用standard模式的活动，系统不会在乎这个活动是否已经在返回栈中存在，每次启动都会创建该活动的一个新的实例。
-
-singleTop当活动的启动模式指定为si...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-06-16</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/android%E5%9F%BA%E7%A1%80/">android基础</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/06/16/%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -871,7 +877,7 @@ singleTop当活动的启动模式指定为si...
         
           <a class="prev" rel="prev" href="/page/6/">
             <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
             </section>
           </a>
         
@@ -881,7 +887,7 @@ singleTop当活动的启动模式指定为si...
         
           <a class="next" rel="next" href="/page/8/">
             <section class="post next white-box shadow">
-              &nbsp;下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -1082,7 +1088,7 @@ singleTop当活动的启动模式指定为si...
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(23)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(24)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
@@ -1238,7 +1244,7 @@ singleTop当活动的启动模式指定为si...
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -1252,7 +1258,7 @@ singleTop当活动的启动模式指定为si...
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作為主題
+        作为主题
       
     
       
