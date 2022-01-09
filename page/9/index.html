@@ -369,6 +369,61 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/">
+        spring面试题（一）
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        Spring中bean的生命周期
+
+如上图我们大致可以将spring生命周期分为12个步骤
+
+
+通过反射实例化对象。
+设置对象的属性。
+如果对象实现了BeanNameAware接口，spring将bean的id传递给setBeanName()方法
+如果对象实现了BeanFactoryAware接口，spring将BeanFactory容器传给setBeanFactory()方法。
+如果对象实...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-09</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/spring%E9%9D%A2%E8%AF%95%E9%A2%98/">spring面试题</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/'>
+            閱讀全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/">
         集合面试题（一）
       </a>
@@ -410,7 +465,7 @@ HashSet
       
         <div>
           <a class='readmore' href='/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -460,7 +515,7 @@ HashSet
       
         <div>
           <a class='readmore' href='/2020/06/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -507,7 +562,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -559,7 +614,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -608,7 +663,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/05/29/java%E6%9E%9A%E4%B8%BE/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -656,7 +711,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/28/http%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -705,7 +760,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/27/java%E6%B3%9B%E5%9E%8B/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -763,7 +818,7 @@ cluster模式
       
         <div>
           <a class='readmore' href='/2020/05/14/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -810,60 +865,7 @@ cluster模式
       
         <div>
           <a class='readmore' href='/2020/05/14/%E8%B7%B3%E8%B7%83%E8%A1%A8/'>
-            Read More
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/10/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/">
-        redis学习笔记(一)
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        redis简介
-redis是一个开源，高性能，基于key-value的缓存存储系统，通过多种键值数据类型来适应不同应用场景的缓存与存储需求。redis是Remote Dictionary Server(远程字典服务器)的缩写，允许其他应用使用TCP协议读写字典的内容。目前redis提供5种键值数据类型。
-
-
-string(字符串类型)
-hash(散列/哈希类型)
-list(列表类型)
-set...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-10</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Redis/">Redis</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/10/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%B8%80/'>
-            Read More
+            閱讀全文
           </a>
         </div>
       
@@ -884,7 +886,7 @@ set...
         
           <a class="prev" rel="prev" href="/page/8/">
             <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;Previous&nbsp;
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
             </section>
           </a>
         
@@ -894,7 +896,7 @@ set...
         
           <a class="next" rel="next" href="/page/10/">
             <section class="post next white-box shadow">
-              &nbsp;Next&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -1095,7 +1097,7 @@ set...
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(25)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(26)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
@@ -1251,7 +1253,7 @@ set...
       
     
       
-        <div><p>Blog content follows the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener">Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0) License</a></p>
+        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
 </div>
       
     
@@ -1263,9 +1265,9 @@ set...
       
     
       
-        Use
+        本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        as theme
+        作為主題
       
     
       
