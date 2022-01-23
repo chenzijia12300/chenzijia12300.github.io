@@ -369,6 +369,55 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
     <h2 class="article-title" >
+      <a href="/2020/06/14/java7-try-with-resource/">
+        java7 try-with-resource
+      </a>
+    </h2>
+  
+  <div class='md'>
+    
+      
+        java7之前
+在java7版本之前我们使用资源后，都需要把资源关闭，在try-catch-finally中的finally关闭资源。
+
+例子12345678910111213141516171819202122long currentTime &#x3D; System.currentTimeMillis();BufferedReader bufferedReader &#x3D; nul...
+      
+    
+  </div>
+  
+    <div class='meta-v3' line_style='solid'>
+      <div>
+        
+        <time>2020-06-14</time>
+        
+          <span class="dot"></span>
+          <a class="category-link" href="/categories/java%E5%9F%BA%E7%A1%80/">java基础</a>
+        
+      </div>
+      
+        <div>
+          <a class='readmore' href='/2020/06/14/java7-try-with-resource/'>
+            阅读全文
+          </a>
+        </div>
+      
+    </div>
+  
+
+</div>
+
+          </div>
+        
+      
+        
+          <div class='post-wrapper'>
+            <div class="post post-v3 white-box reveal shadow">
+  
+  
+  
+  
+    
+    <h2 class="article-title" >
       <a href="/2020/06/14/fail-fast%E5%92%8Cfail-safe/">
         fail-fast和fail-safe
       </a>
@@ -398,7 +447,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2020/06/14/fail-fast%E5%92%8Cfail-safe/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -453,7 +502,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <div>
           <a class='readmore' href='/2020/06/09/Spring%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -515,7 +564,7 @@ HashSet
       
         <div>
           <a class='readmore' href='/2020/06/09/%E9%9B%86%E5%90%88%E5%90%88%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -565,7 +614,7 @@ HashSet
       
         <div>
           <a class='readmore' href='/2020/06/07/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E9%9D%A2%E8%AF%95%E9%A2%98/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -612,7 +661,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/06/04/hreadPoolExceutor%E7%BA%BF%E7%A8%8B%E6%B1%A0%E8%AF%A6%E8%A7%A3/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -664,7 +713,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/06/02/ix%E7%9A%84%E4%BA%94%E7%A7%8DI-O%E6%A8%A1%E5%9E%8B/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -713,7 +762,7 @@ ThreadPoolExecutor源码初探线程池状态成员字段12345678910111213141516
       
         <div>
           <a class='readmore' href='/2020/05/29/java%E6%9E%9A%E4%B8%BE/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -761,7 +810,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/28/http%E5%92%8Chttps%E7%9A%84%E5%8C%BA%E5%88%AB/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -810,65 +859,7 @@ HTTP协议，即超文本传输协议（Hypertext transfer protocol），它是�
       
         <div>
           <a class='readmore' href='/2020/05/27/java%E6%B3%9B%E5%9E%8B/'>
-            閱讀全文
-          </a>
-        </div>
-      
-    </div>
-  
-
-</div>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow">
-  
-  
-  
-  
-    
-    <h2 class="article-title" >
-      <a href="/2020/05/14/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/">
-        redis学习笔记(二)---集群
-      </a>
-    </h2>
-  
-  <div class='md'>
-    
-      
-        redis集群简介
-首先为什么要集群呢，如果是单机版的redis，如果它挂了对我们程序的执行会有影响。我们想要实现如果redis挂了会有其他redis顶上。而且单个redis的能力终究有限，我们可以把多个redis节点组成一个可用的工作节点，增加 Redis 的 高可用、可扩展、分布式、容错。
-
-
-redis有三种集群模式
-
-
-主从模式
-哨兵模式
-cluster模式
-
-主从模式
-主从模式简介...
-      
-    
-  </div>
-  
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time>2020-05-14</time>
-        
-          <span class="dot"></span>
-          <a class="category-link" href="/categories/Redis/">Redis</a>
-        
-      </div>
-      
-        <div>
-          <a class='readmore' href='/2020/05/14/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-%E4%BA%8C-%E9%9B%86%E7%BE%A4/'>
-            閱讀全文
+            阅读全文
           </a>
         </div>
       
@@ -889,17 +880,17 @@ cluster模式
         
           <a class="prev" rel="prev" href="/page/8/">
             <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一頁&nbsp;
+              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
             </section>
           </a>
         
         <p class="current">
-          9 / 11
+          9 / 12
         </p>
         
           <a class="next" rel="next" href="/page/10/">
             <section class="post next white-box shadow">
-              &nbsp;下一頁&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
+              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
             </section>
           </a>
         
@@ -1100,7 +1091,7 @@ cluster模式
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E7%BB%93/" href="/categories/%E5%91%A8%E7%BB%93/"
             id="categoriesE591A8E7BB93"
-            ><div class='name'>周结</div><div class='badge'>(27)</div></a></li>
+            ><div class='name'>周结</div><div class='badge'>(28)</div></a></li>
         
           <li><a class="flat-box"
             title="/categories/%E5%91%A8%E8%AE%B0/" href="/categories/%E5%91%A8%E8%AE%B0/"
@@ -1256,7 +1247,7 @@ cluster模式
       
     
       
-        <div><p>博客內容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" target="_blank" rel="noopener">姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0) 協議</a></p>
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
@@ -1270,7 +1261,7 @@ cluster模式
       
         本站使用
         <a href="https://github.com/volantis-x/hexo-theme-volantis/tree/4.3.1" target="_blank" class="codename">Volantis</a>
-        作為主題
+        作为主题
       
     
       
